@@ -1,0 +1,18 @@
+DOCUMENT FORENSIC INSPECTOR
+
+Автор оболочки, интеграции и Windows-сборки: Amirkhan Smagulov.
+
+Document Forensic Inspector объединяет независимые open-source инструменты в
+едином графическом интерфейсе. Amirkhan Smagulov не является автором и не
+заявляет исключительных прав на ExifTool, qpdf, pdfcpu, Poppler, JHOVE,
+veraPDF, Apache PDFBox, PDFiD, pdf-parser, PySide6, pypdf, pyHanko,
+python-docx, Pillow и другие сторонние компоненты.
+
+Авторские права на сторонние компоненты принадлежат их разработчикам и
+участникам проектов. Каждый компонент распространяется на условиях своей
+лицензии. Полный перечень и тексты лицензий находятся в каталоге licenses.
+
+Самоподписанная Authenticode-подпись Amirkhan Smagulov подтверждает целостность
+конкретной сборки после подписания. Она не является сертификатом, выданным
+публичным удостоверяющим центром, и сама по себе не создаёт репутацию Microsoft
+Defender SmartScreen на другом компьютере.

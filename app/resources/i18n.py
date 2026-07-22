@@ -1,0 +1,51 @@
+from __future__ import annotations
+
+_RU = {
+    "app_title": "Document Forensic Inspector",
+    "drop_hint": "Перетащите сюда PDF или PPTX\nили нажмите «Добавить файл»",
+    "add_file": "Добавить файл",
+    "export_json": "Экспорт JSON",
+    "export_html": "Экспорт HTML",
+    "file_menu": "Файл",
+    "summary": "Сводка",
+    "pdf_info": "PDF Info",
+    "xmp": "XMP",
+    "structure": "Структура",
+    "pptx": "PPTX",
+    "tools": "Инструменты",
+    "raw": "Необработанные результаты",
+    "ready": "Готово. Добавьте PDF или PPTX.",
+    "analyzing": "Выполняется исследование рабочей копии…",
+    "completed": "Исследование завершено",
+    "completed_partial": "Исследование завершено частично",
+    "analysis_error": "Ошибка исследования",
+    "select_document": "Выберите документ",
+    "documents_filter": "Документы (*.pdf *.pptx)",
+    "save_json": "Сохранить JSON-отчёт",
+    "save_html": "Сохранить HTML-отчёт",
+    "no_result": "Сначала выполните исследование.",
+    "export_done": "Отчёт сохранён",
+    "error": "Ошибка",
+    "difference": "РАЗЛИЧИЕ",
+    "command": "Команда",
+    "version": "Версия",
+    "status": "Статус",
+    "exit_code": "Код",
+    "duration": "Время, мс",
+    "source": "Источник",
+    "field": "Поле",
+    "value": "Значение",
+    "attention": "Внимание",
+    "details": "Пояснение",
+    "original": "Оригинал",
+    "working_copy": "Рабочая копия",
+    "format": "Формат",
+    "size": "Размер",
+    "integrity": "Целостность",
+    "original_untouched": "Анализ выполнен только по рабочей копии; оригинал не изменялся.",
+}
+
+
+def tr(key: str) -> str:
+    return _RU.get(key, key)
+
