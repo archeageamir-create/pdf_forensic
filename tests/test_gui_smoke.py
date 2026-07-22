@@ -54,6 +54,25 @@ class GuiSmokeTests(unittest.TestCase):
                 )
             window.close()
 
+    def test_main_window_fits_small_screen(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            config = AppConfig(
+                data_dir=root,
+                database_path=root / "db.sqlite3",
+                cases_dir=root / "cases",
+                reports_dir=root / "reports",
+                create_qdf_in_full_mode=False,
+                validate_signatures=False,
+            )
+            window = MainWindow(ForensicsService(config))
+            available = self.application.primaryScreen().availableGeometry()
+            self.assertLessEqual(window.width(), available.width())
+            self.assertLessEqual(window.height(), available.height())
+            self.assertLessEqual(window.minimumSizeHint().width(), available.width())
+            self.assertTrue(window.document_subtitle.wordWrap())
+            window.close()
+
 
 if __name__ == "__main__":
     unittest.main()

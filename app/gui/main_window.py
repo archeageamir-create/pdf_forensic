@@ -6,10 +6,18 @@ import subprocess
 from pathlib import Path
 
 from PySide6.QtCore import QThreadPool, QTimer, Qt, QUrl
-from PySide6.QtGui import QAction, QDesktopServices, QDragEnterEvent, QDropEvent
+from PySide6.QtGui import (
+    QAction,
+    QCursor,
+    QDesktopServices,
+    QDragEnterEvent,
+    QDropEvent,
+    QGuiApplication,
+)
 from PySide6.QtWidgets import (
     QComboBox,
     QFrame,
+    QGridLayout,
     QFileDialog,
     QGroupBox,
     QHBoxLayout,
@@ -62,10 +70,10 @@ class MainWindow(QMainWindow):
         self.current_worker: AnalysisWorker | None = None
         self.background_workers: list[FunctionWorker] = []
         self.setWindowTitle("Document Forensic Inspector")
-        self.resize(1560, 940)
         self.setAcceptDrops(True)
         self._create_actions()
         self._build_ui()
+        self._fit_to_available_screen()
         self._refresh_projects()
         self.statusBar().showMessage(self.tr("Готово. Создайте проект или добавьте файл."))
         if self.service.config.update_manifest_url:
@@ -190,7 +198,8 @@ class MainWindow(QMainWindow):
         self.project_list.itemDoubleClicked.connect(lambda _item: self._edit_project())
         sidebar_layout.addWidget(self.project_list, 1)
 
-        project_buttons = QHBoxLayout()
+        project_buttons = QVBoxLayout()
+        project_buttons.setSpacing(6)
         new_project_button = QPushButton(self.tr("Новый проект"))
         new_project_button.setObjectName("PrimaryButton")
         new_project_button.clicked.connect(self._new_project)
@@ -239,6 +248,10 @@ class MainWindow(QMainWindow):
             self.tr("Оригинал останется неизменным — анализ выполняется с рабочей копией")
         )
         self.document_subtitle.setObjectName("DocumentSubtitle")
+        self.drop_label.setWordWrap(True)
+        self.document_subtitle.setWordWrap(True)
+        self.drop_label.setMinimumWidth(0)
+        self.document_subtitle.setMinimumWidth(0)
         title_layout.addWidget(self.drop_label)
         title_layout.addWidget(self.document_subtitle)
         banner_layout.addLayout(title_layout, 1)
@@ -287,17 +300,19 @@ class MainWindow(QMainWindow):
         overview_layout = QVBoxLayout(overview_page)
         overview_layout.setContentsMargins(12, 12, 12, 12)
         overview_layout.setSpacing(10)
-        metrics_layout = QHBoxLayout()
+        metrics_layout = QGridLayout()
         metrics_layout.setSpacing(10)
-        for title, attribute in (
+        for index, (title, attribute) in enumerate((
             ("Формат", "metric_format"),
             ("Размер", "metric_size"),
             ("Целостность", "metric_integrity"),
             ("Требует внимания", "metric_attention"),
-        ):
+        )):
             panel, value_label = _metric_panel(self.tr(title))
             setattr(self, attribute, value_label)
-            metrics_layout.addWidget(panel, 1)
+            metrics_layout.addWidget(panel, index // 2, index % 2)
+        metrics_layout.setColumnStretch(0, 1)
+        metrics_layout.setColumnStretch(1, 1)
         overview_layout.addLayout(metrics_layout)
         summary_group = QGroupBox(self.tr("Коротко о результате"))
         summary_layout = QVBoxLayout(summary_group)
@@ -348,7 +363,7 @@ class MainWindow(QMainWindow):
             "revision_visual_diffs",
         )
         revisions_layout.addWidget(self.revision_diff_table)
-        revision_actions = QHBoxLayout()
+        revision_actions = QGridLayout()
         self.open_revision_button = QPushButton(self.tr("Открыть выбранную ревизию"))
         self.open_revision_button.clicked.connect(self._open_selected_revision)
         self.open_revision_button.setEnabled(False)
@@ -358,10 +373,11 @@ class MainWindow(QMainWindow):
         self.open_revision_diff_button = QPushButton(self.tr("Открыть выбранное различие"))
         self.open_revision_diff_button.clicked.connect(self._open_revision_diff)
         self.open_revision_diff_button.setEnabled(False)
-        revision_actions.addWidget(self.open_revision_button)
-        revision_actions.addWidget(self.open_qdf_button)
-        revision_actions.addWidget(self.open_revision_diff_button)
-        revision_actions.addStretch(1)
+        revision_actions.addWidget(self.open_revision_button, 0, 0)
+        revision_actions.addWidget(self.open_qdf_button, 0, 1)
+        revision_actions.addWidget(self.open_revision_diff_button, 1, 0, 1, 2)
+        revision_actions.setColumnStretch(0, 1)
+        revision_actions.setColumnStretch(1, 1)
         revisions_layout.addLayout(revision_actions)
         self.revision_paths: list[Path | None] = []
         self.qdf_path: Path | None = None
@@ -452,9 +468,26 @@ class MainWindow(QMainWindow):
         content_layout.addWidget(self.progress)
         root_splitter.addWidget(content)
         root_splitter.setStretchFactor(1, 1)
-        root_splitter.setSizes([300, 1260])
+        root_splitter.setSizes([270, 1290])
         self.setCentralWidget(root_splitter)
         self._show_welcome()
+
+    def _fit_to_available_screen(self) -> None:
+        """Keep the first window geometry inside the active monitor work area."""
+        screen = QGuiApplication.screenAt(QCursor.pos()) or QGuiApplication.primaryScreen()
+        if screen is None:
+            self.resize(1280, 800)
+            return
+        available = screen.availableGeometry()
+        horizontal_margin = min(32, max(0, available.width() // 20))
+        vertical_margin = min(32, max(0, available.height() // 20))
+        width = min(1560, max(1, available.width() - horizontal_margin))
+        height = min(940, max(1, available.height() - vertical_margin))
+        self.resize(width, height)
+        self.move(
+            available.x() + max(0, (available.width() - width) // 2),
+            available.y() + max(0, (available.height() - height) // 2),
+        )
 
     def _tools_widget(self) -> QWidget:
         widget = QWidget()

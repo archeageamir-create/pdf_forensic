@@ -15,6 +15,7 @@ OutputDir=..\dist
 OutputBaseFilename=DocumentForensicInspector-Setup-{#MyAppVersion}
 Compression=lzma2
 SolidCompression=yes
+SetupLogging=yes
 WizardStyle=modern
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible

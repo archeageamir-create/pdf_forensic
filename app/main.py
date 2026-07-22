@@ -72,11 +72,16 @@ def main() -> int:
         announce_headless_report(destination)
         return 0 if not result.errors else 2
 
+    from PySide6.QtCore import Qt
+    from PySide6.QtGui import QGuiApplication
     from PySide6.QtWidgets import QApplication
 
     from app.gui.main_window import MainWindow
     from app.resources.theme import apply_theme
 
+    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(
+        Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
+    )
     application = QApplication(sys.argv)
     application.setApplicationName("Document Forensic Inspector")
     application.setApplicationVersion(__version__)

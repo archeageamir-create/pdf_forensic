@@ -204,7 +204,8 @@ class HexViewer(QWidget):
         super().__init__()
         self.service = service
         self.path: Path | None = None
-        controls = QHBoxLayout()
+        navigation = QHBoxLayout()
+        search_controls = QHBoxLayout()
         self.offset = QLineEdit("0x0")
         self.length = QSpinBox()
         self.length.setRange(16, 65536)
@@ -217,13 +218,16 @@ class HexViewer(QWidget):
         jump.clicked.connect(self.refresh)
         find.clicked.connect(self._find)
         for widget in (QLabel("Смещение"), self.offset, QLabel("Байты"), self.length, jump):
-            controls.addWidget(widget)
-        controls.addStretch(1)
-        for widget in (self.search, self.encoding, find):
-            controls.addWidget(widget)
+            navigation.addWidget(widget)
+        navigation.addStretch(1)
+        search_controls.addWidget(QLabel("Поиск"))
+        search_controls.addWidget(self.search, 1)
+        search_controls.addWidget(self.encoding)
+        search_controls.addWidget(find)
         self.text = _plain()
         layout = QVBoxLayout(self)
-        layout.addLayout(controls)
+        layout.addLayout(navigation)
+        layout.addLayout(search_controls)
         layout.addWidget(self.text)
 
     def set_path(self, path: Path | None) -> None:
