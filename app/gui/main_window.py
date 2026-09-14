@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 import subprocess
+from collections import Counter
 from pathlib import Path
 
 from PySide6.QtCore import QThreadPool, QTimer, Qt, QUrl
@@ -16,6 +17,7 @@ from PySide6.QtGui import (
 )
 from PySide6.QtWidgets import (
     QComboBox,
+    QCheckBox,
     QFrame,
     QGridLayout,
     QFileDialog,
@@ -25,11 +27,13 @@ from PySide6.QtWidgets import (
     QListWidget,
     QListWidgetItem,
     QMainWindow,
+    QLineEdit,
     QMessageBox,
     QPlainTextEdit,
     QProgressBar,
     QPushButton,
     QStyle,
+    QScrollArea,
     QSplitter,
     QTableWidget,
     QTableWidgetItem,
@@ -50,7 +54,14 @@ from app.gui.widgets import (
     configure_resizable_columns,
 )
 from app.gui.workers import AnalysisWorker, FunctionWorker
-from app.models import AnalysisMode, AnalysisResult, ToolRun
+from app.gui.explorer import FindingsExplorer
+from app.gui.queue_panel import QueuePanel, QueueWorker
+from app.gui.tool_status import ToolStatusDialog
+from app.gui.identity import IdentityPanel
+from app.gui.project_search import ProjectSearchDialog
+from app.analyzers.overview import needs_attention, original_integrity_label
+from app.core.formats import PROFILES
+from app.models import AnalysisMode, AnalysisResult, FileKind, ToolRun
 from app.reporting import (
     DocxReportExporter,
     HtmlReportExporter,
@@ -69,7 +80,10 @@ class MainWindow(QMainWindow):
         self.current_result: AnalysisResult | None = None
         self.current_worker: AnalysisWorker | None = None
         self.background_workers: list[FunctionWorker] = []
-        self.setWindowTitle("Document Forensic Inspector")
+        self.queue_pool = QThreadPool(self)
+        self.queue_pool.setMaxThreadCount(1)
+        self.queue_worker: QueueWorker | None = None
+        self.setWindowTitle("Document Forensic Inspector — Universal Preview")
         self.setAcceptDrops(True)
         self._create_actions()
         self._build_ui()
@@ -97,8 +111,12 @@ class MainWindow(QMainWindow):
         self.add_action.setIcon(
             self.style().standardIcon(QStyle.StandardPixmap.SP_DialogOpenButton)
         )
-        self.add_action.setToolTip(self.tr("Выбрать один или несколько PDF/PPTX"))
+        self.add_action.setToolTip(self.tr("Документы, фотографии, аудио, видео, архивы и другие файлы"))
+        self.add_action.setShortcut("Ctrl+O")
         self.add_action.triggered.connect(self._choose_files)
+        self.search_project_action = QAction(self.tr("Поиск по метаданным проекта"), self)
+        self.search_project_action.setShortcut("Ctrl+Shift+F")
+        self.search_project_action.triggered.connect(self._search_project)
         self.cancel_action = QAction(self.tr("Отменить анализ"), self)
         self.cancel_action.setIcon(
             self.style().standardIcon(QStyle.StandardPixmap.SP_DialogCancelButton)
@@ -133,6 +151,7 @@ class MainWindow(QMainWindow):
             self.export_actions[key] = action
 
         file_menu = self.menuBar().addMenu(self.tr("Файл"))
+        file_menu.addAction(self.search_project_action)
         file_menu.addAction(self.new_project_action)
         file_menu.addAction(self.edit_project_action)
         file_menu.addAction(self.add_action)
@@ -147,6 +166,7 @@ class MainWindow(QMainWindow):
         help_menu.addAction(self.about_action)
 
         toolbar = QToolBar()
+        self.main_toolbar = toolbar
         toolbar.setObjectName("MainToolbar")
         toolbar.setMovable(False)
         toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
@@ -169,7 +189,7 @@ class MainWindow(QMainWindow):
         self.mode_combo.addItem(self.tr("Быстрый"), AnalysisMode.QUICK)
         self.mode_combo.addItem(self.tr("Полный"), AnalysisMode.FULL)
         self.mode_combo.addItem(self.tr("Пользовательский"), AnalysisMode.CUSTOM)
-        self.mode_combo.setCurrentIndex(1)
+        self.mode_combo.setCurrentIndex(0)
         toolbar.addWidget(self.mode_combo)
         toolbar.addSeparator()
         toolbar.addAction(self.check_tools_action)
@@ -212,6 +232,11 @@ class MainWindow(QMainWindow):
         file_label = QLabel(self.tr("ФАЙЛЫ"))
         file_label.setObjectName("SectionLabel")
         sidebar_layout.addWidget(file_label)
+        self.file_search = QLineEdit()
+        self.file_search.setPlaceholderText(self.tr("Найти файл…"))
+        self.file_search.setClearButtonEnabled(True)
+        self.file_search.textChanged.connect(self._filter_files)
+        sidebar_layout.addWidget(self.file_search)
         self.file_list = QListWidget()
         self.file_list.setHorizontalScrollBarPolicy(
             Qt.ScrollBarPolicy.ScrollBarAlwaysOff
@@ -219,6 +244,13 @@ class MainWindow(QMainWindow):
         self.file_list.setToolTip(self.tr("Документы выбранного проекта"))
         self.file_list.currentItemChanged.connect(self._file_selected)
         sidebar_layout.addWidget(self.file_list, 2)
+        queue_button = QPushButton(self.tr("Очередь и папки"))
+        queue_button.clicked.connect(self._show_queue)
+        search_project_button = QPushButton(self.tr("Поиск по проекту"))
+        search_project_button.setToolTip("Поиск по всем сохранённым файлам проекта · Ctrl+Shift+F")
+        search_project_button.clicked.connect(self._search_project)
+        sidebar_layout.addWidget(search_project_button)
+        sidebar_layout.addWidget(queue_button)
         delete_button = QPushButton(self.tr("Удалить пустой"))
         delete_button.setObjectName("DangerButton")
         delete_button.clicked.connect(self._delete_project)
@@ -232,6 +264,7 @@ class MainWindow(QMainWindow):
         content_layout.setSpacing(12)
 
         document_banner = QFrame()
+        self.document_banner = document_banner
         document_banner.setObjectName("DocumentBanner")
         banner_layout = QHBoxLayout(document_banner)
         banner_layout.setContentsMargins(16, 13, 16, 13)
@@ -261,30 +294,37 @@ class MainWindow(QMainWindow):
         banner_layout.addWidget(add_button)
         content_layout.addWidget(document_banner)
 
+        self.expert_mode = QCheckBox(self.tr("Показать технические инструменты"))
+        self.expert_mode.setToolTip(self.tr("Структура PDF, ревизии, объекты, Hex и журналы запуска"))
+        self.expert_mode.toggled.connect(self._update_visible_tabs)
+        content_layout.addWidget(self.expert_mode)
+
         self.welcome_panel = QWidget()
         welcome_layout = QVBoxLayout(self.welcome_panel)
         welcome_layout.setContentsMargins(40, 40, 40, 80)
         welcome_layout.addStretch(1)
-        welcome_badge = QLabel("PDF  •  PPTX")
+        welcome_badge = QLabel("ФАЙЛЫ")
         welcome_badge.setObjectName("DocumentBadge")
         welcome_badge.setAlignment(Qt.AlignmentFlag.AlignCenter)
         welcome_badge.setFixedWidth(120)
         welcome_layout.addWidget(welcome_badge, 0, Qt.AlignmentFlag.AlignHCenter)
-        welcome_title = QLabel(self.tr("Начнём исследование документа"))
+        welcome_title = QLabel(self.tr("Что можно узнать об этом файле?"))
         welcome_title.setObjectName("WelcomeTitle")
         welcome_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         welcome_layout.addWidget(welcome_title)
         welcome_text = QLabel(
             self.tr(
-                "Перетащите файл в это окно или выберите его вручную.\n"
-                "Программа создаст рабочую копию, рассчитает SHA-256 и соберёт результаты в одном месте."
+                "Добавьте документ, фотографию, аудио, видео или ZIP.\n"
+                "Формат определится по содержимому, подходящие проверки запустятся автоматически.\n\n"
+                "Авторы и программы • Даты и GPS • Скрытые данные • Следы изменений\n"
+                "У каждого результата будут источник и пояснение."
             )
         )
         welcome_text.setObjectName("WelcomeText")
         welcome_text.setAlignment(Qt.AlignmentFlag.AlignCenter)
         welcome_text.setWordWrap(True)
         welcome_layout.addWidget(welcome_text)
-        welcome_button = QPushButton(self.tr("Выбрать документы"))
+        welcome_button = QPushButton(self.tr("Выбрать файлы"))
         welcome_button.setObjectName("PrimaryButton")
         welcome_button.clicked.connect(self._choose_files)
         welcome_layout.addWidget(welcome_button, 0, Qt.AlignmentFlag.AlignHCenter)
@@ -292,6 +332,8 @@ class MainWindow(QMainWindow):
         content_layout.addWidget(self.welcome_panel, 1)
 
         self.tabs = QTabWidget()
+        self.queue_panel = QueuePanel(self.service, self._current_project_id)
+        self.queue_panel.open_result.connect(self._open_queued_result)
 
         self.summary_text = _plain()
         self.summary_text.setMaximumHeight(150)
@@ -300,12 +342,13 @@ class MainWindow(QMainWindow):
         overview_layout = QVBoxLayout(overview_page)
         overview_layout.setContentsMargins(12, 12, 12, 12)
         overview_layout.setSpacing(10)
+        self.identity_panel = IdentityPanel()
+        self.identity_panel.finding_selected.connect(self._reveal_finding)
+        overview_layout.addWidget(self.identity_panel)
         metrics_layout = QGridLayout()
         metrics_layout.setSpacing(10)
         for index, (title, attribute) in enumerate((
-            ("Формат", "metric_format"),
-            ("Размер", "metric_size"),
-            ("Целостность", "metric_integrity"),
+            ("Целостность рабочей копии", "metric_integrity"),
             ("Требует внимания", "metric_attention"),
         )):
             panel, value_label = _metric_panel(self.tr(title))
@@ -318,10 +361,35 @@ class MainWindow(QMainWindow):
         summary_layout = QVBoxLayout(summary_group)
         summary_layout.addWidget(self.summary_text)
         overview_layout.addWidget(summary_group)
+        self.coverage_label = QLabel()
+        self.coverage_label.setWordWrap(True)
+        self.coverage_label.setObjectName("CautionText")
+        overview_layout.addWidget(self.coverage_label)
+        self.completion_label = QLabel()
+        self.completion_label.setWordWrap(True)
+        overview_layout.addWidget(self.completion_label)
+        self.review_button = QPushButton(self.tr("Посмотреть, что требует внимания"))
+        self.review_button.clicked.connect(self._review_findings)
+        overview_layout.addWidget(self.review_button)
+        self.reanalyze_button = QPushButton(self.tr("Провести полный анализ"))
+        self.reanalyze_button.setToolTip(self.tr("Повторно исследовать текущую версию исходного файла всеми доступными методами"))
+        self.reanalyze_button.clicked.connect(self._reanalyze_current)
+        overview_layout.addWidget(self.reanalyze_button)
         hashes_group = QGroupBox(self.tr("Файл и контрольные суммы"))
         hashes_layout = QVBoxLayout(hashes_group)
         hashes_layout.addWidget(self.hash_table)
-        overview_layout.addWidget(hashes_group, 1)
+        self.hashes_toggle = QPushButton(self.tr("Показать пути и контрольные суммы"))
+        self.hashes_toggle.setCheckable(True)
+        self.hashes_toggle.toggled.connect(hashes_group.setVisible)
+        overview_layout.addWidget(self.hashes_toggle)
+        hashes_group.setMinimumHeight(240)
+        hashes_group.hide()
+        overview_layout.addWidget(hashes_group)
+        overview_layout.addStretch(1)
+        overview_scroll = QScrollArea()
+        overview_scroll.setWidgetResizable(True)
+        overview_scroll.setFrameShape(QFrame.Shape.NoFrame)
+        overview_scroll.setWidget(overview_page)
 
         self.pdf_info_table = FindingsTable("pdf_info")
         self.xmp_table = FindingsTable("xmp")
@@ -427,6 +495,11 @@ class MainWindow(QMainWindow):
                 (self.provenance_page, "Авторство и правки"),
             )
         )
+        self.findings_explorer = FindingsExplorer()
+        self.findings_explorer.mark_changed.connect(self._mark_changed)
+        self.findings_explorer.export_value.connect(self._export_finding_value)
+        self.metadata_tabs.insertTab(0, self.findings_explorer, self.tr("Все результаты"))
+        self.metadata_tabs.setCurrentIndex(0)
         self.structure_tabs = _nested_tabs(
             (
                 (self.structure_table, "Общие сведения"),
@@ -443,19 +516,24 @@ class MainWindow(QMainWindow):
                 (debugger_page, "PDFBox Debugger"),
             )
         )
+        self.object_tabs = object_tabs
+        self.debugger_page = debugger_page
         expert_tabs = _nested_tabs(
             ((self.comparison_page, "Сравнение"), (self.conclusions_page, "Заметки и выводы"))
         )
         for widget, label in (
-            (overview_page, "Обзор"),
-            (self.metadata_tabs, "Метаданные"),
+            (overview_scroll, "Обзор"),
+            (self.metadata_tabs, "Результаты"),
             (self.structure_tabs, "Структура PDF"),
             (object_tabs, "Объекты и Hex"),
             (self.timeline_table, "Хронология"),
             (expert_tabs, "Эксперт"),
             (self.tools_page, "Технические данные"),
+            (self.queue_panel, "Очередь"),
         ):
             self.tabs.addTab(widget, self.tr(label))
+        self._update_visible_tabs()
+        self.tabs.currentChanged.connect(self._tab_context_changed)
         content_layout.addWidget(self.tabs, 1)
 
         self.stage_label = QLabel()
@@ -513,6 +591,14 @@ class MainWindow(QMainWindow):
         layout.addWidget(QLabel(self.tr("Выводы пользователя")))
         self.conclusions_edit = QPlainTextEdit()
         layout.addWidget(self.conclusions_edit)
+        self.notes_saved_label = QLabel("Заметки сохраняются автоматически")
+        layout.addWidget(self.notes_saved_label)
+        self.notes_save_timer = QTimer(self)
+        self.notes_save_timer.setSingleShot(True)
+        self.notes_save_timer.setInterval(600)
+        self.notes_save_timer.timeout.connect(self._save_notes)
+        for edit in (self.notes_edit, self.conclusions_edit):
+            edit.textChanged.connect(lambda: self.notes_save_timer.start())
         button = QPushButton(self.tr("Сохранить заметки и выводы"))
         button.clicked.connect(self._save_notes)
         layout.addWidget(button)
@@ -567,6 +653,9 @@ class MainWindow(QMainWindow):
         project_id = self._current_project_id()
         if not project_id:
             return
+        if self.queue_panel.queue.project_in_use(project_id):
+            QMessageBox.information(self, "Проект используется", "У проекта есть задания в очереди или наблюдаемые папки. Сначала отмените задания и уберите привязанные папки.")
+            return
         if QMessageBox.question(
             self,
             self.tr("Удаление проекта"),
@@ -603,12 +692,17 @@ class MainWindow(QMainWindow):
         self.file_list.blockSignals(True)
         self.file_list.clear()
         project_id = self._current_project_id()
-        for evidence_id in self.service.repository.list_evidence_ids(project_id):
-            result = self.service.repository.load(evidence_id)
-            if not result:
-                continue
-            prefix = "⚠" if result.incomplete else "✓"
-            item = QListWidgetItem(f"{prefix} {result.evidence.original_name}")
+        summaries = self.service.repository.list_evidence_summaries(project_id)
+        names = Counter(row["original_name"] for row in summaries)
+        for result in summaries:
+            evidence_id = result["id"]
+            title = result["original_name"]
+            if names[title] > 1:
+                mode_label = {"quick": "быстрый", "full": "полный", "custom": "выбранные"}.get(result["analysis_mode"], result["analysis_mode"])
+                title += f"\n{result['added_at'][11:19]} UTC · {mode_label} · {result['id'][:4]}"
+            item = QListWidgetItem(title)
+            item.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_MessageBoxWarning if result["incomplete"] else QStyle.StandardPixmap.SP_FileIcon))
+            item.setToolTip(f"{result['original_path']}\n{result['detected_format']}\nИсследование: {result['added_at']}\nSHA-256: {result['sha256']}")
             item.setData(Qt.ItemDataRole.UserRole, evidence_id)
             self.file_list.addItem(item)
             if evidence_id == select_id:
@@ -619,6 +713,15 @@ class MainWindow(QMainWindow):
         elif not self.file_list.count():
             self._show_welcome()
         self._refresh_compare_combo()
+        self._filter_files()
+
+    def _filter_files(self, *_args) -> None:
+        if not hasattr(self, "file_list"):
+            return
+        query = self.file_search.text().strip().casefold()
+        for index in range(self.file_list.count()):
+            item = self.file_list.item(index)
+            item.setHidden(bool(query and query not in (item.text() + item.toolTip()).casefold()))
 
     def _file_selected(self, current: QListWidgetItem | None, _previous) -> None:
         if not current:
@@ -630,16 +733,14 @@ class MainWindow(QMainWindow):
     def _choose_files(self) -> None:
         selected, _ = QFileDialog.getOpenFileNames(
             self,
-            self.tr("Выберите документы"),
+            self.tr("Выберите файлы для исследования"),
             "",
-            self.tr("Документы (*.pdf *.pptx)"),
+            self.tr("Все файлы (*);;Документы (*.pdf *.pptx *.pptm *.docx *.docm *.xlsx *.xlsm);;Изображения (*.jpg *.jpeg *.png *.tif *.tiff *.webp *.gif *.bmp);;Аудио и видео (*.mp4 *.mov *.mkv *.webm *.avi *.mp3 *.wav *.flac *.ogg);;Архивы (*.zip)"),
         )
         if selected:
             self._start_analysis([Path(item) for item in selected])
 
     def _start_analysis(self, paths: list[Path]) -> None:
-        if self.current_worker is not None:
-            return
         mode = self.mode_combo.currentData()
         selected: set[str] | None = None
         if mode == AnalysisMode.CUSTOM:
@@ -647,34 +748,30 @@ class MainWindow(QMainWindow):
             if not dialog.exec():
                 return
             selected = dialog.selected()
-        worker = AnalysisWorker(
-            self.service,
-            paths,
-            self._current_project_id(),
-            mode,
-            selected,
-        )
-        worker.signals.result.connect(self._analysis_ready)
-        worker.signals.error.connect(self._analysis_error)
-        worker.signals.cancelled.connect(self._analysis_cancelled)
-        worker.signals.progress.connect(self._analysis_progress)
-        worker.signals.finished.connect(self._analysis_finished)
-        self.current_worker = worker
-        self.add_action.setEnabled(False)
-        self.cancel_action.setEnabled(True)
-        self.stage_label.setText(self.tr("Подготавливаем рабочую копию…"))
-        self.stage_label.show()
-        self.progress.show()
-        self.progress.setRange(0, 0)
-        self.statusBar().showMessage(self.tr("Исследование выполняется…"))
-        self.thread_pool.start(worker)
+        errors = []
+        count = 0
+        for path in paths:
+            try:
+                if path.is_dir():
+                    raise ValueError("Для наблюдения за папкой используйте кнопку «Выбрать папку для наблюдения» в очереди")
+                self.queue_panel.queue.enqueue(path, self._current_project_id(), mode, selected_analyzers=selected)
+                count += 1
+            except (OSError, ValueError) as exc:
+                errors.append(f"{path.name}: {exc}")
+        self.start_background_processing()
+        self._show_queue()
+        self.queue_panel.refresh()
+        self.queue_panel.state.setText("\n".join(errors) if errors else f"Добавлено в очередь: {count}. Можно продолжать исследование других файлов.")
 
     def _cancel_analysis(self) -> None:
+        self.queue_panel.daemon.cancel_current()
         if self.current_worker:
             self.current_worker.cancel()
             self.stage_label.setText(self.tr("Отмена выполняющихся процессов…"))
 
     def _analysis_progress(self, stage: str, current: int, total: int) -> None:
+        self.queue_panel.state.setText(stage)
+        self.cancel_action.setEnabled(True)
         self.stage_label.setText(stage)
         if total > 0:
             self.progress.setRange(0, total)
@@ -721,9 +818,16 @@ class MainWindow(QMainWindow):
             )
 
     def _display_result(self, result: AnalysisResult) -> None:
+        previous = self.current_result
+        self._save_notes()
+        if previous and previous.evidence.id == result.evidence.id:
+            result.evidence.user_notes = previous.evidence.user_notes
+            result.evidence.user_conclusions = previous.evidence.user_conclusions
         self.current_result = result
         self.welcome_panel.hide()
         self.tabs.show()
+        for index in range(self.tabs.count()):
+            self.tabs.setTabEnabled(index, True)
         for action in self.export_actions.values():
             action.setEnabled(True)
         self.document_badge.setText(result.evidence.detected_format or result.evidence.kind.value.upper())
@@ -737,21 +841,24 @@ class MainWindow(QMainWindow):
         self.document_subtitle.setText(
             f"{_human_size(result.evidence.size_bytes)}  •  "
             f"{mode_labels.get(mode_value, mode_value)}  •  "
-            + self.tr("оригинал не изменён")
+            + original_integrity_label(result)
         )
         self.summary_text.setPlainText(
-            "\n\n".join(f"• {item}" for item in result.summary)
+            "\n".join(f"• {item}" for item in result.summary)
             or self.tr("Значимых наблюдений пока нет.")
         )
-        attention_count = sum(
-            1
-            for finding in result.findings
-            if finding.conflict
-            or str(getattr(finding.level, "value", finding.level))
-            in {"high", "manual_review"}
-        )
-        self.metric_format.setText(result.evidence.detected_format or result.evidence.kind.value.upper())
-        self.metric_size.setText(_human_size(result.evidence.size_bytes))
+        attention_count = sum(needs_attention(finding) for finding in result.findings)
+        self.findings_explorer.populate(result.findings)
+        self.identity_panel.populate(result)
+        self.reanalyze_button.setText("Провести полный анализ" if result.evidence.analysis_mode != AnalysisMode.FULL else "Повторить полный анализ")
+        self.review_button.setText(f"Посмотреть наблюдения, требующие внимания ({attention_count})")
+        self.review_button.setEnabled(bool(attention_count))
+        self.coverage_label.setText("Возможности профиля: " + PROFILES[result.evidence.kind].coverage)
+        failed = sorted({run.tool_name for run in result.tool_runs if run.status.value != "completed"})
+        done = sorted({run.tool_name for run in result.tool_runs if run.status.value == "completed"})
+        status = "Часть проверок не завершена" if result.incomplete else "Выбранные проверки завершены"
+        self.completion_label.setText(status + ". " + ("Внешние методы: " + ", ".join(done) + ". " if done else "Внешние методы не завершались. ") + ("Недоступны или с ошибкой: " + ", ".join(failed) + ". " if failed else "") + ("Ошибки: " + "; ".join(result.errors) if result.errors else ""))
+        self._update_visible_tabs()
         integrity_value = str(
             getattr(result.evidence.integrity_status, "value", result.evidence.integrity_status)
         )
@@ -798,18 +905,157 @@ class MainWindow(QMainWindow):
         self._refresh_compare_combo()
 
     def _show_welcome(self) -> None:
+        self._save_notes()
         self.current_result = None
         if not hasattr(self, "welcome_panel"):
             return
         self.tabs.hide()
+        for index in range(self.tabs.count()):
+            self.tabs.setTabEnabled(index, self.tabs.widget(index) == self.queue_panel)
+        self.findings_explorer.populate([])
         self.welcome_panel.show()
-        self.document_badge.setText(self.tr("PDF / PPTX"))
-        self.drop_label.setText(self.tr("Перетащите сюда PDF или PPTX"))
+        self.document_banner.show()
+        self.expert_mode.show()
+        self.document_badge.setText(self.tr("ФАЙЛЫ"))
+        self.drop_label.setText(self.tr("Добавьте файлы для исследования"))
         self.document_subtitle.setText(
             self.tr("Оригинал останется неизменным — анализ выполняется с рабочей копией")
         )
         for action in self.export_actions.values():
             action.setEnabled(False)
+
+    def start_background_processing(self) -> None:
+        if self.queue_worker is not None:
+            return
+        worker = QueueWorker(self.queue_panel.daemon)
+        self.queue_worker = worker
+        worker.signals.result.connect(self._queued_result_ready)
+        worker.signals.changed.connect(self.queue_panel.refresh)
+        worker.signals.progress.connect(self._analysis_progress)
+        worker.signals.error.connect(self.queue_panel.state.setText)
+        worker.signals.finished.connect(self._queue_stopped)
+        self.queue_pool.start(worker)
+        self.queue_panel.state.setText("Очередь работает. Новые файлы можно добавлять в любое время.")
+        self.queue_panel.timer.start()
+
+    def _queue_stopped(self) -> None:
+        self.queue_worker = None
+        self.cancel_action.setEnabled(False)
+
+    def _show_queue(self) -> None:
+        self.welcome_panel.hide()
+        self.tabs.show()
+        self.tabs.setCurrentWidget(self.queue_panel)
+        self._tab_context_changed()
+        self.queue_panel.refresh()
+
+    def _open_queued_result(self, evidence_id: str) -> None:
+        result = self.service.repository.load(evidence_id)
+        if result:
+            self._refresh_projects(result.evidence.project_id)
+            self._refresh_files(evidence_id)
+            self._display_result(result)
+            self.tabs.setCurrentIndex(0)
+
+    def _queued_result_ready(self, result: object) -> None:
+        if not isinstance(result, AnalysisResult):
+            return
+        self.cancel_action.setEnabled(False)
+        self.queue_panel.state.setText(f"Готово: {result.evidence.original_name}. Результат доступен в списке файлов и очереди.")
+        if result.evidence.project_id == self._current_project_id():
+            current = self.current_result
+            on_queue = self.tabs.currentWidget() == self.queue_panel
+            self._refresh_files(current.evidence.id if current else result.evidence.id)
+            if current is None:
+                self._display_result(result)
+            if on_queue:
+                self._show_queue()
+
+    def closeEvent(self, event) -> None:
+        self._save_notes()
+        self.queue_panel.daemon.stop()
+        if self.current_worker:
+            self.current_worker.cancel()
+        if self.queue_pool.activeThreadCount() or self.thread_pool.activeThreadCount():
+            event.ignore()
+            self.statusBar().showMessage("Завершаем процессы и сохраняем очередь…")
+            QTimer.singleShot(250, self.close)
+            return
+        self.queue_panel.timer.stop()
+        event.accept()
+
+    def resizeEvent(self, event) -> None:
+        super().resizeEvent(event)
+        if hasattr(self, "main_toolbar"):
+            self.main_toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly if self.width() < 1100 else Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+
+    def _review_findings(self) -> None:
+        self.tabs.setCurrentWidget(self.metadata_tabs)
+        self.metadata_tabs.setCurrentWidget(self.findings_explorer)
+        self.findings_explorer.search.clear()
+        self.findings_explorer.category.setCurrentIndex(0)
+        self.findings_explorer.attention.setChecked(True)
+
+    def _reveal_finding(self, finding_id: str) -> None:
+        self.tabs.setCurrentWidget(self.metadata_tabs)
+        self.metadata_tabs.setCurrentWidget(self.findings_explorer)
+        self.findings_explorer.reveal(finding_id)
+
+    def _search_project(self) -> None:
+        project_id = self._current_project_id()
+        project = self.service.repository.get_project(project_id) if project_id else None
+        dialog = ProjectSearchDialog(self.service.config.database_path, project_id, project.title if project else "Быстрое исследование", self)
+        dialog.open_finding.connect(self._open_search_finding)
+        dialog.exec()
+
+    def _open_search_finding(self, evidence_id: str, finding_id: str) -> None:
+        self._open_queued_result(evidence_id)
+        self._reveal_finding(finding_id)
+
+    def _tab_context_changed(self, *_args) -> None:
+        showing_queue = self.tabs.currentWidget() is self.queue_panel and not self.welcome_panel.isVisible()
+        self.document_banner.setVisible(not showing_queue)
+        self.expert_mode.setVisible(not showing_queue)
+
+    def _reanalyze_current(self) -> None:
+        if self.current_result is None:
+            return
+        try:
+            evidence = self.current_result.evidence
+            self.queue_panel.queue.enqueue(Path(evidence.original_path), evidence.project_id, AnalysisMode.FULL, force=True)
+            self.start_background_processing()
+            self._show_queue()
+        except (OSError, ValueError) as exc:
+            QMessageBox.warning(self, "Повторный анализ", str(exc))
+
+    def _export_finding_value(self, finding) -> None:
+        if self.current_result is None:
+            return
+        selected, _ = QFileDialog.getSaveFileName(self, "Сохранить исходное значение", "finding.json", "JSON (*.json)")
+        if not selected:
+            return
+        from app.reporting.safety import validate_report_destination
+        try:
+            destination = Path(selected)
+            validate_report_destination(self.current_result, destination)
+            payload = {"evidence_sha256": self.current_result.evidence.sha256, "category": finding.category, "name": finding.name, "source": finding.source, "location": finding.location, "value": finding.value}
+            destination.write_text(json.dumps(payload, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
+            self.statusBar().showMessage(f"Исходное значение сохранено: {destination.name}")
+        except (OSError, ValueError) as exc:
+            QMessageBox.warning(self, "Экспорт значения", str(exc))
+
+    def _update_visible_tabs(self, *_args) -> None:
+        if not hasattr(self, "tabs") or not hasattr(self, "object_tabs"):
+            return
+        expert = self.expert_mode.isChecked()
+        pdf = bool(self.current_result and self.current_result.evidence.kind == FileKind.PDF)
+        for widget, visible in ((self.structure_tabs, expert and pdf), (self.object_tabs, expert), (self.tools_page, expert)):
+            self.tabs.setTabVisible(self.tabs.indexOf(widget), visible)
+        for widget, visible in ((self.pdf_info_table, expert and pdf), (self.provenance_page, expert and pdf), (self.xmp_table, expert)):
+            self.metadata_tabs.setTabVisible(self.metadata_tabs.indexOf(widget), visible)
+        for widget in (self.objects_widget, self.debugger_page):
+            self.object_tabs.setTabVisible(self.object_tabs.indexOf(widget), pdf)
+        self.pdfbox_debugger_button.setEnabled(pdf)
 
     def _fill_hashes(self, result: AnalysisResult) -> None:
         evidence = result.evidence
@@ -1002,10 +1248,13 @@ class MainWindow(QMainWindow):
         run = self.current_result.tool_runs[index]
         self.raw_text.setPlainText(
             f"COMMAND\n{json.dumps(run.command, ensure_ascii=False)}\n\nVERSION\n{run.version}"
+            f"\n\nSTDIN (UTF-8)\n{run.parsed_result.get('stdin_utf8', '')}"
             f"\n\nSTDOUT\n{run.stdout}\n\nSTDERR\n{run.stderr}"
         )
 
     def _mark_changed(self, finding_id: str, mark: str, include: bool) -> None:
+        if not self.current_result or not any(f.id == finding_id for f in self.current_result.findings):
+            return
         self.service.repository.update_finding_mark(finding_id, mark, include)
         if self.current_result:
             for finding in self.current_result.findings:
@@ -1018,12 +1267,14 @@ class MainWindow(QMainWindow):
         if not self.current_result:
             return
         evidence = self.current_result.evidence
+        if evidence.user_notes == self.notes_edit.toPlainText() and evidence.user_conclusions == self.conclusions_edit.toPlainText():
+            return
         evidence.user_notes = self.notes_edit.toPlainText()
         evidence.user_conclusions = self.conclusions_edit.toPlainText()
         self.service.repository.update_evidence_notes(
             evidence.id, evidence.user_notes, evidence.user_conclusions
         )
-        QMessageBox.information(self, self.tr("Выводы"), self.tr("Сохранено."))
+        self.notes_saved_label.setText("Заметки и выводы сохранены")
 
     def _extract_attachments(self) -> None:
         if not self.current_result:
@@ -1076,14 +1327,14 @@ class MainWindow(QMainWindow):
         self.compare_combo.clear()
         if not self.current_result:
             return
-        for evidence_id in self.service.repository.list_evidence_ids(
+        for result in self.service.repository.list_evidence_summaries(
             self.current_result.evidence.project_id
         ):
+            evidence_id = result["id"]
             if evidence_id == self.current_result.evidence.id:
                 continue
-            result = self.service.repository.load(evidence_id)
-            if result and result.evidence.kind == self.current_result.evidence.kind:
-                self.compare_combo.addItem(result.evidence.original_name, evidence_id)
+            if result["kind"] == self.current_result.evidence.kind:
+                self.compare_combo.addItem(result["original_name"], evidence_id)
 
     def _compare(self) -> None:
         if not self.current_result or self.compare_combo.currentIndex() < 0:
@@ -1114,6 +1365,8 @@ class MainWindow(QMainWindow):
             if config.settings_path:
                 SettingsStore(config.settings_path).save(config)
             self.service = ForensicsService(config)
+            self.queue_panel.daemon.service = self.service
+            self.queue_panel.service = self.service
             self.hex_widget.service = self.service
             self._refresh_projects(self._current_project_id())
 
@@ -1130,17 +1383,9 @@ class MainWindow(QMainWindow):
     def _show_installation(self, value: object) -> None:
         if not isinstance(value, list):
             return
-        lines = [
-            f"{'✓' if run.status.value == 'completed' else '✗'} {run.tool_name}: "
-            f"{run.version} [{run.status.value}]"
-            for run in value
-            if isinstance(run, ToolRun)
-        ]
-        QMessageBox.information(
-            self,
-            self.tr("Проверка установки"),
-            "\n".join(lines),
-        )
+        dialog = ToolStatusDialog([run for run in value if isinstance(run, ToolRun)], self)
+        if dialog.exec():
+            self._settings()
 
     def _check_updates(self, manual: bool) -> None:
         url = self.service.config.update_manifest_url
@@ -1209,13 +1454,13 @@ class MainWindow(QMainWindow):
             self,
             self.tr("О программе"),
             self.tr(
-                f"<h3>Document Forensic Inspector {__version__}</h3>"
+                f"<h3>Document Forensic Inspector — Universal Preview</h3><p>Разработка на базе {__version__}</p>"
                 "<p><b>Автор оболочки, интеграции и Windows-сборки:</b><br>"
                 "Amirkhan Smagulov</p>"
                 "<p>Приложение объединяет независимые open-source инструменты в "
                 "едином графическом интерфейсе. Amirkhan Smagulov не является "
                 "автором ExifTool, qpdf, pdfcpu, Poppler, JHOVE, veraPDF, "
-                "Apache PDFBox, PDFiD, pdf-parser и других сторонних компонентов.</p>"
+                "Apache PDFBox, PDFiD, pdf-parser, FFmpeg/ffprobe, Pillow и других сторонних компонентов.</p>"
                 "<p>Авторские права и лицензии на эти компоненты принадлежат их "
                 "разработчикам. Полные тексты лицензий входят в поставку.</p>"
                 "<p>Перечень компонентов зафиксирован в SPDX SBOM. Для LGPL-компонентов "
@@ -1232,6 +1477,7 @@ class MainWindow(QMainWindow):
             self.background_workers.remove(worker)
 
     def _export(self, kind: str) -> None:
+        self._save_notes()
         if not self.current_result:
             return
         filters = {

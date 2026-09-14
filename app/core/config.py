@@ -19,7 +19,9 @@ class AppConfig:
     reports_dir: Path
     settings_path: Path | None = None
     tool_timeout_seconds: int = 120
+    max_analysis_seconds: int = 900
     exiftool_command: str = "exiftool"
+    ffprobe_command: str = "ffprobe"
     qpdf_command: str = "qpdf"
     pdfcpu_command: str = "pdfcpu"
     poppler_bin_dir: Path | None = None

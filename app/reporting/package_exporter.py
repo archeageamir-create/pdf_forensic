@@ -8,6 +8,7 @@ import zipfile
 from pathlib import Path
 
 from app.models import AnalysisResult, ResearchProject
+from app.reporting.safety import atomic_report_path, validate_report_destination
 from app.reporting.docx_exporter import DocxReportExporter
 from app.reporting.exporters import HtmlReportExporter, JsonReportExporter
 
@@ -23,6 +24,7 @@ class ZipPackageExporter:
         project: ResearchProject | None = None,
         audit_log: list[dict] | None = None,
     ) -> Path:
+        validate_report_destination(result, destination)
         destination.parent.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(prefix="dfi-export-") as temp:
             root = Path(temp) / "project_export"
@@ -52,8 +54,8 @@ class ZipPackageExporter:
             (evidence_dir / "file_manifest.json").write_text(
                 json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
             )
-            for run in result.tool_runs:
-                name = _safe_name(run.tool_name)
+            for index, run in enumerate(result.tool_runs, start=1):
+                name = f"{index:03d}-{_safe_name(run.tool_name)}"
                 (raw_dir / f"{name}.stdout.txt").write_text(run.stdout, encoding="utf-8")
                 (raw_dir / f"{name}.stderr.txt").write_text(run.stderr, encoding="utf-8")
                 (raw_dir / f"{name}.run.json").write_text(
@@ -112,6 +114,7 @@ class ZipPackageExporter:
             if qpdf_json and Path(str(qpdf_json)).is_file():
                 shutil.copyfile(Path(str(qpdf_json)), raw_dir / "qpdf-objects.json")
             artifact_files = {
+                "image_preview_path": "image-preview.png",
                 "poppler_text_path": "poppler-text.txt",
                 "verapdf_validation_path": "verapdf-validation.json",
                 "verapdf_features_path": "verapdf-features.json",
@@ -161,11 +164,10 @@ class ZipPackageExporter:
                 checksums.append(f"{_sha256(file)}  {file.relative_to(root).as_posix()}")
             (root / "manifest.sha256").write_text("\n".join(checksums) + "\n", encoding="utf-8")
 
-            temporary = destination.with_suffix(destination.suffix + ".tmp")
-            with zipfile.ZipFile(temporary, "w", zipfile.ZIP_DEFLATED, allowZip64=True) as archive:
-                for file in sorted(path for path in root.rglob("*") if path.is_file()):
-                    archive.write(file, file.relative_to(root).as_posix())
-            temporary.replace(destination)
+            with atomic_report_path(result, destination) as temporary:
+                with zipfile.ZipFile(temporary, "w", zipfile.ZIP_DEFLATED, allowZip64=True) as archive:
+                    for file in sorted(path for path in root.rglob("*") if path.is_file()):
+                        archive.write(file, file.relative_to(root).as_posix())
         return destination
 
 

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "document-forensics-lab"
 version = "0.4.2"
-description = "Desktop laboratory for forensic inspection of PDF and PPTX metadata"
+description = "Local file forensics laboratory with metadata inspection, persistent queue and folder monitoring"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

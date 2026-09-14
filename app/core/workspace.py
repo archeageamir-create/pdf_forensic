@@ -4,10 +4,10 @@ import logging
 import shutil
 from pathlib import Path
 
-from app.core.errors import EvidencePreparationError, UnsupportedFileError
+from app.core.errors import EvidencePreparationError
 from datetime import UTC, datetime
 
-from app.core.formats import detect_file_kind, mime_for_kind
+from app.core.formats import PROFILES, canonical_extension, detect_file_kind, mime_for_kind
 from app.core.hashing import calculate_hashes, sha256_file
 from app.models import AnalysisMode, EvidenceFile, IntegrityStatus
 
@@ -32,15 +32,13 @@ class EvidenceWorkspace:
         if source.stat().st_size == 0:
             raise EvidencePreparationError("The selected file is empty")
         kind = detect_file_kind(source)
-        if kind is None:
-            raise UnsupportedFileError("File signature is not a supported PDF or PPTX format")
 
         source_hashes = calculate_hashes(source)
         source_hash = source_hashes["sha256"]
         project_part = project_id or "quick-analysis"
         case_dir = self.cases_dir / project_part / source_hash
         case_dir.mkdir(parents=True, exist_ok=True)
-        copy_path = case_dir / f"working-copy{source.suffix.lower()}"
+        copy_path = case_dir / f"working-copy{canonical_extension(kind)}"
 
         if not copy_path.exists() or sha256_file(copy_path) != source_hash:
             temporary = case_dir / f".{copy_path.name}.tmp"
@@ -65,6 +63,8 @@ class EvidenceWorkspace:
 
         if sha256_file(source) != source_hash:
             raise EvidencePreparationError("Original file changed while it was being copied")
+        if detect_file_kind(copy_path) != kind:
+            raise EvidencePreparationError("Содержимое изменилось во время определения формата. Повторите добавление стабильной версии файла.")
 
         stat = source.stat()
 
@@ -76,7 +76,7 @@ class EvidenceWorkspace:
             kind=kind,
             original_name=source.name,
             extension=source.suffix.lower(),
-            detected_format=kind.value.upper(),
+            detected_format=PROFILES[kind].label,
             mime_type=mime_for_kind(kind),
             sha1=source_hashes["sha1"],
             md5=source_hashes["md5"],

@@ -1,0 +1,240 @@
+"""Operate: inherit the existing Windows/Segoe UI evidence desk.
+
+One searchable list connects a plain-language observation to its exact value,
+source and location. Filtering never changes the report or the stored evidence.
+The table is compact; full values and expert marks belong in the detail pane.
+"""
+
+from __future__ import annotations
+
+import json
+
+from PySide6.QtCore import Qt, Signal, QSettings
+from PySide6.QtWidgets import (
+    QCheckBox,
+    QComboBox,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPlainTextEdit,
+    QPushButton,
+    QSplitter,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+    QWidget,
+)
+
+from app.analyzers.overview import needs_attention
+from app.gui.widgets import configure_resizable_columns
+from app.models import Finding, UserMark
+from app.resources.labels import (
+    category_label,
+    display_value,
+    parameter_description,
+    parameter_label,
+    source_label,
+)
+
+
+class FindingsExplorer(QWidget):
+    mark_changed = Signal(str, str, bool)
+    export_value = Signal(object)
+
+    def __init__(self):
+        super().__init__()
+        self.findings: list[Finding] = []
+        self.visible_findings: list[Finding] = []
+        self.search_values = {}
+        self.search = QLineEdit()
+        self.search.setPlaceholderText(
+            "Найти автора, дату, GPS, программу или любое значение…"
+        )
+        self.search.setAccessibleName("Поиск по результатам")
+        self.search.setClearButtonEnabled(True)
+        self.category = QComboBox()
+        self.category.setSizeAdjustPolicy(
+            QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon
+        )
+        self.category.setMinimumContentsLength(20)
+        self.category.setAccessibleName("Группа результатов")
+        self.attention = QCheckBox("Требует внимания")
+        self.counter = QLabel()
+        self.table = QTableWidget(0, 4)
+        self.table.setHorizontalHeaderLabels(
+            ["Что найдено", "Значение", "Источник", "Оценка"]
+        )
+        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
+        self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.table.setAlternatingRowColors(True)
+        self.table.setWordWrap(False)
+        self.table.verticalHeader().hide()
+        configure_resizable_columns(
+            self.table, "universal_findings", [240, 290, 160, 150]
+        )
+        self.detail = QPlainTextEdit()
+        self.detail.setReadOnly(True)
+        self.detail.setAccessibleName("Объяснение и исходные данные")
+        self.mark = QComboBox()
+        for value, label in (
+            (UserMark.NONE, "Без отметки"),
+            (UserMark.SIGNIFICANT, "Существенно"),
+            (UserMark.INSIGNIFICANT, "Несущественно"),
+            (UserMark.EXPLAINED, "Объяснено"),
+            (UserMark.FURTHER_REVIEW, "Доп. исследование"),
+        ):
+            self.mark.addItem(label, value.value)
+        self.include = QCheckBox("Включить в отчёт")
+        self.save_value = QPushButton("Сохранить исходное значение")
+        self.save_value.clicked.connect(self._export_value)
+        self.mark.currentIndexChanged.connect(self._mark)
+        self.include.toggled.connect(self._mark)
+        self.table.currentCellChanged.connect(self._selection)
+        self.search.textChanged.connect(self._filter)
+        self.category.currentIndexChanged.connect(self._filter)
+        self.attention.toggled.connect(self._filter)
+        layout = QVBoxLayout(self)
+        filters = QHBoxLayout()
+        filters.addWidget(self.search, 1)
+        filters.addWidget(self.attention)
+        layout.addLayout(filters)
+        groups = QHBoxLayout()
+        groups.addWidget(self.category, 1)
+        groups.addWidget(self.counter)
+        layout.addLayout(groups)
+        splitter = QSplitter(Qt.Orientation.Vertical)
+        splitter.addWidget(self.table)
+        splitter.addWidget(self.detail)
+        splitter.setSizes([300, 270])
+        settings = QSettings("DocumentForensicsLab", "Inspector")
+        state = settings.value("explorer/splitter")
+        if state is not None:
+            splitter.restoreState(state)
+        splitter.splitterMoved.connect(
+            lambda *_: settings.setValue("explorer/splitter", splitter.saveState())
+        )
+        layout.addWidget(splitter, 1)
+        marks = QHBoxLayout()
+        marks.addWidget(QLabel("Оценка эксперта:"))
+        marks.addWidget(self.mark)
+        marks.addWidget(self.include)
+        marks.addStretch()
+        layout.addLayout(marks)
+        layout.addWidget(self.save_value, 0, Qt.AlignmentFlag.AlignRight)
+
+    def populate(self, findings: list[Finding]):
+        self.findings = findings
+        self.search_values = {
+            f.id: " ".join(
+                (
+                    f.name,
+                    parameter_label(f.name),
+                    category_label(f.category),
+                    f.source,
+                    json.dumps(f.value, ensure_ascii=False, default=str),
+                    f.details,
+                    f.location,
+                )
+            ).casefold()
+            for f in findings
+        }
+        self.search.clear()
+        self.attention.setChecked(False)
+        self.category.blockSignals(True)
+        self.category.clear()
+        self.category.addItem("Все группы", "")
+        for category in sorted({f.category for f in findings}, key=category_label):
+            self.category.addItem(category_label(category), category)
+        self.category.blockSignals(False)
+        self._filter()
+
+    def _filter(self, *_):
+        query = self.search.text().casefold().strip()
+        category = self.category.currentData()
+        self.visible_findings = [
+            f
+            for f in self.findings
+            if (not category or f.category == category)
+            and (not self.attention.isChecked() or needs_attention(f))
+            and (not query or query in self.search_values.get(f.id, ""))
+        ]
+        self.table.blockSignals(True)
+        self.table.clearContents()
+        self.table.setRowCount(len(self.visible_findings))
+        for row, finding in enumerate(self.visible_findings):
+            raw = (
+                f"{len(finding.value)} записей — выберите строку"
+                if isinstance(finding.value, (dict, list))
+                else display_value(finding.value)
+            )
+            compact = raw.replace("\n", " ")[:240]
+            for col, text in enumerate(
+                (
+                    parameter_label(finding.name),
+                    compact,
+                    source_label(finding.source),
+                    "Расхождение" if finding.conflict else display_value(finding.level),
+                )
+            ):
+                item = QTableWidgetItem(text)
+                item.setToolTip(raw if col == 1 else text)
+                self.table.setItem(row, col, item)
+        self.table.blockSignals(False)
+        self.counter.setText(
+            f"Показано {len(self.visible_findings)} из {len(self.findings)}"
+        )
+        if self.visible_findings:
+            self.table.setCurrentCell(0, 0)
+        self._selection()
+
+    def reveal(self, finding_id: str):
+        self.search.clear()
+        self.attention.setChecked(False)
+        self.category.setCurrentIndex(0)
+        for row, finding in enumerate(self.visible_findings):
+            if finding.id == finding_id:
+                self.table.setCurrentCell(row, 0)
+                self.table.scrollToItem(self.table.item(row, 0))
+                return
+
+    def _selection(self, *_):
+        row = self.table.currentRow()
+        valid = 0 <= row < len(self.visible_findings)
+        self.mark.setEnabled(valid)
+        self.include.setEnabled(valid)
+        self.save_value.setEnabled(valid)
+        if not valid:
+            self.detail.setPlainText(
+                "Нет результатов для выбранных условий. Очистите поиск или смените группу."
+            )
+            return
+        finding = self.visible_findings[row]
+        raw = json.dumps(finding.value, ensure_ascii=False, indent=2, default=str)
+        if len(raw) > 100_000:
+            raw = (
+                raw[:100_000]
+                + "\n\nПоказаны первые 100 000 символов. Кнопка «Сохранить исходное значение» выгружает значение целиком."
+            )
+        self.detail.setPlainText(
+            f"{parameter_label(finding.name)}\n{parameter_description(finding.name, finding.details or finding.description)}\n\nИсходное значение:\n{raw}\n\nГруппа: {category_label(finding.category)}\nИсточник: {source_label(finding.source)}\nРасположение: {finding.location or 'не указано анализатором'}\nТехническое имя: {finding.name}"
+        )
+        self.mark.blockSignals(True)
+        self.include.blockSignals(True)
+        self.mark.setCurrentIndex(max(0, self.mark.findData(finding.user_mark)))
+        self.include.setChecked(finding.include_in_report)
+        self.mark.blockSignals(False)
+        self.include.blockSignals(False)
+
+    def _mark(self, *_):
+        row = self.table.currentRow()
+        if 0 <= row < len(self.visible_findings):
+            finding = self.visible_findings[row]
+            self.mark_changed.emit(
+                finding.id, self.mark.currentData(), self.include.isChecked()
+            )
+
+    def _export_value(self):
+        row = self.table.currentRow()
+        if 0 <= row < len(self.visible_findings):
+            self.export_value.emit(self.visible_findings[row])

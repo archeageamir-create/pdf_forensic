@@ -95,6 +95,8 @@ class MetadataConflictDetector:
                     continue
                 left = normalize_date(str(created_item.value))
                 right = normalize_date(str(modified_item.value))
+                if left.get("timezone_present") != right.get("timezone_present"):
+                    continue
                 if left.get("timestamp") is not None and right.get("timestamp") is not None:
                     if float(right["timestamp"]) < float(left["timestamp"]):
                         results.append(

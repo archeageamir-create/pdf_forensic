@@ -95,6 +95,7 @@ class SettingsDialog(QDialog):
         self.setWindowTitle("Настройки анализа")
         form = QFormLayout()
         self.exiftool = _path_row(str(config.exiftool_command), self, executable=True)
+        self.ffprobe = _path_row(str(config.ffprobe_command), self, executable=True)
         self.qpdf = _path_row(str(config.qpdf_command), self, executable=True)
         self.pdfcpu = _path_row(str(config.pdfcpu_command), self, executable=True)
         self.poppler = _directory_row(str(config.poppler_bin_dir or ""), self)
@@ -108,6 +109,9 @@ class SettingsDialog(QDialog):
         self.timeout = QSpinBox()
         self.timeout.setRange(10, 3600)
         self.timeout.setValue(config.tool_timeout_seconds)
+        self.analysis_timeout = QSpinBox()
+        self.analysis_timeout.setRange(1, 240)
+        self.analysis_timeout.setValue(max(1, config.max_analysis_seconds // 60))
         self.stream_limit = QSpinBox()
         self.stream_limit.setRange(1, 2048)
         self.stream_limit.setValue(config.max_stream_bytes // (1024 * 1024))
@@ -116,6 +120,7 @@ class SettingsDialog(QDialog):
         self.signatures = QCheckBox("Проверять подписи криптографически")
         self.signatures.setChecked(config.validate_signatures)
         form.addRow("ExifTool", self.exiftool)
+        form.addRow("ffprobe — аудио и видео", self.ffprobe)
         form.addRow("qpdf", self.qpdf)
         form.addRow("pdfcpu", self.pdfcpu)
         form.addRow("Poppler — папка bin", self.poppler)
@@ -126,6 +131,7 @@ class SettingsDialog(QDialog):
         form.addRow("DOCX-шаблон", self.template)
         form.addRow("Манифест обновлений", self.update_url)
         form.addRow("Timeout, секунд", self.timeout)
+        form.addRow("Лимит на файл, минут", self.analysis_timeout)
         form.addRow("Максимальный stream, МБ", self.stream_limit)
         form.addRow(self.qdf)
         form.addRow(self.signatures)
@@ -142,6 +148,7 @@ class SettingsDialog(QDialog):
         return replace(
             self.config,
             exiftool_command=self.exiftool.findChild(QLineEdit).text().strip() or "exiftool",
+            ffprobe_command=self.ffprobe.findChild(QLineEdit).text().strip() or "ffprobe",
             qpdf_command=self.qpdf.findChild(QLineEdit).text().strip() or "qpdf",
             pdfcpu_command=self.pdfcpu.findChild(QLineEdit).text().strip() or "pdfcpu",
             poppler_bin_dir=(
@@ -171,6 +178,7 @@ class SettingsDialog(QDialog):
                 else None
             ),
             tool_timeout_seconds=self.timeout.value(),
+            max_analysis_seconds=self.analysis_timeout.value() * 60,
             max_stream_bytes=self.stream_limit.value() * 1024 * 1024,
             create_qdf_in_full_mode=self.qdf.isChecked(),
             validate_signatures=self.signatures.isChecked(),
@@ -193,6 +201,7 @@ class CustomAnalyzersDialog(QDialog):
             ("verapdf", "veraPDF — PDF/A и PDF/UA"),
             ("pdfbox", "Apache PDFBox — независимый парсер"),
             ("pdfid", "PDFiD"),
+            ("ffprobe", "ffprobe — контейнер и медиадорожки"),
             ("pdf_parser", "pdf-parser"),
             ("deep_pdf", "Ревизии, объекты и streams"),
             ("signatures", "ByteRange и подписи"),

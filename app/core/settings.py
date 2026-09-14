@@ -20,18 +20,33 @@ class SettingsStore:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             return config
+        if not isinstance(raw, dict):
+            return config
         allowed = {item.name: item for item in fields(AppConfig)}
         updates: dict[str, Any] = {}
         for key, value in raw.items():
             if key not in allowed:
                 continue
+            default_value = getattr(config, key)
             if key.endswith("_path") or key.endswith("_dir") or key in {
                 "pdfid_script",
                 "pdf_parser_script",
                 "report_template",
                 "pdfbox_jar",
             }:
-                updates[key] = Path(value) if value else None
+                if isinstance(value, str) and value.strip():
+                    updates[key] = Path(value)
+                elif value in (None, "") and key not in {"data_dir", "database_path", "cases_dir", "reports_dir"}:
+                    updates[key] = None
+            elif isinstance(default_value, bool):
+                if isinstance(value, bool):
+                    updates[key] = value
+            elif isinstance(default_value, int):
+                if type(value) is int and value > 0:
+                    updates[key] = value
+            elif isinstance(default_value, str):
+                if isinstance(value, str):
+                    updates[key] = value
             else:
                 updates[key] = value
         return replace(config, **updates)

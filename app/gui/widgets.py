@@ -26,7 +26,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.core.service import ForensicsService
-from app.models import AnalysisResult, Finding, UserMark
+from app.models import Finding, UserMark
 from app.resources.labels import display_value, parameter_description, parameter_label, source_label
 
 

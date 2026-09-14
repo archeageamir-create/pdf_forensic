@@ -7,7 +7,7 @@ from typing import Any
 from app.models import EvidenceFile, Finding
 
 
-DATE_WORDS = {"date", "time", "datetime", "created", "modified", "creation", "moddate"}
+DATE_WORDS = {"date", "datetime", "moddate", "timestamp"}
 
 
 def normalize_date(raw: str) -> dict[str, Any]:
@@ -63,13 +63,15 @@ class TimelineBuilder:
             if _is_date_field(finding.name):
                 if isinstance(finding.value, (str, int, float)):
                     events.append(self._event(finding.source, finding.name, str(finding.value)))
-            if finding.category == "PPTX comments" and isinstance(finding.value, list):
+            if finding.name in {"Word comments", "Tracked changes"} or finding.category == "PPTX comments":
+                if not isinstance(finding.value, list):
+                    continue
                 for comment in finding.value:
                     if isinstance(comment, dict) and comment.get("date"):
                         events.append(
                             self._event(
-                                "PPTX comment",
-                                f"Comment in {comment.get('part', '')}",
+                                finding.source,
+                                f"{finding.name}: {comment.get('type', 'comment')} in {comment.get('part') or finding.location or ''}",
                                 str(comment["date"]),
                             )
                         )
@@ -83,13 +85,13 @@ class TimelineBuilder:
 
 
 def _date_result(raw: str, value: datetime, timezone_present: bool) -> dict[str, Any]:
-    comparable = value if value.tzinfo else value.replace(tzinfo=UTC)
     return {
         "raw": raw,
         "parsed": True,
         "normalized": value.isoformat(),
         "timezone_present": timezone_present,
-        "timestamp": comparable.timestamp(),
+        # An unknown timezone cannot locate an event on an absolute timeline.
+        "timestamp": value.timestamp() if timezone_present else None,
     }
 
 
@@ -98,9 +100,15 @@ def _has_timezone(value: str) -> bool:
 
 
 def _is_date_field(name: str) -> bool:
-    folded = name.casefold()
-    words = set(re.findall(r"[a-zа-я]+", folded))
+    folded = re.sub(r"[^a-z0-9]", "", name.casefold())
+    # OOXML's LinksUpToDate is a boolean flag, not a timestamp.
+    if folded.endswith("uptodate"):
+        return False
+    separated = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1 \2", name)
+    separated = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", separated)
+    words = set(re.findall(r"[a-zа-я]+", separated.casefold()))
     if words & DATE_WORDS:
         return True
-    # ExifTool/OOXML keys frequently use CamelCase without separators.
-    return folded.endswith(("date", "time", "datetime", "created", "modified", "moddate"))
+    # Lowercase keys and time fields with calendar meaning. Generic *Time
+    # includes durations (ExposureTime, TotalTime), so is deliberately excluded.
+    return folded.endswith(("createdate", "creationdate", "modifydate", "modificationdate", "accessdate", "metadatadate", "datetime", "created", "modified", "moddate", "timestamp", "creationtime", "createtime", "modificationtime", "modifytime", "accesstime", "savedtime")) or folded in {"datetimeoriginal", "datetimedigitized", "subsecdatetimeoriginal", "lastprinted"}

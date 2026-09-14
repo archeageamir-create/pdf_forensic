@@ -30,10 +30,16 @@ def announce_headless_report(destination: Path) -> None:
 
 
 def main() -> int:
+    import multiprocessing
+    multiprocessing.freeze_support()
     parser = argparse.ArgumentParser(description="Document Forensic Inspector")
     parser.add_argument("--version", action="version", version=__version__)
-    parser.add_argument("--analyze", type=Path, help="Run a headless analysis of one PDF/PPTX")
+    parser.add_argument("--analyze", type=Path, help="Run a headless analysis of a file (format detected from content)")
     parser.add_argument("--output", type=Path, help="Output report path for headless mode")
+    parser.add_argument("--watch", type=Path, help="Continuously analyze new files in a local folder")
+    parser.add_argument("--recursive", action="store_true", help="Include subfolders with --watch")
+    parser.add_argument("--drain-queue", action="store_true", help="Process saved pending jobs and exit")
+    parser.add_argument("--data-dir", type=Path, help="Use a separate local workspace for evidence, settings and queue")
     parser.add_argument(
         "--mode",
         choices=[item.value for item in AnalysisMode if item != AnalysisMode.CUSTOM],
@@ -41,17 +47,41 @@ def main() -> int:
         help="Analysis mode for headless operation",
     )
     args = parser.parse_args()
+    if sum(bool(value) for value in (args.analyze, args.watch, args.drain_queue)) > 1:
+        parser.error("Choose one of --analyze, --watch, --drain-queue")
 
     defaults = AppConfig.default()
+    if args.data_dir:
+        from dataclasses import replace
+        data_dir = args.data_dir.expanduser().resolve()
+        defaults = replace(defaults, data_dir=data_dir, database_path=data_dir / "forensics.sqlite3", cases_dir=data_dir / "cases", reports_dir=data_dir / "reports", settings_path=data_dir / "settings.json")
     config = (
         SettingsStore(defaults.settings_path).load(defaults)
         if defaults.settings_path
         else defaults
     )
+    if args.data_dir:
+        config = replace(config, **{key: getattr(defaults, key) for key in ("data_dir", "database_path", "cases_dir", "reports_dir", "settings_path")})
     config.ensure_directories()
     configure_logging(config.data_dir)
     logging.getLogger(__name__).info("Application started, version %s", __version__)
     service = ForensicsService(config)
+
+    if args.watch or args.drain_queue:
+        import signal
+        from app.core.daemon import QueueDaemon
+        from app.core.job_queue import JobQueue
+        queue = JobQueue(config.data_dir / "queue.sqlite3")
+        daemon = QueueDaemon(service, queue)
+        if args.watch:
+            root = args.watch.expanduser().resolve()
+            if any(root.is_relative_to(path.resolve()) for path in (config.data_dir, config.cases_dir, config.reports_dir)):
+                parser.error("Watch folder must be outside the application workspace")
+            queue.save_watch(root, None, AnalysisMode(args.mode), args.recursive)
+        signal.signal(signal.SIGINT, lambda *_: daemon.stop())
+        signal.signal(signal.SIGTERM, lambda *_: daemon.stop())
+        daemon.run(once=args.drain_queue)
+        return 0
 
     if args.analyze:
         result = service.analyze_file(args.analyze, mode=AnalysisMode(args.mode))
@@ -70,7 +100,7 @@ def main() -> int:
         # PyInstaller's windowed bootloader intentionally exposes no stdout.
         # Headless analysis must still finish successfully in that build.
         announce_headless_report(destination)
-        return 0 if not result.errors else 2
+        return 0 if not result.incomplete else 2
 
     from PySide6.QtCore import Qt
     from PySide6.QtGui import QGuiApplication
@@ -88,6 +118,7 @@ def main() -> int:
     application.setStyle("Fusion")
     apply_theme(application)
     window = MainWindow(service)
+    window.start_background_processing()
     window.show()
     return application.exec()
 

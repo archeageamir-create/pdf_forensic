@@ -6,6 +6,17 @@ from typing import Any
 
 
 CATEGORY_LABELS = {
+    "EXIF": "EXIF / камера и съёмка",
+    "GPS": "GPS / местоположение",
+    "Image properties": "Свойства изображения",
+    "Media container": "Медиаконтейнер",
+    "Media streams": "Аудио- и видеодорожки",
+    "Media metadata": "Метаданные аудио и видео",
+    "Archive": "Содержимое ZIP",
+    "OOXML structure": "Состав документа Office",
+    "OOXML relationships": "Связи документа Office",
+    "Word review": "Комментарии и исправления Word",
+    "Excel workbook": "Листы Excel",
     "Integrity": "Целостность и идентификация",
     "PDF structure": "Структура PDF",
     "PDF revisions": "Инкрементальные ревизии PDF",
@@ -41,6 +52,60 @@ CATEGORY_LABELS = {
 
 
 NAME_LABELS = {
+    "Image format": "Формат изображения",
+    "Image width": "Ширина, пикселей",
+    "Image height": "Высота, пикселей",
+    "Color mode": "Цветовой режим",
+    "Make": "Производитель камеры",
+    "Model": "Модель камеры",
+    "Software": "Программа обработки",
+    "DateTimeOriginal": "Дата съёмки из EXIF",
+    "DateTimeDigitized": "Дата оцифровки из EXIF",
+    "DateTime": "Дата изменения из EXIF",
+    "GPSLatitude": "Широта GPS",
+    "GPSLongitude": "Долгота GPS",
+    "GPSLatitudeRef": "Полушарие: север / юг",
+    "GPSLongitudeRef": "Полушарие: восток / запад",
+    "GPSAltitude": "Высота GPS",
+    "GPSPosition": "Координаты GPS",
+    "ExposureTime": "Выдержка",
+    "FNumber": "Диафрагма",
+    "FocalLength": "Фокусное расстояние",
+    "Orientation": "Ориентация изображения",
+    "LensModel": "Модель объектива",
+    "Artist": "Заявленный автор изображения",
+    "Copyright": "Заявленные авторские права",
+    "Header bytes": "Первые 64 байта файла",
+    "Word comments": "Комментарии Word",
+    "Tracked changes count": "Количество сохранённых исправлений",
+    "Tracked changes": "Записи об исправлениях",
+    "Worksheets": "Листы книги",
+    "Hidden worksheets": "Скрытые листы",
+    "Macro parts": "Части с макросами VBA",
+    "OOXML embedded files": "Встроенные части Office",
+    "Archive inventory": "Список записей архива",
+    "Encrypted entries": "Зашифрованные записи",
+    "Unsafe archive paths": "Пути за пределы папки распаковки",
+    "format_name": "Формат контейнера",
+    "format_long_name": "Название формата контейнера",
+    "duration": "Длительность, секунд",
+    "bit_rate": "Битрейт, бит/с",
+    "codec_name": "Кодек",
+    "codec_long_name": "Название кодека",
+    "codec_type": "Тип дорожки",
+    "width": "Ширина, пикселей",
+    "height": "Высота, пикселей",
+    "sample_rate": "Частота дискретизации, Гц",
+    "channels": "Количество аудиоканалов",
+    "channel_layout": "Расположение аудиоканалов",
+    "r_frame_rate": "Частота кадров",
+    "avg_frame_rate": "Средняя частота кадров",
+    "creation_time": "Заявленная дата создания",
+    "encoder": "Программа кодирования",
+    "nb_streams": "Количество дорожек",
+    "nb_frames": "Количество кадров",
+    "pix_fmt": "Формат пикселей",
+    "tags": "Дополнительные метаданные",
     "Signature format": "Формат по сигнатуре файла",
     "Extension matches signature": "Расширение соответствует сигнатуре",
     "Working copy hash verified": "SHA-256 рабочей копии подтверждён",
@@ -190,8 +255,6 @@ NAME_LABELS = {
     "AppVersion": "Версия приложения",
     "Company": "Организация",
     "Metadata": "Метаданные",
-    "Signatures": "Подписи",
-    "Object streams": "Потоки объектов",
     "XRef": "Таблицы XRef",
     "Forms": "Формы",
     "Size": "Размер файла",
@@ -206,6 +269,13 @@ NAME_LABELS = {
 
 
 DESCRIPTIONS = {
+    "DateTimeOriginal": "Дата съёмки, записанная в EXIF. Может быть изменена и часто не содержит часового пояса.",
+    "Software": "Название программы, записанное в метаданных. Само по себе не устанавливает автора и характер обработки.",
+    "GPSLatitude": "Записанная широта; для интерпретации учитывайте GPSLatitudeRef и формат значения. Подлинность координат не проверялась.",
+    "GPSLongitude": "Записанная долгота; для интерпретации учитывайте GPSLongitudeRef и формат значения. Подлинность координат не проверялась.",
+    "Tracked changes count": "Сохранённые исправления Word, включая вставки, удаления, перемещения и изменения оформления. Принятые правки могут уже отсутствовать.",
+    "creation_time": "Дата из медиаконтейнера или дорожки. Это метаданные, а не независимое подтверждение времени записи.",
+    "Header bytes": "Сигнатура начала рабочей копии. Позволяет проверить тип содержимого независимо от расширения имени.",
     "PDF version": "Версия синтаксиса PDF из заголовка или служебных данных.",
     "PDFVersion": "Версия синтаксиса PDF, сообщённая ExifTool.",
     "Encrypted": "Показывает наличие словаря /Encrypt; это не означает, что файл нельзя открыть.",
@@ -340,7 +410,10 @@ def parameter_label(name: str) -> str:
 
 
 def parameter_description(name: str, supplied: str = "") -> str:
-    return DESCRIPTIONS.get(name) or supplied or "Техническое значение; источник указан в соседнем столбце."
+    known = DESCRIPTIONS.get(name)
+    if known and supplied and supplied != known:
+        return known + "\n" + supplied
+    return known or supplied or "Техническое значение; источник указан в соседнем столбце."
 
 
 def source_label(source: str) -> str:
@@ -355,6 +428,14 @@ def display_value(value: Any) -> str:
     if isinstance(value, (list, dict)):
         return json.dumps(value, ensure_ascii=False, indent=2, default=str)
     translations = {
+        "none": "без отметки",
+        "significant": "существенно",
+        "insignificant": "несущественно",
+        "explained": "объяснено",
+        "further_review": "дополнительное исследование",
+        "quick": "быстрый",
+        "full": "полный",
+        "custom": "выбранные проверки",
         "passed": "проверка пройдена",
         "warnings": "завершено с предупреждениями",
         "classic table": "классическая таблица",

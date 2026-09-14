@@ -15,6 +15,24 @@ def utc_now_iso() -> str:
 class FileKind(StrEnum):
     PDF = "pdf"
     PPTX = "pptx"
+    DOCX = "docx"
+    XLSX = "xlsx"
+    JPEG = "jpeg"
+    PNG = "png"
+    TIFF = "tiff"
+    GIF = "gif"
+    WEBP = "webp"
+    BMP = "bmp"
+    MP4 = "mp4"
+    MOV = "mov"
+    MP3 = "mp3"
+    WAV = "wav"
+    FLAC = "flac"
+    OGG = "ogg"
+    MKV = "mkv"
+    AVI = "avi"
+    ZIP = "zip"
+    BINARY = "binary"
 
     @classmethod
     def from_path(cls, path: Path) -> "FileKind":

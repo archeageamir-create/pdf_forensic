@@ -3,7 +3,8 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from app.models import AnalysisResult, ComparisonResult, FindingLevel
+from app.models import AnalysisResult, ComparisonResult
+from app.analyzers.overview import observations, original_integrity_label
 
 
 class SummaryBuilder:
@@ -13,6 +14,8 @@ class SummaryBuilder:
             "Целостность рабочей копии подтверждена SHA-256.",
         ]
         conflicts = sum(1 for item in result.findings if item.conflict)
+        messages.append(original_integrity_label(result) + ".")
+        messages = observations(result) + messages
         if conflicts:
             messages.append(f"Обнаружено различий метаданных: {conflicts}; требуется экспертная оценка.")
         values = {item.name: item.value for item in result.findings}
@@ -75,12 +78,15 @@ class FileComparator:
 
 
 def _finding_map(result: AnalysisResult) -> dict[str, Any]:
-    included_categories = {"PDF Info", "XMP", "PDF structure", "PDF revisions", "PDF signatures"}
-    return {
-        f"{item.category}/{item.name}/{item.source}": item.value
-        for item in result.findings
-        if item.category in included_categories
-    }
+    # Work-copy paths/timestamps and execution diagnostics differ on every run.
+    excluded_categories = {"Integrity", "Tool diagnostics", "Metadata conflicts"}
+    grouped = {}
+    for item in result.findings:
+        if item.category in excluded_categories or item.source == "ExifTool/System" or item.name in {"FileName", "Directory", "FileAccessDate", "FileCreateDate", "FileModifyDate"}:
+            continue
+        key = f"{item.category}/{item.name}/{item.source}" + (f" [{item.location}]" if item.location else "")
+        grouped.setdefault(key, []).append(item.value)
+    return {key: values[0] if len(values) == 1 else values for key, values in grouped.items()}
 
 
 def _stable(value: Any) -> str:
