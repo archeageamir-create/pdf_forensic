@@ -96,3 +96,23 @@ def test_html_report_keeps_source_location_scope_and_escaped_notes():
     assert "Часовой пояс не указан" in output and "объяснено" in output
     assert "Авторство и история правок PDF" not in output
     assert "<script>" not in output and "&lt;script&gt;" in output
+
+
+def test_timeline_reports_keep_offset_provenance_and_do_not_reuse_old_false_precision(tmp_path):
+    result = sample_result()
+    result.artifacts["timeline"] = [
+        {"raw": "D:2026Z", "normalized": "2026-01-01T00:00:00+00:00", "name": "CreationDate", "source": "PDF"},
+        {"raw": "2026:01:02 12:00:00", "comparison_raw": "2026:01:02 12:00:00+05:00",
+         "source": "ExifTool/ExifIFD", "scope": "embedded_metadata", "name": "DateTimeOriginal",
+         "timezone_field": "OffsetTimeOriginal", "timezone_value": "+05:00", "timezone_finding_id": "offset-id",
+         "finding_id": "date-id"},
+    ]
+    html = HtmlReportExporter().render(result)
+    path = tmp_path / "timeline.docx"
+    DocxReportExporter().export(result, path)
+    with zipfile.ZipFile(path) as archive:
+        xml = archive.read("word/document.xml").decode("utf-8")
+    for text in (html, xml):
+        assert "Неполная точность" in text
+        assert "2026-01-01T00:00:00+00:00" not in text
+        assert "OffsetTimeOriginal" in text and "offset-id" in text and "date-id" in text

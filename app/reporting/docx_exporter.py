@@ -15,6 +15,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 from app.models import AnalysisResult, Finding, ResearchProject
 from app.reporting.safety import atomic_report_path, validate_report_destination
+from app.reporting.timeline import timeline_cells
 from app.resources.labels import (
     category_label,
     display_value,
@@ -182,10 +183,8 @@ class DocxReportExporter:
                 if not isinstance(item, dict):
                     continue
                 cells = table.add_row().cells
-                cells[0].text = _xml_safe(str(item.get("normalized") or item.get("raw", "")) + ("\nЧасовой пояс не указан" if not item.get("timezone_present") else ""))
-                cells[1].text = _xml_safe(source_label(str(item.get("source", ""))))
-                cells[2].text = _xml_safe(parameter_label(str(item.get("name", ""))))
-                cells[3].text = _xml_safe(str(item.get("raw", "")))
+                for cell, text in zip(cells, timeline_cells(item)):
+                    cell.text = _xml_safe(text)
             _format_table(table, [2100, 1800, 2700, 2760])
         else:
             document.add_paragraph("Даты не извлечены.")

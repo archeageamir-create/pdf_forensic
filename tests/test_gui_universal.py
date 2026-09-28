@@ -142,6 +142,63 @@ def test_notes_survive_switching_files_and_export_state(window):
     assert window.notes_edit.toPlainText() == "Заметка до смены файла"
 
 
+def test_research_guidance_opens_source_and_draft_preserves_expert_conclusion(window):
+    result = sample_result()
+    result.evidence.user_conclusions = "Самостоятельный вывод эксперта"
+    result.evidence.user_notes = "Исходная заметка"
+    finding = Finding("EXIF", "Software", "Editor", "Pillow", location="IFD0 tag 305")
+    result.findings = [finding]
+    window.service.repository.save(result)
+    window._display_result(result)
+    assistant = window.research_assistant
+    row = next(i for i, a in enumerate(assistant.answers) if a.rule_id == "software")
+    assistant.table.setCurrentCell(row, 0)
+    assistant._open_ground()
+    assert window.findings_explorer.visible_findings[window.findings_explorer.table.currentRow()].id == finding.id
+    explorer = window.findings_explorer
+    assert "Возможные объяснения" in explorer.detail.toPlainText()
+    assert explorer.raw_detail.isHidden()
+    explorer.raw_toggle.setChecked(True)
+    assert not explorer.raw_detail.isHidden()
+    explorer._add_observation()
+    saved = window.service.repository.load(result.evidence.id)
+    assert saved.evidence.user_conclusions == "Самостоятельный вывод эксперта"
+    assert "Исходная заметка" in saved.evidence.user_notes
+    assert finding.id in saved.evidence.user_notes
+    assert "IFD0 tag 305" in saved.evidence.user_notes
+    old_note = saved.evidence.user_notes
+    explorer._add_observation()
+    assert window.notes_edit.toPlainText() == old_note
+    window._show_welcome()
+    assert not assistant.answers and not window.chronology_panel.events
+    assert not assistant.add_draft.isEnabled()
+
+
+def test_chronology_compare_and_source_navigation(window):
+    from PySide6.QtCore import QItemSelectionModel
+
+    result = sample_result()
+    first = Finding("EXIF", "DateTimeOriginal", "2026:01:02 12:00:00+05:00", "Pillow")
+    second = Finding("XMP", "CreateDate", "2026-01-02T07:00:00Z", "ExifTool/XMP")
+    result.findings = [first, second]
+    window.service.repository.save(result)
+    window._display_result(result)
+    panel = window.chronology_panel
+    rows = [i for i, event in enumerate(panel.events) if event.get("finding_id") in {first.id, second.id}]
+    panel.table.clearSelection()
+    flags = QItemSelectionModel.SelectionFlag.Select | QItemSelectionModel.SelectionFlag.Rows
+    for row in rows:
+        panel.table.selectionModel().select(panel.table.model().index(row, 0), flags)
+    assert "одному моменту" in panel.detail.toPlainText()
+    assert panel.add_note.isEnabled()
+    panel._add_note()
+    assert first.id in window.notes_edit.toPlainText()
+    panel.table.clearSelection()
+    panel.table.selectRow(rows[0])
+    panel._open_source()
+    assert window.findings_explorer.visible_findings[window.findings_explorer.table.currentRow()].id == first.id
+
+
 def test_settings_apply_to_future_queue_jobs(window):
     config = replace(
         window.service.config,

@@ -26,12 +26,12 @@ from PySide6.QtWidgets import (
 )
 
 from app.analyzers.overview import needs_attention
+from app.analyzers.research_guidance import explain_finding, observation_draft
 from app.gui.widgets import configure_resizable_columns
 from app.models import Finding, UserMark
 from app.resources.labels import (
     category_label,
     display_value,
-    parameter_description,
     parameter_label,
     source_label,
 )
@@ -40,6 +40,7 @@ from app.resources.labels import (
 class FindingsExplorer(QWidget):
     mark_changed = Signal(str, str, bool)
     export_value = Signal(object)
+    draft_requested = Signal(str)
 
     def __init__(self):
         super().__init__()
@@ -76,6 +77,17 @@ class FindingsExplorer(QWidget):
         self.detail = QPlainTextEdit()
         self.detail.setReadOnly(True)
         self.detail.setAccessibleName("Объяснение и исходные данные")
+        self.raw_detail = QPlainTextEdit()
+        self.raw_detail.setReadOnly(True)
+        self.raw_detail.setAccessibleName("Исходное значение и технические сведения")
+        self.raw_toggle = QPushButton("Исходные данные")
+        self.raw_toggle.setToolTip("Показать полное значение, расположение и служебные сведения")
+        self.raw_toggle.setCheckable(True)
+        self.raw_toggle.toggled.connect(self.raw_detail.setVisible)
+        self.raw_detail.hide()
+        self.add_observation = QPushButton("Описание в заметки")
+        self.add_observation.setToolTip("Добавить заготовку описания наблюдения с источником и ограничениями")
+        self.add_observation.clicked.connect(self._add_observation)
         self.mark = QComboBox()
         for value, label in (
             (UserMark.NONE, "Без отметки"),
@@ -86,7 +98,7 @@ class FindingsExplorer(QWidget):
         ):
             self.mark.addItem(label, value.value)
         self.include = QCheckBox("Включить в отчёт")
-        self.save_value = QPushButton("Сохранить исходное значение")
+        self.save_value = QPushButton("Сохранить значение")
         self.save_value.clicked.connect(self._export_value)
         self.mark.currentIndexChanged.connect(self._mark)
         self.include.toggled.connect(self._mark)
@@ -106,6 +118,7 @@ class FindingsExplorer(QWidget):
         splitter = QSplitter(Qt.Orientation.Vertical)
         splitter.addWidget(self.table)
         splitter.addWidget(self.detail)
+        splitter.addWidget(self.raw_detail)
         splitter.setSizes([300, 270])
         settings = QSettings("DocumentForensicsLab", "Inspector")
         state = settings.value("explorer/splitter")
@@ -121,7 +134,12 @@ class FindingsExplorer(QWidget):
         marks.addWidget(self.include)
         marks.addStretch()
         layout.addLayout(marks)
-        layout.addWidget(self.save_value, 0, Qt.AlignmentFlag.AlignRight)
+        actions = QHBoxLayout()
+        actions.addWidget(self.raw_toggle)
+        actions.addWidget(self.add_observation)
+        actions.addWidget(self.save_value)
+        actions.addStretch()
+        layout.addLayout(actions)
 
     def populate(self, findings: list[Finding]):
         self.findings = findings
@@ -204,7 +222,10 @@ class FindingsExplorer(QWidget):
         self.mark.setEnabled(valid)
         self.include.setEnabled(valid)
         self.save_value.setEnabled(valid)
+        self.add_observation.setEnabled(valid)
+        self.raw_toggle.setEnabled(valid)
         if not valid:
+            self.raw_detail.clear()
             self.detail.setPlainText(
                 "Нет результатов для выбранных условий. Очистите поиск или смените группу."
             )
@@ -216,8 +237,18 @@ class FindingsExplorer(QWidget):
                 raw[:100_000]
                 + "\n\nПоказаны первые 100 000 символов. Кнопка «Сохранить исходное значение» выгружает значение целиком."
             )
-        self.detail.setPlainText(
-            f"{parameter_label(finding.name)}\n{parameter_description(finding.name, finding.details or finding.description)}\n\nИсходное значение:\n{raw}\n\nГруппа: {category_label(finding.category)}\nИсточник: {source_label(finding.source)}\nРасположение: {finding.location or 'не указано анализатором'}\nТехническое имя: {finding.name}"
+        guide = explain_finding(finding)
+        preview = (
+            f"{len(finding.value)} записей; содержимое доступно по кнопке исходного значения"
+            if isinstance(finding.value, (list, dict)) else
+            raw.replace("\n", " ")[:200] + ("…" if len(raw) > 200 else "")
+        )
+        self.detail.setPlainText(f"{parameter_label(finding.name)}: {preview}\n\n" + guide.text())
+        self.raw_detail.setPlainText(
+            f"Исходное значение:\n{raw}\n\nГруппа: {category_label(finding.category)}\n"
+            f"Источник: {source_label(finding.source)}\nРасположение: {finding.location or 'не указано анализатором'}\n"
+            f"Техническое имя: {finding.name}\nИдентификатор: {finding.id}\n"
+            f"Пояснение анализатора: {finding.details or finding.description}\nПравило помощника: {guide.rule}"
         )
         self.mark.blockSignals(True)
         self.include.blockSignals(True)
@@ -238,3 +269,8 @@ class FindingsExplorer(QWidget):
         row = self.table.currentRow()
         if 0 <= row < len(self.visible_findings):
             self.export_value.emit(self.visible_findings[row])
+
+    def _add_observation(self):
+        row = self.table.currentRow()
+        if 0 <= row < len(self.visible_findings):
+            self.draft_requested.emit(observation_draft(self.visible_findings[row]))

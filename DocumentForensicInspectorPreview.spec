@@ -15,6 +15,7 @@ datas = [
     (str(project_root / "NOTICE"), "app/resources/compliance"),
     (str(project_root / "docs/LGPL_COMPLIANCE.md"), "app/resources/compliance"),
     (str(project_root / "docs/UNIVERSAL_PREVIEW.md"), "."),
+    (str(project_root / "docs/RESEARCH_ASSISTANT_KZ.md"), "."),
 ]
 a = Analysis([str(project_root / "app/main.py")], pathex=[str(project_root)], binaries=[], datas=datas, hiddenimports=["pyhanko_certvalidator"], hookspath=[], hooksconfig={}, runtime_hooks=[], excludes=["pytest"], noarchive=False)
 pyz = PYZ(a.pure)

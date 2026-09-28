@@ -58,6 +58,9 @@ from app.gui.explorer import FindingsExplorer
 from app.gui.queue_panel import QueuePanel, QueueWorker
 from app.gui.tool_status import ToolStatusDialog
 from app.gui.identity import IdentityPanel
+from app.gui.research_assistant import ResearchAssistant
+from app.gui.chronology import ChronologyPanel
+from app.analyzers.interpretation import working_copy_verified
 from app.gui.project_search import ProjectSearchDialog
 from app.analyzers.overview import needs_attention, original_integrity_label
 from app.core.formats import PROFILES
@@ -342,6 +345,18 @@ class MainWindow(QMainWindow):
         overview_layout = QVBoxLayout(overview_page)
         overview_layout.setContentsMargins(12, 12, 12, 12)
         overview_layout.setSpacing(10)
+        self.research_assistant = ResearchAssistant()
+        self.research_assistant.finding_selected.connect(self._reveal_finding)
+        self.research_assistant.draft_requested.connect(self._append_research_note)
+        overview_layout.addWidget(self.research_assistant)
+        self.overview_details_toggle = QPushButton("Показать свойства файла, объём проверок и служебные сведения")
+        self.overview_details_toggle.setCheckable(True)
+        overview_layout.addWidget(self.overview_details_toggle)
+        overview_details = QWidget()
+        overview_layout.addWidget(overview_details)
+        overview_details.hide()
+        self.overview_details_toggle.toggled.connect(overview_details.setVisible)
+        overview_layout = QVBoxLayout(overview_details)
         self.identity_panel = IdentityPanel()
         self.identity_panel.finding_selected.connect(self._reveal_finding)
         overview_layout.addWidget(self.identity_panel)
@@ -413,10 +428,10 @@ class MainWindow(QMainWindow):
         )
         provenance_layout.addWidget(self.provenance_caution)
         provenance_layout.addWidget(self.provenance_table, 1)
-        self.timeline_table = _table(
-            ["Дата", "Источник", "Событие", "Исходное значение", "TZ"],
-            "timeline",
-        )
+        self.chronology_panel = ChronologyPanel()
+        self.chronology_panel.finding_selected.connect(self._reveal_finding)
+        self.chronology_panel.draft_requested.connect(self._append_research_note)
+        self.timeline_table = self.chronology_panel.table
         self.revision_table = _table(
             ["№", "Диапазон байтов", "startxref", "/Prev", "Объекты", "Метаданные", "Примечания"],
             "revisions",
@@ -498,6 +513,7 @@ class MainWindow(QMainWindow):
         self.findings_explorer = FindingsExplorer()
         self.findings_explorer.mark_changed.connect(self._mark_changed)
         self.findings_explorer.export_value.connect(self._export_finding_value)
+        self.findings_explorer.draft_requested.connect(self._append_research_note)
         self.metadata_tabs.insertTab(0, self.findings_explorer, self.tr("Все результаты"))
         self.metadata_tabs.setCurrentIndex(0)
         self.structure_tabs = _nested_tabs(
@@ -521,12 +537,13 @@ class MainWindow(QMainWindow):
         expert_tabs = _nested_tabs(
             ((self.comparison_page, "Сравнение"), (self.conclusions_page, "Заметки и выводы"))
         )
+        self.expert_tabs = expert_tabs
         for widget, label in (
             (overview_scroll, "Обзор"),
             (self.metadata_tabs, "Результаты"),
             (self.structure_tabs, "Структура PDF"),
             (object_tabs, "Объекты и Hex"),
-            (self.timeline_table, "Хронология"),
+            (self.chronology_panel, "Хронология"),
             (expert_tabs, "Эксперт"),
             (self.tools_page, "Технические данные"),
             (self.queue_panel, "Очередь"),
@@ -585,7 +602,7 @@ class MainWindow(QMainWindow):
     def _conclusions_widget(self) -> QWidget:
         widget = QWidget()
         layout = QVBoxLayout(widget)
-        layout.addWidget(QLabel(self.tr("Заметки эксперта")))
+        layout.addWidget(QLabel(self.tr("Заметки и заготовки исследовательской части")))
         self.notes_edit = QPlainTextEdit()
         layout.addWidget(self.notes_edit)
         layout.addWidget(QLabel(self.tr("Выводы пользователя")))
@@ -850,6 +867,7 @@ class MainWindow(QMainWindow):
         attention_count = sum(needs_attention(finding) for finding in result.findings)
         self.findings_explorer.populate(result.findings)
         self.identity_panel.populate(result)
+        self.research_assistant.populate(result)
         self.reanalyze_button.setText("Провести полный анализ" if result.evidence.analysis_mode != AnalysisMode.FULL else "Повторить полный анализ")
         self.review_button.setText(f"Посмотреть наблюдения, требующие внимания ({attention_count})")
         self.review_button.setEnabled(bool(attention_count))
@@ -859,11 +877,8 @@ class MainWindow(QMainWindow):
         status = "Часть проверок не завершена" if result.incomplete else "Выбранные проверки завершены"
         self.completion_label.setText(status + ". " + ("Внешние методы: " + ", ".join(done) + ". " if done else "Внешние методы не завершались. ") + ("Недоступны или с ошибкой: " + ", ".join(failed) + ". " if failed else "") + ("Ошибки: " + "; ".join(result.errors) if result.errors else ""))
         self._update_visible_tabs()
-        integrity_value = str(
-            getattr(result.evidence.integrity_status, "value", result.evidence.integrity_status)
-        )
         self.metric_integrity.setText(
-            self.tr("Подтверждена") if integrity_value == "verified" else self.tr("Нарушена")
+            self.tr("Подтверждена") if working_copy_verified(result) else self.tr("Не подтверждена")
         )
         self.metric_attention.setText(str(attention_count))
         self._fill_hashes(result)
@@ -913,6 +928,8 @@ class MainWindow(QMainWindow):
         for index in range(self.tabs.count()):
             self.tabs.setTabEnabled(index, self.tabs.widget(index) == self.queue_panel)
         self.findings_explorer.populate([])
+        self.research_assistant.populate(None)
+        self.chronology_panel.populate(None)
         self.welcome_panel.show()
         self.document_banner.show()
         self.expert_mode.show()
@@ -1001,6 +1018,20 @@ class MainWindow(QMainWindow):
         self.metadata_tabs.setCurrentWidget(self.findings_explorer)
         self.findings_explorer.reveal(finding_id)
 
+    def _append_research_note(self, text: str) -> None:
+        if self.current_result is None:
+            return
+        evidence = self.current_result.evidence
+        block = f"Объект: {evidence.original_name}\nSHA-256: {evidence.sha256}\n\n{text}"
+        existing = self.notes_edit.toPlainText().rstrip()
+        if block not in existing:
+            self.notes_edit.setPlainText(existing + ("\n\n———\n\n" if existing else "") + block)
+            self._save_notes()
+        self.tabs.setCurrentWidget(self.expert_tabs)
+        self.expert_tabs.setCurrentWidget(self.conclusions_page)
+        self.notes_edit.setFocus()
+        self.statusBar().showMessage("Заготовка добавлена в заметки. Проверьте основания и отредактируйте текст.")
+
     def _search_project(self) -> None:
         project_id = self._current_project_id()
         project = self.service.repository.get_project(project_id) if project_id else None
@@ -1072,19 +1103,7 @@ class MainWindow(QMainWindow):
         _fill_rows(self.hash_table, rows)
 
     def _fill_timeline(self, result: AnalysisResult) -> None:
-        items = result.artifacts.get("timeline", [])
-        rows = [
-            (
-                item.get("normalized") or item.get("raw", ""),
-                source_label(str(item.get("source", ""))),
-                parameter_label(str(item.get("name", ""))),
-                item.get("raw", ""),
-                "есть" if item.get("timezone_present") else "нет",
-            )
-            for item in items
-            if isinstance(item, dict)
-        ]
-        _fill_rows(self.timeline_table, rows)
+        self.chronology_panel.populate(result)
 
     def _fill_provenance(self, result: AnalysisResult) -> None:
         provenance = result.artifacts.get("pdf_provenance", {})

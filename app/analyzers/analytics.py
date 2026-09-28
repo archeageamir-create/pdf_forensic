@@ -5,13 +5,15 @@ from typing import Any
 
 from app.models import AnalysisResult, ComparisonResult
 from app.analyzers.overview import observations, original_integrity_label
+from app.analyzers.interpretation import working_copy_verified
 
 
 class SummaryBuilder:
     def build(self, result: AnalysisResult) -> list[str]:
         messages = [
             f"Формат {result.evidence.detected_format}, размер {result.evidence.size_bytes:,} байт.",
-            "Целостность рабочей копии подтверждена SHA-256.",
+            "Целостность рабочей копии подтверждена SHA-256." if working_copy_verified(result)
+            else "Соответствие рабочей копии по SHA-256 не подтверждено.",
         ]
         conflicts = sum(1 for item in result.findings if item.conflict)
         messages.append(original_integrity_label(result) + ".")

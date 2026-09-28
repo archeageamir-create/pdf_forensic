@@ -8,6 +8,7 @@ from typing import Iterable
 
 from app.models import AnalysisResult, Finding
 from app.reporting.safety import atomic_report_path
+from app.reporting.timeline import timeline_cells
 from app.resources.labels import (
     category_label,
     display_value,
@@ -120,11 +121,7 @@ def _artifact_table(items: object) -> str:
     if not isinstance(items, list) or not items:
         return "<p>Нет данных</p>"
     rows = "".join(
-        "<tr>"
-        f"<td>{_h(item.get('normalized') or item.get('raw', ''))}{'<small>Часовой пояс не указан</small>' if not item.get('timezone_present') else ''}</td>"
-        f"<td>{_h(source_label(str(item.get('source', ''))))}</td>"
-        f"<td>{_h(parameter_label(str(item.get('name', ''))))}</td>"
-        f"<td>{_h(item.get('raw', ''))}</td></tr>"
+        "<tr>" + "".join(f'<td class="notes">{_h(cell)}</td>' for cell in timeline_cells(item)) + "</tr>"
         for item in items
         if isinstance(item, dict)
     )

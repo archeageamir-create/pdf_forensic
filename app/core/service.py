@@ -28,6 +28,7 @@ from app.adapters.base import (
 from app.adapters.pdf_tools import _python_tool_prefix
 from app.adapters.ffprobe import FfprobeAdapter
 from app.analyzers.universal import analyze_universal
+from app.analyzers.interpretation import InterpretationBuilder
 from app.analyzers import (
     FileComparator,
     MetadataConflictDetector,
@@ -250,6 +251,7 @@ class ForensicsService:
             artifacts=artifacts,
         )
         result.summary = SummaryBuilder().build(result)
+        result.artifacts["research_assistant"] = InterpretationBuilder().snapshot(result)
         self.repository.save(result)
         self.repository.log_event(
             "analysis_completed",

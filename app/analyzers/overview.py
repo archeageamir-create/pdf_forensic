@@ -18,13 +18,14 @@ def original_integrity_label(result: AnalysisResult) -> str:
             f
             for f in result.findings
             if f.name == "Original hash unchanged during analysis"
+            and f.category == "Integrity" and f.source == "SHA-256"
         ),
         None,
     )
     if check is None:
         return "Повторная проверка оригинала не записана"
     return (
-        "Оригинал не изменился за время анализа"
+        "Хеш оригинала до и после анализа совпал"
         if check.value is True
         else "Неизменность оригинала не подтверждена — откройте результаты проверки"
     )
