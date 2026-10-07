@@ -1,7 +1,7 @@
 """Inventory the local preview's build environment without rewriting release SBOMs.
 
-The preview bundles Python libraries and the two repository tool scripts. Other
-CLI engines remain optional, installed tools. This is not a public release audit.
+The standalone preview bundles Python libraries, scripts and every CLI engine.
+This is a build inventory, not an Authenticode/public-release audit.
 """
 
 from __future__ import annotations
@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from app import __version__
+from scripts.prepare_runtime_dependencies import verify_bundle
 from scripts.generate_compliance import (
     _copy_distribution_licenses,
     _license_expression,
@@ -29,6 +30,7 @@ from scripts.generate_compliance import (
 
 
 def prepare() -> Path:
+    runtime = verify_bundle()
     target = ROOT / "build" / "preview-resources"
     target.mkdir(parents=True, exist_ok=True)
     project_url = "https://github.com/archeageamir-create/pdf_forensic"
@@ -57,11 +59,19 @@ def prepare() -> Path:
     notices = [
         "# Local universal preview — build inventory",
         "",
-        "This inventory records the installed build environment. PyInstaller selects a subset of its modules. Optional ExifTool, qpdf, ffprobe, Poppler and Java engines are not bundled in this preview; the application discovers locally installed tools.",
+        "This standalone build bundles Python, Qt, ExifTool (including Perl), qpdf, pdfcpu, Poppler, ffprobe, Java, JHOVE, veraPDF, PDFBox and the repository PDF scripts. No separate runtime installation is needed. Exact engine files and hashes are in binaries/RUNTIME_MANIFEST.json; upstream download hashes are in compliance/runtime-dependencies.lock.json.",
         "",
         "The release 0.4.2 inventory in the repository describes that earlier distribution, not this preview. No public-release compliance audit or Authenticode signing was performed.",
         "",
     ]
+    for component in runtime["components"]:
+        packages.append(_package(
+            name=component["name"], version=component["version"],
+            license_id=component["license"], supplier="NOASSERTION",
+            homepage=component["url"], source=component["url"],
+            scope="bundled external engine",
+        ))
+        notices.append(f"- Bundled {component['name']} {component['version']}: {component['license']}. Upstream: {component['url']}.")
     for distribution in sorted(
         metadata.distributions(), key=lambda d: d.metadata["Name"].lower()
     ):
@@ -164,6 +174,8 @@ def prepare() -> Path:
         "created_utc": created,
         "base_version": __version__,
         "build": "universal-preview",
+        "standalone": True,
+        "runtime_manifest_sha256": hashlib.sha256((ROOT / "app/resources/binaries/RUNTIME_MANIFEST.json").read_bytes()).hexdigest(),
         "python": platform.python_version(),
         "platform": platform.platform(),
         "qt": qt_version,

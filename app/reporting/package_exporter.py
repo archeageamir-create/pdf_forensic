@@ -118,6 +118,7 @@ class ZipPackageExporter:
                 "poppler_text_path": "poppler-text.txt",
                 "verapdf_validation_path": "verapdf-validation.json",
                 "verapdf_features_path": "verapdf-features.json",
+                "verapdf_features_xml_path": "verapdf-features.xml",
                 "pdfbox_text_path": "pdfbox-text.txt",
                 "pdfbox_xmp_path": "pdfbox-xmp.xml",
                 "pdfbox_decoded_path": "pdfbox-decoded.pdf",

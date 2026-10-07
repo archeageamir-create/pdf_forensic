@@ -25,6 +25,13 @@
   "build_distributions": ["PyInstaller"],
   "external_components": [
     {
+      "name": "ffprobe (FFmpeg, Gyan essentials static build)", "version": "8.1.2",
+      "license": "GPL-3.0-or-later", "supplier": "Organization: FFmpeg Developers; Gyan Doshi",
+      "homepage": "https://ffmpeg.org/",
+      "source": "https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz",
+      "artifact": "app/resources/binaries/ffmpeg/ffprobe.exe"
+    },
+    {
       "name": "ExifTool", "version": "13.59",
       "license": "Artistic-1.0-Perl OR GPL-1.0-or-later",
       "supplier": "Person: Phil Harvey", "homepage": "https://exiftool.org/",

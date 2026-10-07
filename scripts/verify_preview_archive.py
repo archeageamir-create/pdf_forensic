@@ -1,4 +1,4 @@
-"""Check archive hashes, relocate the EXE and run a native GUI burst without CLI tools."""
+"""Check archive hashes, relocate the EXE and run the complete package without host-installed CLI tools."""
 
 from __future__ import annotations
 
@@ -7,7 +7,6 @@ import hashlib
 import json
 import os
 import runpy
-import subprocess
 import sys
 import time
 import zipfile
@@ -17,7 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from pypdf import PdfWriter
+from scripts.verify_standalone_engines import verify as verify_engines
+from scripts.prepare_runtime_dependencies import verify_bundle
 from app.core.database import AnalysisRepository
 from app.core.job_queue import JobQueue
 from app.models import AnalysisMode
@@ -59,6 +59,8 @@ def main() -> int:
         assert path.stat().st_size == item["size"] and digest(path) == item["sha256"], (
             path
         )
+    assert manifest.get("standalone") is True
+    verify_bundle(app / "_internal/app/resources/binaries")
     executable = app / "DocumentForensicInspectorPreview.exe"
     assert digest(executable) == manifest["executable_sha256"]
     helper = runpy.run_path(str(ROOT / "scripts/soak-queue.py"))
@@ -123,36 +125,7 @@ def main() -> int:
         daemon.stop()
         daemon.join(timeout=15)
         assert not daemon.is_alive(), "Owned GUI did not stop"
-    # A quick PDF check should honestly report absent CLI engines while its
-    # bundled Python-based PDFiD helper still runs in this relocated package.
-    pdf = root / "СИНТЕТИКА-standalone.pdf"
-    writer = PdfWriter()
-    writer.add_blank_page(100, 100)
-    writer.write(pdf)
-    report = root / "standalone-pdf.json"
-    completed = subprocess.run(
-        [
-            str(executable),
-            "--data-dir",
-            str(root / "pdf-workspace"),
-            "--analyze",
-            str(pdf),
-            "--mode",
-            "quick",
-            "--output",
-            str(report),
-        ],
-        timeout=60,
-        check=False,
-        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
-    )
-    assert completed.returncode == 2
-    payload = json.loads(report.read_text(encoding="utf-8"))
-    tools = {run["tool_name"]: run["status"] for run in payload["tool_runs"]}
-    assert tools["pdfid.py"] == "completed", tools
-    assert (
-        tools["ExifTool"] == "unavailable" and tools["qpdf/check"] == "unavailable"
-    ), tools
+    engines = verify_engines(executable, root / "standalone-engines")
     summary = {
         "completed_utc": datetime.now(UTC).isoformat(),
         "archive_sha256": digest(args.archive),
@@ -167,7 +140,7 @@ def main() -> int:
         "peak_parent_memory_bytes": max(
             (e["memory_bytes"] or 0 for e in events), default=0
         ),
-        "standalone_pdf_tools": tools,
+        "standalone_engines": engines,
         "all_checks_passed": True,
     }
     (root / "events.json").write_text(json.dumps(events, indent=2), encoding="utf-8")

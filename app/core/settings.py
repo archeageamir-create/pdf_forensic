@@ -1,11 +1,25 @@
 from __future__ import annotations
 
 import json
+import sys
 from dataclasses import asdict, fields, replace
 from pathlib import Path
 from typing import Any
 
 from app.core.config import AppConfig
+
+TOOL_LOCATIONS = {
+    "exiftool_command", "ffprobe_command", "qpdf_command", "pdfcpu_command",
+    "java_command", "poppler_bin_dir", "jhove_dir", "verapdf_dir", "pdfbox_jar",
+    "pdfid_script", "pdf_parser_script",
+}
+
+
+def _bundled_or_legacy_tool(value: Any) -> bool:
+    if value in (None, "", "exiftool", "ffprobe", "qpdf", "pdfcpu", "java"):
+        return True
+    normalized = str(value).replace("\\", "/").casefold()
+    return any(part in normalized for part in ("/app/resources/binaries/", "/app/resources/tools/"))
 
 
 class SettingsStore:
@@ -26,6 +40,10 @@ class SettingsStore:
         updates: dict[str, Any] = {}
         for key, value in raw.items():
             if key not in allowed:
+                continue
+            if getattr(sys, "frozen", False) and key in TOOL_LOCATIONS and _bundled_or_legacy_tool(value):
+                # Settings may come from the earlier lightweight preview or
+                # another installation directory. Rebase bundled paths.
                 continue
             default_value = getattr(config, key)
             if key.endswith("_path") or key.endswith("_dir") or key in {
@@ -53,9 +71,11 @@ class SettingsStore:
 
     def save(self, config: AppConfig) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        defaults = AppConfig.default()
         payload = {
             key: str(value) if isinstance(value, Path) else value
             for key, value in asdict(config).items()
+            if key not in TOOL_LOCATIONS or value != getattr(defaults, key)
         }
         temporary = self.path.with_suffix(".tmp")
         temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")

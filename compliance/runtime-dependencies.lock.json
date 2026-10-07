@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "platform": "windows-x86_64",
+  "components": [
+    {
+      "name": "exiftool",
+      "version": "13.59",
+      "url": "https://downloads.sourceforge.net/project/exiftool/exiftool-13.59_64.zip",
+      "filename": "exiftool-13.59_64.zip",
+      "sha256": "44b512b25af500724ba579d0a53c8fc5851628b692dd5e5d94ae4a15c2cba9ec",
+      "bytes": 11183675,
+      "upstream_checksum_verified": false,
+      "license": "Artistic-1.0-Perl OR GPL-1.0-or-later"
+    },
+    {
+      "name": "ffprobe",
+      "version": "8.1.2",
+      "url": "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-8.1.2-essentials_build.zip",
+      "filename": "ffmpeg-8.1.2-essentials_build.zip",
+      "sha256": "db580001caa24ac104c8cb856cd113a87b0a443f7bdf47d8c12b1d740584a2ec",
+      "bytes": 109728040,
+      "upstream_checksum_verified": true,
+      "license": "GPL-3.0-or-later"
+    },
+    {
+      "name": "java",
+      "version": "21.0.11+10",
+      "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jre_x64_windows_hotspot_21.0.11_10.zip",
+      "filename": "OpenJDK21U-jre_x64_windows_hotspot_21.0.11_10.zip",
+      "sha256": "be26677aaa20b39a62edcaab4c8857a8b76673b0f45abc0b6143b142b62717e4",
+      "bytes": 49005708,
+      "upstream_checksum_verified": true,
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0"
+    },
+    {
+      "name": "jhove",
+      "version": "1.34.0",
+      "url": "https://software.openpreservation.org/releases/jhove-installer-1.34.jar",
+      "filename": "jhove-installer-1.34.jar",
+      "sha256": "8652ddd84a65ab449e872f2baef7acb4c2a2212268c657788d0257b85b645498",
+      "bytes": 36203737,
+      "upstream_checksum_verified": false,
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "name": "pdfbox",
+      "version": "3.0.8",
+      "url": "https://archive.apache.org/dist/pdfbox/3.0.8/pdfbox-app-3.0.8.jar",
+      "filename": "pdfbox-app-3.0.8.jar",
+      "sha256": "f6b3a80c39747ff0ef5d06708bc03882152403de58dbef4a1fbffbee568eceb1",
+      "bytes": 13602031,
+      "upstream_checksum_verified": false,
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "pdfcpu",
+      "version": "0.13.0",
+      "url": "https://github.com/pdfcpu/pdfcpu/releases/download/v0.13.0/pdfcpu_0.13.0_Windows_x86_64.zip",
+      "filename": "pdfcpu_0.13.0_Windows_x86_64.zip",
+      "sha256": "53add9ba4bd6fa754e0e12a856c7ede6030a17b67d49f634ae1011424d75fced",
+      "bytes": 5531039,
+      "upstream_checksum_verified": true,
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "poppler",
+      "version": "26.02.0",
+      "url": "https://github.com/oschwartz10612/poppler-windows/releases/download/v26.02.0-0/Release-26.02.0-0.zip",
+      "filename": "Release-26.02.0-0.zip",
+      "sha256": "993e4a94376ed712fafc7058d724ea0b943d118bbd2305cd9ed55174eb85cda5",
+      "bytes": 16107283,
+      "upstream_checksum_verified": true,
+      "license": "GPL-2.0-or-later"
+    },
+    {
+      "name": "qpdf",
+      "version": "12.3.2",
+      "url": "https://github.com/qpdf/qpdf/releases/download/v12.3.2/qpdf-12.3.2-msvc64.zip",
+      "filename": "qpdf-12.3.2-msvc64.zip",
+      "sha256": "8941870a604e7c87ed24566b038d46c24ce76616254d2383c578f60c0677f202",
+      "bytes": 24555583,
+      "upstream_checksum_verified": true,
+      "license": "Apache-2.0 OR Artistic-2.0"
+    },
+    {
+      "name": "verapdf",
+      "version": "1.30.2",
+      "url": "https://software.verapdf.org/releases/1.30/verapdf-greenfield-1.30.2-installer.zip",
+      "filename": "verapdf-greenfield-1.30.2-installer.zip",
+      "sha256": "6cc6341cb1af644044054b81f00a6590a7918abb18f762243de115258bcad838",
+      "bytes": 32923960,
+      "upstream_checksum_verified": false,
+      "license": "MPL-2.0 OR GPL-3.0-or-later"
+    }
+  ]
+}

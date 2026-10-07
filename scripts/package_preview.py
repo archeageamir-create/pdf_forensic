@@ -7,11 +7,14 @@ import hashlib
 import json
 import tempfile
 import zipfile
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APPLICATION = "DocumentForensicInspectorPreview"
+sys.path.insert(0, str(ROOT))
+from scripts.prepare_runtime_dependencies import verify_bundle
 
 
 def sha256(path: Path) -> str:
@@ -42,6 +45,10 @@ def main() -> int:
         )
     if not executable.is_file():
         raise FileNotFoundError(executable)
+    runtime_path = folder / "_internal/app/resources/binaries"
+    runtime = verify_bundle(runtime_path)
+    if not inventory.get("standalone") or inventory.get("runtime_manifest_sha256") != sha256(runtime_path / "RUNTIME_MANIFEST.json"):
+        raise RuntimeError("The complete runtime payload does not match this application build")
     guide_relative = Path("docs/user-guide/DocumentForensicInspector-User-Guide-RU.pdf")
     if sha256(ROOT / guide_relative) != sha256(folder / "_internal" / guide_relative):
         raise RuntimeError("The bundled user guide does not match the current PDF. Rebuild before packaging.")
@@ -64,6 +71,8 @@ def main() -> int:
         "base_version": inventory["base_version"],
         "executable_sha256": sha256(executable),
         "current_app_sources_match_build": True,
+        "standalone": True,
+        "runtime_components": [{"name": item["name"], "version": item["version"]} for item in runtime["components"]],
         "files": [
             {
                 "path": p.relative_to(folder).as_posix(),
@@ -76,7 +85,9 @@ def main() -> int:
     readme = """ФОРЕНЗИК-ЛАБОРАТОРИЯ ФАЙЛОВ — UNIVERSAL PREVIEW
 
 Распакуйте всю папку и откройте DocumentForensicInspectorPreview.exe.
-Папка _internal должна оставаться рядом с EXE. Python устанавливать не нужно.
+Папка _internal должна оставаться рядом с EXE. Всё нужное уже внутри:
+Python, Qt, ExifTool с Perl, qpdf, pdfcpu, Poppler, ffprobe, Java, JHOVE,
+veraPDF, PDFBox и инструменты PDFiD/pdf-parser. Отдельно ничего ставить не нужно.
 
 Добавьте файлы кнопкой или перетаскиванием. Начните с обзора, затем откройте
 «Результаты»: поиск, исходные значения, источники и пояснения. «Поиск по проекту»
@@ -95,9 +106,8 @@ PDF-руководство со скриншотами: F1 или «Справк
 
 В этой сборке: PDF, Office OOXML, распространённые изображения, аудио/видео,
 ZIP и базовая карточка других файлов. Глубина анализа зависит от формата.
-ExifTool, qpdf, ffprobe и другие CLI-движки устанавливаются отдельно; их
-доступность и пути показывает меню инструментов. Встроенные проверки работают
-и без них. OCR, старые DOC/XLS и восстановление удалённых данных пока не входят.
+Проверка инструментов и их версии доступны в меню инструментов.
+OCR, старые DOC/XLS и восстановление удалённых данных пока не входят.
 
 Данные сохраняются в %LOCALAPPDATA%/DocumentForensicsLab. Наблюдение работает,
 пока открыто приложение или запущен отдельный процесс демона. Файлы не

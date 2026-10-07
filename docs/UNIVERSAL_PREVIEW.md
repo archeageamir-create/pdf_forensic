@@ -21,16 +21,18 @@ Word, веб-отчёт, пакет исследования, все данны�
 Для самостоятельной EXE выполните `build-preview.ps1`. Открывайте
 `dist/DocumentForensicInspectorPreview/DocumentForensicInspectorPreview.exe`.
 Вся папка рядом с EXE нужна для работы; перенос одного EXE недостаточен.
-Эта локальная тестовая сборка содержит Python, Qt и библиотеки приложения.
-Внешние CLI-движки в неё не включены. Их пути и фактические версии показывает
-окно проверки инструментов. Инвентарь сборки: `_internal/app/resources/BUILD_INVENTORY.json`.
+Эта сборка содержит Python, Qt и все используемые движки: ExifTool с Perl,
+qpdf, pdfcpu, Poppler, ffprobe, Java, JHOVE, veraPDF, PDFBox и PDFiD/pdf-parser.
+Отдельно устанавливать их не нужно. Версии показывает окно проверки инструментов.
+Инвентарь сборки: `_internal/app/resources/BUILD_INVENTORY.json`.
+Состав и контрольные суммы инструментов: `_internal/app/resources/binaries/RUNTIME_MANIFEST.json`.
 Инвентарь окружения включает также пакеты сборки; он не утверждает, что каждый
 их модуль попал в EXE. Релизный SBOM 0.4.2 в исходниках сохранён отдельно.
 
 Архив для переноса собирается командой
 `.\.venv\Scripts\python.exe scripts\package_preview.py`. Она проверяет совпадение
 исходников приложения с инвентарём EXE, добавляет SHA-256 каждого файла и проверяет
-ZIP. Распакуйте `DocumentForensicInspectorPreview-Windows.zip` целиком.
+ZIP и полный комплект зависимостей. Распакуйте `DocumentForensicInspectorPreview-Windows.zip` целиком.
 Исходный код отдельно архивируется через `scripts\create_public_source_archive.py --preview`.
 
 ## Что можно исследовать

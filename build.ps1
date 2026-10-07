@@ -25,6 +25,8 @@ function Get-CodeSigningCertificates {
 
 python -m pip install -e ".[dev]"
 Assert-NativeSuccess "Установка зависимостей"
+python scripts\prepare_runtime_dependencies.py --download
+Assert-NativeSuccess "Полный автономный комплект инструментов"
 python scripts\generate_compliance.py
 Assert-NativeSuccess "Генерация SBOM и лицензий"
 python scripts\generate_compliance.py --check
@@ -53,6 +55,9 @@ if ($signingCertificate) {
 
 python -m PyInstaller --noconfirm --clean DocumentForensicInspector.spec
 Assert-NativeSuccess "Сборка приложения"
+$standaloneProbeDirectory = Join-Path $PSScriptRoot (".verification\release-engines-" + [guid]::NewGuid().ToString("N"))
+python scripts\verify_standalone_engines.py --exe dist\DocumentForensicInspector\DocumentForensicInspector.exe --output $standaloneProbeDirectory
+Assert-NativeSuccess "Все встроенные движки, PDF, медиа и отчёты"
 if ($signingCertificate) {
     & .\sign-build.ps1 -CertificateThumbprint $signingCertificate.Thumbprint `
         -Targets @("dist\DocumentForensicInspector\DocumentForensicInspector.exe")

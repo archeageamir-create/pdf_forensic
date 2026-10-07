@@ -403,7 +403,7 @@ class ForensicsService:
             ("Poppler", [poppler._exe("pdfinfo"), "-v"]),
             ("Java runtime", [self.config.java_command, "-version"]),
             ("JHOVE PDF-hul", [*jhove.command_prefix(), "-h"]),
-            ("veraPDF", [*verapdf.command_prefix(), "--version"]),
+            ("veraPDF", [*verapdf.command_prefix(self.config.data_dir / "tool-config" / "verapdf"), "--version"]),
             (
                 "Apache PDFBox",
                 [self.config.java_command, "-jar", str(pdfbox_jar), "version"],
