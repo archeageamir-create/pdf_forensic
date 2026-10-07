@@ -22,9 +22,19 @@ def main():
     assert sum(len(p.get("/Annots", [])) for p in reader.pages) >= 20
     pages = [p.extract_text() for p in reader.pages]
     assert all("Document Forensic Inspector" in text for text in pages)
-    for index, keyword in ((1, "Быстрый старт"), (7, "Сбросить фильтры"), (8, "Запомнить первую дату"), (9, "неизвестен"), (11, "Прямого экспорта"), (17, "Сообщение до исследования"), (18, "%LOCALAPPDATA%")):
+    for index, keyword in ((1, "Быстрый старт"), (7, "Сбросить фильтры"), (8, "Запомнить первую дату"), (9, "неизвестен"), (11, "отдельной кнопки для PDF-отчёта"), (17, "Сообщение до исследования"), (18, "%LOCALAPPDATA%")):
         assert keyword in pages[index], (index, keyword)
     assert all("\ufffd" not in text for text in pages)
+    layout = json.loads((pdf.parent / "user-guide-layout.json").read_text(encoding="utf-8"))
+    for i, first in enumerate(layout["elements"]):
+        ax, ay, aw, ah = first["box"]
+        for second in layout["elements"][i + 1:]:
+            if first["page"] != second["page"]:
+                continue
+            bx, by, bw, bh = second["box"]
+            overlap_width = min(ax + aw, bx + bw) - max(ax, bx)
+            overlap_height = min(ay + ah, by + bh) - max(ay, by)
+            assert overlap_width <= 1 or overlap_height <= 1, ("Overlapping content", first, second)
     embedded = 0
     for font in reader.pages[0]["/Resources"]["/Font"].values():
         descriptor = font.get_object().get("/FontDescriptor")
