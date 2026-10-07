@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QPlainTextEdit,
     QPushButton,
+    QSizePolicy,
     QSplitter,
     QTableWidget,
     QTableWidgetItem,
@@ -61,6 +62,10 @@ class FindingsExplorer(QWidget):
         self.category.setAccessibleName("Группа результатов")
         self.attention = QCheckBox("Требует внимания")
         self.counter = QLabel()
+        self.reset_filters = QPushButton("Сбросить фильтры")
+        self.reset_filters.setToolTip("Показать все результаты, сохранив оценки и выбор для отчёта")
+        self.reset_filters.clicked.connect(self.clear_filters)
+        self.reset_filters.setEnabled(False)
         self.table = QTableWidget(0, 4)
         self.table.setHorizontalHeaderLabels(
             ["Что найдено", "Значение", "Источник", "Оценка"]
@@ -79,11 +84,12 @@ class FindingsExplorer(QWidget):
         self.detail.setAccessibleName("Объяснение и исходные данные")
         self.raw_detail = QPlainTextEdit()
         self.raw_detail.setReadOnly(True)
+        self.raw_detail.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Ignored)
         self.raw_detail.setAccessibleName("Исходное значение и технические сведения")
         self.raw_toggle = QPushButton("Исходные данные")
         self.raw_toggle.setToolTip("Показать полное значение, расположение и служебные сведения")
         self.raw_toggle.setCheckable(True)
-        self.raw_toggle.toggled.connect(self.raw_detail.setVisible)
+        self.raw_toggle.toggled.connect(self._toggle_raw)
         self.raw_detail.hide()
         self.add_observation = QPushButton("Описание в заметки")
         self.add_observation.setToolTip("Добавить заготовку описания наблюдения с источником и ограничениями")
@@ -114,8 +120,10 @@ class FindingsExplorer(QWidget):
         groups = QHBoxLayout()
         groups.addWidget(self.category, 1)
         groups.addWidget(self.counter)
+        groups.addWidget(self.reset_filters)
         layout.addLayout(groups)
         splitter = QSplitter(Qt.Orientation.Vertical)
+        self.splitter = splitter
         splitter.addWidget(self.table)
         splitter.addWidget(self.detail)
         splitter.addWidget(self.raw_detail)
@@ -140,6 +148,14 @@ class FindingsExplorer(QWidget):
         actions.addWidget(self.save_value)
         actions.addStretch()
         layout.addLayout(actions)
+
+    def _toggle_raw(self, visible: bool):
+        self.raw_detail.setVisible(visible)
+        if visible:
+            # Hidden panes can be restored at zero height from QSettings.
+            # Explicitly give the source record space whenever it is requested.
+            height = max(300, self.splitter.height())
+            self.splitter.setSizes([height * 3 // 10, height * 3 // 10, height * 4 // 10])
 
     def populate(self, findings: list[Finding]):
         self.findings = findings
@@ -170,6 +186,7 @@ class FindingsExplorer(QWidget):
     def _filter(self, *_):
         query = self.search.text().casefold().strip()
         category = self.category.currentData()
+        self.reset_filters.setEnabled(bool(self.search.text() or category or self.attention.isChecked()))
         self.visible_findings = [
             f
             for f in self.findings
@@ -206,10 +223,20 @@ class FindingsExplorer(QWidget):
             self.table.setCurrentCell(0, 0)
         self._selection()
 
+    def clear_filters(self):
+        controls = (self.search, self.attention, self.category)
+        previous = [control.blockSignals(True) for control in controls]
+        try:
+            self.search.clear()
+            self.attention.setChecked(False)
+            self.category.setCurrentIndex(0)
+        finally:
+            for control, blocked in zip(controls, previous):
+                control.blockSignals(blocked)
+        self._filter()
+
     def reveal(self, finding_id: str):
-        self.search.clear()
-        self.attention.setChecked(False)
-        self.category.setCurrentIndex(0)
+        self.clear_filters()
         for row, finding in enumerate(self.visible_findings):
             if finding.id == finding_id:
                 self.table.setCurrentCell(row, 0)
@@ -227,7 +254,7 @@ class FindingsExplorer(QWidget):
         if not valid:
             self.raw_detail.clear()
             self.detail.setPlainText(
-                "Нет результатов для выбранных условий. Очистите поиск или смените группу."
+                "Нет результатов для выбранных условий. Нажмите «Сбросить фильтры», чтобы показать все записи."
             )
             return
         finding = self.visible_findings[row]

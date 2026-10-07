@@ -199,6 +199,111 @@ def test_chronology_compare_and_source_navigation(window):
     assert window.findings_explorer.visible_findings[window.findings_explorer.table.currentRow()].id == first.id
 
 
+def test_chronology_buttons_keep_exact_pair_and_clear_stale_comparison(window):
+    result = sample_result()
+    first = Finding("EXIF", "DateTimeOriginal", "2026:01:02 12:00:00+05:00", "Pillow")
+    second = Finding("XMP", "CreateDate", "2026-01-02T07:00:00Z", "ExifTool/XMP")
+    third = Finding("EXIF", "ModifyDate", "2026:01:03 12:00:00", "Pillow")
+    result.findings = [first, second, third]
+    window.service.repository.save(result)
+    window._display_result(result)
+    panel = window.chronology_panel
+    rows = {e.get("finding_id"): i for i, e in enumerate(panel.events)}
+    panel.table.selectRow(rows[first.id])
+    panel.pin_date.click()
+    assert not panel.compare_dates.isEnabled()
+    panel.table.selectRow(rows[second.id])
+    assert panel.compare_dates.isEnabled()
+    assert not panel.add_note.isEnabled()
+    panel.compare_dates.click()
+    assert "одному моменту" in panel.detail.toPlainText()
+    panel.add_note.click()
+    assert first.id in window.notes_edit.toPlainText()
+    assert second.id in window.notes_edit.toPlainText()
+    panel.table.selectRow(rows[third.id])
+    assert not panel.add_note.isEnabled()
+    panel.compare_dates.click()
+    assert "не вычисляются" in panel.detail.toPlainText()
+    panel.reset_comparison.click()
+    assert not panel.add_note.isEnabled()
+    assert panel.comparison is None
+    panel.pin_date.click()
+    window._display_result(sample_result())
+    assert panel.anchor_row is None and panel.comparison is None
+    assert not panel.compare_dates.isEnabled()
+
+
+def test_reset_filters_recovers_all_results_without_changing_marks(window):
+    result = sample_result()
+    result.findings.extend([Finding("EXIF", "Software", "Demo", "Pillow")])
+    window.service.repository.save(result)
+    window._display_result(result)
+    explorer = window.findings_explorer
+    explorer.mark.setCurrentIndex(explorer.mark.findData(UserMark.SIGNIFICANT.value))
+    explorer.include.setChecked(False)
+    explorer.category.setCurrentIndex(1)
+    explorer.attention.setChecked(True)
+    explorer.search.setText("nonexistent-value")
+    assert not explorer.visible_findings
+    assert explorer.reset_filters.isEnabled()
+    explorer.reset_filters.click()
+    assert len(explorer.visible_findings) == 2
+    assert not explorer.reset_filters.isEnabled()
+    saved = window.service.repository.load(result.evidence.id)
+    assert saved.findings[0].user_mark == UserMark.SIGNIFICANT.value
+    assert not saved.findings[0].include_in_report
+
+
+def test_source_pane_reopens_after_being_collapsed(window, application):
+    window._display_result(sample_result())
+    window.tabs.setCurrentWidget(window.metadata_tabs)
+    window.resize(1200, 900)
+    window.show()
+    explorer = window.findings_explorer
+    application.processEvents()
+    explorer.splitter.setSizes([400, 200, 0])
+    explorer.raw_toggle.setChecked(True)
+    application.processEvents()
+    assert explorer.raw_detail.isVisible()
+    assert explorer.splitter.sizes()[2] >= 80
+    assert 'test-tool' in explorer.raw_detail.toPlainText()
+    explorer.raw_toggle.setChecked(False)
+    window.resize(900, 700)
+    application.processEvents()
+    assert window.height() <= 700
+
+
+def test_visible_export_saves_latest_notes_and_reports_exact_path(window, tmp_path):
+    import json
+
+    result = sample_result()
+    window.service.repository.save(result)
+    window._display_result(result)
+    assert window.save_report_button.isEnabled()
+    assert window.export_actions["json"] in window.save_report_button.menu().actions()
+    window.notes_edit.setPlainText("Заметка непосредственно перед сохранением")
+    destination = tmp_path / "Отчёт с пробелами.json"
+    with patch("app.gui.main_window.QFileDialog.getSaveFileName", return_value=(str(destination), "")), patch.object(window, "_report_saved") as saved:
+        window.export_actions["json"].trigger()
+    saved.assert_called_once_with(destination)
+    assert json.loads(destination.read_text(encoding="utf-8"))["evidence"]["user_notes"] == window.notes_edit.toPlainText()
+    window._show_welcome()
+    assert not window.save_report_button.isEnabled()
+
+
+def test_guide_opens_local_pdf_and_handles_missing_file(window, tmp_path):
+    guide = tmp_path / "Руководство.pdf"
+    guide.write_bytes(b"%PDF-1.4\n")
+    with patch("app.gui.main_window.bundled_resource", return_value=guide), patch("app.gui.main_window.QDesktopServices.openUrl", return_value=True) as opened:
+        window.user_guide_action.trigger()
+        assert opened.call_args.args[0].toLocalFile() == str(guide.resolve()).replace("\\", "/")
+    guide.unlink()
+    with patch("app.gui.main_window.bundled_resource", return_value=guide), patch("app.gui.main_window.QDesktopServices.openUrl") as opened, patch("app.gui.main_window.QMessageBox.information") as notice:
+        window.user_guide_action.trigger()
+    opened.assert_not_called()
+    assert "Руководство не найдено" in notice.call_args.args
+
+
 def test_settings_apply_to_future_queue_jobs(window):
     config = replace(
         window.service.config,

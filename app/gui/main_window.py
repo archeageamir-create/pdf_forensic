@@ -27,6 +27,7 @@ from PySide6.QtWidgets import (
     QListWidget,
     QListWidgetItem,
     QMainWindow,
+    QMenu,
     QLineEdit,
     QMessageBox,
     QPlainTextEdit,
@@ -44,6 +45,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.core.service import ForensicsService
+from app.core.config import bundled_resource
 from app.core.settings import SettingsStore
 from app.core.updater import UpdateInfo, UpdateService
 from app.gui.dialogs import CustomAnalyzersDialog, ProjectDialog, SettingsDialog
@@ -140,13 +142,16 @@ class MainWindow(QMainWindow):
         self.updates_action.triggered.connect(lambda: self._check_updates(True))
         self.about_action = QAction(self.tr("О программе"), self)
         self.about_action.triggered.connect(self._show_about)
+        self.user_guide_action = QAction(self.tr("Руководство пользователя (PDF)"), self)
+        self.user_guide_action.setShortcut("F1")
+        self.user_guide_action.triggered.connect(self._open_user_guide)
 
         self.export_actions: dict[str, QAction] = {}
         for key, label in (
-            ("json", "Экспорт JSON"),
-            ("html", "Экспорт HTML"),
-            ("docx", "Экспорт DOCX"),
-            ("zip", "ZIP-пакет исследования"),
+            ("docx", "Word — редактировать и печатать (.docx)"),
+            ("html", "Веб-отчёт — открыть в браузере (.html)"),
+            ("zip", "Пакет исследования — отчёты и журналы (.zip)"),
+            ("json", "Все данные — для обработки программами (.json)"),
         ):
             action = QAction(self.tr(label), self)
             action.triggered.connect(lambda _checked=False, kind=key: self._export(kind))
@@ -166,6 +171,7 @@ class MainWindow(QMainWindow):
         tools_menu.addAction(self.updates_action)
         tools_menu.addAction(self.settings_action)
         help_menu = self.menuBar().addMenu(self.tr("Справка"))
+        help_menu.addAction(self.user_guide_action)
         help_menu.addAction(self.about_action)
 
         toolbar = QToolBar()
@@ -291,10 +297,15 @@ class MainWindow(QMainWindow):
         title_layout.addWidget(self.drop_label)
         title_layout.addWidget(self.document_subtitle)
         banner_layout.addLayout(title_layout, 1)
-        add_button = QPushButton(self.tr("Добавить файлы"))
-        add_button.setObjectName("PrimaryButton")
-        add_button.clicked.connect(self._choose_files)
-        banner_layout.addWidget(add_button)
+        self.save_report_button = QPushButton(self.tr("Сохранить отчёт"))
+        self.save_report_button.setObjectName("PrimaryButton")
+        self.save_report_button.setToolTip("Выберите Word, веб-отчёт, пакет исследования или все данные")
+        report_menu = QMenu(self.save_report_button)
+        for action in self.export_actions.values():
+            report_menu.addAction(action)
+        self.save_report_button.setMenu(report_menu)
+        self.save_report_button.setEnabled(False)
+        banner_layout.addWidget(self.save_report_button)
         content_layout.addWidget(document_banner)
 
         self.expert_mode = QCheckBox(self.tr("Показать технические инструменты"))
@@ -331,6 +342,9 @@ class MainWindow(QMainWindow):
         welcome_button.setObjectName("PrimaryButton")
         welcome_button.clicked.connect(self._choose_files)
         welcome_layout.addWidget(welcome_button, 0, Qt.AlignmentFlag.AlignHCenter)
+        guide_button = QPushButton(self.tr("Как пользоваться · F1"))
+        guide_button.clicked.connect(self._open_user_guide)
+        welcome_layout.addWidget(guide_button, 0, Qt.AlignmentFlag.AlignHCenter)
         welcome_layout.addStretch(2)
         content_layout.addWidget(self.welcome_panel, 1)
 
@@ -847,6 +861,7 @@ class MainWindow(QMainWindow):
             self.tabs.setTabEnabled(index, True)
         for action in self.export_actions.values():
             action.setEnabled(True)
+        self.save_report_button.setEnabled(True)
         self.document_badge.setText(result.evidence.detected_format or result.evidence.kind.value.upper())
         self.drop_label.setText(result.evidence.original_name)
         mode_labels = {
@@ -940,6 +955,7 @@ class MainWindow(QMainWindow):
         )
         for action in self.export_actions.values():
             action.setEnabled(False)
+        self.save_report_button.setEnabled(False)
 
     def start_background_processing(self) -> None:
         if self.queue_worker is not None:
@@ -1539,9 +1555,40 @@ class MainWindow(QMainWindow):
                 f"{kind}: {selected}",
                 self.current_result.evidence.project_id,
             )
-            QMessageBox.information(self, self.tr("Экспорт"), self.tr("Отчёт сохранён."))
+            self._report_saved(Path(selected))
         except Exception as exc:
             QMessageBox.critical(self, self.tr("Ошибка экспорта"), str(exc))
+
+    def _open_user_guide(self) -> None:
+        guide = bundled_resource("docs", "user-guide", "DocumentForensicInspector-User-Guide-RU.pdf")
+        if not guide.is_file():
+            QMessageBox.information(
+                self, "Руководство не найдено",
+                "Руководство входит в полную папку программы. Распакуйте её целиком. "
+                "Для запуска из исходников сначала создайте PDF по инструкции docs/user-guide/README.md.",
+            )
+            return
+        if not QDesktopServices.openUrl(QUrl.fromLocalFile(str(guide.resolve()))):
+            QMessageBox.information(self, "Не удалось открыть PDF", f"Откройте файл в браузере или программе для PDF:\n{guide.resolve()}")
+
+    def _report_saved(self, path: Path) -> None:
+        path = path.resolve()
+        box = QMessageBox(self)
+        box.setWindowTitle("Отчёт сохранён")
+        box.setIcon(QMessageBox.Icon.Information)
+        box.setTextFormat(Qt.TextFormat.PlainText)
+        box.setText("Отчёт готов. Вы можете открыть его или перейти в папку.")
+        box.setInformativeText(str(path))
+        box.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        open_report = box.addButton("Открыть отчёт", QMessageBox.ButtonRole.ActionRole)
+        open_folder = box.addButton("Открыть папку", QMessageBox.ButtonRole.ActionRole)
+        done = box.addButton("Готово", QMessageBox.ButtonRole.AcceptRole)
+        box.setDefaultButton(done)
+        box.setEscapeButton(done)
+        box.exec()
+        target = path if box.clickedButton() == open_report else path.parent if box.clickedButton() == open_folder else None
+        if target and not QDesktopServices.openUrl(QUrl.fromLocalFile(str(target))):
+            QMessageBox.information(self, "Не удалось открыть", f"Откройте вручную:\n{target}")
 
     def _current_project_id(self) -> str | None:
         item = self.project_list.currentItem()

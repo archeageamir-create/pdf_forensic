@@ -16,6 +16,7 @@ VERSION = "0.4.2"
 ARCHIVE = ROOT / "dist" / f"DocumentForensicInspector-Source-{VERSION}.zip"
 DIRECTORIES = ("app", "compliance", "docs", "installer", "scripts", "signing", "tests")
 FILES = (
+    ".gitattributes",
     ".gitignore",
     "build.ps1",
     "CONTRIBUTING.md",

@@ -1,0 +1,92 @@
+[
+  {
+    "image": "01-start.png",
+    "width": 1366,
+    "height": 900,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "02-project.png",
+    "width": 780,
+    "height": 600,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "03-overview.png",
+    "width": 1366,
+    "height": 900,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "04-assistant.png",
+    "width": 1023,
+    "height": 577,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "05-finding.png",
+    "width": 1059,
+    "height": 570,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "06-empty-search.png",
+    "width": 1059,
+    "height": 215,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "07-raw.png",
+    "width": 1059,
+    "height": 570,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "07b-raw-value.png",
+    "width": 1041,
+    "height": 159,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "08-chronology.png",
+    "width": 1061,
+    "height": 608,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "09-notes.png",
+    "width": 1059,
+    "height": 570,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "10-export-menu.png",
+    "width": 363,
+    "height": 138,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "11-queue.png",
+    "width": 1061,
+    "height": 320,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "12-watch.png",
+    "width": 1061,
+    "height": 300,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "14-unknown-timezone.png",
+    "width": 1061,
+    "height": 608,
+    "source": "Actual Qt widget; synthetic training material"
+  },
+  {
+    "image": "13-small-window.png",
+    "width": 900,
+    "height": 700,
+    "source": "Actual Qt widget; synthetic training material"
+  }
+]

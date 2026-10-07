@@ -28,13 +28,30 @@ class ChronologyPanel(QWidget):
     def __init__(self):
         super().__init__()
         self.events = []
+        self.anchor_row = None
+        self.comparison = None
         layout = QVBoxLayout(self)
         hint = QLabel(
-            "Выберите одну запись для пояснения или две с Ctrl для сопоставления. "
+            "Выберите запись и нажмите «Запомнить первую дату», затем выберите другую и нажмите «Сравнить даты». "
             "Записи без известного пояса или точного времени вынесены в конец; их порядок не установлен."
         )
         hint.setWordWrap(True)
         layout.addWidget(hint)
+        compare_row = QHBoxLayout()
+        self.pin_date = QPushButton("Запомнить первую дату")
+        self.pin_date.clicked.connect(self._pin_date)
+        self.compare_dates = QPushButton("Сравнить даты")
+        self.compare_dates.clicked.connect(self._compare_dates)
+        self.reset_comparison = QPushButton("Сбросить")
+        self.reset_comparison.clicked.connect(self._reset_comparison)
+        compare_row.addWidget(self.pin_date)
+        compare_row.addWidget(self.compare_dates)
+        compare_row.addWidget(self.reset_comparison)
+        compare_row.addStretch()
+        layout.addLayout(compare_row)
+        self.anchor_label = QLabel("Первая дата не выбрана. Также можно выделить две строки с Ctrl.")
+        self.anchor_label.setWordWrap(True)
+        layout.addWidget(self.anchor_label)
         self.table = QTableWidget(0, 5)
         self.table.setHorizontalHeaderLabels(
             [
@@ -74,6 +91,10 @@ class ChronologyPanel(QWidget):
     def populate(self, result):
         # Rebuild from source findings so old results gain provenance and precision
         # without silently trusting historical synthetic timestamps.
+        self.anchor_row = None
+        self.comparison = None
+        self.anchor_label.setText("Первая дата не выбрана. Также можно выделить две строки с Ctrl.")
+        self.anchor_label.setToolTip("")
         self.events = (
             TimelineBuilder().build(result.evidence, result.findings) if result else []
         )
@@ -107,6 +128,14 @@ class ChronologyPanel(QWidget):
 
     def _selection(self):
         selected = self._selected()
+        self.comparison = tuple(selected) if len(selected) == 2 else None
+        rows = self.table.selectionModel().selectedRows()
+        self.pin_date.setEnabled(len(selected) == 1)
+        self.compare_dates.setEnabled(
+            len(selected) == 1 and self.anchor_row is not None
+            and rows[0].row() != self.anchor_row
+        )
+        self.reset_comparison.setEnabled(self.anchor_row is not None)
         self.open_source.setEnabled(
             len(selected) == 1 and bool(selected[0].get("finding_id"))
         )
@@ -125,14 +154,40 @@ class ChronologyPanel(QWidget):
                 "Выберите одну или две записи. Точные интервалы вычисляются только при известных поясах и полной записи времени."
             )
 
+    def _pin_date(self):
+        rows = self.table.selectionModel().selectedRows()
+        if len(rows) != 1:
+            return
+        self.anchor_row = rows[0].row()
+        event = self.events[self.anchor_row]
+        description = f"Первая дата: {parameter_label(event['name'])} — {event['raw']} ({source_label(event['source'])})"
+        self.anchor_label.setText(description)
+        self.anchor_label.setToolTip(description)
+        self._selection()
+
+    def _compare_dates(self):
+        selected = self._selected()
+        rows = self.table.selectionModel().selectedRows()
+        if self.anchor_row is None or len(selected) != 1 or rows[0].row() == self.anchor_row:
+            return
+        self.comparison = (self.events[self.anchor_row], selected[0])
+        self.detail.setPlainText(compare_events(*self.comparison))
+        self.add_note.setEnabled(True)
+
+    def _reset_comparison(self):
+        self.anchor_row = None
+        self.anchor_label.setText("Первая дата не выбрана. Также можно выделить две строки с Ctrl.")
+        self.anchor_label.setToolTip("")
+        self._selection()
+
     def _open_source(self):
         selected = self._selected()
         if len(selected) == 1 and selected[0].get("finding_id"):
             self.finding_selected.emit(selected[0]["finding_id"])
 
     def _add_note(self):
-        selected = self._selected()
-        if len(selected) == 2:
+        selected = self.comparison
+        if selected:
             refs = "\n".join(
                 f"{e['source']}; {e.get('location', '')}; запись: {e.get('finding_id') or e['scope']}"
                 for e in selected

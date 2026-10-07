@@ -22,6 +22,8 @@ datas = [
     (str(project_root / "docs" / "LGPL_COMPLIANCE.md"), "app/resources/compliance"),
     (str(project_root / "compliance"), "app/resources/compliance"),
     (str(tool_runner), "app/resources/bin"),
+    (str(project_root / "docs/user-guide/DocumentForensicInspector-User-Guide-RU.pdf"), "docs/user-guide"),
+    (str(project_root / "docs/user-guide/examples"), "docs/user-guide/examples"),
 ]
 if (exiftool_dir / "ExifTool.exe").is_file():
     datas.append((str(exiftool_dir), "app/resources/binaries"))

@@ -42,6 +42,12 @@ def main() -> int:
         )
     if not executable.is_file():
         raise FileNotFoundError(executable)
+    guide_relative = Path("docs/user-guide/DocumentForensicInspector-User-Guide-RU.pdf")
+    if sha256(ROOT / guide_relative) != sha256(folder / "_internal" / guide_relative):
+        raise RuntimeError("The bundled user guide does not match the current PDF. Rebuild before packaging.")
+    for example in (ROOT / "docs/user-guide/examples").iterdir():
+        if example.is_file() and sha256(example) != sha256(folder / "_internal" / example.relative_to(ROOT)):
+            raise RuntimeError(f"The bundled training example changed: {example.name}")
     output = args.output.resolve()
     if output.is_relative_to(folder.resolve()):
         raise ValueError(
@@ -77,9 +83,15 @@ def main() -> int:
 ищет по всем сохранённым исследованиям. «Очередь» позволяет наблюдать за папками.
 
 Помощник исследования: пояснения к артефактам, основания, пределы интерпретации
-и заготовки для заметок. В «Хронологии» выделите две записи с Ctrl, чтобы
-сопоставить даты. НПВ в ходе исследования и сообщение до исследования разделены;
-решение и вывод формулирует эксперт. Руководство: _internal/RESEARCH_ASSISTANT_KZ.md.
+и заготовки для заметок. В «Хронологии» запомните первую дату, выберите вторую
+и нажмите «Сравнить даты». Можно также выделить две строки с Ctrl.
+НПВ в ходе исследования и сообщение до исследования разделены;
+решение и вывод формулирует эксперт.
+
+PDF-руководство со скриншотами: F1 или «Справка → Руководство пользователя».
+Файл: _internal/docs/user-guide/DocumentForensicInspector-User-Guide-RU.pdf.
+Учебные файлы: _internal/docs/user-guide/examples.
+Кнопка «Сохранить отчёт» находится справа от имени открытого файла.
 
 В этой сборке: PDF, Office OOXML, распространённые изображения, аудио/видео,
 ZIP и базовая карточка других файлов. Глубина анализа зависит от формата.
