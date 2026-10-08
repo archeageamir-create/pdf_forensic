@@ -13,6 +13,7 @@ if not tool_runner.is_file():
 
 datas = [
     (str(project_root / "app" / "resources" / "tools"), "app/resources/tools"),
+    (str(project_root / "app" / "resources" / "icons"), "app/resources/icons"),
     (str(project_root / "app" / "resources" / "THIRD_PARTY_NOTICES.md"), "app/resources"),
     (str(project_root / "app" / "resources" / "SBOM.spdx.json"), "app/resources"),
     (str(project_root / "app" / "resources" / "AUTHORSHIP.txt"), "app/resources"),

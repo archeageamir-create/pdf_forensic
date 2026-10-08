@@ -13,6 +13,7 @@ if not tool_runner.is_file() or not (resources / "BUILD_INVENTORY.json").is_file
     raise FileNotFoundError("Run build-preview.ps1 to prepare the runner and build inventory")
 datas = [
     (str(project_root / "app/resources/tools"), "app/resources/tools"),
+    (str(project_root / "app/resources/icons"), "app/resources/icons"),
     (str(project_root / "app/resources/AUTHORSHIP.txt"), "app/resources"),
     (str(resources), "app/resources"),
     (str(tool_runner), "app/resources/bin"),

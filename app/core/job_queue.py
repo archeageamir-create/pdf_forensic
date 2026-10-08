@@ -75,6 +75,20 @@ class JobQueue:
         force=False,
         selected_analyzers: set[str] | None = None,
     ) -> str:
+        return self.enqueue_with_status(
+            path, project_id, mode, force=force, selected_analyzers=selected_analyzers
+        )[0]
+
+    def enqueue_with_status(
+        self,
+        path: Path,
+        project_id: str | None = None,
+        mode: AnalysisMode = AnalysisMode.QUICK,
+        *,
+        force=False,
+        selected_analyzers: set[str] | None = None,
+    ) -> tuple[str, bool]:
+        """Return the job id and whether this call actually inserted a job."""
         source = path.expanduser().resolve(strict=True)
         if not source.is_file():
             raise ValueError("Для очереди нужен обычный файл")
@@ -97,7 +111,7 @@ class JobQueue:
         job_id = str(uuid4())
         now = utc_now_iso()
         with self.connection() as db:
-            db.execute(
+            inserted = db.execute(
                 "INSERT OR IGNORE INTO jobs VALUES (?, ?, ?, ?, 'pending', ?, ?, NULL, '', ?, ?, ?, ?)",
                 (
                     job_id,
@@ -112,9 +126,10 @@ class JobQueue:
                     selected,
                 ),
             )
-            return db.execute(
+            identifier = db.execute(
                 "SELECT id FROM jobs WHERE dedupe_key = ?", (key,)
             ).fetchone()[0]
+            return identifier, inserted.rowcount == 1
 
     def list_jobs(self, limit: int = 500) -> list[QueueJob]:
         with self.connection() as db:

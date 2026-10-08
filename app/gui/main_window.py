@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import sqlite3
 import subprocess
 from collections import Counter
 from pathlib import Path
@@ -50,6 +51,7 @@ from app.core.settings import SettingsStore
 from app.core.updater import UpdateInfo, UpdateService
 from app.gui.dialogs import CustomAnalyzersDialog, ProjectDialog, SettingsDialog
 from app.gui.widgets import (
+    ElidedLabel,
     FindingsTable,
     HexViewer,
     PdfObjectsWidget,
@@ -253,6 +255,10 @@ class MainWindow(QMainWindow):
         self.file_list.setToolTip(self.tr("Документы выбранного проекта"))
         self.file_list.currentItemChanged.connect(self._file_selected)
         sidebar_layout.addWidget(self.file_list, 2)
+        self.file_search_status = QLabel()
+        self.file_search_status.setWordWrap(True)
+        self.file_search_status.hide()
+        sidebar_layout.addWidget(self.file_search_status)
         queue_button = QPushButton(self.tr("Очередь и папки"))
         queue_button.clicked.connect(self._show_queue)
         search_project_button = QPushButton(self.tr("Поиск по проекту"))
@@ -284,13 +290,12 @@ class MainWindow(QMainWindow):
         banner_layout.addWidget(self.document_badge)
         title_layout = QVBoxLayout()
         title_layout.setSpacing(2)
-        self.drop_label = QLabel(self.tr("Перетащите сюда PDF или PPTX"))
+        self.drop_label = ElidedLabel(self.tr("Добавьте файлы для исследования"))
         self.drop_label.setObjectName("DocumentTitle")
         self.document_subtitle = QLabel(
             self.tr("Оригинал останется неизменным — анализ выполняется с рабочей копией")
         )
         self.document_subtitle.setObjectName("DocumentSubtitle")
-        self.drop_label.setWordWrap(True)
         self.document_subtitle.setWordWrap(True)
         self.drop_label.setMinimumWidth(0)
         self.document_subtitle.setMinimumWidth(0)
@@ -623,13 +628,14 @@ class MainWindow(QMainWindow):
         self.conclusions_edit = QPlainTextEdit()
         layout.addWidget(self.conclusions_edit)
         self.notes_saved_label = QLabel("Заметки сохраняются автоматически")
+        self.notes_saved_label.setWordWrap(True)
         layout.addWidget(self.notes_saved_label)
         self.notes_save_timer = QTimer(self)
         self.notes_save_timer.setSingleShot(True)
         self.notes_save_timer.setInterval(600)
         self.notes_save_timer.timeout.connect(self._save_notes)
         for edit in (self.notes_edit, self.conclusions_edit):
-            edit.textChanged.connect(lambda: self.notes_save_timer.start())
+            edit.textChanged.connect(self._notes_changed)
         button = QPushButton(self.tr("Сохранить заметки и выводы"))
         button.clicked.connect(self._save_notes)
         layout.addWidget(button)
@@ -700,6 +706,8 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, self.tr("Удаление проекта"), str(exc))
 
     def _refresh_projects(self, select_id: str | None = None) -> None:
+        if not self._save_notes():
+            return
         self.project_list.blockSignals(True)
         self.project_list.clear()
         quick = QListWidgetItem(self.tr("Быстрое исследование"))
@@ -709,6 +717,7 @@ class MainWindow(QMainWindow):
         selected_row = 0
         for row, project in enumerate(self.service.repository.list_projects(), start=1):
             item = QListWidgetItem(f"{project.case_number} — {project.title}")
+            item.setToolTip(f"{project.case_number} — {project.title}")
             item.setData(Qt.ItemDataRole.UserRole, project.id)
             self.project_list.addItem(item)
             if project.id == select_id:
@@ -716,10 +725,18 @@ class MainWindow(QMainWindow):
         self.project_list.blockSignals(False)
         self.project_list.setCurrentRow(selected_row)
 
-    def _project_selected(self, _current, _previous) -> None:
+    def _project_selected(self, _current, previous) -> None:
+        if not self._save_notes():
+            self.project_list.blockSignals(True)
+            self.project_list.setCurrentItem(previous)
+            self.project_list.blockSignals(False)
+            return
+        self.file_search.clear()
         self._refresh_files()
 
     def _refresh_files(self, select_id: str | None = None) -> None:
+        if not self._save_notes():
+            return
         self.file_list.blockSignals(True)
         self.file_list.clear()
         project_id = self._current_project_id()
@@ -750,16 +767,32 @@ class MainWindow(QMainWindow):
         if not hasattr(self, "file_list"):
             return
         query = self.file_search.text().strip().casefold()
+        visible = 0
         for index in range(self.file_list.count()):
             item = self.file_list.item(index)
             item.setHidden(bool(query and query not in (item.text() + item.toolTip()).casefold()))
+            visible += int(not item.isHidden())
+        self.file_search_status.setVisible(bool(query))
+        if query:
+            message = f"Найдено файлов: {visible}." if visible else "Файлы не найдены. Очистите поиск кнопкой × или измените запрос."
+            current = self.file_list.currentItem()
+            if current and current.isHidden():
+                message += " Справа остаётся ранее открытый файл."
+            self.file_search_status.setText(message)
 
-    def _file_selected(self, current: QListWidgetItem | None, _previous) -> None:
+    def _file_selected(self, current: QListWidgetItem | None, previous) -> None:
         if not current:
+            return
+        if not self._save_notes():
+            self.file_list.blockSignals(True)
+            self.file_list.setCurrentItem(previous)
+            self.file_list.blockSignals(False)
             return
         result = self.service.repository.load(str(current.data(Qt.ItemDataRole.UserRole)))
         if result:
             self._display_result(result)
+            if self.tabs.currentWidget() is self.queue_panel:
+                self.tabs.setCurrentIndex(0)
 
     def _choose_files(self) -> None:
         selected, _ = QFileDialog.getOpenFileNames(
@@ -781,18 +814,30 @@ class MainWindow(QMainWindow):
             selected = dialog.selected()
         errors = []
         count = 0
+        duplicates = 0
+        last_job_id = None
         for path in paths:
             try:
                 if path.is_dir():
                     raise ValueError("Для наблюдения за папкой используйте кнопку «Выбрать папку для наблюдения» в очереди")
-                self.queue_panel.queue.enqueue(path, self._current_project_id(), mode, selected_analyzers=selected)
-                count += 1
+                last_job_id, created = self.queue_panel.queue.enqueue_with_status(
+                    path, self._current_project_id(), mode, selected_analyzers=selected
+                )
+                count += int(created)
+                duplicates += int(not created)
             except (OSError, ValueError) as exc:
                 errors.append(f"{path.name}: {exc}")
         self.start_background_processing()
         self._show_queue()
         self.queue_panel.refresh()
-        self.queue_panel.state.setText("\n".join(errors) if errors else f"Добавлено в очередь: {count}. Можно продолжать исследование других файлов.")
+        if last_job_id:
+            self.queue_panel.select_job(last_job_id)
+        message = [f"Добавлено в очередь: {count}."]
+        if duplicates:
+            message.append(f"Уже были в очереди: {duplicates}. Выберите задание, чтобы открыть результат или повторить неудачную проверку.")
+        message.extend(errors)
+        self.queue_panel.notice.setText("\n".join(message))
+        self.queue_panel.notice.show()
 
     def _cancel_analysis(self) -> None:
         self.queue_panel.daemon.cancel_current()
@@ -810,7 +855,6 @@ class MainWindow(QMainWindow):
 
     def _analysis_ready(self, value: object) -> None:
         if isinstance(value, AnalysisResult):
-            self.current_result = value
             self._display_result(value)
             self._refresh_files(value.evidence.id)
 
@@ -850,7 +894,8 @@ class MainWindow(QMainWindow):
 
     def _display_result(self, result: AnalysisResult) -> None:
         previous = self.current_result
-        self._save_notes()
+        if not self._save_notes():
+            return
         if previous and previous.evidence.id == result.evidence.id:
             result.evidence.user_notes = previous.evidence.user_notes
             result.evidence.user_conclusions = previous.evidence.user_conclusions
@@ -930,12 +975,19 @@ class MainWindow(QMainWindow):
         self.objects_widget.set_objects(result.artifacts.get("pdf_objects", []))
         self.hex_widget.set_path(Path(result.evidence.working_copy_path))
         self._fill_tools(result)
-        self.notes_edit.setPlainText(result.evidence.user_notes)
-        self.conclusions_edit.setPlainText(result.evidence.user_conclusions)
+        for edit, text in (
+            (self.notes_edit, result.evidence.user_notes),
+            (self.conclusions_edit, result.evidence.user_conclusions),
+        ):
+            edit.blockSignals(True)
+            edit.setPlainText(text)
+            edit.blockSignals(False)
+        self.notes_saved_label.setText("Заметки сохраняются автоматически")
         self._refresh_compare_combo()
 
     def _show_welcome(self) -> None:
-        self._save_notes()
+        if not self._save_notes():
+            return
         self.current_result = None
         if not hasattr(self, "welcome_panel"):
             return
@@ -963,7 +1015,7 @@ class MainWindow(QMainWindow):
         worker = QueueWorker(self.queue_panel.daemon)
         self.queue_worker = worker
         worker.signals.result.connect(self._queued_result_ready)
-        worker.signals.changed.connect(self.queue_panel.refresh)
+        worker.signals.changed.connect(self._queue_changed)
         worker.signals.progress.connect(self._analysis_progress)
         worker.signals.error.connect(self.queue_panel.state.setText)
         worker.signals.finished.connect(self._queue_stopped)
@@ -975,6 +1027,10 @@ class MainWindow(QMainWindow):
         self.queue_worker = None
         self.cancel_action.setEnabled(False)
 
+    def _queue_changed(self) -> None:
+        self.queue_panel.refresh()
+        self.cancel_action.setEnabled(self.queue_panel.daemon.current_token is not None)
+
     def _show_queue(self) -> None:
         self.welcome_panel.hide()
         self.tabs.show()
@@ -983,6 +1039,8 @@ class MainWindow(QMainWindow):
         self.queue_panel.refresh()
 
     def _open_queued_result(self, evidence_id: str) -> None:
+        if not self._save_notes():
+            return
         result = self.service.repository.load(evidence_id)
         if result:
             self._refresh_projects(result.evidence.project_id)
@@ -1005,7 +1063,11 @@ class MainWindow(QMainWindow):
                 self._show_queue()
 
     def closeEvent(self, event) -> None:
-        self._save_notes()
+        if not self._save_notes():
+            event.ignore()
+            self.tabs.setCurrentWidget(self.expert_tabs)
+            self.expert_tabs.setCurrentWidget(self.conclusions_page)
+            return
         self.queue_panel.daemon.stop()
         if self.current_worker:
             self.current_worker.cancel()
@@ -1040,13 +1102,15 @@ class MainWindow(QMainWindow):
         evidence = self.current_result.evidence
         block = f"Объект: {evidence.original_name}\nSHA-256: {evidence.sha256}\n\n{text}"
         existing = self.notes_edit.toPlainText().rstrip()
+        saved = True
         if block not in existing:
             self.notes_edit.setPlainText(existing + ("\n\n———\n\n" if existing else "") + block)
-            self._save_notes()
+            saved = self._save_notes()
         self.tabs.setCurrentWidget(self.expert_tabs)
         self.expert_tabs.setCurrentWidget(self.conclusions_page)
         self.notes_edit.setFocus()
-        self.statusBar().showMessage("Заготовка добавлена в заметки. Проверьте основания и отредактируйте текст.")
+        if saved:
+            self.statusBar().showMessage("Заготовка добавлена в заметки. Проверьте основания и отредактируйте текст.")
 
     def _search_project(self) -> None:
         project_id = self._current_project_id()
@@ -1290,26 +1354,67 @@ class MainWindow(QMainWindow):
     def _mark_changed(self, finding_id: str, mark: str, include: bool) -> None:
         if not self.current_result or not any(f.id == finding_id for f in self.current_result.findings):
             return
-        self.service.repository.update_finding_mark(finding_id, mark, include)
+        try:
+            self.service.repository.update_finding_mark(finding_id, mark, include)
+        except (OSError, sqlite3.Error):
+            logging.getLogger(__name__).exception("Could not save finding mark")
+            finding = next(f for f in self.current_result.findings if f.id == finding_id)
+            self._sync_finding_mark(finding)
+            self.statusBar().showMessage("Оценка не сохранена. Повторите действие.")
+            return
         if self.current_result:
             for finding in self.current_result.findings:
                 if finding.id == finding_id:
                     finding.user_mark = mark
                     finding.include_in_report = include
+                    self._sync_finding_mark(finding)
+                    self.statusBar().showMessage("Оценка и выбор для отчёта сохранены", 5000)
                     break
 
-    def _save_notes(self) -> None:
+    def _sync_finding_mark(self, finding) -> None:
+        for table in self.findChildren(FindingsTable):
+            table.sync_mark(finding)
+        explorer = self.findings_explorer
+        row = explorer.table.currentRow()
+        if 0 <= row < len(explorer.visible_findings) and explorer.visible_findings[row].id == finding.id:
+            for control in (explorer.mark, explorer.include):
+                control.blockSignals(True)
+            explorer.mark.setCurrentIndex(max(0, explorer.mark.findData(finding.user_mark)))
+            explorer.include.setChecked(finding.include_in_report)
+            for control in (explorer.mark, explorer.include):
+                control.blockSignals(False)
+
+    def _notes_changed(self) -> None:
+        if self.current_result:
+            self.notes_saved_label.setText("Есть изменения — сохраняем…")
+            self.notes_save_timer.start()
+
+    def _save_notes(self) -> bool:
         if not self.current_result:
-            return
+            return True
+        self.notes_save_timer.stop()
         evidence = self.current_result.evidence
-        if evidence.user_notes == self.notes_edit.toPlainText() and evidence.user_conclusions == self.conclusions_edit.toPlainText():
-            return
-        evidence.user_notes = self.notes_edit.toPlainText()
-        evidence.user_conclusions = self.conclusions_edit.toPlainText()
-        self.service.repository.update_evidence_notes(
-            evidence.id, evidence.user_notes, evidence.user_conclusions
-        )
+        notes, conclusions = self.notes_edit.toPlainText(), self.conclusions_edit.toPlainText()
+        if evidence.user_notes == notes and evidence.user_conclusions == conclusions:
+            self.notes_saved_label.setText("Заметки и выводы сохранены")
+            self.notes_saved_label.setToolTip("")
+            if self.statusBar().currentMessage().startswith("Заметки не сохранены"):
+                self.statusBar().clearMessage()
+            return True
+        try:
+            self.service.repository.update_evidence_notes(evidence.id, notes, conclusions)
+        except (OSError, sqlite3.Error) as exc:
+            logging.getLogger(__name__).exception("Could not save evidence notes")
+            message = "Заметки не сохранены. Текст остался в окне. Нажмите «Сохранить заметки и выводы», чтобы повторить."
+            self.notes_saved_label.setText(message)
+            self.notes_saved_label.setToolTip(str(exc))
+            self.statusBar().showMessage(message)
+            return False
+        evidence.user_notes, evidence.user_conclusions = notes, conclusions
         self.notes_saved_label.setText("Заметки и выводы сохранены")
+        self.notes_saved_label.setToolTip("")
+        self.statusBar().showMessage("Заметки и выводы сохранены", 5000)
+        return True
 
     def _extract_attachments(self) -> None:
         if not self.current_result:
@@ -1512,7 +1617,8 @@ class MainWindow(QMainWindow):
             self.background_workers.remove(worker)
 
     def _export(self, kind: str) -> None:
-        self._save_notes()
+        if not self._save_notes():
+            return
         if not self.current_result:
             return
         filters = {
@@ -1545,7 +1651,7 @@ class MainWindow(QMainWindow):
                     self.current_result, Path(selected), project
                 )
             else:
-                audit = self.service.repository.list_audit(self.current_result.evidence.project_id)
+                audit = self.service.repository.list_evidence_audit(self.current_result.evidence.id)
                 ZipPackageExporter(self.service.config.report_template).export(
                     self.current_result, Path(selected), project, audit
                 )

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from PySide6.QtGui import QColor, QFont, QPalette
 from PySide6.QtWidgets import QApplication
 
@@ -145,6 +147,11 @@ QPushButton#PrimaryButton {
 }
 QPushButton#PrimaryButton:hover { background: #403d85; }
 QPushButton#DangerButton { color: #a13b46; border-color: #e0b8bd; }
+QPushButton:disabled, QPushButton#PrimaryButton:disabled, QPushButton#DangerButton:disabled {
+    color: #626a7c;
+    background: #edf0f4;
+    border: 1px solid #dde1e8;
+}
 QComboBox, QLineEdit, QSpinBox, QPlainTextEdit {
     background: #ffffff;
     border: 1px solid #cfd4df;
@@ -159,6 +166,8 @@ QComboBox:focus, QLineEdit:focus, QSpinBox:focus, QPlainTextEdit:focus {
     padding: 4px 6px;
 }
 QComboBox::drop-down { border: 0; width: 24px; }
+QComboBox { padding-right: 27px; }
+QComboBox::down-arrow { image: url("@@ICON_DIR@@/chevron-down.svg"); width: 12px; height: 8px; }
 QTableWidget, QTreeWidget {
     background: #ffffff;
     alternate-background-color: #f7f8fb;
@@ -211,4 +220,4 @@ def apply_theme(application: QApplication) -> None:
     palette.setColor(QPalette.ColorRole.PlaceholderText, QColor("#626a7c"))
     application.setPalette(palette)
     application.setFont(QFont("Segoe UI", 10))
-    application.setStyleSheet(APP_STYLE)
+    application.setStyleSheet(APP_STYLE.replace("@@ICON_DIR@@", (Path(__file__).parent / "icons").as_posix()))

@@ -52,6 +52,7 @@ class ResearchAssistant(QWidget):
         self.observations_label = QLabel(
             "Наблюдения, которые стоит проверить — выберите для пояснения"
         )
+        self.observations_label.setWordWrap(True)
         layout.addWidget(self.observations_label)
         self.observations = QListWidget()
         self.observations.setMaximumHeight(100)
@@ -83,6 +84,17 @@ class ResearchAssistant(QWidget):
         self.table.setMinimumHeight(180)
         self.table.setAccessibleName("Вопросы для исследования")
         self.table.currentCellChanged.connect(self._select)
+        self.question_selector = QComboBox()
+        self.question_selector.setAccessibleName("Вопрос для исследования")
+        self.question_selector.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon)
+        self.question_selector.setMinimumContentsLength(20)
+        self.question_selector.currentIndexChanged.connect(self._question_changed)
+        layout.addWidget(self.question_selector)
+        self.answer_status = QLabel()
+        self.answer_status.setWordWrap(True)
+        layout.addWidget(self.answer_status)
+        self.question_selector.hide()
+        self.answer_status.hide()
         self.splitter = QSplitter(Qt.Orientation.Horizontal)
         self.splitter.addWidget(self.table)
         detail_page = QWidget()
@@ -135,11 +147,19 @@ class ResearchAssistant(QWidget):
         super().resizeEvent(event)
         if hasattr(self, "splitter"):
             narrow = self.width() < 820
+            self.table.setVisible(not narrow)
+            self.question_selector.setVisible(narrow)
+            self.answer_status.setVisible(narrow)
             orientation = Qt.Orientation.Vertical if narrow else Qt.Orientation.Horizontal
             if self.splitter.orientation() != orientation:
                 self.splitter.setOrientation(orientation)
                 self.splitter.setSizes([200, 300] if narrow else [440, 590])
-            self.splitter.setMinimumHeight(500 if narrow else 330)
+            self.splitter.setMinimumHeight(290 if narrow else 330)
+
+    def _question_changed(self, row):
+        if 0 <= row < len(self.answers):
+            self.table.setCurrentCell(row, 0)
+            self._select()
 
     def populate(self, result):
         self.result = result
@@ -167,6 +187,7 @@ class ResearchAssistant(QWidget):
             self.observations.addItem(item)
         self.observations.setVisible(bool(interesting))
         self.observations_label.setVisible(bool(interesting))
+        self.observations.setFixedHeight(min(100, max(34, len(interesting) * 36 + 4)))
         self.scope.setText(
             "Часть методов не завершена. Полученные наблюдения доступны; полнота исследования ограничена."
             if result
@@ -175,8 +196,12 @@ class ResearchAssistant(QWidget):
                 or result.errors
                 or any(r.status != "completed" for r in result.tool_runs)
             )
-            else "Статус показывает, какое утверждение допускают полученные данные. Вывод по вопросу формулирует эксперт."
+            else "Здесь — данные, основания и ограничения. Вывод по вопросу формулирует эксперт."
         )
+        self.question_selector.blockSignals(True)
+        self.question_selector.clear()
+        self.question_selector.addItems([answer.question for answer in self.answers])
+        self.question_selector.blockSignals(False)
         self.table.blockSignals(True)
         self.table.setRowCount(len(self.answers))
         for row, answer in enumerate(self.answers):
@@ -199,8 +224,13 @@ class ResearchAssistant(QWidget):
         self.open_ground.setEnabled(False)
         if not valid:
             self.detail.clear()
+            self.answer_status.clear()
             return
         answer = self.answers[row]
+        self.question_selector.blockSignals(True)
+        self.question_selector.setCurrentIndex(row)
+        self.question_selector.blockSignals(False)
+        self.answer_status.setText(STATUS_LABELS[answer.status])
         self.detail.setPlainText(
             "\n\n".join(
                 (

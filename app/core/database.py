@@ -410,6 +410,16 @@ class AnalysisRepository:
                 rows = connection.execute("SELECT * FROM audit_log ORDER BY id").fetchall()
         return [dict(row) for row in rows]
 
+    def list_evidence_audit(self, evidence_id: str) -> list[dict[str, Any]]:
+        """A file export must not disclose activity from unrelated evidence."""
+        with self._connection() as connection:
+            connection.row_factory = sqlite3.Row
+            rows = connection.execute(
+                "SELECT * FROM audit_log WHERE object_id = ? ORDER BY id",
+                (evidence_id,),
+            ).fetchall()
+        return [dict(row) for row in rows]
+
     def _connect(self) -> sqlite3.Connection:
         return sqlite3.connect(self.database_path)
 

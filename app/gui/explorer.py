@@ -255,6 +255,8 @@ class FindingsExplorer(QWidget):
             self.raw_detail.clear()
             self.detail.setPlainText(
                 "Нет результатов для выбранных условий. Нажмите «Сбросить фильтры», чтобы показать все записи."
+                if self.findings else
+                "В этом исследовании нет записей. Откройте «Обзор», чтобы проверить, завершился ли анализ и какие методы были доступны."
             )
             return
         finding = self.visible_findings[row]

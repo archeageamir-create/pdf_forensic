@@ -43,6 +43,9 @@ def main() -> int:
         raise RuntimeError(
             "The application sources changed after this build. Rebuild and validate before packaging."
         )
+    for icon in (ROOT / "app/resources/icons").iterdir():
+        if icon.is_file() and sha256(icon) != sha256(folder / "_internal" / icon.relative_to(ROOT)):
+            raise RuntimeError(f"The bundled interface icon changed: {icon.name}")
     if not executable.is_file():
         raise FileNotFoundError(executable)
     runtime_path = folder / "_internal/app/resources/binaries"

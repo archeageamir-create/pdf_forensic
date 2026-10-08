@@ -16,7 +16,7 @@ from app.core.config import default_data_dir
 
 
 def _poppler_output_path(path: Path) -> str:
-    """Poppler's PNG writer needs extended Windows paths beyond MAX_PATH."""
+    """Use extended Windows paths for pdftotext output beyond MAX_PATH."""
     if os.name != "nt":
         return str(path)
     absolute = str(path.absolute())

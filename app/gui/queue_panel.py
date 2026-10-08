@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PySide6.QtCore import QObject, QRunnable, QTimer, Signal
+from PySide6.QtCore import QObject, QRunnable, QTimer, Qt, Signal
 from PySide6.QtWidgets import (
     QCheckBox,
     QComboBox,
@@ -73,22 +73,29 @@ class QueuePanel(QWidget):
         self.service = service
         self.jobs = []
         self.watches = []
+        self.project_names = {}
         self.summary = QLabel("Очередь пуста")
         self.summary.setWordWrap(True)
         self.state = QLabel("Обработка начнётся при запуске приложения")
         self.state.setWordWrap(True)
-        self.table = QTableWidget(0, 4)
-        self.table.setHorizontalHeaderLabels(["Файл", "Состояние", "Режим", "Добавлен"])
+        self.notice = QLabel()
+        self.notice.setWordWrap(True)
+        self.notice.setTextFormat(Qt.TextFormat.PlainText)
+        self.state.setTextFormat(Qt.TextFormat.PlainText)
+        self.notice.hide()
+        self.table = QTableWidget(0, 5)
+        self.table.setHorizontalHeaderLabels(["Файл", "Проект", "Состояние", "Режим", "Добавлен"])
         self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         self.table.verticalHeader().hide()
         self.table.setAlternatingRowColors(True)
-        configure_resizable_columns(self.table, "queue", [300, 130, 100, 200])
+        configure_resizable_columns(self.table, "queue_with_project", [230, 180, 130, 100, 200])
         self.detail = QPlainTextEdit()
         self.detail.setReadOnly(True)
         self.detail.setMaximumHeight(90)
         self.table.currentCellChanged.connect(self._selected)
+        self.table.cellDoubleClicked.connect(lambda *_: self._open())
         self.pause = QPushButton("Приостановить очередь")
         self.pause.setCheckable(True)
         self.pause.toggled.connect(self._pause)
@@ -119,6 +126,7 @@ class QueuePanel(QWidget):
         layout = QVBoxLayout(self)
         layout.addWidget(self.summary)
         layout.addWidget(self.state)
+        layout.addWidget(self.notice)
         self.pages = QTabWidget()
         jobs_page, watches_page = QWidget(), QWidget()
         jobs_layout, watches_layout = QVBoxLayout(jobs_page), QVBoxLayout(watches_page)
@@ -164,19 +172,24 @@ class QueuePanel(QWidget):
         jobs = self.queue.list_jobs()
         counts = self.queue.counts()
         self.summary.setText(
-            "  •  ".join(
+            "Общая очередь  •  " + ("  •  ".join(
                 f"{label}: {counts[status]}"
                 for status, label in STATUS_LABELS.items()
                 if counts.get(status)
             )
-            or "Очередь пуста — добавьте файлы или папку"
+            or "Пока нет заданий — добавьте файлы или папку")
         )
-        if jobs != self.jobs:
+        project_names = {project.id: f"{project.case_number} — {project.title}" for project in self.service.repository.list_projects()}
+        projects_changed = project_names != self.project_names
+        self.project_names = project_names
+        if jobs != self.jobs or projects_changed:
             self._update_jobs(jobs, selected_id)
         self._selected()
         self._refresh_watches()
         if self.daemon.scanner.errors:
             self.state.setText("; ".join(self.daemon.scanner.errors[:3]))
+        elif self.daemon.has_execution_lock and self.daemon.current_job_id is None:
+            self.state.setText("Очередь на паузе" if self.daemon.paused.is_set() else "Очередь работает — ожидаем новые задания")
 
     def _update_jobs(self, jobs, selected_id):
         vertical = self.table.verticalScrollBar().value()
@@ -192,6 +205,7 @@ class QueuePanel(QWidget):
             for column, value in enumerate(
                 (
                     Path(job.path).name,
+                    self._project_name(job),
                     STATUS_LABELS.get(job.status, job.status),
                     mode,
                     job.created_at[:19].replace("T", " ") + " UTC",
@@ -225,6 +239,13 @@ class QueuePanel(QWidget):
         row = self.table.currentRow()
         return self.jobs[row] if 0 <= row < len(self.jobs) else None
 
+    def select_job(self, job_id):
+        for row, job in enumerate(self.jobs):
+            if job.id == job_id:
+                self.table.setCurrentCell(row, 0)
+                self.table.scrollToItem(self.table.item(row, 0))
+                break
+
     def _selected(self, *_):
         job = self._current_job()
         self.cancel.setEnabled(
@@ -243,10 +264,13 @@ class QueuePanel(QWidget):
             bool(job and job.evidence_id and job.status in {"completed", "partial"})
         )
         self.detail.setPlainText(
-            (job.path + "\n" + (job.error or STATUS_LABELS[job.status]))
+            (job.path + "\nПроект: " + self._project_name(job) + "\n" + (job.error or STATUS_LABELS[job.status]))
             if job
             else "Выберите задание, чтобы увидеть подробности."
         )
+
+    def _project_name(self, job):
+        return self.project_names.get(job.project_id, "Проект удалён") if job.project_id else "Быстрое исследование"
 
     def _pause(self, paused):
         self.daemon.paused.set() if paused else self.daemon.paused.clear()
@@ -271,7 +295,7 @@ class QueuePanel(QWidget):
 
     def _open(self):
         job = self._current_job()
-        if job and job.evidence_id:
+        if job and job.evidence_id and job.status in {"completed", "partial"}:
             self.open_result.emit(job.evidence_id)
 
     def _add_watch(self):
