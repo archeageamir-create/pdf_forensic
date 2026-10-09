@@ -67,7 +67,7 @@ th{{background:#edf3f8}} tr.conflict{{background:#fff1c9}} code,pre{{white-space
 .notice{{padding:12px;border:1px solid #b8cee0;border-radius:8px;background:#eef6fc}}
 </style></head><body>
 <h1>Document Forensic Inspector — технический отчёт</h1>
-<p><strong>Оболочка, интеграция и сборка:</strong> Amirkhan Smagulov. Сторонние
+<p><strong>Оболочка, интеграция и сборка:</strong> ТОО «АНСЭ». Сторонние
 open-source инструменты сохраняют своё авторство и лицензии.</p>
 <p class="notice">Автоматические наблюдения требуют экспертной оценки. Различие метаданных
 само по себе не является доказательством подделки.</p>

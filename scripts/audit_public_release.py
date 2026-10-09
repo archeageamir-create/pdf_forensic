@@ -11,7 +11,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.4.2"
+sys.path.insert(0, str(ROOT))
+from app import __version__ as VERSION
 DIST = ROOT / "dist"
 APP_DIR = DIST / "DocumentForensicInspector"
 INSTALLER = DIST / f"DocumentForensicInspector-Setup-{VERSION}.exe"
@@ -42,7 +43,7 @@ def audit() -> tuple[list[str], dict[str, object]]:
         APP_DIR / "_internal" / "PySide6" / "QtCore.pyd",
         APP_DIR / "_internal" / "app" / "resources" / "SBOM.spdx.json",
         APP_DIR / "_internal" / "app" / "resources" / "THIRD_PARTY_NOTICES.md",
-        APP_DIR / "_internal" / "app" / "resources" / "licenses" / "qt" / "LGPL-3.0-only.txt",
+        APP_DIR / "_internal" / "app" / "resources" / "licenses" / "repository-notices" / "qt" / "LGPL-3.0-only.txt",
         APP_DIR / "_internal" / "app" / "resources" / "compliance" / "SOURCE_OFFER.md",
         APP_DIR / "_internal" / "app" / "resources" / "bin" / "DocumentForensicToolRunner.exe",
     ]

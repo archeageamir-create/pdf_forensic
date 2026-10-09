@@ -105,7 +105,7 @@ class DocxReportExporter:
         authorship = document.add_paragraph()
         authorship.paragraph_format.space_after = Pt(12)
         run = authorship.add_run(
-            "Оболочка, интеграция и сборка: Amirkhan Smagulov. Сторонние "
+            "Оболочка, интеграция и сборка: ТОО «АНСЭ». Сторонние "
             "open-source инструменты сохраняют своё авторство и лицензии."
         )
         _font(run.font, "Calibri", 9.5, color=MUTED)

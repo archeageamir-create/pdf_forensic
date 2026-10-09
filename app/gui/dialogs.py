@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 from pathlib import Path
+from PySide6.QtGui import QGuiApplication
 
 from PySide6.QtWidgets import (
     QCheckBox,
@@ -15,6 +16,8 @@ from PySide6.QtWidgets import (
     QPlainTextEdit,
     QPushButton,
     QSpinBox,
+    QScrollArea,
+    QFrame,
     QVBoxLayout,
     QWidget,
 )
@@ -59,9 +62,7 @@ class ProjectDialog(QDialog):
         buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Отмена")
         buttons.accepted.connect(self._validate)
         buttons.rejected.connect(self.reject)
-        layout = QVBoxLayout(self)
-        layout.addLayout(form)
-        layout.addWidget(buttons)
+        _scrolling_form(self, form, buttons)
 
     def _validate(self) -> None:
         if not all(
@@ -144,9 +145,7 @@ class SettingsDialog(QDialog):
         buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Отмена")
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
-        layout = QVBoxLayout(self)
-        layout.addLayout(form)
-        layout.addWidget(buttons)
+        _scrolling_form(self, form, buttons)
 
     def value(self) -> AppConfig:
         return replace(
@@ -226,6 +225,24 @@ class CustomAnalyzersDialog(QDialog):
 
     def selected(self) -> set[str]:
         return {key for key, box in self.boxes.items() if box.isChecked()}
+
+
+def _scrolling_form(dialog: QDialog, form: QFormLayout, buttons: QDialogButtonBox) -> None:
+    """Keep Save/Cancel reachable on short displays and at increased DPI."""
+    form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
+    form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+    content = QWidget()
+    content.setLayout(form)
+    scroll = QScrollArea()
+    scroll.setWidgetResizable(True)
+    scroll.setFrameShape(QFrame.Shape.NoFrame)
+    scroll.setWidget(content)
+    layout = QVBoxLayout(dialog)
+    layout.addWidget(scroll, 1)
+    layout.addWidget(buttons)
+    screen = dialog.parentWidget().screen() if dialog.parentWidget() else QGuiApplication.primaryScreen()
+    area = screen.availableGeometry() if screen else None
+    dialog.resize(min(760, area.width() - 40) if area else 760, min(640, area.height() - 60) if area else 640)
 
 
 def _path_row(

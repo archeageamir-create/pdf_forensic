@@ -12,15 +12,16 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.4.2"
+import sys
+sys.path.insert(0, str(ROOT))
+from app import __version__ as VERSION
 ARCHIVE = ROOT / "dist" / f"DocumentForensicInspector-Source-{VERSION}.zip"
-DIRECTORIES = ("app", "compliance", "docs", "installer", "scripts", "signing", "tests")
+DIRECTORIES = ("app", "compliance", "docs", "installer", "scripts", "tests")
 FILES = (
     ".gitattributes",
     ".gitignore",
     "build.ps1",
     "CONTRIBUTING.md",
-    "create-self-signed-certificate.ps1",
     "DocumentForensicInspector.spec",
     "DocumentForensicToolRunner.spec",
     "LICENSE",
@@ -31,7 +32,6 @@ FILES = (
     "requirements.txt",
     "run.ps1",
     "SECURITY.md",
-    "sign-build.ps1",
     "SOURCE_OFFER.md",
     "THIRD_PARTY_NOTICES.md",
     "SBOM.spdx.json",

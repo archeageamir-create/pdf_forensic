@@ -80,7 +80,7 @@ class PersistenceAndReportingTests(unittest.TestCase):
             self.assertIn("A &amp; B", html)
             self.assertIn("&lt;original&gt;.pdf", html)
             self.assertIn("не является доказательством подделки", html)
-            self.assertIn("Amirkhan Smagulov", html)
+            self.assertIn("ТОО «АНСЭ»", html)
 
     def test_project_card_marks_notes_and_empty_project_deletion(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

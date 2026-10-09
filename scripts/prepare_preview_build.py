@@ -29,17 +29,17 @@ from scripts.generate_compliance import (
 )
 
 
-def prepare() -> Path:
+def prepare(*, release: bool = False) -> Path:
     runtime = verify_bundle()
-    target = ROOT / "build" / "preview-resources"
+    target = ROOT / "build" / ("release-resources" if release else "preview-resources")
     target.mkdir(parents=True, exist_ok=True)
     project_url = "https://github.com/archeageamir-create/pdf_forensic"
     packages = [
         _package(
-            name="Document Forensic Inspector Universal Preview",
-            version=__version__ + "+universal",
+            name="Document Forensic Inspector" if release else "Document Forensic Inspector Universal Preview",
+            version=__version__ if release else __version__ + "+universal",
             license_id="Apache-2.0",
-            supplier="Person: Amirkhan Smagulov",
+            supplier="Organization: ANSE LLP",
             homepage=project_url,
             source=project_url,
             scope="application",
@@ -57,11 +57,11 @@ def prepare() -> Path:
     )
     inventory = []
     notices = [
-        "# Local universal preview — build inventory",
+        "# Document Forensic Inspector — build inventory",
         "",
         "This standalone build bundles Python, Qt, ExifTool (including Perl), qpdf, pdfcpu, Poppler, ffprobe, Java, JHOVE, veraPDF, PDFBox and the repository PDF scripts. No separate runtime installation is needed. Exact engine files and hashes are in binaries/RUNTIME_MANIFEST.json; upstream download hashes are in compliance/runtime-dependencies.lock.json.",
         "",
-        "The release 0.4.2 inventory in the repository describes that earlier distribution, not this preview. No public-release compliance audit or Authenticode signing was performed.",
+        "The inventory records the actual build environment; build-only packages are labelled separately. Third-party rights and license notices are retained. This distribution is unsigned.",
         "",
     ]
     for component in runtime["components"]:
@@ -144,7 +144,7 @@ def prepare() -> Path:
         "spdxVersion": "SPDX-2.3",
         "dataLicense": "CC0-1.0",
         "SPDXID": "SPDXRef-DOCUMENT",
-        "name": "DFI local universal preview build environment",
+        "name": "DFI build environment",
         "documentNamespace": "https://spdx.org/spdxdocs/dfi-preview-"
         + str(uuid.uuid4()),
         "creationInfo": {
@@ -173,7 +173,7 @@ def prepare() -> Path:
     manifest = {
         "created_utc": created,
         "base_version": __version__,
-        "build": "universal-preview",
+        "build": "release" if release else "universal-preview",
         "standalone": True,
         "runtime_manifest_sha256": hashlib.sha256((ROOT / "app/resources/binaries/RUNTIME_MANIFEST.json").read_bytes()).hexdigest(),
         "python": platform.python_version(),

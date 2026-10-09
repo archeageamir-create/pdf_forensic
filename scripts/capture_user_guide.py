@@ -95,6 +95,7 @@ def main():
     service = ForensicsService(config)
     window = MainWindow(service)
     window.resize(1366, 900)
+    window.sidebar_action.setChecked(True)
     window.show()
     manifest = []
 
@@ -160,10 +161,12 @@ def main():
     window.queue_panel.queue.enqueue(path, project_id=project.id, mode=AnalysisMode.QUICK)
     window.queue_panel.refresh()
     shot("11-queue", window.queue_panel, QRect(0, 0, window.queue_panel.width(), 320))
-    window.queue_panel.queue.save_watch(EXAMPLES, project.id, AnalysisMode.QUICK, False)
-    window.queue_panel.refresh()
-    window.queue_panel.pages.setCurrentIndex(1)
-    shot("12-watch", window.queue_panel, QRect(0, 0, window.queue_panel.width(), 300))
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="DFI-training-") as temporary_watch:
+        window.queue_panel.queue.save_watch(Path(temporary_watch), project.id, AnalysisMode.QUICK, False)
+        window.queue_panel.refresh()
+        window.queue_panel.pages.setCurrentIndex(1)
+        shot("12-watch", window.queue_panel, QRect(0, 0, window.queue_panel.width(), 300))
     image_result = next(service.repository.load(item["id"]) for item in service.repository.list_evidence_summaries(project.id) if item["original_name"].endswith(".jpg"))
     window._display_result(image_result)
     window.tabs.setCurrentWidget(panel)

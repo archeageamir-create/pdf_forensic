@@ -51,8 +51,10 @@ def main() -> int:
                 raise ValueError(f"Unsafe archive member: {item.filename}")
         assert archive.testzip() is None
         archive.extractall(extraction)
-    app = extraction / "DocumentForensicInspectorPreview"
-    manifest = json.loads((app / "PREVIEW_MANIFEST.json").read_text(encoding="utf-8"))
+    release = (extraction / "DocumentForensicInspector").is_dir()
+    name = "DocumentForensicInspector" if release else "DocumentForensicInspectorPreview"
+    app = extraction / name
+    manifest = json.loads((app / ("RELEASE_MANIFEST.json" if release else "PREVIEW_MANIFEST.json")).read_text(encoding="utf-8"))
     for item in manifest["files"]:
         path = (app / item["path"]).resolve()
         assert path.is_relative_to(app.resolve())
@@ -61,7 +63,7 @@ def main() -> int:
         )
     assert manifest.get("standalone") is True
     verify_bundle(app / "_internal/app/resources/binaries")
-    executable = app / "DocumentForensicInspectorPreview.exe"
+    executable = app / f"{name}.exe"
     assert digest(executable) == manifest["executable_sha256"]
     helper = runpy.run_path(str(ROOT / "scripts/soak-queue.py"))
     inbox, workspace = root / "inbox", root / "workspace"

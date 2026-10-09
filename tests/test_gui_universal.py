@@ -285,6 +285,8 @@ def test_visible_export_saves_latest_notes_and_reports_exact_path(window, tmp_pa
     destination = tmp_path / "Отчёт с пробелами.json"
     with patch("app.gui.main_window.QFileDialog.getSaveFileName", return_value=(str(destination), "")), patch.object(window, "_report_saved") as saved:
         window.export_actions["json"].trigger()
+        from tests.qt_helpers import wait_for_export
+        wait_for_export(window)
     saved.assert_called_once_with(destination)
     assert json.loads(destination.read_text(encoding="utf-8"))["evidence"]["user_notes"] == window.notes_edit.toPlainText()
     window._show_welcome()

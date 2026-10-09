@@ -238,7 +238,7 @@ class AttachmentAndReportingTests(unittest.TestCase):
             self.assertIn("ТЕХНИЧЕСКИЙ ОТЧЁТ", text)
             self.assertIn("4. Область исследования", text)
             self.assertIn("Авторство и история правок PDF", text)
-            self.assertIn("Amirkhan Smagulov", text)
+            self.assertIn("ТОО «АНСЭ»", text)
             self.assertIn(r"raw\x00value\x01", text)
             package = ZipPackageExporter().export(result, root / "package.zip")
             with zipfile.ZipFile(package) as archive:

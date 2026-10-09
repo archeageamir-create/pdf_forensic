@@ -92,6 +92,8 @@ def test_exported_audit_contains_only_selected_evidence(window, tmp_path, in_pro
     destination = tmp_path / "selected.zip"
     with patch("app.gui.main_window.QFileDialog.getSaveFileName", return_value=(str(destination), "")), patch.object(window, "_report_saved"):
         window._export("zip")
+        from tests.qt_helpers import wait_for_export
+        wait_for_export(window)
     with zipfile.ZipFile(destination) as archive:
         log = json.loads(archive.read("logs/project_audit.json"))
     assert [entry["object_id"] for entry in log] == [result.evidence.id]
@@ -160,6 +162,7 @@ def test_long_name_keeps_result_panes_usable_and_full_name_accessible(window):
 
 
 def test_narrow_overview_shows_selected_answer_and_keeps_selection_when_resized(window):
+    window.sidebar_action.setChecked(True)
     result = sample_result()
     result.findings.append(Finding("OOXML", "creator", "Test", "OOXML"))
     window._display_result(result)

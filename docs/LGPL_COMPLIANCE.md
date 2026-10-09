@@ -8,7 +8,7 @@ plugins and PySide `.pyd` modules remain individual files below the installed
 
 Recipients may inspect, replace and debug modified LGPL components. The project
 does not prohibit reverse engineering for that purpose. Keep a backup and use a
-binary-compatible Qt/PySide6 6.11.1 build when replacing files.
+binary-compatible Qt/PySide6 6.11.2 build when replacing files.
 
 ## Rebuild with modified Qt/PySide6
 

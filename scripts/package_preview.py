@@ -23,11 +23,18 @@ def sha256(path: Path) -> str:
 
 
 def main() -> int:
+    global APPLICATION
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--release", action="store_true", help="Package the release application instead of the preview")
     parser.add_argument(
-        "--output", type=Path, default=ROOT / "dist" / f"{APPLICATION}-Windows.zip"
+        "--output", type=Path
     )
     args = parser.parse_args()
+    if args.release:
+        APPLICATION = "DocumentForensicInspector"
+    if args.output is None:
+        from app import __version__
+        args.output = ROOT / "dist" / (f"{APPLICATION}-{__version__}-Windows.zip" if args.release else f"{APPLICATION}-Windows.zip")
     folder = ROOT / "dist" / APPLICATION
     executable = folder / f"{APPLICATION}.exe"
     inventory = json.loads(
@@ -70,7 +77,7 @@ def main() -> int:
             raise ValueError(f"Unexpected linked file: {path}")
     manifest = {
         "created_utc": datetime.now(UTC).isoformat(),
-        "build": "universal-preview",
+        "build": "release" if args.release else "universal-preview",
         "base_version": inventory["base_version"],
         "executable_sha256": sha256(executable),
         "current_app_sources_match_build": True,
@@ -120,6 +127,8 @@ OCR, старые DOC/XLS и восстановление удалённых д�
 Состав и SHA-256 файлов: PREVIEW_MANIFEST.json.
 Лицензии и инвентарь: _internal/app/resources.
 """
+    if args.release:
+        readme = (ROOT / "docs/release/README-RU.txt").read_text(encoding="utf-8")
     with tempfile.NamedTemporaryFile(
         dir=output.parent, suffix=".tmp", delete=False
     ) as temporary:
@@ -133,7 +142,7 @@ OCR, старые DOC/XLS и восстановление удалённых д�
                     path, f"{APPLICATION}/{path.relative_to(folder).as_posix()}"
                 )
             archive.writestr(
-                f"{APPLICATION}/PREVIEW_MANIFEST.json",
+                f"{APPLICATION}/{'RELEASE' if args.release else 'PREVIEW'}_MANIFEST.json",
                 json.dumps(manifest, ensure_ascii=False, indent=2),
             )
             archive.writestr(

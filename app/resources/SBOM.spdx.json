@@ -2,31 +2,29 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "Document-Forensic-Inspector-0.4.2",
-  "documentNamespace": "https://github.com/archeageamir-create/document-forensic-inspector/spdx/0.4.2/7712ade3-26de-5bbc-8d0c-1db11bedfc2a",
+  "name": "DFI build environment",
+  "documentNamespace": "https://spdx.org/spdxdocs/dfi-preview-52ac8ee5-9dfa-4b22-9f09-c56be00c2a90",
   "creationInfo": {
-    "created": "2026-07-22T10:38:59Z",
+    "created": "2026-10-09T08:00:41Z",
     "creators": [
-      "Tool: scripts/generate_compliance.py",
-      "Person: Amirkhan Smagulov"
-    ],
-    "licenseListVersion": "3.27"
+      "Tool: prepare_preview_build.py"
+    ]
   },
   "documentDescribes": [
-    "SPDXRef-Package-Document-Forensic-Inspector-0.4.2"
+    "SPDXRef-Package-Document-Forensic-Inspector-0.5.0"
   ],
   "packages": [
     {
-      "SPDXID": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
+      "SPDXID": "SPDXRef-Package-Document-Forensic-Inspector-0.5.0",
       "name": "Document Forensic Inspector",
-      "versionInfo": "0.4.2",
-      "supplier": "Person: Amirkhan Smagulov",
-      "downloadLocation": "https://github.com/archeageamir-create/document-forensic-inspector",
+      "versionInfo": "0.5.0",
+      "supplier": "Organization: ANSE LLP",
+      "downloadLocation": "https://github.com/archeageamir-create/pdf_forensic",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://github.com/archeageamir-create/document-forensic-inspector",
+      "homepage": "https://github.com/archeageamir-create/pdf_forensic",
       "primaryPackagePurpose": "APPLICATION",
       "comment": "Distribution scope: application."
     },
@@ -40,373 +38,639 @@
       "licenseConcluded": "PSF-2.0",
       "licenseDeclared": "PSF-2.0",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://www.python.org/",
+      "homepage": "https://www.python.org",
       "primaryPackagePurpose": "LIBRARY",
       "comment": "Distribution scope: runtime."
     },
     {
-      "SPDXID": "SPDXRef-Package-PySide6-6.11.1",
-      "name": "PySide6",
-      "versionInfo": "6.11.1",
+      "SPDXID": "SPDXRef-Package-exiftool-13.59",
+      "name": "exiftool",
+      "versionInfo": "13.59",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://pyside.org",
+      "downloadLocation": "https://downloads.sourceforge.net/project/exiftool/exiftool-13.59_64.zip",
       "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
-      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseConcluded": "Artistic-1.0-Perl OR GPL-1.0-or-later",
+      "licenseDeclared": "Artistic-1.0-Perl OR GPL-1.0-or-later",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://pyside.org",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "homepage": "https://downloads.sourceforge.net/project/exiftool/exiftool-13.59_64.zip",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
     },
     {
-      "SPDXID": "SPDXRef-Package-PySide6-Essentials-6.11.1",
-      "name": "PySide6_Essentials",
-      "versionInfo": "6.11.1",
+      "SPDXID": "SPDXRef-Package-ffprobe-8.1.2",
+      "name": "ffprobe",
+      "versionInfo": "8.1.2",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://pyside.org",
+      "downloadLocation": "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-8.1.2-essentials_build.zip",
       "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
-      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseDeclared": "GPL-3.0-or-later",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://pyside.org",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "homepage": "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-8.1.2-essentials_build.zip",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
     },
     {
-      "SPDXID": "SPDXRef-Package-PySide6-Addons-6.11.1",
-      "name": "PySide6_Addons",
-      "versionInfo": "6.11.1",
+      "SPDXID": "SPDXRef-Package-java-21.0.11-10",
+      "name": "java",
+      "versionInfo": "21.0.11+10",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://pyside.org",
+      "downloadLocation": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jre_x64_windows_hotspot_21.0.11_10.zip",
       "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
-      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseConcluded": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "licenseDeclared": "GPL-2.0-only WITH Classpath-exception-2.0",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://pyside.org",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "homepage": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jre_x64_windows_hotspot_21.0.11_10.zip",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
     },
     {
-      "SPDXID": "SPDXRef-Package-shiboken6-6.11.1",
-      "name": "shiboken6",
-      "versionInfo": "6.11.1",
+      "SPDXID": "SPDXRef-Package-jhove-1.34.0",
+      "name": "jhove",
+      "versionInfo": "1.34.0",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://pyside.org",
+      "downloadLocation": "https://software.openpreservation.org/releases/jhove-installer-1.34.jar",
       "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
-      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "licenseDeclared": "LGPL-2.1-or-later",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://pyside.org",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "homepage": "https://software.openpreservation.org/releases/jhove-installer-1.34.jar",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
     },
     {
-      "SPDXID": "SPDXRef-Package-pypdf-6.14.2",
-      "name": "pypdf",
-      "versionInfo": "6.14.2",
+      "SPDXID": "SPDXRef-Package-pdfbox-3.0.8",
+      "name": "pdfbox",
+      "versionInfo": "3.0.8",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://pypdf.readthedocs.io/en/latest/",
+      "downloadLocation": "https://archive.apache.org/dist/pdfbox/3.0.8/pdfbox-app-3.0.8.jar",
       "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause",
-      "licenseDeclared": "BSD-3-Clause",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://pypdf.readthedocs.io/en/latest/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "homepage": "https://archive.apache.org/dist/pdfbox/3.0.8/pdfbox-app-3.0.8.jar",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
     },
     {
-      "SPDXID": "SPDXRef-Package-pyHanko-0.35.2",
-      "name": "pyHanko",
-      "versionInfo": "0.35.2",
+      "SPDXID": "SPDXRef-Package-pdfcpu-0.13.0",
+      "name": "pdfcpu",
+      "versionInfo": "0.13.0",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/MatthiasValvekens/pyHanko",
+      "downloadLocation": "https://github.com/pdfcpu/pdfcpu/releases/download/v0.13.0/pdfcpu_0.13.0_Windows_x86_64.zip",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/pdfcpu/pdfcpu/releases/download/v0.13.0/pdfcpu_0.13.0_Windows_x86_64.zip",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-poppler-26.02.0",
+      "name": "poppler",
+      "versionInfo": "26.02.0",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "https://github.com/oschwartz10612/poppler-windows/releases/download/v26.02.0-0/Release-26.02.0-0.zip",
+      "filesAnalyzed": false,
+      "licenseConcluded": "GPL-2.0-or-later",
+      "licenseDeclared": "GPL-2.0-or-later",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/oschwartz10612/poppler-windows/releases/download/v26.02.0-0/Release-26.02.0-0.zip",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-qpdf-12.3.2",
+      "name": "qpdf",
+      "versionInfo": "12.3.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "https://github.com/qpdf/qpdf/releases/download/v12.3.2/qpdf-12.3.2-msvc64.zip",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0 OR Artistic-2.0",
+      "licenseDeclared": "Apache-2.0 OR Artistic-2.0",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/qpdf/qpdf/releases/download/v12.3.2/qpdf-12.3.2-msvc64.zip",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-verapdf-1.30.2",
+      "name": "verapdf",
+      "versionInfo": "1.30.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "https://software.verapdf.org/releases/1.30/verapdf-greenfield-1.30.2-installer.zip",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
+      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://software.verapdf.org/releases/1.30/verapdf-greenfield-1.30.2-installer.zip",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: bundled external engine."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-altgraph-0.17.5",
+      "name": "altgraph",
+      "versionInfo": "0.17.5",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://github.com/MatthiasValvekens/pyHanko",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-pyhanko-certvalidator-0.31.1",
-      "name": "pyhanko-certvalidator",
-      "versionInfo": "0.31.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/MatthiasValvekens/pyHanko/tree/master/pkgs/pyhanko-certvalidator",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://github.com/MatthiasValvekens/pyHanko/tree/master/pkgs/pyhanko-certvalidator",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-python-docx-1.2.0",
-      "name": "python-docx",
-      "versionInfo": "1.2.0",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://python-docx.readthedocs.org/en/latest/",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://python-docx.readthedocs.org/en/latest/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Pillow-12.3.0",
-      "name": "Pillow",
-      "versionInfo": "12.3.0",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://pillow.readthedocs.io",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT-CMU",
-      "licenseDeclared": "MIT-CMU",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://pillow.readthedocs.io",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "homepage": "https://altgraph.readthedocs.io/en/latest/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-asn1crypto-1.5.1",
       "name": "asn1crypto",
       "versionInfo": "1.5.1",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/wbond/asn1crypto",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/wbond/asn1crypto",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-bcrypt-5.0.0",
-      "name": "bcrypt",
-      "versionInfo": "5.0.0",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/pyca/bcrypt/",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://github.com/pyca/bcrypt/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-certifi-2026.6.17",
+      "SPDXID": "SPDXRef-Package-certifi-2026.7.22",
       "name": "certifi",
-      "versionInfo": "2026.6.17",
+      "versionInfo": "2026.7.22",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/certifi/python-certifi",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MPL-2.0",
       "licenseDeclared": "MPL-2.0",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/certifi/python-certifi",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-cffi-2.0.0",
+      "SPDXID": "SPDXRef-Package-cffi-2.1.1",
       "name": "cffi",
-      "versionInfo": "2.0.0",
+      "versionInfo": "2.1.1",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://cffi.readthedocs.io/",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT-0",
+      "licenseDeclared": "MIT-0",
       "copyrightText": "NOASSERTION",
       "homepage": "https://cffi.readthedocs.io/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-charset-normalizer-3.4.9",
+      "SPDXID": "SPDXRef-Package-charset-normalizer-3.5.1",
       "name": "charset-normalizer",
-      "versionInfo": "3.4.9",
+      "versionInfo": "3.5.1",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://charset-normalizer.readthedocs.io/",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "https://charset-normalizer.readthedocs.io/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-cryptography-49.0.0",
-      "name": "cryptography",
-      "versionInfo": "49.0.0",
+      "SPDXID": "SPDXRef-Package-colorama-0.4.6",
+      "name": "colorama",
+      "versionInfo": "0.4.6",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://cryptography.io/",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/tartley/colorama",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cryptography-50.0.1",
+      "name": "cryptography",
+      "versionInfo": "50.0.1",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0 OR BSD-3-Clause",
       "licenseDeclared": "Apache-2.0 OR BSD-3-Clause",
       "copyrightText": "NOASSERTION",
       "homepage": "https://cryptography.io/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-idna-3.18",
+      "SPDXID": "SPDXRef-Package-idna-3.19",
       "name": "idna",
-      "versionInfo": "3.18",
+      "versionInfo": "3.19",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/kjd/idna",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/kjd/idna",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-lxml-6.1.1",
-      "name": "lxml",
-      "versionInfo": "6.1.1",
+      "SPDXID": "SPDXRef-Package-iniconfig-2.3.0",
+      "name": "iniconfig",
+      "versionInfo": "2.3.0",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/lxml/lxml",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/pytest-dev/iniconfig",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-lxml-6.1.3",
+      "name": "lxml",
+      "versionInfo": "6.1.3",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/lxml/lxml",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-numpy-2.5.1",
-      "name": "numpy",
-      "versionInfo": "2.5.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://numpy.org",
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
-      "licenseDeclared": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://numpy.org",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-oscrypto-1.3.0",
       "name": "oscrypto",
       "versionInfo": "1.3.0",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/wbond/oscrypto",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/wbond/oscrypto",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-packaging-26.2",
+      "SPDXID": "SPDXRef-Package-packaging-26.3",
       "name": "packaging",
-      "versionInfo": "26.2",
+      "versionInfo": "26.3",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://packaging.pypa.io/",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0 OR BSD-2-Clause",
       "licenseDeclared": "Apache-2.0 OR BSD-2-Clause",
       "copyrightText": "NOASSERTION",
       "homepage": "https://packaging.pypa.io/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pefile-2024.8.26",
+      "name": "pefile",
+      "versionInfo": "2024.8.26",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/erocarrera/pefile",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pillow-12.3.0",
+      "name": "pillow",
+      "versionInfo": "12.3.0",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT-CMU",
+      "licenseDeclared": "MIT-CMU",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pillow.readthedocs.io",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pip-25.0.1",
+      "name": "pip",
+      "versionInfo": "25.0.1",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pip.pypa.io/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pluggy-1.6.0",
+      "name": "pluggy",
+      "versionInfo": "1.6.0",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "NOASSERTION",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-pycparser-3.0",
       "name": "pycparser",
       "versionInfo": "3.0",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/eliben/pycparser",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/eliben/pycparser",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-Pygments-2.21.0",
+      "name": "Pygments",
+      "versionInfo": "2.21.0",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-2-Clause",
+      "licenseDeclared": "BSD-2-Clause",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pygments.org",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pyHanko-0.35.2",
+      "name": "pyHanko",
+      "versionInfo": "0.35.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/MatthiasValvekens/pyHanko",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pyhanko-certvalidator-0.31.4",
+      "name": "pyhanko-certvalidator",
+      "versionInfo": "0.31.4",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/MatthiasValvekens/pyHanko/tree/master/pkgs/pyhanko-certvalidator",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pyinstaller-6.22.3",
+      "name": "pyinstaller",
+      "versionInfo": "6.22.3",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pyinstaller.org",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pyinstaller-hooks-contrib-2026.7",
+      "name": "pyinstaller-hooks-contrib",
+      "versionInfo": "2026.7",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/pyinstaller/pyinstaller-hooks-contrib",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pypdf-6.18.1",
+      "name": "pypdf",
+      "versionInfo": "6.18.1",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pypdf.readthedocs.io/en/latest/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-PySide6-6.11.2",
+      "name": "PySide6",
+      "versionInfo": "6.11.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pyside.org",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-PySide6-Addons-6.11.2",
+      "name": "PySide6_Addons",
+      "versionInfo": "6.11.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pyside.org",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-PySide6-Essentials-6.11.2",
+      "name": "PySide6_Essentials",
+      "versionInfo": "6.11.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pyside.org",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pytest-8.4.2",
+      "name": "pytest",
+      "versionInfo": "8.4.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://docs.pytest.org/en/latest/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-python-docx-1.2.0",
+      "name": "python-docx",
+      "versionInfo": "1.2.0",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://python-docx.readthedocs.org/en/latest/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-pywin32-ctypes-0.2.3",
+      "name": "pywin32-ctypes",
+      "versionInfo": "0.2.3",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://github.com/enthought/pywin32-ctypes",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-PyYAML-6.0.3",
       "name": "PyYAML",
       "versionInfo": "6.0.3",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "https://pyyaml.org/wiki/PyYAMLDocumentation",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-requests-2.34.2",
       "name": "requests",
       "versionInfo": "2.34.2",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://requests.readthedocs.io",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "copyrightText": "NOASSERTION",
       "homepage": "https://requests.readthedocs.io",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-setuptools-83.0.0",
-      "name": "setuptools",
-      "versionInfo": "83.0.0",
+      "SPDXID": "SPDXRef-Package-ruff-0.16.7",
+      "name": "ruff",
+      "versionInfo": "0.16.7",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/pypa/setuptools",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://docs.astral.sh/ruff/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-setuptools-84.0.0",
+      "name": "setuptools",
+      "versionInfo": "84.0.0",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/pypa/setuptools",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-shiboken6-6.11.2",
+      "name": "shiboken6",
+      "versionInfo": "6.11.2",
+      "supplier": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "licenseDeclared": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "copyrightText": "NOASSERTION",
+      "homepage": "https://pyside.org",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-typing-extensions-4.16.0",
       "name": "typing_extensions",
       "versionInfo": "4.16.0",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://typing-extensions.readthedocs.io/",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "PSF-2.0",
       "licenseDeclared": "PSF-2.0",
       "copyrightText": "NOASSERTION",
       "homepage": "https://typing-extensions.readthedocs.io/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-tzdata-2026.2",
+      "SPDXID": "SPDXRef-Package-tzdata-2026.4",
       "name": "tzdata",
-      "versionInfo": "2026.2",
+      "versionInfo": "2026.4",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/python/tzdata",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/python/tzdata",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-tzlocal-5.4.4",
@@ -419,532 +683,64 @@
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "NOASSERTION",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-uritools-6.1.2",
+      "SPDXID": "SPDXRef-Package-uritools-6.1.3",
       "name": "uritools",
-      "versionInfo": "6.1.2",
+      "versionInfo": "6.1.3",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://github.com/tkem/uritools/",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "https://github.com/tkem/uritools/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: build environment."
     },
     {
       "SPDXID": "SPDXRef-Package-urllib3-2.7.0",
       "name": "urllib3",
       "versionInfo": "2.7.0",
       "supplier": "NOASSERTION",
-      "downloadLocation": "https://urllib3.readthedocs.io",
+      "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "NOASSERTION",
       "homepage": "https://urllib3.readthedocs.io",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-PyInstaller-6.21.0",
-      "name": "PyInstaller",
-      "versionInfo": "6.21.0",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://pyinstaller.org",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://pyinstaller.org",
       "primaryPackagePurpose": "APPLICATION",
-      "comment": "Distribution scope: build."
+      "comment": "Distribution scope: build environment."
     },
     {
-      "SPDXID": "SPDXRef-Package-ExifTool-13.59",
-      "name": "ExifTool",
-      "versionInfo": "13.59",
-      "supplier": "Person: Phil Harvey",
-      "downloadLocation": "https://exiftool.org/Image-ExifTool-13.59.tar.gz",
+      "SPDXID": "SPDXRef-Package-Qt-libraries-used-by-PySide6-6.11.2",
+      "name": "Qt libraries used by PySide6",
+      "versionInfo": "6.11.2",
+      "supplier": "Organization: The Qt Company",
+      "downloadLocation": "https://download.qt.io/archive/qt/6.11/6.11.2/submodules/",
       "filesAnalyzed": false,
-      "licenseConcluded": "Artistic-1.0-Perl OR GPL-1.0-or-later",
-      "licenseDeclared": "Artistic-1.0-Perl OR GPL-1.0-or-later",
+      "licenseConcluded": "LGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Qt-Commercial",
+      "licenseDeclared": "LGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Qt-Commercial",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://exiftool.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: build source for ExifTool.exe.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "ce389bf0eff9f2e2aae21eb7d85e1f255d243bb9a2ddfed8da65f106ccba87e6"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Strawberry-Perl-runtime-for-ExifTool-5.40.2.1",
-      "name": "Strawberry Perl runtime for ExifTool",
-      "versionInfo": "5.40.2.1",
-      "supplier": "Organization: Strawberry Perl Project",
-      "downloadLocation": "https://strawberryperl.com/releases.html",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Artistic-1.0-Perl OR GPL-1.0-or-later",
-      "licenseDeclared": "Artistic-1.0-Perl OR GPL-1.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://strawberryperl.com/",
+      "homepage": "https://www.qt.io",
       "primaryPackagePurpose": "LIBRARY",
       "comment": "Distribution scope: runtime."
     },
     {
-      "SPDXID": "SPDXRef-Package-qpdf-12.3.2",
-      "name": "qpdf",
-      "versionInfo": "12.3.2",
-      "supplier": "Organization: qpdf Project",
-      "downloadLocation": "https://github.com/qpdf/qpdf/releases/tag/v12.3.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0 OR Artistic-2.0",
-      "licenseDeclared": "Apache-2.0 OR Artistic-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://qpdf.readthedocs.io/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: build source for qpdf.exe.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "43f79db620ce09529a67572a5de87aec4065b95f11ba6e5918db557f943a7eac"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-pdfcpu-0.13.0",
-      "name": "pdfcpu",
-      "versionInfo": "0.13.0",
-      "supplier": "Organization: pdfcpu",
-      "downloadLocation": "https://github.com/pdfcpu/pdfcpu/releases/tag/v0.13.0",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://pdfcpu.io/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/pdfcpu/pdfcpu.exe.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "784289e668157b1c4fa77085c185c3eca3d05339f7d5d2a1bdfdb7830d168940"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Poppler-26.02.0",
-      "name": "Poppler",
-      "versionInfo": "26.02.0",
-      "supplier": "Organization: Poppler Developers",
-      "downloadLocation": "https://poppler.freedesktop.org/poppler-26.02.0.tar.xz",
-      "filesAnalyzed": false,
-      "licenseConcluded": "GPL-2.0-or-later",
-      "licenseDeclared": "GPL-2.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://poppler.freedesktop.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/poppler.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "43248bf36db31c416f420ce5e5a0168eccd2235e42c04906a3e7c2678bfc63be"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-poppler-data-0.4.12",
-      "name": "poppler-data",
-      "versionInfo": "0.4.12",
-      "supplier": "Organization: Poppler Developers",
-      "downloadLocation": "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz",
-      "filesAnalyzed": false,
-      "licenseConcluded": "GPL-2.0-or-later AND BSD-3-Clause",
-      "licenseDeclared": "GPL-2.0-or-later AND BSD-3-Clause",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://poppler.freedesktop.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-libdeflate-NOASSERTION",
-      "name": "libdeflate",
-      "versionInfo": "NOASSERTION",
-      "supplier": "Organization: libdeflate contributors",
-      "downloadLocation": "https://github.com/ebiggers/libdeflate",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://github.com/ebiggers/libdeflate",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/deflate.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "0c8d7e40b4512d86969e2003a7d8bede601cfb9bc0a2d2472056a08a769769d5"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-FreeType-2.14.3",
-      "name": "FreeType",
-      "versionInfo": "2.14.3",
-      "supplier": "Organization: FreeType Project",
-      "downloadLocation": "https://download.savannah.gnu.org/releases/freetype/",
-      "filesAnalyzed": false,
-      "licenseConcluded": "FTL OR GPL-2.0-or-later",
-      "licenseDeclared": "FTL OR GPL-2.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://freetype.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/freetype.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "94c2a7fbceb4e28d7c6d7364939569669d2e592236c0f758f726b44e41426c6c"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-libjpeg-turbo-3.1.4.1",
-      "name": "libjpeg-turbo",
-      "versionInfo": "3.1.4.1",
-      "supplier": "Organization: libjpeg-turbo Project",
-      "downloadLocation": "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.1.4.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause AND IJG AND Zlib",
-      "licenseDeclared": "BSD-3-Clause AND IJG AND Zlib",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://libjpeg-turbo.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/jpeg8.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "77bef8b5257987800e01806f64a189e312ba057e138356e69dc4367555bd0d93"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Little-CMS-2.19",
-      "name": "Little CMS",
-      "versionInfo": "2.19",
-      "supplier": "Organization: Little CMS Project",
-      "downloadLocation": "https://github.com/mm2/Little-CMS/releases/tag/lcms2.19",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://www.littlecms.com/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/lcms2.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "13ca89317d709ec3b3c8aaa8a02629b96e25aeb1bda2fc0a003dc5394bb5a48a"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Lerc-NOASSERTION",
-      "name": "Lerc",
-      "versionInfo": "NOASSERTION",
-      "supplier": "Organization: Esri",
-      "downloadLocation": "https://github.com/Esri/lerc",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://github.com/Esri/lerc",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/Lerc.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "7844ff388c1fe684c95f176a9f256a55af4511c136e3b3340fd8050741ef5d3f"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-OpenSSL-3.6.2",
-      "name": "OpenSSL",
-      "versionInfo": "3.6.2",
-      "supplier": "Organization: OpenSSL Project",
-      "downloadLocation": "https://github.com/openssl/openssl/releases/tag/openssl-3.6.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://www.openssl.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/libcrypto-3-x64.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "23263b220487605daaa64aba45253603f837e5f90a31dde2409d0bb8f22e8582"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-curl-8.20.0",
-      "name": "curl",
-      "versionInfo": "8.20.0",
-      "supplier": "Organization: curl Project",
-      "downloadLocation": "https://curl.se/download.html",
-      "filesAnalyzed": false,
-      "licenseConcluded": "curl",
-      "licenseDeclared": "curl",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://curl.se/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/libcurl.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "966f1d3f78a29f7fcc2db28785dbfcb5fc46a64bbbb04463ed803d12c468657f"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-XZ-Utils-5.8.3",
-      "name": "XZ Utils",
-      "versionInfo": "5.8.3",
-      "supplier": "Organization: Tukaani Project",
-      "downloadLocation": "https://github.com/tukaani-project/xz/releases/tag/v5.8.3",
-      "filesAnalyzed": false,
-      "licenseConcluded": "0BSD",
-      "licenseDeclared": "0BSD",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://tukaani.org/xz/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/liblzma.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "64eb6567bead1a5b7386bd7acd1cdd9db8f9a03133eef7ae8208ae555738d680"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-libpng-1.6.58",
-      "name": "libpng",
-      "versionInfo": "1.6.58",
-      "supplier": "Organization: PNG Development Group",
-      "downloadLocation": "https://github.com/pnggroup/libpng/releases/tag/v1.6.58",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Libpng",
-      "licenseDeclared": "Libpng",
-      "copyrightText": "NOASSERTION",
-      "homepage": "http://www.libpng.org/pub/png/libpng.html",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/libpng16.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "c3fc74e2bfa2d944cbea22e1db31f06247a54634f8f489f04b5ceec921118f3f"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-libssh2-1.11.1",
-      "name": "libssh2",
-      "versionInfo": "1.11.1",
-      "supplier": "Organization: libssh2 Project",
-      "downloadLocation": "https://github.com/libssh2/libssh2/releases/tag/libssh2-1.11.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause",
-      "licenseDeclared": "BSD-3-Clause",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://libssh2.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/libssh2.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "1563642bed85fcb68fdcf3c8d2c23c742e95aa5dbb11234b2ba5d7a634775327"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-OpenJPEG-2.5.4",
-      "name": "OpenJPEG",
-      "versionInfo": "2.5.4",
-      "supplier": "Organization: OpenJPEG Project",
-      "downloadLocation": "https://github.com/uclouvain/openjpeg",
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-2-Clause",
-      "licenseDeclared": "BSD-2-Clause",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://www.openjpeg.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/openjp2.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "274e6a200cd564b014389546f6472d387717dece95b7d03db5f99195bd1d6e03"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-libtiff-4.7.1",
-      "name": "libtiff",
-      "versionInfo": "4.7.1",
-      "supplier": "Organization: libtiff Project",
-      "downloadLocation": "https://gitlab.com/libtiff/libtiff/-/tags/v4.7.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "libtiff",
-      "licenseDeclared": "libtiff",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://libtiff.gitlab.io/libtiff/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/tiff.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "57ad7d27c81d140cfe9b16a6b1e75ce7fa360d613add138dcdc8a61ba0872459"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-zlib-1.3.2",
-      "name": "zlib",
-      "versionInfo": "1.3.2",
-      "supplier": "Organization: zlib Project",
-      "downloadLocation": "https://github.com/madler/zlib/releases/tag/v1.3.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Zlib",
-      "licenseDeclared": "Zlib",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://zlib.net/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/zlib.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "85c711c83f96bed93184bede15be6b5a3e5444df09dfffef00564107189dc722"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Zstandard-1.5.7",
-      "name": "Zstandard",
-      "versionInfo": "1.5.7",
-      "supplier": "Organization: Facebook",
-      "downloadLocation": "https://github.com/facebook/zstd/releases/tag/v1.5.7",
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause OR GPL-2.0-only",
-      "licenseDeclared": "BSD-3-Clause OR GPL-2.0-only",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://facebook.github.io/zstd/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/poppler/bin/zstd.dll.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "ca228f0f33b8296d6650b4694bb38ba9ea8796c523b6b5e0682fcc05a5edab0a"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-JHOVE-1.34.0",
-      "name": "JHOVE",
-      "versionInfo": "1.34.0",
-      "supplier": "Organization: Open Preservation Foundation",
-      "downloadLocation": "https://github.com/openpreserve/jhove/releases/tag/v1.34.0",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://jhove.openpreservation.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "feea5a190e6b3c6693a4d361999d075a3f36fb78f557580befe01bd44c02b939"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-veraPDF-Greenfield-CLI-1.30.2",
-      "name": "veraPDF Greenfield CLI",
-      "versionInfo": "1.30.2",
-      "supplier": "Organization: veraPDF Consortium",
-      "downloadLocation": "https://github.com/veraPDF/veraPDF-apps/releases/tag/v1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://verapdf.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/verapdf/bin/cli-1.30.2.jar.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "889075253fb9df4db5482efb8f8208fb3b4f2e00f5f7e1b1e31edf6fb4b69bb6"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Apache-PDFBox-3.0.8",
-      "name": "Apache PDFBox",
-      "versionInfo": "3.0.8",
-      "supplier": "Organization: Apache Software Foundation",
-      "downloadLocation": "https://archive.apache.org/dist/pdfbox/3.0.8/pdfbox-3.0.8-src.zip",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://pdfbox.apache.org/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/pdfbox/pdfbox-app-3.0.8.jar.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "f6b3a80c39747ff0ef5d06708bc03882152403de58dbef4a1fbffbee568eceb1"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Eclipse-Temurin-OpenJDK-runtime-21.0.11-10",
-      "name": "Eclipse Temurin OpenJDK runtime",
-      "versionInfo": "21.0.11+10",
-      "supplier": "Organization: Eclipse Adoptium",
-      "downloadLocation": "https://github.com/adoptium/jdk21u/tree/jdk-21.0.11%2B10",
-      "filesAnalyzed": false,
-      "licenseConcluded": "GPL-2.0-only WITH Classpath-exception-2.0",
-      "licenseDeclared": "GPL-2.0-only WITH Classpath-exception-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://adoptium.net/temurin/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/binaries/java/bin/java.exe.",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "5e0fab9f07952ceb6e71eb9fd33e1ed69959904ca00cf70869b7baf516a98016"
-        }
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-PDFiD-0.2.10",
-      "name": "PDFiD",
-      "versionInfo": "0.2.10",
+      "SPDXID": "SPDXRef-Package-pdfid.py-repository-copy",
+      "name": "pdfid.py",
+      "versionInfo": "repository copy",
       "supplier": "Person: Didier Stevens",
       "downloadLocation": "https://github.com/DidierStevens/DidierStevensSuite",
       "filesAnalyzed": false,
       "licenseConcluded": "LicenseRef-Public-Domain",
       "licenseDeclared": "LicenseRef-Public-Domain",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://blog.didierstevens.com/programs/pdf-tools/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/tools/pdfid.py.",
+      "homepage": "https://blog.didierstevens.com/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: tool script. Bundled artifact: app/resources/tools/pdfid.py.",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -953,1030 +749,35 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-Package-pdf-parser-0.7.14",
-      "name": "pdf-parser",
-      "versionInfo": "0.7.14",
+      "SPDXID": "SPDXRef-Package-pdf-parser.py-repository-copy",
+      "name": "pdf-parser.py",
+      "versionInfo": "repository copy",
       "supplier": "Person: Didier Stevens",
       "downloadLocation": "https://github.com/DidierStevens/DidierStevensSuite",
       "filesAnalyzed": false,
       "licenseConcluded": "LicenseRef-Public-Domain",
       "licenseDeclared": "LicenseRef-Public-Domain",
       "copyrightText": "NOASSERTION",
-      "homepage": "https://blog.didierstevens.com/programs/pdf-tools/",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Bundled artifact: app/resources/tools/pdf-parser.py.",
+      "homepage": "https://blog.didierstevens.com/",
+      "primaryPackagePurpose": "APPLICATION",
+      "comment": "Distribution scope: tool script. Bundled artifact: app/resources/tools/pdf-parser.py.",
       "checksums": [
         {
           "algorithm": "SHA256",
           "checksumValue": "a9fa2faa25e88ab0293543d14aa168ff21fc9fd25a0a8ad657b0dad3171214ac"
         }
       ]
-    },
-    {
-      "SPDXID": "SPDXRef-Package-Microsoft-Visual-C---Runtime-14.x",
-      "name": "Microsoft Visual C++ Runtime",
-      "versionInfo": "14.x",
-      "supplier": "Organization: Microsoft Corporation",
-      "downloadLocation": "NOASSERTION",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LicenseRef-Microsoft-Visual-Cpp-Runtime",
-      "licenseDeclared": "LicenseRef-Microsoft-Visual-Cpp-Runtime",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-com.fasterxml.jackson.core-jackson-annotations-2.21",
-      "name": "com.fasterxml.jackson.core:jackson-annotations",
-      "versionInfo": "2.21",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-annotations/2.21",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-annotations/2.21",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-com.fasterxml.jackson.core-jackson-core-2.21.1",
-      "name": "com.fasterxml.jackson.core:jackson-core",
-      "versionInfo": "2.21.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core/2.21.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core/2.21.1",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-com.fasterxml.jackson.core-jackson-databind-2.21.1",
-      "name": "com.fasterxml.jackson.core:jackson-databind",
-      "versionInfo": "2.21.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-databind/2.21.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-databind/2.21.1",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-com.sun.istack-istack-commons-runtime-3.0.5",
-      "name": "com.sun.istack:istack-commons-runtime",
-      "versionInfo": "3.0.5",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/com.sun.istack/istack-commons-runtime/3.0.5",
-      "filesAnalyzed": false,
-      "licenseConcluded": "BSD-3-Clause",
-      "licenseDeclared": "BSD-3-Clause",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/com.sun.istack/istack-commons-runtime/3.0.5",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-com.sun.xml.bind-jaxb-core-2.3.0.1",
-      "name": "com.sun.xml.bind:jaxb-core",
-      "versionInfo": "2.3.0.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/com.sun.xml.bind/jaxb-core/2.3.0.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/com.sun.xml.bind/jaxb-core/2.3.0.1",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-com.sun.xml.bind-jaxb-impl-2.3.2",
-      "name": "com.sun.xml.bind:jaxb-impl",
-      "versionInfo": "2.3.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/com.sun.xml.bind/jaxb-impl/2.3.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/com.sun.xml.bind/jaxb-impl/2.3.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-jakarta.json-jakarta.json-api-2.1.3",
-      "name": "jakarta.json:jakarta.json-api",
-      "versionInfo": "2.1.3",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/jakarta.json/jakarta.json-api/2.1.3",
-      "filesAnalyzed": false,
-      "licenseConcluded": "EPL-2.0 OR (GPL-2.0-only WITH Classpath-exception-2.0)",
-      "licenseDeclared": "EPL-2.0 OR (GPL-2.0-only WITH Classpath-exception-2.0)",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/jakarta.json/jakarta.json-api/2.1.3",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-javax.activation-javax.activation-api-1.2.0",
-      "name": "javax.activation:javax.activation-api",
-      "versionInfo": "1.2.0",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/javax.activation/javax.activation-api/1.2.0",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/javax.activation/javax.activation-api/1.2.0",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-javax.xml.bind-jaxb-api-2.3.1",
-      "name": "javax.xml.bind:jaxb-api",
-      "versionInfo": "2.3.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/javax.xml.bind/jaxb-api/2.3.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/javax.xml.bind/jaxb-api/2.3.1",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.apache.pdfbox-pdfbox-app-3.0.8",
-      "name": "org.apache.pdfbox:pdfbox-app",
-      "versionInfo": "3.0.8",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox-app/3.0.8",
-      "filesAnalyzed": false,
-      "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox-app/3.0.8",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/pdfbox/pdfbox-app-3.0.8.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.eclipse.parsson-parsson-1.1.7",
-      "name": "org.eclipse.parsson:parsson",
-      "versionInfo": "1.1.7",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.eclipse.parsson/parsson/1.1.7",
-      "filesAnalyzed": false,
-      "licenseConcluded": "EPL-2.0 OR (GPL-2.0-only WITH Classpath-exception-2.0)",
-      "licenseDeclared": "EPL-2.0 OR (GPL-2.0-only WITH Classpath-exception-2.0)",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.eclipse.parsson/parsson/1.1.7",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.glassfish.jaxb-jaxb-core-2.3.0.1",
-      "name": "org.glassfish.jaxb:jaxb-core",
-      "versionInfo": "2.3.0.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.glassfish.jaxb/jaxb-core/2.3.0.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.glassfish.jaxb/jaxb-core/2.3.0.1",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.glassfish.jaxb-jaxb-runtime-2.3.2",
-      "name": "org.glassfish.jaxb:jaxb-runtime",
-      "versionInfo": "2.3.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.glassfish.jaxb/jaxb-runtime/2.3.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.glassfish.jaxb/jaxb-runtime/2.3.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.glassfish.jaxb-txw2-2.3.0.1",
-      "name": "org.glassfish.jaxb:txw2",
-      "versionInfo": "2.3.0.1",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.glassfish.jaxb/txw2/2.3.0.1",
-      "filesAnalyzed": false,
-      "licenseConcluded": "NOASSERTION",
-      "licenseDeclared": "NOASSERTION",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.glassfish.jaxb/txw2/2.3.0.1",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove-jhove-apps-1.34.0",
-      "name": "org.openpreservation.jhove:jhove-apps",
-      "versionInfo": "1.34.0",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove/jhove-apps/1.34.0",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove/jhove-apps/1.34.0",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove-jhove-core-1.34.0",
-      "name": "org.openpreservation.jhove:jhove-core",
-      "versionInfo": "1.34.0",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove/jhove-core/1.34.0",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove/jhove-core/1.34.0",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-aiff-hul-1.6.2",
-      "name": "org.openpreservation.jhove.modules:aiff-hul",
-      "versionInfo": "1.6.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/aiff-hul/1.6.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/aiff-hul/1.6.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/aiff-hul-1.6.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-ascii-hul-1.4.2",
-      "name": "org.openpreservation.jhove.modules:ascii-hul",
-      "versionInfo": "1.4.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/ascii-hul/1.4.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/ascii-hul/1.4.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/ascii-hul-1.4.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-gif-hul-1.4.3",
-      "name": "org.openpreservation.jhove.modules:gif-hul",
-      "versionInfo": "1.4.3",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/gif-hul/1.4.3",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/gif-hul/1.4.3",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/gif-hul-1.4.3.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-html-hul-1.4.5",
-      "name": "org.openpreservation.jhove.modules:html-hul",
-      "versionInfo": "1.4.5",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/html-hul/1.4.5",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/html-hul/1.4.5",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/html-hul-1.4.5.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-jpeg-hul-1.5.4",
-      "name": "org.openpreservation.jhove.modules:jpeg-hul",
-      "versionInfo": "1.5.4",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/jpeg-hul/1.5.4",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/jpeg-hul/1.5.4",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/jpeg-hul-1.5.4.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-jpeg2000-hul-1.4.5",
-      "name": "org.openpreservation.jhove.modules:jpeg2000-hul",
-      "versionInfo": "1.4.5",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/jpeg2000-hul/1.4.5",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/jpeg2000-hul/1.4.5",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/jpeg2000-hul-1.4.5.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-pdf-hul-1.12.8",
-      "name": "org.openpreservation.jhove.modules:pdf-hul",
-      "versionInfo": "1.12.8",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/pdf-hul/1.12.8",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/pdf-hul/1.12.8",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/pdf-hul-1.12.8.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-tiff-hul-1.9.5",
-      "name": "org.openpreservation.jhove.modules:tiff-hul",
-      "versionInfo": "1.9.5",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/tiff-hul/1.9.5",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/tiff-hul/1.9.5",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/tiff-hul-1.9.5.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-utf8-hul-1.7.5",
-      "name": "org.openpreservation.jhove.modules:utf8-hul",
-      "versionInfo": "1.7.5",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/utf8-hul/1.7.5",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/utf8-hul/1.7.5",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/utf8-hul-1.7.5.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-wave-hul-1.8.3",
-      "name": "org.openpreservation.jhove.modules:wave-hul",
-      "versionInfo": "1.8.3",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/wave-hul/1.8.3",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/wave-hul/1.8.3",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/wave-hul-1.8.3.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.openpreservation.jhove.modules-xml-hul-1.5.5",
-      "name": "org.openpreservation.jhove.modules:xml-hul",
-      "versionInfo": "1.5.5",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/xml-hul/1.5.5",
-      "filesAnalyzed": false,
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.openpreservation.jhove.modules/xml-hul/1.5.5",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/jhove/bin/xml-hul-1.5.5.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf-core-1.30.2",
-      "name": "org.verapdf:core",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf/core/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf/core/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf-feature-reporting-1.30.2",
-      "name": "org.verapdf:feature-reporting",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf/feature-reporting/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf/feature-reporting/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf-metadata-fixer-1.30.2",
-      "name": "org.verapdf:metadata-fixer",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf/metadata-fixer/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf/metadata-fixer/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf-parser-1.30.2",
-      "name": "org.verapdf:parser",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf/parser/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf/parser/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf-pdf-model-1.30.2",
-      "name": "org.verapdf:pdf-model",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf/pdf-model/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf/pdf-model/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf-validation-model-1.30.2",
-      "name": "org.verapdf:validation-model",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf/validation-model/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf/validation-model/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf-verapdf-xmp-core-1.30.2",
-      "name": "org.verapdf:verapdf-xmp-core",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf/verapdf-xmp-core/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf/verapdf-xmp-core/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf.apps-apps-1.30.2",
-      "name": "org.verapdf.apps:apps",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf.apps/apps/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf.apps/apps/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
-    },
-    {
-      "SPDXID": "SPDXRef-Package-org.verapdf.apps-cli-1.30.2",
-      "name": "org.verapdf.apps:cli",
-      "versionInfo": "1.30.2",
-      "supplier": "NOASSERTION",
-      "downloadLocation": "https://central.sonatype.com/artifact/org.verapdf.apps/cli/1.30.2",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MPL-2.0 OR GPL-3.0-or-later",
-      "licenseDeclared": "MPL-2.0 OR GPL-3.0-or-later",
-      "copyrightText": "NOASSERTION",
-      "homepage": "https://central.sonatype.com/artifact/org.verapdf.apps/cli/1.30.2",
-      "primaryPackagePurpose": "LIBRARY",
-      "comment": "Distribution scope: runtime. Embedded Maven artifact discovered in app/resources/binaries/verapdf/bin/cli-1.30.2.jar."
     }
   ],
-  "relationships": [
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-CPython-3.12.10"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-PySide6-6.11.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-PySide6-Essentials-6.11.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-PySide6-Addons-6.11.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-shiboken6-6.11.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-pypdf-6.14.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-pyHanko-0.35.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-pyhanko-certvalidator-0.31.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-python-docx-1.2.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Pillow-12.3.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-asn1crypto-1.5.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-bcrypt-5.0.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-certifi-2026.6.17"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-cffi-2.0.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-charset-normalizer-3.4.9"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-cryptography-49.0.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-idna-3.18"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-lxml-6.1.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-numpy-2.5.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-oscrypto-1.3.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-packaging-26.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-pycparser-3.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-PyYAML-6.0.3"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-requests-2.34.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-setuptools-83.0.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-typing-extensions-4.16.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-tzdata-2026.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-tzlocal-5.4.4"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-uritools-6.1.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-urllib3-2.7.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-PyInstaller-6.21.0",
-      "relationshipType": "BUILD_TOOL_OF",
-      "relatedSpdxElement": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-ExifTool-13.59"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Strawberry-Perl-runtime-for-ExifTool-5.40.2.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-qpdf-12.3.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-pdfcpu-0.13.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Poppler-26.02.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-poppler-data-0.4.12"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-libdeflate-NOASSERTION"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-FreeType-2.14.3"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-libjpeg-turbo-3.1.4.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Little-CMS-2.19"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Lerc-NOASSERTION"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-OpenSSL-3.6.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-curl-8.20.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-XZ-Utils-5.8.3"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-libpng-1.6.58"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-libssh2-1.11.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-OpenJPEG-2.5.4"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-libtiff-4.7.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-zlib-1.3.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Zstandard-1.5.7"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-JHOVE-1.34.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-veraPDF-Greenfield-CLI-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Apache-PDFBox-3.0.8"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Eclipse-Temurin-OpenJDK-runtime-21.0.11-10"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-PDFiD-0.2.10"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-pdf-parser-0.7.14"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-Microsoft-Visual-C---Runtime-14.x"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-com.fasterxml.jackson.core-jackson-annotations-2.21"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-com.fasterxml.jackson.core-jackson-core-2.21.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-com.fasterxml.jackson.core-jackson-databind-2.21.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-com.sun.istack-istack-commons-runtime-3.0.5"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-com.sun.xml.bind-jaxb-core-2.3.0.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-com.sun.xml.bind-jaxb-impl-2.3.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-jakarta.json-jakarta.json-api-2.1.3"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-javax.activation-javax.activation-api-1.2.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-javax.xml.bind-jaxb-api-2.3.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.apache.pdfbox-pdfbox-app-3.0.8"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.eclipse.parsson-parsson-1.1.7"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.glassfish.jaxb-jaxb-core-2.3.0.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.glassfish.jaxb-jaxb-runtime-2.3.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.glassfish.jaxb-txw2-2.3.0.1"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove-jhove-apps-1.34.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove-jhove-core-1.34.0"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-aiff-hul-1.6.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-ascii-hul-1.4.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-gif-hul-1.4.3"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-html-hul-1.4.5"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-jpeg-hul-1.5.4"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-jpeg2000-hul-1.4.5"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-pdf-hul-1.12.8"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-tiff-hul-1.9.5"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-utf8-hul-1.7.5"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-wave-hul-1.8.3"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.openpreservation.jhove.modules-xml-hul-1.5.5"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf-core-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf-feature-reporting-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf-metadata-fixer-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf-parser-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf-pdf-model-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf-validation-model-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf-verapdf-xmp-core-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf.apps-apps-1.30.2"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-Document-Forensic-Inspector-0.4.2",
-      "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-Package-org.verapdf.apps-cli-1.30.2"
-    }
-  ],
+  "relationships": [],
   "hasExtractedLicensingInfos": [
     {
       "licenseId": "LicenseRef-Public-Domain",
-      "extractedText": "The bundled PDFiD and pdf-parser source headers state that the programs are public domain.",
-      "seeAlsos": [
-        "https://github.com/DidierStevens/DidierStevensSuite"
-      ]
+      "extractedText": "Tool scripts retain the public-domain dedication in their source headers."
     },
     {
-      "licenseId": "LicenseRef-Microsoft-Visual-Cpp-Runtime",
-      "extractedText": "Microsoft Visual C++ runtime files are redistributed under the applicable Microsoft Visual Studio redist terms.",
-      "seeAlsos": [
-        "https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist"
-      ]
+      "licenseId": "LicenseRef-Qt-Commercial",
+      "extractedText": "Alternative commercial Qt license; this build does not assert a commercial Qt entitlement."
     }
   ]
 }

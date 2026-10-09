@@ -1,10 +1,13 @@
-#define MyAppName "Document Forensic Inspector"
-#define MyAppVersion "0.4.2"
-#define MyAppPublisher "Amirkhan Smagulov"
+﻿#define MyAppName "Document Forensic Inspector"
+#include "version.iss"
+#define MyAppPublisher "ТОО «АНСЭ»"
 #define MyAppExeName "DocumentForensicInspector.exe"
+#ifndef MyAppId
+#define MyAppId "{{3DA10599-74CB-4A61-97FC-A7759120AB62}"
+#endif
 
 [Setup]
-AppId={{3DA10599-74CB-4A61-97FC-A7759120AB62}
+AppId={#MyAppId}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -17,20 +20,38 @@ Compression=lzma2
 SolidCompression=yes
 SetupLogging=yes
 WizardStyle=modern
-ArchitecturesAllowed=x64compatible
-ArchitecturesInstallIn64BitMode=x64compatible
+ArchitecturesAllowed=x64os
+ArchitecturesInstallIn64BitMode=x64os
 UninstallDisplayIcon={app}\{#MyAppExeName}
 VersionInfoCompany={#MyAppPublisher}
-VersionInfoDescription=Единая оболочка для экспертного исследования PDF и PPTX
-VersionInfoCopyright=Оболочка и интеграция © 2026 Amirkhan Smagulov; сторонние компоненты сохраняют свои лицензии
+VersionInfoDescription=Исследование файлов и метаданных — АНСЭ
+VersionInfoCopyright=© 2026 ТОО «АНСЭ». Права защищены в пределах применимых лицензий.
 VersionInfoProductName={#MyAppName}
 InfoBeforeFile=..\app\resources\AUTHORSHIP.txt
+LicenseFile=USER_AGREEMENT_RU.txt
+SetupIconFile=..\app\resources\icons\anse.ico
+WizardImageFile=..\app\resources\branding\wizard.bmp
+WizardSmallImageFile=..\app\resources\branding\wizard-small.bmp
+MinVersion=10.0.17763
+CloseApplications=yes
+RestartApplications=no
+AppPublisherURL=https://github.com/archeageamir-create/pdf_forensic
+AppSupportURL=https://github.com/archeageamir-create/pdf_forensic/issues
+UninstallDisplayName={#MyAppName} {#MyAppVersion} — АНСЭ
 
 [Languages]
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "Создать ярлык на рабочем столе"; GroupDescription: "Ярлыки:"; Flags: checkedonce
+
+[InstallDelete]
+; Only replace directories owned by an existing installation of this product.
+; Research databases and working copies live outside {app} and are never removed.
+Type: filesandordirs; Name: "{app}\_internal"; Check: IsManagedInstall
+Type: filesandordirs; Name: "{app}\licenses"; Check: IsManagedInstall
+Type: filesandordirs; Name: "{app}\compliance"; Check: IsManagedInstall
+Type: filesandordirs; Name: "{app}\certificates"; Check: IsManagedInstall
 
 [Files]
 Source: "..\dist\DocumentForensicInspector\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -42,13 +63,25 @@ Source: "..\SOURCE_OFFER.md"; DestDir: "{app}\compliance"; Flags: ignoreversion
 Source: "..\docs\LGPL_COMPLIANCE.md"; DestDir: "{app}\compliance"; Flags: ignoreversion
 Source: "..\compliance\*"; DestDir: "{app}\compliance"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\app\resources\AUTHORSHIP.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\signing\Amirkhan-Smagulov-Code-Signing.cer"; DestDir: "{app}\certificates"; Flags: ignoreversion
-Source: "..\signing\README-RU.txt"; DestDir: "{app}\certificates"; Flags: ignoreversion
-Source: "..\app\resources\licenses\*"; DestDir: "{app}\licenses"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\build\release-resources\licenses\*"; DestDir: "{app}\licenses"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+Source: "USER_AGREEMENT_RU.txt"; DestDir: "{app}\compliance"; Flags: ignoreversion
+Source: "..\docs\release\*.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
+Name: "{group}\Руководство пользователя"; Filename: "{app}\_internal\docs\user-guide\DocumentForensicInspector-User-Guide-RU.pdf"
+
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "Запустить {#MyAppName}"; Flags: nowait postinstall skipifsilent
+
+[Code]
+function IsManagedInstall: Boolean;
+var
+  InstalledVersion: String;
+begin
+  Result := FileExists(ExpandConstant('{app}\unins000.dat')) and
+    GetVersionNumbersString(ExpandConstant('{app}\{#MyAppExeName}'), InstalledVersion);
+end;

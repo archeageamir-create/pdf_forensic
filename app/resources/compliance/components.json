@@ -1,10 +1,10 @@
 {
   "application": {
     "name": "Document Forensic Inspector",
-    "version": "0.4.2",
+    "version": "0.5.0",
     "license": "Apache-2.0",
-    "supplier": "Person: Amirkhan Smagulov",
-    "homepage": "https://github.com/archeageamir-create/document-forensic-inspector"
+    "supplier": "Organization: ANSE LLP",
+    "homepage": "https://github.com/archeageamir-create/pdf_forensic"
   },
   "python_runtime": {
     "name": "CPython",
@@ -15,161 +15,287 @@
     "source": "https://www.python.org/ftp/python/3.12.10/Python-3.12.10.tgz"
   },
   "python_distributions": [
-    "PySide6", "PySide6_Essentials", "PySide6_Addons", "shiboken6",
-    "pypdf", "pyHanko", "pyhanko-certvalidator", "python-docx", "Pillow",
-    "asn1crypto", "bcrypt", "certifi", "cffi", "charset-normalizer",
-    "cryptography", "idna", "lxml", "numpy", "oscrypto", "packaging",
-    "pycparser", "PyYAML", "requests", "setuptools", "typing_extensions",
-    "tzdata", "tzlocal", "uritools", "urllib3"
+    "PySide6",
+    "PySide6_Essentials",
+    "PySide6_Addons",
+    "shiboken6",
+    "pypdf",
+    "pyHanko",
+    "pyhanko-certvalidator",
+    "python-docx",
+    "Pillow",
+    "asn1crypto",
+    "bcrypt",
+    "certifi",
+    "cffi",
+    "charset-normalizer",
+    "cryptography",
+    "idna",
+    "lxml",
+    "numpy",
+    "oscrypto",
+    "packaging",
+    "pycparser",
+    "PyYAML",
+    "requests",
+    "setuptools",
+    "typing_extensions",
+    "tzdata",
+    "tzlocal",
+    "uritools",
+    "urllib3"
   ],
-  "build_distributions": ["PyInstaller"],
+  "build_distributions": [
+    "PyInstaller"
+  ],
   "external_components": [
     {
-      "name": "ExifTool", "version": "13.59",
+      "name": "ffprobe (FFmpeg, Gyan essentials static build)",
+      "version": "8.1.2",
+      "license": "GPL-3.0-or-later",
+      "supplier": "Organization: FFmpeg Developers; Gyan Doshi",
+      "homepage": "https://ffmpeg.org/",
+      "source": "https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz",
+      "artifact": "app/resources/binaries/ffmpeg/ffprobe.exe"
+    },
+    {
+      "name": "ExifTool",
+      "version": "13.59",
       "license": "Artistic-1.0-Perl OR GPL-1.0-or-later",
-      "supplier": "Person: Phil Harvey", "homepage": "https://exiftool.org/",
+      "supplier": "Person: Phil Harvey",
+      "homepage": "https://exiftool.org/",
       "source": "https://exiftool.org/Image-ExifTool-13.59.tar.gz",
       "artifact": "app/resources/binaries/ExifTool.exe"
     },
     {
-      "name": "Strawberry Perl runtime for ExifTool", "version": "5.40.2.1",
+      "name": "Strawberry Perl runtime for ExifTool",
+      "version": "5.40.2.1",
       "license": "Artistic-1.0-Perl OR GPL-1.0-or-later",
       "supplier": "Organization: Strawberry Perl Project",
-      "homepage": "https://strawberryperl.com/", "source": "https://strawberryperl.com/releases.html"
+      "homepage": "https://strawberryperl.com/",
+      "source": "https://strawberryperl.com/releases.html"
     },
     {
-      "name": "qpdf", "version": "12.3.2",
-      "license": "Apache-2.0 OR Artistic-2.0", "supplier": "Organization: qpdf Project",
-      "homepage": "https://qpdf.readthedocs.io/", "source": "https://github.com/qpdf/qpdf/releases/tag/v12.3.2",
+      "name": "qpdf",
+      "version": "12.3.2",
+      "license": "Apache-2.0 OR Artistic-2.0",
+      "supplier": "Organization: qpdf Project",
+      "homepage": "https://qpdf.readthedocs.io/",
+      "source": "https://github.com/qpdf/qpdf/releases/tag/v12.3.2",
       "artifact": "app/resources/binaries/qpdf/qpdf.exe"
     },
     {
-      "name": "pdfcpu", "version": "0.13.0", "license": "Apache-2.0",
-      "supplier": "Organization: pdfcpu", "homepage": "https://pdfcpu.io/",
+      "name": "pdfcpu",
+      "version": "0.13.0",
+      "license": "Apache-2.0",
+      "supplier": "Organization: pdfcpu",
+      "homepage": "https://pdfcpu.io/",
       "source": "https://github.com/pdfcpu/pdfcpu/releases/tag/v0.13.0",
       "artifact": "app/resources/binaries/pdfcpu/pdfcpu.exe"
     },
     {
-      "name": "Poppler", "version": "26.02.0", "license": "GPL-2.0-or-later",
-      "supplier": "Organization: Poppler Developers", "homepage": "https://poppler.freedesktop.org/",
+      "name": "Poppler",
+      "version": "26.02.0",
+      "license": "GPL-2.0-or-later",
+      "supplier": "Organization: Poppler Developers",
+      "homepage": "https://poppler.freedesktop.org/",
       "source": "https://poppler.freedesktop.org/poppler-26.02.0.tar.xz",
       "artifact": "app/resources/binaries/poppler/bin/poppler.dll"
     },
     {
-      "name": "poppler-data", "version": "0.4.12", "license": "GPL-2.0-or-later AND BSD-3-Clause",
-      "supplier": "Organization: Poppler Developers", "homepage": "https://poppler.freedesktop.org/",
+      "name": "poppler-data",
+      "version": "0.4.12",
+      "license": "GPL-2.0-or-later AND BSD-3-Clause",
+      "supplier": "Organization: Poppler Developers",
+      "homepage": "https://poppler.freedesktop.org/",
       "source": "https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz"
     },
     {
-      "name": "libdeflate", "version": "NOASSERTION", "license": "MIT",
-      "supplier": "Organization: libdeflate contributors", "homepage": "https://github.com/ebiggers/libdeflate",
-      "source": "https://github.com/ebiggers/libdeflate", "artifact": "app/resources/binaries/poppler/bin/deflate.dll"
+      "name": "libdeflate",
+      "version": "NOASSERTION",
+      "license": "MIT",
+      "supplier": "Organization: libdeflate contributors",
+      "homepage": "https://github.com/ebiggers/libdeflate",
+      "source": "https://github.com/ebiggers/libdeflate",
+      "artifact": "app/resources/binaries/poppler/bin/deflate.dll"
     },
     {
-      "name": "FreeType", "version": "2.14.3", "license": "FTL OR GPL-2.0-or-later",
-      "supplier": "Organization: FreeType Project", "homepage": "https://freetype.org/",
-      "source": "https://download.savannah.gnu.org/releases/freetype/", "artifact": "app/resources/binaries/poppler/bin/freetype.dll"
+      "name": "FreeType",
+      "version": "2.14.3",
+      "license": "FTL OR GPL-2.0-or-later",
+      "supplier": "Organization: FreeType Project",
+      "homepage": "https://freetype.org/",
+      "source": "https://download.savannah.gnu.org/releases/freetype/",
+      "artifact": "app/resources/binaries/poppler/bin/freetype.dll"
     },
     {
-      "name": "libjpeg-turbo", "version": "3.1.4.1", "license": "BSD-3-Clause AND IJG AND Zlib",
-      "supplier": "Organization: libjpeg-turbo Project", "homepage": "https://libjpeg-turbo.org/",
-      "source": "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.1.4.1", "artifact": "app/resources/binaries/poppler/bin/jpeg8.dll"
+      "name": "libjpeg-turbo",
+      "version": "3.1.4.1",
+      "license": "BSD-3-Clause AND IJG AND Zlib",
+      "supplier": "Organization: libjpeg-turbo Project",
+      "homepage": "https://libjpeg-turbo.org/",
+      "source": "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.1.4.1",
+      "artifact": "app/resources/binaries/poppler/bin/jpeg8.dll"
     },
     {
-      "name": "Little CMS", "version": "2.19", "license": "MIT",
-      "supplier": "Organization: Little CMS Project", "homepage": "https://www.littlecms.com/",
-      "source": "https://github.com/mm2/Little-CMS/releases/tag/lcms2.19", "artifact": "app/resources/binaries/poppler/bin/lcms2.dll"
+      "name": "Little CMS",
+      "version": "2.19",
+      "license": "MIT",
+      "supplier": "Organization: Little CMS Project",
+      "homepage": "https://www.littlecms.com/",
+      "source": "https://github.com/mm2/Little-CMS/releases/tag/lcms2.19",
+      "artifact": "app/resources/binaries/poppler/bin/lcms2.dll"
     },
     {
-      "name": "Lerc", "version": "NOASSERTION", "license": "Apache-2.0",
-      "supplier": "Organization: Esri", "homepage": "https://github.com/Esri/lerc",
-      "source": "https://github.com/Esri/lerc", "artifact": "app/resources/binaries/poppler/bin/Lerc.dll"
+      "name": "Lerc",
+      "version": "NOASSERTION",
+      "license": "Apache-2.0",
+      "supplier": "Organization: Esri",
+      "homepage": "https://github.com/Esri/lerc",
+      "source": "https://github.com/Esri/lerc",
+      "artifact": "app/resources/binaries/poppler/bin/Lerc.dll"
     },
     {
-      "name": "OpenSSL", "version": "3.6.2", "license": "Apache-2.0",
-      "supplier": "Organization: OpenSSL Project", "homepage": "https://www.openssl.org/",
-      "source": "https://github.com/openssl/openssl/releases/tag/openssl-3.6.2", "artifact": "app/resources/binaries/poppler/bin/libcrypto-3-x64.dll"
+      "name": "OpenSSL",
+      "version": "3.6.2",
+      "license": "Apache-2.0",
+      "supplier": "Organization: OpenSSL Project",
+      "homepage": "https://www.openssl.org/",
+      "source": "https://github.com/openssl/openssl/releases/tag/openssl-3.6.2",
+      "artifact": "app/resources/binaries/poppler/bin/libcrypto-3-x64.dll"
     },
     {
-      "name": "curl", "version": "8.20.0", "license": "curl",
-      "supplier": "Organization: curl Project", "homepage": "https://curl.se/",
-      "source": "https://curl.se/download.html", "artifact": "app/resources/binaries/poppler/bin/libcurl.dll"
+      "name": "curl",
+      "version": "8.20.0",
+      "license": "curl",
+      "supplier": "Organization: curl Project",
+      "homepage": "https://curl.se/",
+      "source": "https://curl.se/download.html",
+      "artifact": "app/resources/binaries/poppler/bin/libcurl.dll"
     },
     {
-      "name": "XZ Utils", "version": "5.8.3", "license": "0BSD",
-      "supplier": "Organization: Tukaani Project", "homepage": "https://tukaani.org/xz/",
-      "source": "https://github.com/tukaani-project/xz/releases/tag/v5.8.3", "artifact": "app/resources/binaries/poppler/bin/liblzma.dll"
+      "name": "XZ Utils",
+      "version": "5.8.3",
+      "license": "0BSD",
+      "supplier": "Organization: Tukaani Project",
+      "homepage": "https://tukaani.org/xz/",
+      "source": "https://github.com/tukaani-project/xz/releases/tag/v5.8.3",
+      "artifact": "app/resources/binaries/poppler/bin/liblzma.dll"
     },
     {
-      "name": "libpng", "version": "1.6.58", "license": "Libpng",
-      "supplier": "Organization: PNG Development Group", "homepage": "http://www.libpng.org/pub/png/libpng.html",
-      "source": "https://github.com/pnggroup/libpng/releases/tag/v1.6.58", "artifact": "app/resources/binaries/poppler/bin/libpng16.dll"
+      "name": "libpng",
+      "version": "1.6.58",
+      "license": "Libpng",
+      "supplier": "Organization: PNG Development Group",
+      "homepage": "http://www.libpng.org/pub/png/libpng.html",
+      "source": "https://github.com/pnggroup/libpng/releases/tag/v1.6.58",
+      "artifact": "app/resources/binaries/poppler/bin/libpng16.dll"
     },
     {
-      "name": "libssh2", "version": "1.11.1", "license": "BSD-3-Clause",
-      "supplier": "Organization: libssh2 Project", "homepage": "https://libssh2.org/",
-      "source": "https://github.com/libssh2/libssh2/releases/tag/libssh2-1.11.1", "artifact": "app/resources/binaries/poppler/bin/libssh2.dll"
+      "name": "libssh2",
+      "version": "1.11.1",
+      "license": "BSD-3-Clause",
+      "supplier": "Organization: libssh2 Project",
+      "homepage": "https://libssh2.org/",
+      "source": "https://github.com/libssh2/libssh2/releases/tag/libssh2-1.11.1",
+      "artifact": "app/resources/binaries/poppler/bin/libssh2.dll"
     },
     {
-      "name": "OpenJPEG", "version": "2.5.4", "license": "BSD-2-Clause",
-      "supplier": "Organization: OpenJPEG Project", "homepage": "https://www.openjpeg.org/",
-      "source": "https://github.com/uclouvain/openjpeg", "artifact": "app/resources/binaries/poppler/bin/openjp2.dll"
+      "name": "OpenJPEG",
+      "version": "2.5.4",
+      "license": "BSD-2-Clause",
+      "supplier": "Organization: OpenJPEG Project",
+      "homepage": "https://www.openjpeg.org/",
+      "source": "https://github.com/uclouvain/openjpeg",
+      "artifact": "app/resources/binaries/poppler/bin/openjp2.dll"
     },
     {
-      "name": "libtiff", "version": "4.7.1", "license": "libtiff",
-      "supplier": "Organization: libtiff Project", "homepage": "https://libtiff.gitlab.io/libtiff/",
-      "source": "https://gitlab.com/libtiff/libtiff/-/tags/v4.7.1", "artifact": "app/resources/binaries/poppler/bin/tiff.dll"
+      "name": "libtiff",
+      "version": "4.7.1",
+      "license": "libtiff",
+      "supplier": "Organization: libtiff Project",
+      "homepage": "https://libtiff.gitlab.io/libtiff/",
+      "source": "https://gitlab.com/libtiff/libtiff/-/tags/v4.7.1",
+      "artifact": "app/resources/binaries/poppler/bin/tiff.dll"
     },
     {
-      "name": "zlib", "version": "1.3.2", "license": "Zlib",
-      "supplier": "Organization: zlib Project", "homepage": "https://zlib.net/",
-      "source": "https://github.com/madler/zlib/releases/tag/v1.3.2", "artifact": "app/resources/binaries/poppler/bin/zlib.dll"
+      "name": "zlib",
+      "version": "1.3.2",
+      "license": "Zlib",
+      "supplier": "Organization: zlib Project",
+      "homepage": "https://zlib.net/",
+      "source": "https://github.com/madler/zlib/releases/tag/v1.3.2",
+      "artifact": "app/resources/binaries/poppler/bin/zlib.dll"
     },
     {
-      "name": "Zstandard", "version": "1.5.7", "license": "BSD-3-Clause OR GPL-2.0-only",
-      "supplier": "Organization: Facebook", "homepage": "https://facebook.github.io/zstd/",
-      "source": "https://github.com/facebook/zstd/releases/tag/v1.5.7", "artifact": "app/resources/binaries/poppler/bin/zstd.dll"
+      "name": "Zstandard",
+      "version": "1.5.7",
+      "license": "BSD-3-Clause OR GPL-2.0-only",
+      "supplier": "Organization: Facebook",
+      "homepage": "https://facebook.github.io/zstd/",
+      "source": "https://github.com/facebook/zstd/releases/tag/v1.5.7",
+      "artifact": "app/resources/binaries/poppler/bin/zstd.dll"
     },
     {
-      "name": "JHOVE", "version": "1.34.0", "license": "LGPL-2.1-or-later",
-      "supplier": "Organization: Open Preservation Foundation", "homepage": "https://jhove.openpreservation.org/",
+      "name": "JHOVE",
+      "version": "1.34.0",
+      "license": "LGPL-2.1-or-later",
+      "supplier": "Organization: Open Preservation Foundation",
+      "homepage": "https://jhove.openpreservation.org/",
       "source": "https://github.com/openpreserve/jhove/releases/tag/v1.34.0",
       "artifact": "app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar"
     },
     {
-      "name": "veraPDF Greenfield CLI", "version": "1.30.2", "license": "MPL-2.0 OR GPL-3.0-or-later",
-      "supplier": "Organization: veraPDF Consortium", "homepage": "https://verapdf.org/",
+      "name": "veraPDF Greenfield CLI",
+      "version": "1.30.2",
+      "license": "MPL-2.0 OR GPL-3.0-or-later",
+      "supplier": "Organization: veraPDF Consortium",
+      "homepage": "https://verapdf.org/",
       "source": "https://github.com/veraPDF/veraPDF-apps/releases/tag/v1.30.2",
       "artifact": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar"
     },
     {
-      "name": "Apache PDFBox", "version": "3.0.8", "license": "Apache-2.0",
-      "supplier": "Organization: Apache Software Foundation", "homepage": "https://pdfbox.apache.org/",
+      "name": "Apache PDFBox",
+      "version": "3.0.8",
+      "license": "Apache-2.0",
+      "supplier": "Organization: Apache Software Foundation",
+      "homepage": "https://pdfbox.apache.org/",
       "source": "https://archive.apache.org/dist/pdfbox/3.0.8/pdfbox-3.0.8-src.zip",
       "artifact": "app/resources/binaries/pdfbox/pdfbox-app-3.0.8.jar"
     },
     {
-      "name": "Eclipse Temurin OpenJDK runtime", "version": "21.0.11+10",
+      "name": "Eclipse Temurin OpenJDK runtime",
+      "version": "21.0.11+10",
       "license": "GPL-2.0-only WITH Classpath-exception-2.0",
-      "supplier": "Organization: Eclipse Adoptium", "homepage": "https://adoptium.net/temurin/",
+      "supplier": "Organization: Eclipse Adoptium",
+      "homepage": "https://adoptium.net/temurin/",
       "source": "https://github.com/adoptium/jdk21u/tree/jdk-21.0.11%2B10",
       "artifact": "app/resources/binaries/java/bin/java.exe"
     },
     {
-      "name": "PDFiD", "version": "0.2.10", "license": "LicenseRef-Public-Domain",
-      "supplier": "Person: Didier Stevens", "homepage": "https://blog.didierstevens.com/programs/pdf-tools/",
+      "name": "PDFiD",
+      "version": "0.2.10",
+      "license": "LicenseRef-Public-Domain",
+      "supplier": "Person: Didier Stevens",
+      "homepage": "https://blog.didierstevens.com/programs/pdf-tools/",
       "source": "https://github.com/DidierStevens/DidierStevensSuite",
       "artifact": "app/resources/tools/pdfid.py"
     },
     {
-      "name": "pdf-parser", "version": "0.7.14", "license": "LicenseRef-Public-Domain",
-      "supplier": "Person: Didier Stevens", "homepage": "https://blog.didierstevens.com/programs/pdf-tools/",
+      "name": "pdf-parser",
+      "version": "0.7.14",
+      "license": "LicenseRef-Public-Domain",
+      "supplier": "Person: Didier Stevens",
+      "homepage": "https://blog.didierstevens.com/programs/pdf-tools/",
       "source": "https://github.com/DidierStevens/DidierStevensSuite",
       "artifact": "app/resources/tools/pdf-parser.py"
     },
     {
-      "name": "Microsoft Visual C++ Runtime", "version": "14.x", "license": "LicenseRef-Microsoft-Visual-Cpp-Runtime",
-      "supplier": "Organization: Microsoft Corporation", "homepage": "https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist",
+      "name": "Microsoft Visual C++ Runtime",
+      "version": "14.x",
+      "license": "LicenseRef-Microsoft-Visual-Cpp-Runtime",
+      "supplier": "Organization: Microsoft Corporation",
+      "homepage": "https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist",
       "source": "NOASSERTION"
     }
   ]

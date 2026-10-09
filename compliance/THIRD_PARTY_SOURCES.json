@@ -1,23 +1,24 @@
 {
   "schema_version": 1,
-  "release": "0.4.2",
+  "release": "0.5.0",
   "offer_valid_through": "2032-07-22",
   "delivery": "Source archives are published with the release or supplied under SOURCE_OFFER.md.",
   "sources": [
     {
       "component": "PySide6 / shiboken6",
-      "version": "6.11.1",
+      "version": "6.11.2",
       "license": "LGPL-3.0-only",
-      "url": "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.1-src/pyside-setup-everywhere-src-6.11.1.tar.xz",
-      "archive": "pyside-setup-everywhere-src-6.11.1.tar.xz",
-      "sha256": "6ffd9835bb0dd2c56f061d62f1616bb1707cfc0202b80e3165d6be087f3965e2"
+      "url": "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.2-src/pyside-setup-everywhere-src-6.11.2.tar.xz",
+      "archive": "pyside-setup-everywhere-src-6.11.2.tar.xz"
     },
     {
       "component": "Qt libraries used by PySide6",
-      "version": "6.11.1",
+      "version": "6.11.2",
       "license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
-      "url": "https://download.qt.io/official_releases/qt/6.11/6.11.1/single/qt-everywhere-src-6.11.1.tar.xz",
-      "archive": "qt-everywhere-src-6.11.1.tar.xz"
+      "url": "https://ftp.fau.de/qtproject/archive/qt/6.11/6.11.2/single/qt-everywhere-src-6.11.2.tar.xz",
+      "archive": "qt-everywhere-src-6.11.2.tar.xz",
+      "sha256": "6dcfbca271d76a6502741a2c0dc6fc98ef7dd0b7b4cfd0abcebb285a86a26f33",
+      "checksum_source": "https://download.qt.io/official_releases/qt/6.11/6.11.2/single/qt-everywhere-src-6.11.2.tar.xz.mirrorlist"
     },
     {
       "component": "Poppler",
@@ -53,6 +54,14 @@
       "license": "GPL-2.0-only WITH Classpath-exception-2.0",
       "url": "https://github.com/adoptium/jdk21u/archive/refs/tags/jdk-21.0.11+10.tar.gz",
       "archive": "OpenJDK-jdk21u-21.0.11+10.tar.gz"
+    },
+    {
+      "component": "FFmpeg / ffprobe",
+      "version": "8.1.2 / 38b88335f9",
+      "license": "GPL-3.0-or-later",
+      "url": "https://github.com/FFmpeg/FFmpeg/archive/38b88335f9.tar.gz",
+      "archive": "ffmpeg-38b88335f9.tar.gz",
+      "notes": "Configuration and external library versions retained in binaries/ffmpeg/README.txt. This archive is the FFmpeg core; it does not replace the corresponding sources of its static dependencies."
     }
   ]
 }

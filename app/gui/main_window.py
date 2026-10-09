@@ -4,6 +4,7 @@ import json
 import logging
 import sqlite3
 import subprocess
+from copy import deepcopy
 from collections import Counter
 from pathlib import Path
 
@@ -15,6 +16,7 @@ from PySide6.QtGui import (
     QDragEnterEvent,
     QDropEvent,
     QGuiApplication,
+    QIcon,
 )
 from PySide6.QtWidgets import (
     QComboBox,
@@ -35,6 +37,7 @@ from PySide6.QtWidgets import (
     QProgressBar,
     QPushButton,
     QStyle,
+    QSizePolicy,
     QScrollArea,
     QSplitter,
     QTableWidget,
@@ -50,6 +53,7 @@ from app.core.config import bundled_resource
 from app.core.settings import SettingsStore
 from app.core.updater import UpdateInfo, UpdateService
 from app.gui.dialogs import CustomAnalyzersDialog, ProjectDialog, SettingsDialog
+from app.gui.about import AboutDialog
 from app.gui.widgets import (
     ElidedLabel,
     FindingsTable,
@@ -87,10 +91,13 @@ class MainWindow(QMainWindow):
         self.current_result: AnalysisResult | None = None
         self.current_worker: AnalysisWorker | None = None
         self.background_workers: list[FunctionWorker] = []
+        self.export_worker: FunctionWorker | None = None
+        self._closing = False
         self.queue_pool = QThreadPool(self)
         self.queue_pool.setMaxThreadCount(1)
         self.queue_worker: QueueWorker | None = None
-        self.setWindowTitle("Document Forensic Inspector — Universal Preview")
+        self.setWindowTitle(f"Document Forensic Inspector {__version__} — АНСЭ")
+        self.setWindowIcon(QIcon(str(bundled_resource("app", "resources", "icons", "anse.ico"))))
         self.setAcceptDrops(True)
         self._create_actions()
         self._build_ui()
@@ -175,6 +182,15 @@ class MainWindow(QMainWindow):
         help_menu = self.menuBar().addMenu(self.tr("Справка"))
         help_menu.addAction(self.user_guide_action)
         help_menu.addAction(self.about_action)
+        view_menu = self.menuBar().addMenu(self.tr("Вид"))
+        self.sidebar_action = QAction(self.tr("Проекты и файлы"), self)
+        self.sidebar_action.setCheckable(True)
+        self.sidebar_action.setChecked(True)
+        self.sidebar_action.setShortcut("Ctrl+B")
+        self.sidebar_action.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_DirIcon))
+        self.sidebar_action.setToolTip("Показать или скрыть проекты и файлы · Ctrl+B")
+        self.sidebar_action.toggled.connect(lambda visible: self.sidebar.setVisible(visible))
+        view_menu.addAction(self.sidebar_action)
 
         toolbar = QToolBar()
         self.main_toolbar = toolbar
@@ -182,6 +198,7 @@ class MainWindow(QMainWindow):
         toolbar.setMovable(False)
         toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
         for action in (
+            self.sidebar_action,
             self.new_project_action,
             self.edit_project_action,
             self.add_action,
@@ -210,6 +227,7 @@ class MainWindow(QMainWindow):
     def _build_ui(self) -> None:
         root_splitter = QSplitter()
         sidebar = QWidget()
+        self.sidebar = sidebar
         sidebar.setObjectName("Sidebar")
         sidebar_layout = QVBoxLayout(sidebar)
         sidebar_layout.setContentsMargins(14, 18, 14, 14)
@@ -229,7 +247,7 @@ class MainWindow(QMainWindow):
         self.project_list.itemDoubleClicked.connect(lambda _item: self._edit_project())
         sidebar_layout.addWidget(self.project_list, 1)
 
-        project_buttons = QVBoxLayout()
+        project_buttons = QHBoxLayout()
         project_buttons.setSpacing(6)
         new_project_button = QPushButton(self.tr("Новый проект"))
         new_project_button.setObjectName("PrimaryButton")
@@ -249,6 +267,9 @@ class MainWindow(QMainWindow):
         self.file_search.textChanged.connect(self._filter_files)
         sidebar_layout.addWidget(self.file_search)
         self.file_list = QListWidget()
+        for listing in (self.project_list, self.file_list):
+            listing.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Ignored)
+            listing.setMinimumHeight(48)
         self.file_list.setHorizontalScrollBarPolicy(
             Qt.ScrollBarPolicy.ScrollBarAlwaysOff
         )
@@ -318,9 +339,13 @@ class MainWindow(QMainWindow):
         self.expert_mode.toggled.connect(self._update_visible_tabs)
         content_layout.addWidget(self.expert_mode)
 
-        self.welcome_panel = QWidget()
-        welcome_layout = QVBoxLayout(self.welcome_panel)
-        welcome_layout.setContentsMargins(40, 40, 40, 80)
+        self.welcome_panel = QScrollArea()
+        self.welcome_panel.setWidgetResizable(True)
+        self.welcome_panel.setFrameShape(QFrame.Shape.NoFrame)
+        welcome_content = QWidget()
+        self.welcome_panel.setWidget(welcome_content)
+        welcome_layout = QVBoxLayout(welcome_content)
+        welcome_layout.setContentsMargins(24, 24, 24, 32)
         welcome_layout.addStretch(1)
         welcome_badge = QLabel("ФАЙЛЫ")
         welcome_badge.setObjectName("DocumentBadge")
@@ -329,6 +354,7 @@ class MainWindow(QMainWindow):
         welcome_layout.addWidget(welcome_badge, 0, Qt.AlignmentFlag.AlignHCenter)
         welcome_title = QLabel(self.tr("Что можно узнать об этом файле?"))
         welcome_title.setObjectName("WelcomeTitle")
+        welcome_title.setWordWrap(True)
         welcome_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         welcome_layout.addWidget(welcome_title)
         welcome_text = QLabel(
@@ -354,6 +380,10 @@ class MainWindow(QMainWindow):
         content_layout.addWidget(self.welcome_panel, 1)
 
         self.tabs = QTabWidget()
+        # Hidden technical pages must not force the entire window beyond the
+        # monitor work area. Their tables and scroll areas handle overflow.
+        self.tabs.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Ignored)
+        self.tabs.setMinimumSize(360, 180)
         self.queue_panel = QueuePanel(self.service, self._current_project_id)
         self.queue_panel.open_result.connect(self._open_queued_result)
 
@@ -593,6 +623,8 @@ class MainWindow(QMainWindow):
             self.resize(1280, 800)
             return
         available = screen.availableGeometry()
+        if available.width() < 1000:
+            self.sidebar_action.setChecked(False)
         horizontal_margin = min(32, max(0, available.width() // 20))
         vertical_margin = min(32, max(0, available.height() // 20))
         width = min(1560, max(1, available.width() - horizontal_margin))
@@ -905,8 +937,8 @@ class MainWindow(QMainWindow):
         for index in range(self.tabs.count()):
             self.tabs.setTabEnabled(index, True)
         for action in self.export_actions.values():
-            action.setEnabled(True)
-        self.save_report_button.setEnabled(True)
+            action.setEnabled(self.export_worker is None)
+        self.save_report_button.setEnabled(self.export_worker is None)
         self.document_badge.setText(result.evidence.detected_format or result.evidence.kind.value.upper())
         self.drop_label.setText(result.evidence.original_name)
         mode_labels = {
@@ -1068,13 +1100,14 @@ class MainWindow(QMainWindow):
             self.tabs.setCurrentWidget(self.expert_tabs)
             self.expert_tabs.setCurrentWidget(self.conclusions_page)
             return
+        self._closing = True
         self.queue_panel.daemon.stop()
         if self.current_worker:
             self.current_worker.cancel()
         if self.queue_pool.activeThreadCount() or self.thread_pool.activeThreadCount():
             event.ignore()
-            self.statusBar().showMessage("Завершаем процессы и сохраняем очередь…")
-            QTimer.singleShot(250, self.close)
+            self.statusBar().showMessage("Завершаем сохранение отчёта и фоновые процессы…" if self.export_worker else "Завершаем процессы и сохраняем очередь…")
+            QTimer.singleShot(250, lambda: self.close() if self._closing else None)
             return
         self.queue_panel.timer.stop()
         event.accept()
@@ -1590,33 +1623,15 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self, self.tr("Ошибка обновления"), details)
 
     def _show_about(self) -> None:
-        QMessageBox.about(
-            self,
-            self.tr("О программе"),
-            self.tr(
-                f"<h3>Document Forensic Inspector — Universal Preview</h3><p>Разработка на базе {__version__}</p>"
-                "<p><b>Автор оболочки, интеграции и Windows-сборки:</b><br>"
-                "Amirkhan Smagulov</p>"
-                "<p>Приложение объединяет независимые open-source инструменты в "
-                "едином графическом интерфейсе. Amirkhan Smagulov не является "
-                "автором ExifTool, qpdf, pdfcpu, Poppler, JHOVE, veraPDF, "
-                "Apache PDFBox, PDFiD, pdf-parser, FFmpeg/ffprobe, Pillow и других сторонних компонентов.</p>"
-                "<p>Авторские права и лицензии на эти компоненты принадлежат их "
-                "разработчикам. Полные тексты лицензий входят в поставку.</p>"
-                "<p>Перечень компонентов зафиксирован в SPDX SBOM. Для LGPL-компонентов "
-                "разрешены замена библиотек и отладка собственных модификаций; исходники "
-                "доступны по письменному предложению в комплекте поставки.</p>"
-                "<p><small>Самоподписанная Authenticode-подпись подтверждает "
-                "целостность подписанной сборки после доверия сертификату, но не "
-                "является сертификатом публичного удостоверяющего центра.</small></p>"
-            ),
-        )
+        AboutDialog(self.service.config, self).exec()
 
     def _release_background_worker(self, worker: FunctionWorker) -> None:
         if worker in self.background_workers:
             self.background_workers.remove(worker)
 
     def _export(self, kind: str) -> None:
+        if self.export_worker is not None:
+            return
         if not self._save_notes():
             return
         if not self.current_result:
@@ -1636,34 +1651,73 @@ class MainWindow(QMainWindow):
         )
         if not selected:
             return
+        result = deepcopy(self.current_result)
+        destination = Path(selected)
+        if not destination.suffix:
+            destination = destination.with_suffix(suffix)
         project = (
-            self.service.repository.get_project(self.current_result.evidence.project_id)
-            if self.current_result.evidence.project_id
+            self.service.repository.get_project(result.evidence.project_id)
+            if result.evidence.project_id
             else None
         )
-        try:
+        audit = self.service.repository.list_evidence_audit(result.evidence.id) if kind == "zip" else []
+        template = self.service.config.report_template
+
+        def write_report() -> Path:
             if kind == "json":
-                JsonReportExporter().export(self.current_result, Path(selected))
+                JsonReportExporter().export(result, destination)
             elif kind == "html":
-                HtmlReportExporter().export(self.current_result, Path(selected))
+                HtmlReportExporter().export(result, destination)
             elif kind == "docx":
-                DocxReportExporter(self.service.config.report_template).export(
-                    self.current_result, Path(selected), project
-                )
+                DocxReportExporter(template).export(result, destination, project)
             else:
-                audit = self.service.repository.list_evidence_audit(self.current_result.evidence.id)
-                ZipPackageExporter(self.service.config.report_template).export(
-                    self.current_result, Path(selected), project, audit
+                ZipPackageExporter(template).export(result, destination, project, audit)
+            return destination
+
+        def saved(path: Path) -> None:
+            # A logging failure must not turn an already published report into an
+            # apparent failed export. The file remains available to the user.
+            try:
+                self.service.repository.log_event(
+                    "report_exported", result.evidence.id, f"{kind}: {path}", result.evidence.project_id,
                 )
-            self.service.repository.log_event(
-                "report_exported",
-                self.current_result.evidence.id,
-                f"{kind}: {selected}",
-                self.current_result.evidence.project_id,
-            )
-            self._report_saved(Path(selected))
-        except Exception as exc:
-            QMessageBox.critical(self, self.tr("Ошибка экспорта"), str(exc))
+            except Exception:
+                logging.getLogger(__name__).exception("Could not record report export")
+                self.statusBar().showMessage(f"Отчёт сохранён: {path}. Запись в журнал не удалась.")
+            if not self._closing:
+                self._report_saved(path)
+
+        worker = FunctionWorker(write_report)
+        self.export_worker = worker
+        self.background_workers.append(worker)
+        self.save_report_button.setText("Сохраняем отчёт…")
+        self.save_report_button.setEnabled(False)
+        for action in self.export_actions.values():
+            action.setEnabled(False)
+        self.statusBar().showMessage("Сохраняем отчёт. Можно продолжать просмотр файлов.")
+        worker.signals.result.connect(saved)
+        worker.signals.error.connect(self._export_failed)
+        worker.signals.finished.connect(self._export_finished)
+        self.thread_pool.start(worker)
+
+    def _export_failed(self, details: str) -> None:
+        self._closing = False
+        box = QMessageBox(self)
+        box.setIcon(QMessageBox.Icon.Warning)
+        box.setWindowTitle("Отчёт не сохранён")
+        box.setText("Проверьте свободное место и доступ к папке. Если отчёт открыт в другой программе, закройте его или выберите другое имя.")
+        box.setInformativeText(details.strip().splitlines()[-1])
+        box.setDetailedText(details)
+        box.exec()
+
+    def _export_finished(self) -> None:
+        if self.export_worker:
+            self._release_background_worker(self.export_worker)
+        self.export_worker = None
+        self.save_report_button.setText("Сохранить отчёт")
+        self.save_report_button.setEnabled(self.current_result is not None)
+        for action in self.export_actions.values():
+            action.setEnabled(self.current_result is not None)
 
     def _open_user_guide(self) -> None:
         guide = bundled_resource("docs", "user-guide", "DocumentForensicInspector-User-Guide-RU.pdf")
