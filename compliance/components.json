@@ -1,7 +1,7 @@
 {
   "application": {
     "name": "Document Forensic Inspector",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "license": "Apache-2.0",
     "supplier": "Organization: ANSE LLP",
     "homepage": "https://github.com/archeageamir-create/pdf_forensic"
@@ -50,12 +50,12 @@
   ],
   "external_components": [
     {
-      "name": "ffprobe (FFmpeg, Gyan essentials static build)",
+      "name": "ffprobe (FFmpeg, ANSE LGPL shared build)",
       "version": "8.1.2",
-      "license": "GPL-3.0-or-later",
-      "supplier": "Organization: FFmpeg Developers; Gyan Doshi",
+      "license": "LGPL-2.1-or-later",
+      "supplier": "Organization: FFmpeg Developers; ANSE LLP (build)",
       "homepage": "https://ffmpeg.org/",
-      "source": "https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz",
+      "source": "https://github.com/FFmpeg/FFmpeg/archive/38b88335f9.tar.gz",
       "artifact": "app/resources/binaries/ffmpeg/ffprobe.exe"
     },
     {

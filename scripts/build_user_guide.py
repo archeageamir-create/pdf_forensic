@@ -26,7 +26,7 @@ MUTED = colors.HexColor("#55617a")
 ACCENT = colors.HexColor("#4d4a98")
 LINE = colors.HexColor("#d6d9e5")
 PALE = colors.HexColor("#f1f2f8")
-VERSION = "АНСЭ / 0.5.0"
+VERSION = "АНСЭ / 0.5.1"
 DATE = "9 октября 2026"
 NAME = "DocumentForensicInspector-User-Guide-RU.pdf"
 LEGAL = "https://old.adilet.zan.kz/rus/docs/Z1700000044"
@@ -76,7 +76,7 @@ class Manual:
         self.c.line(MARGIN, 32, WIDTH - MARGIN, 32)
         self.c.setFillColor(MUTED)
         self.c.setFont("Guide", 8)
-        self.c.drawString(MARGIN, 18, "Document Forensic Inspector  |  АНСЭ 0.5.0  |  09.10.2026")
+        self.c.drawString(MARGIN, 18, "Document Forensic Inspector  |  АНСЭ 0.5.1  |  09.10.2026")
         self.c.drawRightString(WIDTH - MARGIN, 18, str(self.page))
 
     def shot(self, name, x=MARGIN, top=124, width=CONTENT, height=398, align="center"):
@@ -323,7 +323,7 @@ def build(output, fonts):
     ], MARGIN, 105, 373, 11, 17)
     m.para("<b>Несколько слов из программы</b><br/><br/><b>Метаданные.</b> Сведения, записанные вместе с файлом: автор, дата, модель камеры и другие поля.<br/><br/><b>EXIF и XMP.</b> Форматы таких сведений. Записи в них можно менять.<br/><br/><b>Хеш, SHA-256.</b> Длинная контрольная строка, рассчитанная по содержимому файла. Помогает проверить совпадение копий, но не говорит, кто создал файл.<br/><br/><b>UTC, Z, +05:00.</b> Обозначения времени и пояса. Z означает UTC; +05:00 значит на пять часов больше UTC.<br/><br/><b>Ревизия PDF.</b> Сохранившееся в файле обновление. Почему его сделали, нужно разбирать отдельно.<br/><br/><b>Артефакт.</b> Найденная запись или след. Например, дата в свойствах или сохранённая правка.", 445, 105, 361, 11)
     m.para("<b>Клавиши:</b> Ctrl+O добавляет файлы, Ctrl+Shift+F открывает поиск по проекту, F1 открывает эту инструкцию. В «Хронологии» можно выделить две строки с Ctrl или пользоваться кнопками выбора дат.", MARGIN, 482, CONTENT, 11.2)
-    m.para('Страница проекта: <link href="https://github.com/archeageamir-create/pdf_forensic" color="#4d4a98">github.com/archeageamir-create/pdf_forensic</link>. Инструкция написана для версии 0.5.0 от 9 октября 2026 года.', MARGIN, 535, CONTENT, 9.4, MUTED)
+    m.para('Страница проекта: <link href="https://github.com/archeageamir-create/pdf_forensic" color="#4d4a98">github.com/archeageamir-create/pdf_forensic</link>. Инструкция написана для версии 0.5.1 от 9 октября 2026 года.', MARGIN, 535, CONTENT, 9.4, MUTED)
     assert m.page == 20
     m.finish(output)
 

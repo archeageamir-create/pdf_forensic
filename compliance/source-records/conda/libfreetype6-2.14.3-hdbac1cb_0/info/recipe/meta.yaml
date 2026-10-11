@@ -1,0 +1,55 @@
+# This file created by conda-build 26.1.0
+# ------------------------------------------------
+
+package:
+  name: libfreetype6
+  version: 2.14.3
+source:
+  url: https://download.savannah.gnu.org/releases/freetype/freetype-2.14.3.tar.gz
+  sha256: e61b31ab26358b946e767ed7eb7f4bb2e507da1cfefeb7a8861ace7fd5c899a1
+build:
+  number: '0'
+  noarch: false
+  noarch_python: false
+  python_version_independent: false
+  string: hdbac1cb_0
+requirements:
+  build:
+    - vs2022_win-64 19.44.35207 ha74f236_34
+    - vs_win-64 2022.14 ha74f236_34
+    - vswhere 3.1.7 h40126e0_1
+  host:
+    - libpng 1.6.55 h7351971_0
+    - libzlib 1.3.2 hfd05255_2
+    - ucrt 10.0.26100.0 h57928b3_0
+    - vc 14.3 h41ae7f8_34
+    - vc14_runtime 14.44.35208 h818238b_34
+    - vcomp14 14.44.35208 h818238b_34
+    - zlib 1.3.2 hfd05255_2
+  run_constrained:
+    - freetype >=2.14.3
+  run:
+    - libpng >=1.6.55,<1.7.0a0
+    - libzlib >=1.3.2,<2.0a0
+    - ucrt >=10.0.20348.0
+    - vc >=14.3,<15
+    - vc14_runtime >=14.44.35208
+test:
+  commands:
+    - if not exist %PREFIX%\\Library\\bin\\freetype.dll exit 1
+about:
+  license: GPL-2.0-only OR FTL
+  summary: The libfreetype runtime library.
+  description: This is a runtime package only. Developers should install freetype
+    to build with libfreetype.
+extra:
+  recipe-maintainers:
+    - carterbox
+    - ccordoba12
+    - msarahan
+    - ocefpaf
+  final: true
+  copy_test_source_files: true
+  flow_run_id: azure_20260323.2.2
+  remote_url: https://github.com/conda-forge/freetype-feedstock
+  sha: 51c9b2727ccd6bc75eb7b5aa690502c23ecb49d3

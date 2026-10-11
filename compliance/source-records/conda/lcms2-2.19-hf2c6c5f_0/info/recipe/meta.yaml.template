@@ -1,0 +1,52 @@
+{% set version = "2.19" %}
+
+package:
+  name: lcms2
+  version: "{{ version }}"
+
+source:
+  url: https://github.com/mm2/Little-CMS/releases/download/lcms{{ version }}/lcms2-{{ version }}.tar.gz
+  sha256: 49e7e134e4299733dd0eda434fa468997a28ab3d33fa397c642b03644f552216
+  patches:
+    - win_jpegturbo.patch
+
+build:
+  number: 0
+  run_exports:
+    - {{ pin_subpackage("lcms2") }}
+
+requirements:
+  build:
+    - libtool  # [unix]
+    - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+    - make  # [not win]
+  host:
+    - libjpeg-turbo
+    - libtiff
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/lcms2.h  # [not win]
+    - test ! -f ${PREFIX}/lib/liblcms2.a  # [not win]
+    - test -f ${PREFIX}/lib/liblcms2${SHLIB_EXT}  # [not win]
+    - jpgicc
+    - tificc
+    - linkicc
+    - transicc
+    - psicc
+    - if not exist %LIBRARY_INC%\\lcms2.h exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\lcms2.lib exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\lcms2.dll exit 1  # [win]
+
+about:
+  home: http://www.littlecms.com/
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Open Source Color Management Engine
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - hmaarrfk

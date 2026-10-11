@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release": "0.5.0",
+  "release": "0.5.1",
   "offer_valid_through": "2032-07-22",
   "delivery": "Source archives are published with the release or supplied under SOURCE_OFFER.md.",
   "sources": [
@@ -58,10 +58,11 @@
     {
       "component": "FFmpeg / ffprobe",
       "version": "8.1.2 / 38b88335f9",
-      "license": "GPL-3.0-or-later",
+      "license": "LGPL-2.1-or-later",
       "url": "https://github.com/FFmpeg/FFmpeg/archive/38b88335f9.tar.gz",
       "archive": "ffmpeg-38b88335f9.tar.gz",
-      "notes": "Configuration and external library versions retained in binaries/ffmpeg/README.txt. This archive is the FFmpeg core; it does not replace the corresponding sources of its static dependencies."
+      "notes": "Unmodified FFmpeg source. ANSE build recipe in scripts/build_ffprobe.py; configure and toolchain records are included with the replaceable DLLs. No external multimedia libraries; MinGW runtime notices retained."
     }
-  ]
+  ],
+  "supplement": "compliance/source-records; see docs/DEPENDENCY_SOURCES.md"
 }

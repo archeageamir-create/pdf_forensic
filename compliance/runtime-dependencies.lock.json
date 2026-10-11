@@ -15,12 +15,14 @@
     {
       "name": "ffprobe",
       "version": "8.1.2",
-      "url": "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-8.1.2-essentials_build.zip",
-      "filename": "ffmpeg-8.1.2-essentials_build.zip",
-      "sha256": "db580001caa24ac104c8cb856cd113a87b0a443f7bdf47d8c12b1d740584a2ec",
-      "bytes": 109728040,
-      "upstream_checksum_verified": true,
-      "license": "GPL-3.0-or-later"
+      "url": "https://github.com/FFmpeg/FFmpeg/commit/38b88335f9",
+      "filename": "ffprobe-8.1.2-anse-lgpl.zip",
+      "sha256": "bc951e0a2777a6f2898f8c7fec5aec164bdf73da99cff357281937a0f13e70c7",
+      "bytes": 9616461,
+      "upstream_checksum_verified": false,
+      "license": "LGPL-2.1-or-later",
+      "build_script": "scripts/build_ffprobe.py",
+      "source_commit": "38b88335f99e76ed89ff3c93f877fdefce736c13"
     },
     {
       "name": "java",

@@ -20,6 +20,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 LOCK = ROOT / "compliance/runtime-dependencies.lock.json"
 PAYLOAD = ROOT / "app/resources/binaries"
 REQUIRED = (
@@ -62,6 +63,8 @@ def verify_bundle(folder: Path = PAYLOAD) -> dict:
 def fetch(item: dict, cache: Path, allow_download: bool) -> Path:
     target = cache / item["filename"]
     if not target.is_file():
+        if item.get("build_script"):
+            raise FileNotFoundError(f"Build {target.name} with {item['build_script']}; see docs/DEPENDENCY_SOURCES.md")
         if not allow_download:
             raise FileNotFoundError(f"Missing {target.name}. Run with --download on the build machine.")
         request = urllib.request.Request(item["url"], headers={"User-Agent": "DocumentForensicInspector-build"})
@@ -136,12 +139,23 @@ def prepare(allow_download: bool = False) -> dict:
         copy_tree(extracted["qpdf"] / "bin", stage / "qpdf")
         copy_tree(extracted["qpdf"] / "share", stage / "qpdf/share")
         copy_tree(extracted["pdfcpu"], stage / "pdfcpu")
-        copy_tree(extracted["poppler"] / "Library/bin", stage / "poppler/bin")
+        # Resolve the six CLI tools' actual import graph, including the CRT.
+        # Do not rely on a Visual C++ runtime installed on the build machine.
+        from scripts.verify_native_dependencies import closure, verify
+        poppler_bin = extracted["poppler"] / "Library/bin"
+        for name in ("msvcp140.dll", "vcruntime140.dll", "vcruntime140_1.dll"):
+            shutil.copy2(extracted["qpdf"] / "bin" / name, poppler_bin / name)
+        needed = closure(poppler_bin, [f"{name}.exe" for name in ("pdfinfo", "pdffonts", "pdfimages", "pdfdetach", "pdftotext", "pdftoppm")])
+        (stage / "poppler/bin").mkdir(parents=True)
+        for file in poppler_bin.iterdir():
+            if file.name.lower() in needed:
+                shutil.copy2(file, stage / "poppler/bin" / file.name)
         copy_tree(extracted["poppler"] / "Library/share", stage / "poppler/share")
         copy_tree(extracted["poppler"] / "share", stage / "poppler/distribution-share")
         copy_tree(extracted["java"], stage / "java")
-        (stage / "ffmpeg").mkdir()
-        shutil.copy2(extracted["ffprobe"] / "bin/ffprobe.exe", stage / "ffmpeg/ffprobe.exe")
+        copy_tree(extracted["ffprobe"] / "bin", stage / "ffmpeg")
+        for name in ("build-information", "licenses"):
+            copy_tree(extracted["ffprobe"] / name, stage / "ffmpeg" / name)
         for file in extracted["ffprobe"].iterdir():
             if file.is_file():
                 shutil.copy2(file, stage / "ffmpeg" / file.name)
@@ -161,9 +175,13 @@ def prepare(allow_download: bool = False) -> dict:
         conf = stage / "jhove/conf/jhove.conf"
         conf.write_text(re.sub(r"<jhoveHome>.*?</jhoveHome>", "<jhoveHome>.</jhoveHome>", conf.read_text(encoding="utf-8"), flags=re.S), encoding="utf-8")
         copy_tree(ROOT / "app/resources/licenses/pdfbox", stage / "pdfbox/licenses")
+        for name in ("poppler", "poppler-dependencies"):
+            copy_tree(ROOT / "app/resources/licenses" / name, stage / "poppler/licenses" / name)
+        native_dependencies = verify(stage)
         manifest = {
             "schema": 1, "platform": lock["platform"], "lock_sha256": digest(LOCK),
             "components": lock["components"],
+            "native_dependencies": native_dependencies,
             "files": [{"path": p.relative_to(stage).as_posix(), "size": p.stat().st_size, "sha256": digest(p)} for p in sorted(stage.rglob("*")) if p.is_file()],
         }
         (stage / "RUNTIME_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

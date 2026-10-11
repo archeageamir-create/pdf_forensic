@@ -1,0 +1,8 @@
+{
+  "component": "Temurin build scripts",
+  "commit": "a612825ee82a20ac872d60958c349854c1f29a8e",
+  "url": "https://github.com/adoptium/temurin-build/archive/a612825ee82a20ac872d60958c349854c1f29a8e.tar.gz",
+  "file": "temurin-build-a612825ee82a20ac872d60958c349854c1f29a8e.tar.gz",
+  "sha256": "1c0cdcec98d7f43652ad26b7a54f33172089018ca58759ffc6d6fc0ee18ebd3f",
+  "identified_in": "app/resources/binaries/java/release"
+}

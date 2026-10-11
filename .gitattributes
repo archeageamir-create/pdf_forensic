@@ -17,3 +17,7 @@
 *.docx binary
 *.png binary
 *.jpg binary
+
+# Preserve supplier records and notices byte-for-byte for their SHA-256 catalogs.
+compliance/source-records/** -text
+app/resources/licenses/** -text

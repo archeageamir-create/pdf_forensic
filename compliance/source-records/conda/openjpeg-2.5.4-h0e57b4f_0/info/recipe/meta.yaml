@@ -1,0 +1,79 @@
+# This file created by conda-build 26.1.0
+# meta.yaml template originally from:
+# D:\a\1\s\recipe, last modified Wed Mar  4 11:41:31 2026
+# ------------------------------------------------
+
+package:
+  name: openjpeg
+  version: 2.5.4
+source:
+  url: https://github.com/uclouvain/openjpeg/archive/v2.5.4.tar.gz
+  sha256: a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a
+build:
+  number: '0'
+  run_exports:
+    - openjpeg >=2.5.4,<3.0a0
+  string: h0e57b4f_0
+requirements:
+  build:
+    - bzip2 1.0.8 h0ad9c76_9
+    - ca-certificates 2026.2.25 h4c7d964_0
+    - cmake 4.2.3 hdcbee5b_1
+    - krb5 1.22.2 h0ea6238_0
+    - libcurl 8.18.0 h8206538_1
+    - libexpat 2.7.4 hac47afa_0
+    - liblzma 5.8.2 hfd05255_0
+    - libssh2 1.11.1 h9aa295b_0
+    - libuv 1.51.0 hfd05255_1
+    - libzlib 1.3.1 h2466b09_2
+    - ninja 1.13.2 h477610d_0
+    - openssl 3.6.1 hf411b9b_1
+    - ucrt 10.0.26100.0 h57928b3_0
+    - vc 14.3 h41ae7f8_34
+    - vc14_runtime 14.44.35208 h818238b_34
+    - vcomp14 14.44.35208 h818238b_34
+    - vs2022_win-64 19.44.35207 ha74f236_34
+    - vs_win-64 2022.14 ha74f236_34
+    - vswhere 3.1.7 h40126e0_1
+    - zstd 1.5.7 h534d264_6
+  host:
+    - lerc 4.0.0 h6470a55_1
+    - libdeflate 1.25 h51727cc_0
+    - libjpeg-turbo 3.1.2 hfd05255_0
+    - liblzma 5.8.2 hfd05255_0
+    - libpng 1.6.55 h7351971_0
+    - libtiff 4.7.1 h8f73337_1
+    - libzlib 1.3.1 h2466b09_2
+    - ucrt 10.0.26100.0 h57928b3_0
+    - vc 14.3 h41ae7f8_34
+    - vc14_runtime 14.44.35208 h818238b_34
+    - vcomp14 14.44.35208 h818238b_34
+    - zlib 1.3.1 h2466b09_2
+    - zstd 1.5.7 h534d264_6
+  run:
+    - libpng >=1.6.55,<1.7.0a0
+    - libtiff >=4.7.1,<4.8.0a0
+    - libzlib >=1.3.1,<2.0a0
+    - ucrt >=10.0.20348.0
+    - vc >=14.3,<15
+    - vc14_runtime >=14.44.35208
+test:
+  files:
+    - p0_01.j2k
+  commands:
+    - opj_dump -i p0_01.j2k
+about:
+  home: http://www.openjpeg.org/
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: An open-source JPEG 2000 codec written in C
+extra:
+  recipe-maintainers:
+    - gillins
+    - mingwandroid
+    - ocefpaf
+  final: true
+  copy_test_source_files: true
+  flow_run_id: azure_20260304.2.1
+  remote_url: https://github.com/conda-forge/openjpeg-feedstock
+  sha: 11bc8b93e0deb698e01ec13f99de9cf0ab6d4c89

@@ -1,0 +1,260 @@
+{
+  "components": [
+    {
+      "component": "lcms2",
+      "version": "2.19",
+      "binary": "lcms2.dll",
+      "binary_sha256": "13ca89317d709ec3b3c8aaa8a02629b96e25aeb1bda2fc0a003dc5394bb5a48a",
+      "package_url": "https://api.anaconda.org/download/conda-forge/lcms2/2.19/win-64/lcms2-2.19-hf2c6c5f_0.conda",
+      "package_sha256": "500b1907b06c5a1bd43d07203b3d58219a3c31b53e1f20c9c79e97d8a14077fc",
+      "recipe": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0",
+      "license": "MIT",
+      "sources": [
+        {
+          "file": "conda-lcms2-2.19-0-lcms2-2.19.tar.gz",
+          "url": "https://github.com/mm2/Little-CMS/releases/download/lcms2.19/lcms2-2.19.tar.gz",
+          "sha256": "49e7e134e4299733dd0eda434fa468997a28ab3d33fa397c642b03644f552216"
+        }
+      ]
+    },
+    {
+      "component": "lerc",
+      "version": "4.1.0",
+      "binary": "Lerc.dll",
+      "binary_sha256": "7844ff388c1fe684c95f176a9f256a55af4511c136e3b3340fd8050741ef5d3f",
+      "package_url": "https://api.anaconda.org/download/conda-forge/lerc/4.1.0/win-64/lerc-4.1.0-hd936e49_0.conda",
+      "package_sha256": "45df58fca800b552b17c3914cc9ab0d55a82c5172d72b5c44a59c710c06c5473",
+      "recipe": "compliance/source-records/conda/lerc-4.1.0-hd936e49_0",
+      "license": "Apache-2.0",
+      "sources": [
+        {
+          "file": "conda-lerc-4.1.0-0-v4.1.0.tar.gz",
+          "url": "https://github.com/Esri/lerc/archive/v4.1.0.tar.gz",
+          "sha256": "f05b24d2368becab9144873878655bb718910631550d4f786262378c16ab94a7"
+        }
+      ]
+    },
+    {
+      "component": "libcurl",
+      "version": "8.20.0",
+      "binary": "libcurl.dll",
+      "binary_sha256": "966f1d3f78a29f7fcc2db28785dbfcb5fc46a64bbbb04463ed803d12c468657f",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libcurl/8.20.0/win-64/libcurl-8.20.0-h8206538_0.conda",
+      "package_sha256": "f4ce5aa835a698532feaa368e804365a7e45a9edebe006a8e1c80505d893c24e",
+      "recipe": "compliance/source-records/conda/libcurl-8.20.0-h8206538_0",
+      "license": "curl",
+      "sources": [
+        {
+          "file": "conda-libcurl-8.20.0-0-curl-8.20.0.tar.bz2",
+          "url": "http://curl.haxx.se/download/curl-8.20.0.tar.bz2",
+          "sha256": "4be48e69cf467246cb97d369b85d78a08528f2b37cffef2418ee16e6a4eb596e"
+        }
+      ]
+    },
+    {
+      "component": "libdeflate",
+      "version": "1.25",
+      "binary": "deflate.dll",
+      "binary_sha256": "0c8d7e40b4512d86969e2003a7d8bede601cfb9bc0a2d2472056a08a769769d5",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libdeflate/1.25/win-64/libdeflate-1.25-h51727cc_0.conda",
+      "package_sha256": "834e4881a18b690d5ec36f44852facd38e13afe599e369be62d29bd675f107ee",
+      "recipe": "compliance/source-records/conda/libdeflate-1.25-h51727cc_0",
+      "license": "MIT",
+      "sources": [
+        {
+          "file": "conda-libdeflate-1.25-0-v1.25.tar.gz",
+          "url": "https://github.com/ebiggers/libdeflate/archive/v1.25.tar.gz",
+          "sha256": "d11473c1ad4c57d874695e8026865e38b47116bbcb872bfc622ec8f37a86017d"
+        }
+      ]
+    },
+    {
+      "component": "libfreetype6",
+      "version": "2.14.3",
+      "binary": "freetype.dll",
+      "binary_sha256": "94c2a7fbceb4e28d7c6d7364939569669d2e592236c0f758f726b44e41426c6c",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libfreetype6/2.14.3/win-64/libfreetype6-2.14.3-hdbac1cb_0.conda",
+      "package_sha256": "497e9ab7c80f579e1b2850523740d6a543b8020f6b43be6bd6e83b3a6fb7fb32",
+      "recipe": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0",
+      "license": "GPL-2.0-only OR FTL",
+      "sources": [
+        {
+          "file": "conda-libfreetype6-2.14.3-0-freetype-2.14.3.tar.gz",
+          "url": "https://download.savannah.gnu.org/releases/freetype/freetype-2.14.3.tar.gz",
+          "sha256": "e61b31ab26358b946e767ed7eb7f4bb2e507da1cfefeb7a8861ace7fd5c899a1"
+        }
+      ]
+    },
+    {
+      "component": "libjpeg-turbo",
+      "version": "3.1.4.1",
+      "binary": "jpeg8.dll",
+      "binary_sha256": "77bef8b5257987800e01806f64a189e312ba057e138356e69dc4367555bd0d93",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libjpeg-turbo/3.1.4.1/win-64/libjpeg-turbo-3.1.4.1-hfd05255_0.conda",
+      "package_sha256": "698d57b5b90120270eaa401298319fcb25ea186ae95b340c2f4813ed9171083d",
+      "recipe": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0",
+      "license": "IJG AND BSD-3-Clause AND Zlib",
+      "sources": [
+        {
+          "file": "conda-libjpeg-turbo-3.1.4.1-0-3.1.4.1.tar.gz",
+          "url": "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/3.1.4.1.tar.gz",
+          "sha256": "a7da42b640377c2a9a9665e2c4b0ea60cd5599afb48c2521e6df0c9dc9d15a25"
+        }
+      ]
+    },
+    {
+      "component": "liblzma",
+      "version": "5.8.3",
+      "binary": "liblzma.dll",
+      "binary_sha256": "64eb6567bead1a5b7386bd7acd1cdd9db8f9a03133eef7ae8208ae555738d680",
+      "package_url": "https://api.anaconda.org/download/conda-forge/liblzma/5.8.3/win-64/liblzma-5.8.3-hfd05255_0.conda",
+      "package_sha256": "d636d1a25234063642f9c531a7bb58d84c1c496411280a36ea000bd122f078f1",
+      "recipe": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0",
+      "license": "0BSD",
+      "sources": [
+        {
+          "file": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+          "url": "https://github.com/tukaani-project/xz/releases/download/v5.8.3/xz-5.8.3.tar.gz",
+          "sha256": "3d3a1b973af218114f4f889bbaa2f4c037deaae0c8e815eec381c3d546b974a0"
+        }
+      ]
+    },
+    {
+      "component": "libpng",
+      "version": "1.6.58",
+      "binary": "libpng16.dll",
+      "binary_sha256": "c3fc74e2bfa2d944cbea22e1db31f06247a54634f8f489f04b5ceec921118f3f",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libpng/1.6.58/win-64/libpng-1.6.58-h7351971_0.conda",
+      "package_sha256": "218913aeee391460bd0e341b834dbd9c6fa6ae0a4276c0c300266cc99a816a28",
+      "recipe": "compliance/source-records/conda/libpng-1.6.58-h7351971_0",
+      "license": "zlib-acknowledgement",
+      "sources": [
+        {
+          "file": "conda-libpng-1.6.58-0-libpng-1.6.58.tar.gz",
+          "url": "https://downloads.sourceforge.net/project/libpng/libpng16/1.6.58/libpng-1.6.58.tar.gz",
+          "sha256": "8c9b05b675ca7301a458df2c2e46f26e1d41ff36b8863f8c33530bc58c2e6225"
+        }
+      ]
+    },
+    {
+      "component": "libssh2",
+      "version": "1.11.1",
+      "binary": "libssh2.dll",
+      "binary_sha256": "1563642bed85fcb68fdcf3c8d2c23c742e95aa5dbb11234b2ba5d7a634775327",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libssh2/1.11.1/win-64/libssh2-1.11.1-h9aa295b_0.conda",
+      "package_sha256": "cbdf93898f2e27cefca5f3fe46519335d1fab25c4ea2a11b11502ff63e602c09",
+      "recipe": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0",
+      "license": "BSD-3-Clause",
+      "sources": [
+        {
+          "file": "conda-libssh2-1.11.1-0-libssh2-1.11.1.tar.gz",
+          "url": "https://www.libssh2.org/download/libssh2-1.11.1.tar.gz",
+          "sha256": "d9ec76cbe34db98eec3539fe2c899d26b0c837cb3eb466a56b0f109cabf658f7"
+        }
+      ]
+    },
+    {
+      "component": "libtiff",
+      "version": "4.7.1",
+      "binary": "tiff.dll",
+      "binary_sha256": "57ad7d27c81d140cfe9b16a6b1e75ce7fa360d613add138dcdc8a61ba0872459",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libtiff/4.7.1/win-64/libtiff-4.7.1-h8f73337_1.conda",
+      "package_sha256": "f1b8cccaaeea38a28b9cd496694b2e3d372bb5be0e9377c9e3d14b330d1cba8a",
+      "recipe": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1",
+      "license": "HPND",
+      "sources": [
+        {
+          "file": "conda-libtiff-4.7.1-0-tiff-4.7.1.tar.gz",
+          "url": "https://download.osgeo.org/libtiff/tiff-4.7.1.tar.gz",
+          "sha256": "f698d94f3103da8ca7438d84e0344e453fe0ba3b7486e04c5bf7a9a3fabe9b69"
+        }
+      ]
+    },
+    {
+      "component": "libzlib",
+      "version": "1.3.2",
+      "binary": "zlib.dll",
+      "binary_sha256": "85c711c83f96bed93184bede15be6b5a3e5444df09dfffef00564107189dc722",
+      "package_url": "https://api.anaconda.org/download/conda-forge/libzlib/1.3.2/win-64/libzlib-1.3.2-hfd05255_2.conda",
+      "package_sha256": "88609816e0cc7452bac637aaf65783e5edf4fee8a9f8e22bdc3a75882c536061",
+      "recipe": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2",
+      "license": "Zlib",
+      "sources": [
+        {
+          "file": "conda-libzlib-1.3.2-0-zlib-1.3.2.tar.gz",
+          "url": "http://zlib.net/zlib-1.3.2.tar.gz",
+          "sha256": "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16"
+        }
+      ]
+    },
+    {
+      "component": "openjpeg",
+      "version": "2.5.4",
+      "binary": "openjp2.dll",
+      "binary_sha256": "274e6a200cd564b014389546f6472d387717dece95b7d03db5f99195bd1d6e03",
+      "package_url": "https://api.anaconda.org/download/conda-forge/openjpeg/2.5.4/win-64/openjpeg-2.5.4-h0e57b4f_0.conda",
+      "package_sha256": "24342dee891a49a9ba92e2018ec0bde56cc07fdaec95275f7a55b96f03ea4252",
+      "recipe": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0",
+      "license": "BSD-2-Clause",
+      "sources": [
+        {
+          "file": "conda-openjpeg-2.5.4-0-v2.5.4.tar.gz",
+          "url": "https://github.com/uclouvain/openjpeg/archive/v2.5.4.tar.gz",
+          "sha256": "a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a"
+        }
+      ]
+    },
+    {
+      "component": "openssl",
+      "version": "3.6.2",
+      "binary": "libcrypto-3-x64.dll",
+      "binary_sha256": "23263b220487605daaa64aba45253603f837e5f90a31dde2409d0bb8f22e8582",
+      "package_url": "https://api.anaconda.org/download/conda-forge/openssl/3.6.2/win-64/openssl-3.6.2-hf411b9b_0.conda",
+      "package_sha256": "feb5815125c60f2be4a411e532db1ed1cd2d7261a6a43c54cb6ae90724e2e154",
+      "recipe": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0",
+      "license": "Apache-2.0",
+      "sources": [
+        {
+          "file": "conda-openssl-3.6.2-0-openssl-3.6.2.tar.gz",
+          "url": "https://github.com/openssl/openssl/releases/download/openssl-3.6.2/openssl-3.6.2.tar.gz",
+          "sha256": "aaf51a1fe064384f811daeaeb4ec4dce7340ec8bd893027eee676af31e83a04f"
+        }
+      ]
+    },
+    {
+      "component": "poppler",
+      "version": "26.02.0",
+      "binary": "poppler.dll",
+      "binary_sha256": "43248bf36db31c416f420ce5e5a0168eccd2235e42c04906a3e7c2678bfc63be",
+      "package_url": "https://api.anaconda.org/download/conda-forge/poppler/26.02.0/win-64/poppler-26.02.0-h4b9d284_3.conda",
+      "package_sha256": "03a2f841b1833bda3a72288b2d6556cdbc21872d76deb83f667e68d522d4ab9a",
+      "recipe": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3",
+      "license": "GPL-2.0-or-later",
+      "sources": [
+        {
+          "file": "conda-poppler-26.02.0-0-poppler-26.02.0.tar.xz",
+          "url": "https://poppler.freedesktop.org/poppler-26.02.0.tar.xz",
+          "sha256": "dded8621f7b2f695c91063aab1558691c8418374cd583501e89ed39487e7ab77"
+        }
+      ]
+    },
+    {
+      "component": "zstd",
+      "version": "1.5.7",
+      "binary": "zstd.dll",
+      "binary_sha256": "ca228f0f33b8296d6650b4694bb38ba9ea8796c523b6b5e0682fcc05a5edab0a",
+      "package_url": "https://api.anaconda.org/download/conda-forge/zstd/1.5.7/win-64/zstd-1.5.7-h534d264_6.conda",
+      "package_sha256": "368d8628424966fd8f9c8018326a9c779e06913dd39e646cf331226acc90e5b2",
+      "recipe": "compliance/source-records/conda/zstd-1.5.7-h534d264_6",
+      "license": "BSD-3-Clause",
+      "sources": [
+        {
+          "file": "conda-zstd-1.5.7-0-v1.5.7.tar.gz",
+          "url": "https://github.com/facebook/zstd/archive/v1.5.7.tar.gz",
+          "sha256": "37d7284556b20954e56e1ca85b80226768902e2edabd3b649e9e72c0c9012ee3"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

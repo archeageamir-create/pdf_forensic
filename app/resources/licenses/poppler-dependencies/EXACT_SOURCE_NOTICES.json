@@ -1,0 +1,170 @@
+[
+  {
+    "file": "lcms2-1-LICENSE",
+    "source_archive": "conda-lcms2-2.19-0-lcms2-2.19.tar.gz",
+    "upstream_path": "lcms2-2.19/LICENSE",
+    "sha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31"
+  },
+  {
+    "file": "lerc-2-LICENSE",
+    "source_archive": "conda-lerc-4.1.0-0-v4.1.0.tar.gz",
+    "upstream_path": "lerc-4.1.0/LICENSE",
+    "sha256": "77a8b761727c75e2167b15bfdf61b2c0bcf8792271228bebe80779106ad00671"
+  },
+  {
+    "file": "libcurl-3-COPYING",
+    "source_archive": "conda-libcurl-8.20.0-0-curl-8.20.0.tar.bz2",
+    "upstream_path": "curl-8.20.0/COPYING",
+    "sha256": "82f2f4427d6545ee5aaac4f0b80428da6cc8ba41c2cf5da3a03680ec327b9681"
+  },
+  {
+    "file": "libdeflate-4-COPYING",
+    "source_archive": "conda-libdeflate-1.25-0-v1.25.tar.gz",
+    "upstream_path": "libdeflate-1.25/COPYING",
+    "sha256": "4ad69099cb4374836fd27583d9991e2838cd86b6e4666ab26b2d32582c91e73a"
+  },
+  {
+    "file": "libfreetype6-5-GPLv2.TXT",
+    "source_archive": "conda-libfreetype6-2.14.3-0-freetype-2.14.3.tar.gz",
+    "upstream_path": "freetype-2.14.3/docs/GPLv2.TXT",
+    "sha256": "c4120c6752c910c299e3bd9cb3a46ff262c268303ca2069b61f92f10a5656c18"
+  },
+  {
+    "file": "libfreetype6-6-FTL.TXT",
+    "source_archive": "conda-libfreetype6-2.14.3-0-freetype-2.14.3.tar.gz",
+    "upstream_path": "freetype-2.14.3/docs/FTL.TXT",
+    "sha256": "5a5ee54c5001bbad1cdc1a57cc3dd4c42199b2da09d39c7ee41fab002d02967f"
+  },
+  {
+    "file": "libfreetype6-7-LICENSE.TXT",
+    "source_archive": "conda-libfreetype6-2.14.3-0-freetype-2.14.3.tar.gz",
+    "upstream_path": "freetype-2.14.3/LICENSE.TXT",
+    "sha256": "bd36c8b474855fa294c2ec5c184544478ef3720aad37d65a6296a4f264fd2d3b"
+  },
+  {
+    "file": "libjpeg-turbo-8-LICENSE.md",
+    "source_archive": "conda-libjpeg-turbo-3.1.4.1-0-3.1.4.1.tar.gz",
+    "upstream_path": "libjpeg-turbo-3.1.4.1/LICENSE.md",
+    "sha256": "e10114e6e40f3d0311c401ca25245ac5ef459a43c20f976fd63f03e816f5741f"
+  },
+  {
+    "file": "libjpeg-turbo-9-README.ijg",
+    "source_archive": "conda-libjpeg-turbo-3.1.4.1-0-3.1.4.1.tar.gz",
+    "upstream_path": "libjpeg-turbo-3.1.4.1/README.ijg",
+    "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+  },
+  {
+    "file": "libjpeg-turbo-10-License.rtf",
+    "source_archive": "conda-libjpeg-turbo-3.1.4.1-0-3.1.4.1.tar.gz",
+    "upstream_path": "libjpeg-turbo-3.1.4.1/release/License.rtf",
+    "sha256": "d26120ab237f87dea10aa4fa7fd4243cadffd26e54eb2f3903d5fb0f8ed336b2"
+  },
+  {
+    "file": "liblzma-11-COPYING",
+    "source_archive": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+    "upstream_path": "xz-5.8.3/COPYING",
+    "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8"
+  },
+  {
+    "file": "liblzma-12-COPYING.0BSD",
+    "source_archive": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+    "upstream_path": "xz-5.8.3/COPYING.0BSD",
+    "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1"
+  },
+  {
+    "file": "liblzma-13-COPYING.GPLv2",
+    "source_archive": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+    "upstream_path": "xz-5.8.3/COPYING.GPLv2",
+    "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+  },
+  {
+    "file": "liblzma-14-COPYING.GPLv3",
+    "source_archive": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+    "upstream_path": "xz-5.8.3/COPYING.GPLv3",
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  {
+    "file": "liblzma-15-COPYING.LGPLv2.1",
+    "source_archive": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+    "upstream_path": "xz-5.8.3/COPYING.LGPLv2.1",
+    "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+  },
+  {
+    "file": "liblzma-16-license-check.sh",
+    "source_archive": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+    "upstream_path": "xz-5.8.3/build-aux/license-check.sh",
+    "sha256": "2b3fa1d23cb2ab084f3d919908159473cc0e1eed059d106e2a2857c0ec8af98a"
+  },
+  {
+    "file": "libpng-17-LICENSE",
+    "source_archive": "conda-libpng-1.6.58-0-libpng-1.6.58.tar.gz",
+    "upstream_path": "libpng-1.6.58/LICENSE",
+    "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+  },
+  {
+    "file": "libpng-18-LICENSE_MIT.txt",
+    "source_archive": "conda-libpng-1.6.58-0-libpng-1.6.58.tar.gz",
+    "upstream_path": "libpng-1.6.58/ci/LICENSE_MIT.txt",
+    "sha256": "508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1"
+  },
+  {
+    "file": "libssh2-19-COPYING",
+    "source_archive": "conda-libssh2-1.11.1-0-libssh2-1.11.1.tar.gz",
+    "upstream_path": "libssh2-1.11.1/COPYING",
+    "sha256": "f7f9633cf9ff2f1333f3d7ce46973a8716a4d2a2815ad56f30d437d5fea7bafe"
+  },
+  {
+    "file": "libtiff-20-LICENSE.md",
+    "source_archive": "conda-libtiff-4.7.1-0-tiff-4.7.1.tar.gz",
+    "upstream_path": "tiff-4.7.1/LICENSE.md",
+    "sha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade"
+  },
+  {
+    "file": "libzlib-21-LICENSE",
+    "source_archive": "conda-libzlib-1.3.2-0-zlib-1.3.2.tar.gz",
+    "upstream_path": "zlib-1.3.2/LICENSE",
+    "sha256": "e32ff4e00d9d94930537635291da39e7e612703334bf6fde8c7f1686fe8a45a2"
+  },
+  {
+    "file": "openjpeg-22-LICENSE",
+    "source_archive": "conda-openjpeg-2.5.4-0-v2.5.4.tar.gz",
+    "upstream_path": "openjpeg-2.5.4/LICENSE",
+    "sha256": "a6af136f3e15038a666b61f376612a07d9a4e48cb7c01adbf3e33b3f14ab49b6"
+  },
+  {
+    "file": "openssl-23-LICENSE.txt",
+    "source_archive": "conda-openssl-3.6.2-0-openssl-3.6.2.tar.gz",
+    "upstream_path": "openssl-3.6.2/LICENSE.txt",
+    "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+  },
+  {
+    "file": "poppler-24-COPYING",
+    "source_archive": "conda-poppler-26.02.0-0-poppler-26.02.0.tar.xz",
+    "upstream_path": "poppler-26.02.0/COPYING",
+    "sha256": "ab15fd526bd8dd18a9e77ebc139656bf4d33e97fc7238cd11bf60e2b9b8666c6"
+  },
+  {
+    "file": "poppler-25-COPYING3",
+    "source_archive": "conda-poppler-26.02.0-0-poppler-26.02.0.tar.xz",
+    "upstream_path": "poppler-26.02.0/COPYING3",
+    "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+  },
+  {
+    "file": "zstd-26-COPYING",
+    "source_archive": "conda-zstd-1.5.7-0-v1.5.7.tar.gz",
+    "upstream_path": "zstd-1.5.7/COPYING",
+    "sha256": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505"
+  },
+  {
+    "file": "zstd-27-LICENSE",
+    "source_archive": "conda-zstd-1.5.7-0-v1.5.7.tar.gz",
+    "upstream_path": "zstd-1.5.7/LICENSE",
+    "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+  },
+  {
+    "file": "zstd-28-LICENSE",
+    "source_archive": "conda-zstd-1.5.7-0-v1.5.7.tar.gz",
+    "upstream_path": "zstd-1.5.7/build/LICENSE",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

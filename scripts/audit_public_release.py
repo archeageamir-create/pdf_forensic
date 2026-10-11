@@ -24,8 +24,20 @@ FORBIDDEN_SUFFIXES = {
 FORBIDDEN_PARTS = {".verification", ".downloads", ".compliance-cache", "build", "dist", "__pycache__"}
 PRIVATE_PATTERNS = (
     re.compile(rb"[A-Z]:\\Users\\[^\\\r\n]+\\", re.IGNORECASE),
+    re.compile(rb"(?:[A-Z]:|/[a-z])/Users/[^/\r\n]+/", re.IGNORECASE),
     re.compile(rb"BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY"),
 )
+
+
+def audit_build_records(folder: Path) -> list[str]:
+    errors = []
+    allowed = {"config.h", "config.mak", "toolchain.txt", "build_ffprobe.py", "ffprobe-version.txt"}
+    for path in folder.iterdir():
+        if not path.is_file() or path.name not in allowed:
+            errors.append(f"Unexpected build record: {path.name}")
+        elif any(pattern.search(path.read_bytes()) for pattern in PRIVATE_PATTERNS):
+            errors.append(f"Private marker in build record: {path.name}")
+    return errors
 
 
 def _sha256(path: Path) -> str:
@@ -38,6 +50,17 @@ def _sha256(path: Path) -> str:
 
 def audit() -> tuple[list[str], dict[str, object]]:
     errors: list[str] = []
+    records = APP_DIR / "_internal/app/resources/binaries/ffmpeg/build-information"
+    if records.is_dir():
+        errors.extend(audit_build_records(records))
+    else:
+        errors.append("Missing ffprobe build records")
+    from scripts.verify_source_delivery import verify as verify_sources
+    try:
+        source_delivery = verify_sources()
+    except (OSError, ValueError, KeyError) as error:
+        errors.append(f"Source delivery: {error}")
+        source_delivery = {"status": "failed"}
     required_runtime = [
         APP_DIR / "DocumentForensicInspector.exe",
         APP_DIR / "_internal" / "PySide6" / "QtCore.pyd",
@@ -76,6 +99,7 @@ def audit() -> tuple[list[str], dict[str, object]]:
         "version": VERSION,
         "status": "failed" if errors else "passed",
         "source_files": source_files,
+        "source_delivery": source_delivery,
         "artifacts": {},
         "errors": errors,
     }

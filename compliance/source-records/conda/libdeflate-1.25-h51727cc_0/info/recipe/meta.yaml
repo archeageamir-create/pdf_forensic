@@ -1,0 +1,70 @@
+# This file created by conda-build 25.9.0
+# meta.yaml template originally from:
+# D:\a\1\s\recipe, last modified Sat Nov  1 06:46:09 2025
+# ------------------------------------------------
+
+package:
+  name: libdeflate
+  version: '1.25'
+source:
+  url: https://github.com/ebiggers/libdeflate/archive/v1.25.tar.gz
+  sha256: d11473c1ad4c57d874695e8026865e38b47116bbcb872bfc622ec8f37a86017d
+build:
+  number: '0'
+  run_exports:
+    - libdeflate >=1.25,<1.26.0a0
+  string: h51727cc_0
+requirements:
+  build:
+    - bzip2 1.0.8 h0ad9c76_8
+    - ca-certificates 2025.10.5 h4c7d964_0
+    - cmake 4.1.2 hdcbee5b_0
+    - krb5 1.21.3 hdf4eb48_0
+    - libcurl 8.16.0 h43ecb02_0
+    - libexpat 2.7.1 hac47afa_0
+    - liblzma 5.8.1 h2466b09_2
+    - libssh2 1.11.1 h9aa295b_0
+    - libuv 1.51.0 hfd05255_1
+    - libzlib 1.3.1 h2466b09_2
+    - ninja 1.13.1 h477610d_0
+    - openssl 3.5.4 h725018a_0
+    - ucrt 10.0.26100.0 h57928b3_0
+    - vc 14.3 h2b53caa_32
+    - vc14_runtime 14.44.35208 h818238b_32
+    - vcomp14 14.44.35208 h818238b_32
+    - vs2022_win-64 19.44.35207 ha74f236_32
+    - vs_win-64 2022.14 ha74f236_32
+    - vswhere 3.1.7 h40126e0_1
+    - zstd 1.5.7 hbeecb71_2
+  host:
+    - ucrt 10.0.26100.0 h57928b3_0
+    - vc 14.3 h2b53caa_32
+    - vc14_runtime 14.44.35208 h818238b_32
+    - vcomp14 14.44.35208 h818238b_32
+  run:
+    - ucrt >=10.0.20348.0
+    - vc >=14.3,<15
+    - vc14_runtime >=14.44.35208
+test:
+  commands:
+    - libdeflate-gzip -h
+    - libdeflate-gunzip -h
+    - if not exist %LIBRARY_BIN%\\deflate.dll exit 1
+    - if not exist %LIBRARY_LIB%\\deflate.lib exit 1
+    - if not exist %LIBRARY_INC%\\libdeflate.h exit 1
+about:
+  home: https://github.com/ebiggers/libdeflate
+  license: MIT
+  license_file: COPYING
+  summary: libdeflate is a library for fast, whole-buffer DEFLATE-based compression
+    and decompression.
+extra:
+  recipe-maintainers:
+    - dpryan79
+    - hmaarrfk
+    - rhpvorderman
+  final: true
+  copy_test_source_files: true
+  flow_run_id: azure_20251101.2.1
+  remote_url: https://github.com/conda-forge/libdeflate-feedstock
+  sha: 1ec1e52177f97db5799b5e24190297efdc64eb51

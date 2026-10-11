@@ -5,7 +5,7 @@ This standalone build bundles Python, Qt, ExifTool (including Perl), qpdf, pdfcp
 The inventory records the actual build environment; build-only packages are labelled separately. Third-party rights and license notices are retained. This distribution is unsigned.
 
 - Bundled exiftool 13.59: Artistic-1.0-Perl OR GPL-1.0-or-later. Upstream: https://downloads.sourceforge.net/project/exiftool/exiftool-13.59_64.zip.
-- Bundled ffprobe 8.1.2: GPL-3.0-or-later. Upstream: https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-8.1.2-essentials_build.zip.
+- Bundled ffprobe 8.1.2: LGPL-2.1-or-later. Upstream: https://github.com/FFmpeg/FFmpeg/commit/38b88335f9.
 - Bundled java 21.0.11+10: GPL-2.0-only WITH Classpath-exception-2.0. Upstream: https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jre_x64_windows_hotspot_21.0.11_10.zip.
 - Bundled jhove 1.34.0: LGPL-2.1-or-later. Upstream: https://software.openpreservation.org/releases/jhove-installer-1.34.jar.
 - Bundled pdfbox 3.0.8: Apache-2.0. Upstream: https://archive.apache.org/dist/pdfbox/3.0.8/pdfbox-app-3.0.8.jar.
@@ -13,6 +13,24 @@ The inventory records the actual build environment; build-only packages are labe
 - Bundled poppler 26.02.0: GPL-2.0-or-later. Upstream: https://github.com/oschwartz10612/poppler-windows/releases/download/v26.02.0-0/Release-26.02.0-0.zip.
 - Bundled qpdf 12.3.2: Apache-2.0 OR Artistic-2.0. Upstream: https://github.com/qpdf/qpdf/releases/download/v12.3.2/qpdf-12.3.2-msvc64.zip.
 - Bundled verapdf 1.30.2: MPL-2.0 OR GPL-3.0-or-later. Upstream: https://software.verapdf.org/releases/1.30/verapdf-greenfield-1.30.2-installer.zip.
+- Poppler dependency lcms2 2.19: MIT. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency lerc 4.1.0: Apache-2.0. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libcurl 8.20.0: curl. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libdeflate 1.25: MIT. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libfreetype6 2.14.3: GPL-2.0-only OR FTL. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libjpeg-turbo 3.1.4.1: IJG AND BSD-3-Clause AND Zlib. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency liblzma 5.8.3: 0BSD. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libpng 1.6.58: zlib-acknowledgement. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libssh2 1.11.1: BSD-3-Clause. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libtiff 4.7.1: HPND. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency libzlib 1.3.2: Zlib. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency openjpeg 2.5.4: BSD-2-Clause. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency openssl 3.6.2: Apache-2.0. Exact source and patches: compliance/source-records/conda.
+- Poppler dependency zstd 1.5.7: BSD-3-Clause. Exact source and patches: compliance/source-records/conda.
+- Microsoft Visual C++ runtime DLLs: Microsoft Software License Terms; supplied with the pinned qpdf/Java/CPython packages. These runtime files are not covered by the application's Apache license.
+- Saxon-HE 11.4 and 12.8: MPL-2.0; source JARs and build POMs included in the dependency-source supplement.
+- Pillow 12.3.0 includes an LGPL-2.1-or-later FriBiDi loading shim. Its source and the sources for rebuilding the text-shaping module are included. The optional GPL libimagequant feature is disabled in this build.
+- Additional QtBase, QtSvg and QtImageFormats attribution/license files: licenses/repository-notices/qt-third-party.
 - altgraph 0.17.5: MIT. License files: 1.
 - asn1crypto 1.5.1: MIT. License files: 1.
 - certifi 2026.7.22: MPL-2.0. License files: 1.

@@ -61,7 +61,9 @@ Source: "..\THIRD_PARTY_NOTICES.md"; DestDir: "{app}\compliance"; Flags: ignorev
 Source: "..\SBOM.spdx.json"; DestDir: "{app}\compliance"; Flags: ignoreversion
 Source: "..\SOURCE_OFFER.md"; DestDir: "{app}\compliance"; Flags: ignoreversion
 Source: "..\docs\LGPL_COMPLIANCE.md"; DestDir: "{app}\compliance"; Flags: ignoreversion
-Source: "..\compliance\*"; DestDir: "{app}\compliance"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Full supplier recipes and patches are in the separate source delivery. Their
+; deep upstream paths are not required at runtime and can exceed MAX_PATH.
+Source: "..\compliance\*"; DestDir: "{app}\compliance"; Flags: ignoreversion
 Source: "..\app\resources\AUTHORSHIP.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\build\release-resources\licenses\*"; DestDir: "{app}\licenses"; Flags: ignoreversion recursesubdirs createallsubdirs
 

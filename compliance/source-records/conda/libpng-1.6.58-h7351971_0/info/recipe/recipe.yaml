@@ -1,0 +1,74 @@
+schema_version: 1
+
+context:
+  version: "1.6.58"
+  short_version: ${{ (version|split('.'))[0:2]|join }}
+
+package:
+  name: libpng
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/libpng/libpng${{ short_version }}/${{ version }}/libpng-${{ version }}.tar.gz
+  sha256: 8c9b05b675ca7301a458df2c2e46f26e1d41ff36b8863f8c33530bc58c2e6225
+  patches:
+    - patches/0001-Include-pkg-config-files-in-the-Windows-packages-too.patch
+    - patches/0002-Ensure-that-lm-is-not-included-in-Windows-pkg-config.patch
+
+build:
+  number: 0
+  skip:
+    - win and vc<14
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - if: win
+      then:
+        - cmake
+        - ninja
+    - if: unix
+      then:
+        - make
+        - libtool
+        - automake
+  host:
+    - zlib
+  run_exports:
+    - ${{ pin_subpackage('libpng', upper_bound='x.x') }}
+
+tests:
+  - package_contents:
+      lib:
+        - if: win
+          then: libpng${{ short_version }}
+          else: png
+      include:
+        - libpng${{ short_version }}/png.h
+        - libpng${{ short_version }}/pngconf.h
+        - libpng${{ short_version }}/pnglibconf.h
+        - png.h
+        - pngconf.h
+        - pnglibconf.h
+  - script:
+      - if: not win
+        then: libpng-config --version
+
+about:
+  license: zlib-acknowledgement
+  license_file: LICENSE
+  summary: PNG reference library
+  description: |
+    libpng is the official PNG reference library. It supports almost all PNG
+    features, is extensible, and has been extensively tested for over 20 years.
+  homepage: http://www.libpng.org/pub/png/libpng.html
+  repository: https://sourceforge.net/p/libpng/code/ci/libpng16/tree/
+  documentation: http://www.libpng.org/pub/png/libpng.html
+
+extra:
+  recipe-maintainers:
+    - ocefpaf
+    - msarahan
+    - pkgw
+    - baszalmstra

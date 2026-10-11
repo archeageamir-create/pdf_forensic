@@ -7,6 +7,8 @@ $originalBuildPath = $env:PATH
 try {
     & $pythonPath scripts\prepare_runtime_dependencies.py --download
     Assert-Step "Runtime payload"
+    & $pythonPath scripts\verify_source_delivery.py
+    Assert-Step "Corresponding source delivery"
     & $pythonPath -m pytest -q
     Assert-Step "Tests"
     & $pythonPath scripts\prepare_release.py

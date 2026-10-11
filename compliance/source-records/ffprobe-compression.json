@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "file": "bzip2-1.0.8.tar.gz",
+      "sha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+      "url": "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz"
+    }
+  ],
+  "zlib_source": "conda-libzlib-1.3.2-0-zlib-1.3.2.tar.gz",
+  "liblzma_source": "conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+  "msys2_packages": [
+    "mingw-w64-ucrt-x86_64-zlib 1.3.2-2",
+    "mingw-w64-ucrt-x86_64-bzip2 1.0.8-3",
+    "mingw-w64-ucrt-x86_64-xz 5.8.3-1"
+  ],
+  "note": "Compression library binaries copied from MSYS2 UCRT64; notices and toolchain versions retained alongside ffprobe."
+}

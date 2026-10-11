@@ -1,6 +1,6 @@
 # Written source-code offer
 
-Document Forensic Inspector 0.5.0 contains unmodified third-party components
+Document Forensic Inspector 0.5.1 contains unmodified third-party components
 licensed under the GPL, LGPL and MPL. Their exact versions, licenses and source
 locations are listed in `THIRD_PARTY_NOTICES.md`, `SBOM.spdx.json` and
 `compliance/runtime-dependencies.lock.json`.

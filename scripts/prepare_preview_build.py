@@ -32,6 +32,10 @@ from scripts.generate_compliance import (
 def prepare(*, release: bool = False) -> Path:
     runtime = verify_bundle()
     target = ROOT / "build" / ("release-resources" if release else "preview-resources")
+    if target.exists():
+        if not target.resolve().is_relative_to((ROOT / "build").resolve()):
+            raise ValueError("Build resources escape the build directory")
+        target.rename(target.with_name(target.name + "-previous-" + uuid.uuid4().hex))
     target.mkdir(parents=True, exist_ok=True)
     project_url = "https://github.com/archeageamir-create/pdf_forensic"
     packages = [
@@ -72,6 +76,18 @@ def prepare(*, release: bool = False) -> Path:
             scope="bundled external engine",
         ))
         notices.append(f"- Bundled {component['name']} {component['version']}: {component['license']}. Upstream: {component['url']}.")
+    provenance = json.loads((ROOT / "compliance/source-records/poppler-provenance.json").read_text(encoding="utf-8"))
+    for component in provenance["components"]:
+        if component["component"] == "poppler":
+            continue
+        packages.append(_package(name="Poppler dependency: " + component["component"], version=component["version"], license_id=component["license"], supplier="NOASSERTION", homepage=component["package_url"], source=component["sources"][0]["url"], scope="bundled native library"))
+        notices.append(f"- Poppler dependency {component['component']} {component['version']}: {component['license']}. Exact source and patches: compliance/source-records/conda.")
+    notices.extend([
+        "- Microsoft Visual C++ runtime DLLs: Microsoft Software License Terms; supplied with the pinned qpdf/Java/CPython packages. These runtime files are not covered by the application's Apache license.",
+        "- Saxon-HE 11.4 and 12.8: MPL-2.0; source JARs and build POMs included in the dependency-source supplement.",
+        "- Pillow 12.3.0 includes an LGPL-2.1-or-later FriBiDi loading shim. Its source and the sources for rebuilding the text-shaping module are included. The optional GPL libimagequant feature is disabled in this build.",
+        "- Additional QtBase, QtSvg and QtImageFormats attribution/license files: licenses/repository-notices/qt-third-party.",
+    ])
     for distribution in sorted(
         metadata.distributions(), key=lambda d: d.metadata["Name"].lower()
     ):
