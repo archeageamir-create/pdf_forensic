@@ -20,6 +20,10 @@ Compression=lzma2
 SolidCompression=yes
 SetupLogging=yes
 WizardStyle=modern
+DisableWelcomePage=yes
+DisableDirPage=yes
+DisableProgramGroupPage=yes
+DisableReadyPage=yes
 ArchitecturesAllowed=x64os
 ArchitecturesInstallIn64BitMode=x64os
 UninstallDisplayIcon={app}\{#MyAppExeName}
@@ -27,7 +31,6 @@ VersionInfoCompany={#MyAppPublisher}
 VersionInfoDescription=Исследование файлов и метаданных — АНСЭ
 VersionInfoCopyright=© 2026 ТОО «АНСЭ». Права защищены в пределах применимых лицензий.
 VersionInfoProductName={#MyAppName}
-InfoBeforeFile=..\app\resources\AUTHORSHIP.txt
 LicenseFile=USER_AGREEMENT_RU.txt
 SetupIconFile=..\app\resources\icons\anse.ico
 WizardImageFile=..\app\resources\branding\wizard.bmp
@@ -80,6 +83,11 @@ Name: "{group}\Руководство пользователя"; Filename: "{app
 Filename: "{app}\{#MyAppExeName}"; Description: "Запустить {#MyAppName}"; Flags: nowait postinstall skipifsilent
 
 [Code]
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+  Result := PageID = wpSelectTasks;
+end;
+
 function IsManagedInstall: Boolean;
 var
   InstalledVersion: String;
