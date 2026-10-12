@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 import urllib.request
+import time
 from pathlib import Path
 from typing import Any
 
@@ -27,13 +28,31 @@ def _download(item: dict[str, Any]) -> dict[str, Any]:
     DESTINATION.mkdir(parents=True, exist_ok=True)
     target = DESTINATION / item["archive"]
     if not target.is_file():
-        request = urllib.request.Request(
-            item["url"], headers={"User-Agent": "DFI-source-mirror/0.4.2"}
-        )
         partial = target.with_suffix(target.suffix + ".part")
-        with urllib.request.urlopen(request, timeout=120) as response, partial.open("wb") as output:
-            while chunk := response.read(1024 * 1024):
-                output.write(chunk)
+        for attempt in range(3):
+            offset = partial.stat().st_size if partial.exists() else 0
+            headers = {"User-Agent": "DFI-source-mirror"}
+            if offset:
+                headers["Range"] = f"bytes={offset}-"
+            try:
+                request = urllib.request.Request(item["url"], headers=headers)
+                with urllib.request.urlopen(request, timeout=60) as response:
+                    resume = response.status == 206 and offset > 0
+                    if resume and not response.headers.get("Content-Range", "").startswith(f"bytes {offset}-"):
+                        raise ValueError("Unexpected source archive range")
+                    expected_bytes = int(response.headers.get("Content-Length", 0))
+                    received = 0
+                    with partial.open("ab" if resume else "wb") as output:
+                        while chunk := response.read(1024 * 1024):
+                            output.write(chunk)
+                            received += len(chunk)
+                    if expected_bytes and received != expected_bytes:
+                        raise OSError("Truncated source archive")
+                break
+            except (OSError, TimeoutError):
+                if attempt == 2:
+                    raise
+                time.sleep(1)
         partial.replace(target)
     digest = _hash(target)
     expected = item.get("sha256")
@@ -58,7 +77,10 @@ def main() -> int:
         return 0
     if not selected:
         raise SystemExit("No components matched")
-    manifest = [_download(item) for item in selected]
+    manifest = []
+    for item in selected:
+        print(f"Downloading {item['component']} {item['version']}", flush=True)
+        manifest.append(_download(item))
     path = DESTINATION / "SOURCE_ARCHIVES_MANIFEST.json"
     path.write_text(json.dumps({"release": source_data["release"], "files": manifest}, indent=2) + "\n", encoding="utf-8")
     print(path)

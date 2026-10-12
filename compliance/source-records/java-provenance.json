@@ -1,0 +1,2535 @@
+{
+  "components": [
+    {
+      "gav": "com.fasterxml.jackson.core:jackson-annotations:2.18.2",
+      "files": [
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.pom",
+          "sha256": "0b2bd694ea89267eea48126a8a5b24a65234c643387542d24469d195bfba1cf8"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2-sources.jar",
+          "sha256": "43bdeaa3510e49a035f6ff670882a0c1a6df21c255199a37f6ed660e4839e19f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-parent/2.18.1/jackson-parent-2.18.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.18.1/jackson-parent-2.18.1.pom",
+          "sha256": "d0822fac1a0226844b8ad445c920c49a4f619169d09b1010a7dfeed19910998c"
+        },
+        {
+          "file": "maven/com/fasterxml/oss-parent/61/oss-parent-61.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/61/oss-parent-61.pom",
+          "sha256": "3649513cf597e9186da0855986a8c543e12bdbd805edeef9c124db56dd036544"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+      "files": [
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.pom",
+          "sha256": "71cac5392151e2a528cc9a09179f0a334179f05c52f8e596cf58ddf12bb27f2b"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21-sources.jar",
+          "sha256": "71fe6323d91b16d5d1007fd1e1533fa06bb369abde74f68a42a68c0f8f061a8b"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+          "sha256": "3851df627faeb46887b956104630b74a8bbb5f7de22e974cf15982e20e0373de"
+        },
+        {
+          "file": "maven/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+          "sha256": "fcbbf1c18c9047e6917d384f2064e21b42a58fc85fb0523a9e2e015eff7c619d"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.fasterxml.jackson.core:jackson-core:2.18.2",
+      "files": [
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.pom",
+          "sha256": "e065b0039d21f4dfce46bd43104c7d76d5856bd732e2aa860cc5a4a270ed72de"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2-sources.jar",
+          "sha256": "ab5a6bf525586bee936b7127c0d0d6f0d61bb15d1b49edff845c9924810bd91c"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-base/2.18.2/jackson-base-2.18.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.18.2/jackson-base-2.18.2.pom",
+          "sha256": "ef574b72f5b48948044f68376b874c88ae09a029dc8e05f64a1c30bdfb6de14a"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-bom/2.18.2/jackson-bom-2.18.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.18.2/jackson-bom-2.18.2.pom",
+          "sha256": "5247cdc301725d3f67f7ef049037289d5af709d6972bcf4b17096e4548d2956b"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-parent/2.18.1/jackson-parent-2.18.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.18.1/jackson-parent-2.18.1.pom",
+          "sha256": "d0822fac1a0226844b8ad445c920c49a4f619169d09b1010a7dfeed19910998c"
+        },
+        {
+          "file": "maven/com/fasterxml/oss-parent/61/oss-parent-61.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/61/oss-parent-61.pom",
+          "sha256": "3649513cf597e9186da0855986a8c543e12bdbd805edeef9c124db56dd036544"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.fasterxml.jackson.core:jackson-core:2.21.1",
+      "files": [
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-core/2.21.1/jackson-core-2.21.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.1/jackson-core-2.21.1.pom",
+          "sha256": "0f3fb5eb9e8970449ac0cb98e2f8e7b513d2d4ec5b1a4f02e22778e4f7bab8d7"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-core/2.21.1/jackson-core-2.21.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.1/jackson-core-2.21.1-sources.jar",
+          "sha256": "50d16c835cd81fd829036d551c73c40196a988dd6c55d00590e3e0bb41deda32"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-base/2.21.1/jackson-base-2.21.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.21.1/jackson-base-2.21.1.pom",
+          "sha256": "60d4eb66a000a33fa37e7cb51e2550dabe7467a0b8ac60806d7d3ba9728ccd64"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-bom/2.21.1/jackson-bom-2.21.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.21.1/jackson-bom-2.21.1.pom",
+          "sha256": "8d7c78dde10f4d08e7296cef084cf30b77adcea7a36e23d1520793fdec63ff28"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+          "sha256": "3851df627faeb46887b956104630b74a8bbb5f7de22e974cf15982e20e0373de"
+        },
+        {
+          "file": "maven/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+          "sha256": "fcbbf1c18c9047e6917d384f2064e21b42a58fc85fb0523a9e2e015eff7c619d"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.fasterxml.jackson.core:jackson-databind:2.18.2",
+      "files": [
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.pom",
+          "sha256": "493a3db6447b7a8ecbb3724234c6ce677d72db4b04f6ba008f0ebeaea7be5a9d"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2-sources.jar",
+          "sha256": "a543f696cc9db5a009f2c548270ced3ac0232c5d947b0ca3e62605dfccc279a2"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-base/2.18.2/jackson-base-2.18.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.18.2/jackson-base-2.18.2.pom",
+          "sha256": "ef574b72f5b48948044f68376b874c88ae09a029dc8e05f64a1c30bdfb6de14a"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-bom/2.18.2/jackson-bom-2.18.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.18.2/jackson-bom-2.18.2.pom",
+          "sha256": "5247cdc301725d3f67f7ef049037289d5af709d6972bcf4b17096e4548d2956b"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-parent/2.18.1/jackson-parent-2.18.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.18.1/jackson-parent-2.18.1.pom",
+          "sha256": "d0822fac1a0226844b8ad445c920c49a4f619169d09b1010a7dfeed19910998c"
+        },
+        {
+          "file": "maven/com/fasterxml/oss-parent/61/oss-parent-61.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/61/oss-parent-61.pom",
+          "sha256": "3649513cf597e9186da0855986a8c543e12bdbd805edeef9c124db56dd036544"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.fasterxml.jackson.core:jackson-databind:2.21.1",
+      "files": [
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-databind/2.21.1/jackson-databind-2.21.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.1/jackson-databind-2.21.1.pom",
+          "sha256": "bd4817d0b91794aff6f4b116b576bfedc9277be2d6c651c9566f552222c6a550"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/core/jackson-databind/2.21.1/jackson-databind-2.21.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.1/jackson-databind-2.21.1-sources.jar",
+          "sha256": "f9f1f15b07eed9bc0fa2a3ab0ee0f7e9ebe3c17dd4ea519cc7509625a57777ca"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-base/2.21.1/jackson-base-2.21.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.21.1/jackson-base-2.21.1.pom",
+          "sha256": "60d4eb66a000a33fa37e7cb51e2550dabe7467a0b8ac60806d7d3ba9728ccd64"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-bom/2.21.1/jackson-bom-2.21.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.21.1/jackson-bom-2.21.1.pom",
+          "sha256": "8d7c78dde10f4d08e7296cef084cf30b77adcea7a36e23d1520793fdec63ff28"
+        },
+        {
+          "file": "maven/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+          "sha256": "3851df627faeb46887b956104630b74a8bbb5f7de22e974cf15982e20e0373de"
+        },
+        {
+          "file": "maven/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+          "sha256": "fcbbf1c18c9047e6917d384f2064e21b42a58fc85fb0523a9e2e015eff7c619d"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.google.code.findbugs:jsr305:3.0.2",
+      "files": [
+        {
+          "file": "maven/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom",
+          "sha256": "19889dbdf1b254b2601a5ee645b8147a974644882297684c798afe5d63d78dfe"
+        },
+        {
+          "file": "maven/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar",
+          "sha256": "1c9e85e272d0708c6a591dc74828c71603053b48cc75ae83cce56912a2aa063b"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.google.code.findbugs/jsr305/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.google.errorprone:error_prone_annotations:2.18.0",
+      "files": [
+        {
+          "file": "maven/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.pom",
+          "sha256": "920135797dcca5917b5a5c017642a58d340a4cd1bcd12f56f892a5663bd7bddc"
+        },
+        {
+          "file": "maven/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0-sources.jar",
+          "sha256": "a2c0783981c8ad48faaa6ea8de6f1926d8e87c125f5df5ce531a9810b943e032"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/google/errorprone/error_prone_parent/2.18.0/error_prone_parent-2.18.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.18.0/error_prone_parent-2.18.0.pom",
+          "sha256": "47f22e99c7bf466391def16f8377985e5d3ba6f5bbcf65853644805513e15fad"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.google.guava:failureaccess:1.0.1",
+      "files": [
+        {
+          "file": "maven/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.pom",
+          "sha256": "e96042ce78fecba0da2be964522947c87b40a291b5fd3cd672a434924103c4b9"
+        },
+        {
+          "file": "maven/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1-sources.jar",
+          "sha256": "092346eebbb1657b51aa7485a246bf602bb464cc0b0e2e1c7e7201fadce1e98f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
+          "sha256": "f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+          "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.google.guava/failureaccess/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.google.guava:guava:32.0.0-jre",
+      "files": [
+        {
+          "file": "maven/com/google/guava/guava/32.0.0-jre/guava-32.0.0-jre.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/32.0.0-jre/guava-32.0.0-jre.pom",
+          "sha256": "9eccce508b51d5521e53883b974d2b872f2d268543c2c51b4f866e3fa076f5e7"
+        },
+        {
+          "file": "maven/com/google/guava/guava/32.0.0-jre/guava-32.0.0-jre-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/32.0.0-jre/guava-32.0.0-jre-sources.jar",
+          "sha256": "e8c6bdd4c859768a59dd85b704a25275dd69dee23100b90c78e5e1215fa0336f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/google/guava/guava-parent/32.0.0-jre/guava-parent-32.0.0-jre.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/32.0.0-jre/guava-parent-32.0.0-jre.pom",
+          "sha256": "acf92bcda177461531c368519dc9abc5f9d5854adc1c289e9bf80371befd35c3"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.google.guava/guava/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava",
+      "files": [
+        {
+          "file": "maven/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.pom",
+          "sha256": "18d4b1db26153d4e55079ce1f76bb1fe05cdb862ef9954a88cbcc4ff38b8679b"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
+          "sha256": "f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+          "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a"
+        }
+      ],
+      "note": "Empty conflict-avoidance artifact; actual classes are in Guava, whose sources are included.",
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.google.guava/listenablefuture/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.google.j2objc:j2objc-annotations:2.8",
+      "files": [
+        {
+          "file": "maven/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.pom",
+          "sha256": "37f87798b18385113c918bfa9e1276fe50735ef8fa849b5800c519d54dbf11f8"
+        },
+        {
+          "file": "maven/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8-sources.jar",
+          "sha256": "7413eed41f111453a08837f5ac680edded7faed466cbd35745e402e13f4cc3f5"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+          "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.google.j2objc/j2objc-annotations/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.sun.istack:istack-commons-runtime:3.0.5",
+      "files": [
+        {
+          "file": "maven/com/sun/istack/istack-commons-runtime/3.0.5/istack-commons-runtime-3.0.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/istack/istack-commons-runtime/3.0.5/istack-commons-runtime-3.0.5.pom",
+          "sha256": "fb892aff4c68f0efc4756c97112e044cdd44e73276d3641f9cc1d6ba3c1366e6"
+        },
+        {
+          "file": "maven/com/sun/istack/istack-commons-runtime/3.0.5/istack-commons-runtime-3.0.5-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/istack/istack-commons-runtime/3.0.5/istack-commons-runtime-3.0.5-sources.jar",
+          "sha256": "92235ba19d5776456a89b469100de2033e838aaeffc69ad98044603b8e8f0ea1"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/sun/istack/istack-commons/3.0.5/istack-commons-3.0.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/istack/istack-commons/3.0.5/istack-commons-3.0.5.pom",
+          "sha256": "8ef035349ffd2ff11b8d9bdb9c0b4e78dbbf0add31b192f767d089dc6599724e"
+        },
+        {
+          "file": "maven/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "sha256": "1af699f8d9ddab67f9a0d202fbd7915eb0362a5a6dfd5ffc54cafa3465c9cb0a"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/com.sun.istack/istack-commons-runtime/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/com.sun.istack/istack-commons-runtime/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.sun.xml.bind:jaxb-core:2.3.0.1",
+      "files": [
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1.pom",
+          "sha256": "ee7bb74f42fdc4db10e3cc9c68c0e9b5beaf8ebb36cce91d495b479b026c6aab"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1-sources.jar",
+          "sha256": "d628f0d4d24e5a89842a81533da9f5eb4dd7c9bd5e2321c3ded3785e3f28a65f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-bundles/2.3.0.1/jaxb-bundles-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-bundles/2.3.0.1/jaxb-bundles-2.3.0.1.pom",
+          "sha256": "9d705266c0f01695d897b67465115984b3a9b6487087aba4ece1d798a6c344f8"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom",
+          "sha256": "1d366597d77b073448399cbda35d1ace25eda213c593714dd6b1e6742aa162e2"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom",
+          "sha256": "dacb74d0d4568e67bdeb4ad946d5a685f0cba7f08ec247c4c1e1253e1ddf903d"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-bom/2.3.0.1/jaxb-bom-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.0.1/jaxb-bom-2.3.0.1.pom",
+          "sha256": "d94f6debf87f2468c3c3828f548dd2f38557f41b12aec0732922cc5d61be10f1"
+        },
+        {
+          "file": "maven/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "sha256": "1af699f8d9ddab67f9a0d202fbd7915eb0362a5a6dfd5ffc54cafa3465c9cb0a"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/com.sun.xml.bind/jaxb-core/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/com.sun.xml.bind/jaxb-core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.sun.xml.bind:jaxb-impl:2.3.2",
+      "files": [
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-impl/2.3.2/jaxb-impl-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.2/jaxb-impl-2.3.2.pom",
+          "sha256": "565c155012967597ce8d35140f262094a12612172289a4fe6453c3f0337877a1"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-impl/2.3.2/jaxb-impl-2.3.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.2/jaxb-impl-2.3.2-sources.jar",
+          "sha256": "f9b79e69b82e52160fea14388eedc895109f56199e4bb4bedfb21adb273a86d8"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-bundles/2.3.2/jaxb-bundles-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-bundles/2.3.2/jaxb-bundles-2.3.2.pom",
+          "sha256": "98f694769f99fec316c1f8ac3e1c00b9533c57146027c0bb6ea04cf9dc018657"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-parent/2.3.2/jaxb-parent-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.2/jaxb-parent-2.3.2.pom",
+          "sha256": "20dd6dc34ab7549ac40da1d82e92222ec4347ad0ec0cb118ef6c5703bed53a18"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-bom-ext/2.3.2/jaxb-bom-ext-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.2/jaxb-bom-ext-2.3.2.pom",
+          "sha256": "1a7dec2b27e7e055744cdb8cf1b90def4fd473acd1b804eff098139358959bd7"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-bom/2.3.2/jaxb-bom-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.2/jaxb-bom-2.3.2.pom",
+          "sha256": "a1018bb54678ed9f5acb2f7a4084e385ff510201f4e9dbf5f75dc6a675f66be7"
+        },
+        {
+          "file": "maven/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom",
+          "sha256": "916b4794d8d8220a59a3fdf6a64dbe794aeb23395e888b81ae36a9b5a2c591a6"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/com.sun.xml.bind/jaxb-impl/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/com.sun.xml.bind/jaxb-impl/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.twelvemonkeys.common:common-image:3.9.4",
+      "files": [
+        {
+          "file": "maven/com/twelvemonkeys/common/common-image/3.9.4/common-image-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-image/3.9.4/common-image-3.9.4.pom",
+          "sha256": "f1ee11b8e55830032e8e4d598b61281e35e7674f8dd9a770146a7139a0ce3e41"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/common/common-image/3.9.4/common-image-3.9.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-image/3.9.4/common-image-3.9.4-sources.jar",
+          "sha256": "349d68f65f9a3998f0303a46ceac87e86a9586ec9f95c0a10b361118fb62c679"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/twelvemonkeys/common/common/3.9.4/common-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common/3.9.4/common-3.9.4.pom",
+          "sha256": "78c2cc88ef497d32816d9aed1d66746185b093800dbc80890c526ac1ebb05901"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "sha256": "80ecd305df2d56ea25826f3d6b3b9073a828a47e9652ef0564a38f1f3b775527"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.twelvemonkeys.common/common-image/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.twelvemonkeys.common:common-io:3.9.4",
+      "files": [
+        {
+          "file": "maven/com/twelvemonkeys/common/common-io/3.9.4/common-io-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-io/3.9.4/common-io-3.9.4.pom",
+          "sha256": "0ac1e0e9d4244cfcec851c559885d48b845918611087ade549cdd5d5eeabb162"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/common/common-io/3.9.4/common-io-3.9.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-io/3.9.4/common-io-3.9.4-sources.jar",
+          "sha256": "dcd296ca9a3d403d81414fd8de061b034daa7f4a6d91211ef73c19972fca877a"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/twelvemonkeys/common/common/3.9.4/common-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common/3.9.4/common-3.9.4.pom",
+          "sha256": "78c2cc88ef497d32816d9aed1d66746185b093800dbc80890c526ac1ebb05901"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "sha256": "80ecd305df2d56ea25826f3d6b3b9073a828a47e9652ef0564a38f1f3b775527"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.twelvemonkeys.common/common-io/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.twelvemonkeys.common:common-lang:3.9.4",
+      "files": [
+        {
+          "file": "maven/com/twelvemonkeys/common/common-lang/3.9.4/common-lang-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-lang/3.9.4/common-lang-3.9.4.pom",
+          "sha256": "992f15d4d8bd06ffa0e46618ec5579c2abd28b38260cb3e58d8df0189e188c93"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/common/common-lang/3.9.4/common-lang-3.9.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-lang/3.9.4/common-lang-3.9.4-sources.jar",
+          "sha256": "5da52d34ea7206d9171cfa636a0f817f16f8423b779b39614e842c050e7f09b2"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/twelvemonkeys/common/common/3.9.4/common-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common/3.9.4/common-3.9.4.pom",
+          "sha256": "78c2cc88ef497d32816d9aed1d66746185b093800dbc80890c526ac1ebb05901"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "sha256": "80ecd305df2d56ea25826f3d6b3b9073a828a47e9652ef0564a38f1f3b775527"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.twelvemonkeys.common/common-lang/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.twelvemonkeys.imageio:imageio-core:3.9.4",
+      "files": [
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio-core/3.9.4/imageio-core-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-core/3.9.4/imageio-core-3.9.4.pom",
+          "sha256": "6e49a150b58a4e52919ae7e27b4976282235245e3881da8c4ee3e2a4e8fb7817"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio-core/3.9.4/imageio-core-3.9.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-core/3.9.4/imageio-core-3.9.4-sources.jar",
+          "sha256": "6f43c8584348112f19c3eaeabfef8a6f9ce460b3509b978a5f632fdd350994c0"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio/3.9.4/imageio-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio/3.9.4/imageio-3.9.4.pom",
+          "sha256": "ab6e1d6369b952d3e22b0bfc9a66586ca461617de83048c3550069dfdf08372a"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "sha256": "80ecd305df2d56ea25826f3d6b3b9073a828a47e9652ef0564a38f1f3b775527"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.twelvemonkeys.imageio/imageio-core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.twelvemonkeys.imageio:imageio-jpeg:3.9.4",
+      "files": [
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio-jpeg/3.9.4/imageio-jpeg-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-jpeg/3.9.4/imageio-jpeg-3.9.4.pom",
+          "sha256": "5c6f204e1d2efe4ee8248e1e13b371245517555a692bbbdb41496b2f79c15650"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio-jpeg/3.9.4/imageio-jpeg-3.9.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-jpeg/3.9.4/imageio-jpeg-3.9.4-sources.jar",
+          "sha256": "4cb9e04db9aebd331cc47c37985c788a9e71b98ee0ae1499f30d75790ab53fde"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio/3.9.4/imageio-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio/3.9.4/imageio-3.9.4.pom",
+          "sha256": "ab6e1d6369b952d3e22b0bfc9a66586ca461617de83048c3550069dfdf08372a"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "sha256": "80ecd305df2d56ea25826f3d6b3b9073a828a47e9652ef0564a38f1f3b775527"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.twelvemonkeys.imageio/imageio-jpeg/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "com.twelvemonkeys.imageio:imageio-metadata:3.9.4",
+      "files": [
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio-metadata/3.9.4/imageio-metadata-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-metadata/3.9.4/imageio-metadata-3.9.4.pom",
+          "sha256": "5662064a0e614326d91637837918bf91d4fd3220cdef237937fc50a23c992ed5"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio-metadata/3.9.4/imageio-metadata-3.9.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-metadata/3.9.4/imageio-metadata-3.9.4-sources.jar",
+          "sha256": "2a888adb6993195f11003e23eef90f5b6399e415f93b34d9e310013457fada44"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/twelvemonkeys/imageio/imageio/3.9.4/imageio-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio/3.9.4/imageio-3.9.4.pom",
+          "sha256": "ab6e1d6369b952d3e22b0bfc9a66586ca461617de83048c3550069dfdf08372a"
+        },
+        {
+          "file": "maven/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+          "sha256": "80ecd305df2d56ea25826f3d6b3b9073a828a47e9652ef0564a38f1f3b775527"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/com.twelvemonkeys.imageio/imageio-metadata/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "commons-codec:commons-codec:1.15",
+      "files": [
+        {
+          "file": "maven/commons-codec/commons-codec/1.15/commons-codec-1.15.pom",
+          "url": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.15/commons-codec-1.15.pom",
+          "sha256": "c86ee198a35a3715487860f419cbf642e7e4d9e8714777947dbe6a4e3a20ab58"
+        },
+        {
+          "file": "maven/commons-codec/commons-codec/1.15/commons-codec-1.15-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.15/commons-codec-1.15-sources.jar",
+          "sha256": "7019940b2298d333edb946e2db3d10f1caacbbd52bb64e85832cfd0017e049cc"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/apache/commons/commons-parent/52/commons-parent-52.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/52/commons-parent-52.pom",
+          "sha256": "75dbe8f34e98e4c3ff42daae4a2f9eb4cbcd3b5f1047d54460ace906dbb4502e"
+        },
+        {
+          "file": "maven/org/apache/apache/23/apache-23.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/apache/23/apache-23.pom",
+          "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/commons-codec/commons-codec/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "jakarta.json:jakarta.json-api:2.1.3",
+      "files": [
+        {
+          "file": "maven/jakarta/json/jakarta.json-api/2.1.3/jakarta.json-api-2.1.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/jakarta/json/jakarta.json-api/2.1.3/jakarta.json-api-2.1.3.pom",
+          "sha256": "416a73971385a0be43f9da8a477aa64f4814ac52187d88f3e24f215b7f89dfde"
+        },
+        {
+          "file": "maven/jakarta/json/jakarta.json-api/2.1.3/jakarta.json-api-2.1.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/jakarta/json/jakarta.json-api/2.1.3/jakarta.json-api-2.1.3-sources.jar",
+          "sha256": "1b1f8585037ae1f34afd052013cc36788853bd4ad4ed566fe5f190b63c5008d2"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/eclipse/ee4j/project/1.0.8/project-1.0.8.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.8/project-1.0.8.pom",
+          "sha256": "0d0c7b6e54a35eaf6c246e107eb1a8c7ac8ff0a0b84c489b07a357713adf674b"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar",
+          "metadata": "META-INF/maven/jakarta.json/jakarta.json-api/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/jakarta.json/jakarta.json-api/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "javax.activation:javax.activation-api:1.2.0",
+      "files": [
+        {
+          "file": "maven/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.pom",
+          "sha256": "da2926f3c8be898643cc10acdec6de0b0351a57fb2735770fa0177b06ade71b9"
+        },
+        {
+          "file": "maven/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0-sources.jar",
+          "sha256": "d7411fb29089cafa4b77493f10bfb52832cd1976948903d0b039e12b0bd70334"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/sun/activation/all/1.2.0/all-1.2.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/activation/all/1.2.0/all-1.2.0.pom",
+          "sha256": "1d8518e3ac7532a104e4f7be77def37c982e530723c6bdb3d67708cce2b0c2c4"
+        },
+        {
+          "file": "maven/net/java/jvnet-parent/1/jvnet-parent-1.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/java/jvnet-parent/1/jvnet-parent-1.pom",
+          "sha256": "281440811268e65d9e266b3cc898297e214e04f09740d0386ceeb4a8923d63bf"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/javax.activation/javax.activation-api/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/javax.activation/javax.activation-api/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "javax.xml.bind:jaxb-api:2.3.1",
+      "files": [
+        {
+          "file": "maven/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.pom",
+          "sha256": "12b20cf922773445c3445c2883cbf671fa982111e9bf9f875020f9313b3814b1"
+        },
+        {
+          "file": "maven/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1-sources.jar",
+          "sha256": "d69dc2c28833df5fb6e916efae01477ae936326b342d479a43539b0131c96b9d"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/javax/xml/bind/jaxb-api-parent/2.3.1/jaxb-api-parent-2.3.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/javax/xml/bind/jaxb-api-parent/2.3.1/jaxb-api-parent-2.3.1.pom",
+          "sha256": "cd1beaa4560dc4dfdb826b9d809e464db22526dfb54264bae78a6ff7efb08e1f"
+        },
+        {
+          "file": "maven/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "sha256": "1af699f8d9ddab67f9a0d202fbd7915eb0362a5a6dfd5ffc54cafa3465c9cb0a"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/javax.xml.bind/jaxb-api/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/javax.xml.bind/jaxb-api/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "net.minidev:accessors-smart:2.4.9",
+      "files": [
+        {
+          "file": "maven/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9.pom",
+          "sha256": "fec05e970f239ada8471f4ea3f0611c036fbcc7c43f3ceaa9e5e7be6f3217bb1"
+        },
+        {
+          "file": "maven/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9-sources.jar",
+          "sha256": "4b6022d773826980f124e7a2aed243cea6541238bc1bed785e2ce86076567f50"
+        }
+      ],
+      "parents": [],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/net.minidev/accessors-smart/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "net.minidev:json-smart:2.4.10",
+      "files": [
+        {
+          "file": "maven/net/minidev/json-smart/2.4.10/json-smart-2.4.10.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/minidev/json-smart/2.4.10/json-smart-2.4.10.pom",
+          "sha256": "a959d62b5742f0d991bb7cc5d797ef987813e94de9391700cf0d8df6fd21392b"
+        },
+        {
+          "file": "maven/net/minidev/json-smart/2.4.10/json-smart-2.4.10-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/net/minidev/json-smart/2.4.10/json-smart-2.4.10-sources.jar",
+          "sha256": "e2ece85df4e5489cf5644fd826d2875527a405233b02496b7520d871755f395d"
+        }
+      ],
+      "parents": [],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/net.minidev/json-smart/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "net.sf.saxon:Saxon-HE:11.4",
+      "files": [
+        {
+          "file": "maven/net/sf/saxon/Saxon-HE/11.4/Saxon-HE-11.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/11.4/Saxon-HE-11.4.pom",
+          "sha256": "cc4da34ee0bee4c65adb5d7cb292341f659befa35288f6e31f809dc4bb2fc575"
+        },
+        {
+          "file": "maven/net/sf/saxon/Saxon-HE/11.4/Saxon-HE-11.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/11.4/Saxon-HE-11.4-sources.jar",
+          "sha256": "3855cb7c56c64c22a194f1abbf590693b3db7fa76da7a9ffff148420043c96c4"
+        }
+      ],
+      "parents": [],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "net.sf.saxon.Version; embedded build POM"
+        }
+      ]
+    },
+    {
+      "gav": "net.sf.saxon:Saxon-HE:12.8",
+      "files": [
+        {
+          "file": "maven/net/sf/saxon/Saxon-HE/12.8/Saxon-HE-12.8.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/12.8/Saxon-HE-12.8.pom",
+          "sha256": "15116031263f91da7f7c680681d60532b9521a787e30c19b0d36a863480d0b91"
+        },
+        {
+          "file": "maven/net/sf/saxon/Saxon-HE/12.8/Saxon-HE-12.8-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/12.8/Saxon-HE-12.8-sources.jar",
+          "sha256": "995a335a4615132012516122cdfbc4f43db8d50bf5bee20df8a9c5c785fffad5"
+        }
+      ],
+      "parents": [],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "net.sf.saxon.Version; embedded build POM"
+        }
+      ]
+    },
+    {
+      "gav": "org.apache.commons:commons-compress:1.21",
+      "files": [
+        {
+          "file": "maven/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom",
+          "sha256": "675bb023c9beedde3232949979b9742a5fea946280a55a1b462d4ca7801088cd"
+        },
+        {
+          "file": "maven/org/apache/commons/commons-compress/1.21/commons-compress-1.21-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21-sources.jar",
+          "sha256": "f64973e7c00455e819bcf8b74dda6e91b3e09557135b11b3603c2ba7a0e5479b"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/apache/commons/commons-parent/52/commons-parent-52.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/52/commons-parent-52.pom",
+          "sha256": "75dbe8f34e98e4c3ff42daae4a2f9eb4cbcd3b5f1047d54460ace906dbb4502e"
+        },
+        {
+          "file": "maven/org/apache/apache/23/apache-23.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/apache/23/apache-23.pom",
+          "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.apache.commons/commons-compress/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.apache.httpcomponents.client5:httpclient5:5.1.3",
+      "files": [
+        {
+          "file": "maven/org/apache/httpcomponents/client5/httpclient5/5.1.3/httpclient5-5.1.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5/5.1.3/httpclient5-5.1.3.pom",
+          "sha256": "1988ab3d1bdae0f51f22c83dc97b88fa07561adb6244679d8b8f7146cdd13aaf"
+        },
+        {
+          "file": "maven/org/apache/httpcomponents/client5/httpclient5/5.1.3/httpclient5-5.1.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5/5.1.3/httpclient5-5.1.3-sources.jar",
+          "sha256": "86135405842cde6b46337796a8aa4170a3253690d3f95cbdc5a957bc66917eba"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/apache/httpcomponents/client5/httpclient5-parent/5.1.3/httpclient5-parent-5.1.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5-parent/5.1.3/httpclient5-parent-5.1.3.pom",
+          "sha256": "a27b1413aece92a3aa4774915f7589e0c6179d728d2ac6a295d758ee4fa24cc5"
+        },
+        {
+          "file": "maven/org/apache/httpcomponents/httpcomponents-parent/12/httpcomponents-parent-12.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-parent/12/httpcomponents-parent-12.pom",
+          "sha256": "4209f09593212987c29d6801917309dd5e6f71b53b2b1d0e0f0efb984ad11fa1"
+        },
+        {
+          "file": "maven/org/apache/apache/23/apache-23.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/apache/23/apache-23.pom",
+          "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.apache.httpcomponents.client5/httpclient5/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.apache.httpcomponents.core5:httpcore5:5.1.3",
+      "files": [
+        {
+          "file": "maven/org/apache/httpcomponents/core5/httpcore5/5.1.3/httpcore5-5.1.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/core5/httpcore5/5.1.3/httpcore5-5.1.3.pom",
+          "sha256": "7fc2b8045809f3f27ac9d4d9e99b9d34621b6371cf93c7313ecd84a5af0e9bae"
+        },
+        {
+          "file": "maven/org/apache/httpcomponents/core5/httpcore5/5.1.3/httpcore5-5.1.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/core5/httpcore5/5.1.3/httpcore5-5.1.3-sources.jar",
+          "sha256": "97696503c77792102fb84d107932a47acd92563bcbf7a11775894b03b0c8afaa"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/apache/httpcomponents/core5/httpcore5-parent/5.1.3/httpcore5-parent-5.1.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/core5/httpcore5-parent/5.1.3/httpcore5-parent-5.1.3.pom",
+          "sha256": "a67538865ae0f3744b21e91ca47d461054737c552d1ff29da714c860c992d5bb"
+        },
+        {
+          "file": "maven/org/apache/httpcomponents/httpcomponents-parent/12/httpcomponents-parent-12.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-parent/12/httpcomponents-parent-12.pom",
+          "sha256": "4209f09593212987c29d6801917309dd5e6f71b53b2b1d0e0f0efb984ad11fa1"
+        },
+        {
+          "file": "maven/org/apache/apache/23/apache-23.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/apache/23/apache-23.pom",
+          "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.apache.httpcomponents.core5/httpcore5/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.apache.httpcomponents.core5:httpcore5-h2:5.1.3",
+      "files": [
+        {
+          "file": "maven/org/apache/httpcomponents/core5/httpcore5-h2/5.1.3/httpcore5-h2-5.1.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/core5/httpcore5-h2/5.1.3/httpcore5-h2-5.1.3.pom",
+          "sha256": "2bc0317a148edc9aefea3ec1535394efced3d137d62f7ff5656d0b03f94c0786"
+        },
+        {
+          "file": "maven/org/apache/httpcomponents/core5/httpcore5-h2/5.1.3/httpcore5-h2-5.1.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/core5/httpcore5-h2/5.1.3/httpcore5-h2-5.1.3-sources.jar",
+          "sha256": "dde9ca3aa4f3866e73c7d0acafda350ae5f9c14a399ef57c99eacc702c85eb24"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/apache/httpcomponents/core5/httpcore5-parent/5.1.3/httpcore5-parent-5.1.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/core5/httpcore5-parent/5.1.3/httpcore5-parent-5.1.3.pom",
+          "sha256": "a67538865ae0f3744b21e91ca47d461054737c552d1ff29da714c860c992d5bb"
+        },
+        {
+          "file": "maven/org/apache/httpcomponents/httpcomponents-parent/12/httpcomponents-parent-12.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-parent/12/httpcomponents-parent-12.pom",
+          "sha256": "4209f09593212987c29d6801917309dd5e6f71b53b2b1d0e0f0efb984ad11fa1"
+        },
+        {
+          "file": "maven/org/apache/apache/23/apache-23.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/apache/23/apache-23.pom",
+          "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.apache.httpcomponents.core5/httpcore5-h2/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.apache.pdfbox:pdfbox-app:3.0.8",
+      "files": [
+        {
+          "file": "maven/org/apache/pdfbox/pdfbox-app/3.0.8/pdfbox-app-3.0.8.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/pdfbox/pdfbox-app/3.0.8/pdfbox-app-3.0.8.pom",
+          "sha256": "6991c3bfacb968ce871264243f2a1e784ba9eadc4348d391c15147cbc2bd070d"
+        },
+        {
+          "file": "pdfbox-3.0.8-src.tar.gz",
+          "url": "https://github.com/apache/pdfbox/archive/refs/tags/3.0.8.tar.gz",
+          "sha256": "8ce71e5082466ea2705356c4196ab8f52b5ea28e4ee873b46ad66f3119f23c30"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/apache/pdfbox/pdfbox-parent/3.0.8/pdfbox-parent-3.0.8.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/pdfbox/pdfbox-parent/3.0.8/pdfbox-parent-3.0.8.pom",
+          "sha256": "f031373f03c0f92fb4e49210645cd53e40e9579219655363ce19644ff779283e"
+        },
+        {
+          "file": "maven/org/apache/apache/39/apache-39.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom",
+          "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/pdfbox/pdfbox-app-3.0.8.jar",
+          "metadata": "META-INF/maven/org.apache.pdfbox/pdfbox-app/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.eclipse.parsson:parsson:1.1.7",
+      "files": [
+        {
+          "file": "maven/org/eclipse/parsson/parsson/1.1.7/parsson-1.1.7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/eclipse/parsson/parsson/1.1.7/parsson-1.1.7.pom",
+          "sha256": "aeb404e7f0c14a76ecc8ba6e21ecd92f80f7c10402a446ff5d9c31d50f08e2d3"
+        },
+        {
+          "file": "maven/org/eclipse/parsson/parsson/1.1.7/parsson-1.1.7-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/eclipse/parsson/parsson/1.1.7/parsson-1.1.7-sources.jar",
+          "sha256": "713a473593782f3500e4fe829fb9b0d282e72cc67970ddbea4447fe93d045511"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/eclipse/parsson/project/1.1.7/project-1.1.7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/eclipse/parsson/project/1.1.7/project-1.1.7.pom",
+          "sha256": "af5ef5a13ddd78dc0ba11521dc83a12a4572b513c82f101bb310f1186c5c714d"
+        },
+        {
+          "file": "maven/org/eclipse/ee4j/project/1.0.9/project-1.0.9.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.9/project-1.0.9.pom",
+          "sha256": "825379934a1cf29249f349f2d18adaf79a7b2cb2dbe231518974e1ee70941c17"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar",
+          "metadata": "META-INF/maven/org.eclipse.parsson/parsson/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.eclipse.parsson/parsson/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.glassfish.jaxb:jaxb-core:2.3.0.1",
+      "files": [
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1.pom",
+          "sha256": "c1a3d3fda56df5fabe6fbf9eb39b2a8ce7b53c04801498601e9e4df6d6d85166"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1-sources.jar",
+          "sha256": "c3b2ac8a47dc81dbb99818283c23e83e63fc6dccb01ee3062437b46614f4e11f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom",
+          "sha256": "1d366597d77b073448399cbda35d1ace25eda213c593714dd6b1e6742aa162e2"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom",
+          "sha256": "dacb74d0d4568e67bdeb4ad946d5a685f0cba7f08ec247c4c1e1253e1ddf903d"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-bom/2.3.0.1/jaxb-bom-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.0.1/jaxb-bom-2.3.0.1.pom",
+          "sha256": "d94f6debf87f2468c3c3828f548dd2f38557f41b12aec0732922cc5d61be10f1"
+        },
+        {
+          "file": "maven/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "sha256": "1af699f8d9ddab67f9a0d202fbd7915eb0362a5a6dfd5ffc54cafa3465c9cb0a"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.glassfish.jaxb/jaxb-core/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.glassfish.jaxb/jaxb-core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.glassfish.jaxb:jaxb-runtime:2.3.2",
+      "files": [
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2.pom",
+          "sha256": "9448a5ad7fa68a6083dfbe4f42c8c83e082b9202a105401fc68e944c26548b34"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2-sources.jar",
+          "sha256": "b85c2e314e6565e7dc4fb7e00ec8688c1c0fe9c9f7275125fb8dee43898f3743"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-runtime-parent/2.3.2/jaxb-runtime-parent-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-runtime-parent/2.3.2/jaxb-runtime-parent-2.3.2.pom",
+          "sha256": "b24f8d51f184a68bc1b86d48c0e3cfefeb21a44ede1c5f7303c58ae0488533ec"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-parent/2.3.2/jaxb-parent-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.2/jaxb-parent-2.3.2.pom",
+          "sha256": "20dd6dc34ab7549ac40da1d82e92222ec4347ad0ec0cb118ef6c5703bed53a18"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-bom-ext/2.3.2/jaxb-bom-ext-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.2/jaxb-bom-ext-2.3.2.pom",
+          "sha256": "1a7dec2b27e7e055744cdb8cf1b90def4fd473acd1b804eff098139358959bd7"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-bom/2.3.2/jaxb-bom-2.3.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.2/jaxb-bom-2.3.2.pom",
+          "sha256": "a1018bb54678ed9f5acb2f7a4084e385ff510201f4e9dbf5f75dc6a675f66be7"
+        },
+        {
+          "file": "maven/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom",
+          "sha256": "916b4794d8d8220a59a3fdf6a64dbe794aeb23395e888b81ae36a9b5a2c591a6"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.glassfish.jaxb/jaxb-runtime/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.glassfish.jaxb/jaxb-runtime/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.glassfish.jaxb:txw2:2.3.0.1",
+      "files": [
+        {
+          "file": "maven/org/glassfish/jaxb/txw2/2.3.0.1/txw2-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/txw2/2.3.0.1/txw2-2.3.0.1.pom",
+          "sha256": "38b91b6e93dbe1b4b73464a563545bb6213cc09947fa43bffaafb397379ccbe1"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/txw2/2.3.0.1/txw2-2.3.0.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/txw2/2.3.0.1/txw2-2.3.0.1-sources.jar",
+          "sha256": "7815dad139de674d13fa73af7ae70dfee1db3b4d631f2d2596416ff2ba883cd3"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-txw-parent/2.3.0.1/jaxb-txw-parent-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-txw-parent/2.3.0.1/jaxb-txw-parent-2.3.0.1.pom",
+          "sha256": "991c209d3e06faa18458df7c72b722f7eba50615128f7b934538e2393dddd13c"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom",
+          "sha256": "1d366597d77b073448399cbda35d1ace25eda213c593714dd6b1e6742aa162e2"
+        },
+        {
+          "file": "maven/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom",
+          "sha256": "dacb74d0d4568e67bdeb4ad946d5a685f0cba7f08ec247c4c1e1253e1ddf903d"
+        },
+        {
+          "file": "maven/org/glassfish/jaxb/jaxb-bom/2.3.0.1/jaxb-bom-2.3.0.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.0.1/jaxb-bom-2.3.0.1.pom",
+          "sha256": "d94f6debf87f2468c3c3828f548dd2f38557f41b12aec0732922cc5d61be10f1"
+        },
+        {
+          "file": "maven/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "url": "https://repo.maven.apache.org/maven2/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+          "sha256": "1af699f8d9ddab67f9a0d202fbd7915eb0362a5a6dfd5ffc54cafa3465c9cb0a"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.glassfish.jaxb/txw2/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.glassfish.jaxb/txw2/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.jwat:jwat-arc:1.0.3",
+      "files": [
+        {
+          "file": "maven/org/jwat/jwat-arc/1.0.3/jwat-arc-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-arc/1.0.3/jwat-arc-1.0.3.pom",
+          "sha256": "cdb7a051b775a945e37d063159ce8f1799275fe9fc0f3819dadc530687a8ddfa"
+        },
+        {
+          "file": "maven/org/jwat/jwat-arc/1.0.3/jwat-arc-1.0.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-arc/1.0.3/jwat-arc-1.0.3-sources.jar",
+          "sha256": "7749a59074e0cf4abf4a3b0c43dfa4c11d30f8ad22e92b6b17c567cc5f154e14"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "sha256": "58a22f261b4b37fde9d9f06018193bc73d28fd0b68ac85e1223b851ca7f69dba"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.jwat/jwat-arc/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.jwat:jwat-archive-common:1.0.3",
+      "files": [
+        {
+          "file": "maven/org/jwat/jwat-archive-common/1.0.3/jwat-archive-common-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-archive-common/1.0.3/jwat-archive-common-1.0.3.pom",
+          "sha256": "e708681a6f32752f9a03f0582a5a9083e46348334cbbdb028a95a61f1963fe13"
+        },
+        {
+          "file": "maven/org/jwat/jwat-archive-common/1.0.3/jwat-archive-common-1.0.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-archive-common/1.0.3/jwat-archive-common-1.0.3-sources.jar",
+          "sha256": "199069c8f0d5f130805c697cba801a1477f1e4b221d8274b48817222ac3edecd"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "sha256": "58a22f261b4b37fde9d9f06018193bc73d28fd0b68ac85e1223b851ca7f69dba"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.jwat/jwat-archive-common/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.jwat:jwat-common:1.0.3",
+      "files": [
+        {
+          "file": "maven/org/jwat/jwat-common/1.0.3/jwat-common-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-common/1.0.3/jwat-common-1.0.3.pom",
+          "sha256": "606179d1377bdee3f5b759abe81777167c07019fe052a10a88bf36394a375b8f"
+        },
+        {
+          "file": "maven/org/jwat/jwat-common/1.0.3/jwat-common-1.0.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-common/1.0.3/jwat-common-1.0.3-sources.jar",
+          "sha256": "29c03d21c6439c111054828fa38301eaa52b7bb3995e67a9c8ac27b233347acb"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "sha256": "58a22f261b4b37fde9d9f06018193bc73d28fd0b68ac85e1223b851ca7f69dba"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.jwat/jwat-common/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.jwat:jwat-gzip:1.0.3",
+      "files": [
+        {
+          "file": "maven/org/jwat/jwat-gzip/1.0.3/jwat-gzip-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-gzip/1.0.3/jwat-gzip-1.0.3.pom",
+          "sha256": "f1bc5d14f31ea18d0bb8ef47caa286a6a9cff0de5a2309c6ce60b1de3cf7786f"
+        },
+        {
+          "file": "maven/org/jwat/jwat-gzip/1.0.3/jwat-gzip-1.0.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-gzip/1.0.3/jwat-gzip-1.0.3-sources.jar",
+          "sha256": "6d3bdb833ac9597805b5a3d84770f6a26cc78f3496bdd9e6064897aac568659a"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "sha256": "58a22f261b4b37fde9d9f06018193bc73d28fd0b68ac85e1223b851ca7f69dba"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.jwat/jwat-gzip/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.jwat:jwat-warc:1.0.3",
+      "files": [
+        {
+          "file": "maven/org/jwat/jwat-warc/1.0.3/jwat-warc-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-warc/1.0.3/jwat-warc-1.0.3.pom",
+          "sha256": "81ebebf67d38dc60ce70c6d537b121de19ff179783599534d4090e9609163081"
+        },
+        {
+          "file": "maven/org/jwat/jwat-warc/1.0.3/jwat-warc-1.0.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat-warc/1.0.3/jwat-warc-1.0.3-sources.jar",
+          "sha256": "2cbe0f62bca7724c23f470cebaceb06d621e3fda120eb4b1a13dff5b80c3bc8a"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+          "sha256": "58a22f261b4b37fde9d9f06018193bc73d28fd0b68ac85e1223b851ca7f69dba"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.jwat/jwat-warc/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove:jhove-apps:1.34.0",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/jhove-apps/1.34.0/jhove-apps-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-apps/1.34.0/jhove-apps-1.34.0.pom",
+          "sha256": "8004c02b15893b9cebf249d8ce7e996be20d636f24f16be0de1ebc4ef8b13ba9"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove-apps/1.34.0/jhove-apps-1.34.0-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-apps/1.34.0/jhove-apps-1.34.0-sources.jar",
+          "sha256": "2e158b28ce1df3d2c86523b8887f7dc23e8104f930e953b651c8441ba64e5025"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove/jhove-apps/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove:jhove-core:1.34.0",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/jhove-core/1.34.0/jhove-core-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-core/1.34.0/jhove-core-1.34.0.pom",
+          "sha256": "59f52cc68933291320f114cb1491852611aa5dcbeaac9b3ad315ece6a7594fee"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove-core/1.34.0/jhove-core-1.34.0-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-core/1.34.0/jhove-core-1.34.0-sources.jar",
+          "sha256": "6c8c5f598ad7a972d829f1659696759edc8bd76597492ec87a29c98803faf240"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-apps-1.34.0.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove/jhove-core/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove/jhove-core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove:jhove-ext-modules:1.34.0",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/jhove-ext-modules/1.34.0/jhove-ext-modules-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-ext-modules/1.34.0/jhove-ext-modules-1.34.0.pom",
+          "sha256": "174a3731af4bd5b01ba7186732fe5af42a25cc1f9c1cda27e95fd8b7c6bf7770"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove-ext-modules/1.34.0/jhove-ext-modules-1.34.0-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-ext-modules/1.34.0/jhove-ext-modules-1.34.0-sources.jar",
+          "sha256": "93b42d367d5dec679da7a030433fd94ee133c145bd424a387d9876324d5471b8"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove/jhove-ext-modules/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:aiff-hul:1.6.2",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/aiff-hul/1.6.2/aiff-hul-1.6.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/aiff-hul/1.6.2/aiff-hul-1.6.2.pom",
+          "sha256": "020096829e9fbf6f17de47e65dc9345a654cb98e0ef0929129e40a2b43e62b04"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/aiff-hul/1.6.2/aiff-hul-1.6.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/aiff-hul/1.6.2/aiff-hul-1.6.2-sources.jar",
+          "sha256": "99aad7dd189c5df8b9060c570b5dbbc256b7b6624654a65006bddda2e65e884a"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.26.0/jhove-modules-1.26.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.26.0/jhove-modules-1.26.0.pom",
+          "sha256": "7a0b5a265551992869b8ae78a155716214ea7283a5cfb7fbd58a89ebb38ade24"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.26.0/jhove-1.26.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.26.0/jhove-1.26.0.pom",
+          "sha256": "b6143453cbfadb36ea5763edb26f9b8cb7e89790d4aac4f3ee55929abf2cb83b"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/aiff-hul-1.6.2.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/aiff-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:ascii-hul:1.4.2",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/ascii-hul/1.4.2/ascii-hul-1.4.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/ascii-hul/1.4.2/ascii-hul-1.4.2.pom",
+          "sha256": "9dcab4007c95f324da688eb4c030feaec46bf5a6a19f67fdc75b8bedcca0b199"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/ascii-hul/1.4.2/ascii-hul-1.4.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/ascii-hul/1.4.2/ascii-hul-1.4.2-sources.jar",
+          "sha256": "c4a91eea35e99ed3f6ef25e4d37ac85ed3ef12fd8269baf87c991fbb6d5a9765"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.26.0/jhove-modules-1.26.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.26.0/jhove-modules-1.26.0.pom",
+          "sha256": "7a0b5a265551992869b8ae78a155716214ea7283a5cfb7fbd58a89ebb38ade24"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.26.0/jhove-1.26.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.26.0/jhove-1.26.0.pom",
+          "sha256": "b6143453cbfadb36ea5763edb26f9b8cb7e89790d4aac4f3ee55929abf2cb83b"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/ascii-hul-1.4.2.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/ascii-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:gif-hul:1.4.3",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/gif-hul/1.4.3/gif-hul-1.4.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/gif-hul/1.4.3/gif-hul-1.4.3.pom",
+          "sha256": "c7dddb19baa7525cbec244b8e2750ce1ab54c35d64573a166ab8af6a21917dfd"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/gif-hul/1.4.3/gif-hul-1.4.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/gif-hul/1.4.3/gif-hul-1.4.3-sources.jar",
+          "sha256": "3d2ebde33929730a60e986e3222bd3c4584de6fc7e3574030ecc7b9f84fb5d00"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.26.0/jhove-modules-1.26.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.26.0/jhove-modules-1.26.0.pom",
+          "sha256": "7a0b5a265551992869b8ae78a155716214ea7283a5cfb7fbd58a89ebb38ade24"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.26.0/jhove-1.26.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.26.0/jhove-1.26.0.pom",
+          "sha256": "b6143453cbfadb36ea5763edb26f9b8cb7e89790d4aac4f3ee55929abf2cb83b"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/gif-hul-1.4.3.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/gif-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:html-hul:1.4.5",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/html-hul/1.4.5/html-hul-1.4.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/html-hul/1.4.5/html-hul-1.4.5.pom",
+          "sha256": "e359d2b016405bc62240d9994c9a2480a5b9b58f29dfdfb1f2c1c957702d019c"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/html-hul/1.4.5/html-hul-1.4.5-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/html-hul/1.4.5/html-hul-1.4.5-sources.jar",
+          "sha256": "085c2b6a6e92b0e11fa334de723c9f4b848003d4d8e40586b94763b0e1a9449f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "sha256": "bfb6b78f64441610869eb5da49bd8ae926f40b7e7afda7ec5b2b64f202412874"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/html-hul-1.4.5.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/html-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:jpeg-hul:1.5.4",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jpeg-hul/1.5.4/jpeg-hul-1.5.4.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jpeg-hul/1.5.4/jpeg-hul-1.5.4.pom",
+          "sha256": "5146ea89882c6ba50bef8a611380b83e91cbf9511db3634e4bd9eb3758c7cfbf"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jpeg-hul/1.5.4/jpeg-hul-1.5.4-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jpeg-hul/1.5.4/jpeg-hul-1.5.4-sources.jar",
+          "sha256": "6f2b379b6e881c365a0a9403b9737bbb002628a7437c58aac09f0590927542cc"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.28.0/jhove-modules-1.28.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.28.0/jhove-modules-1.28.0.pom",
+          "sha256": "f04455b4a368449caf47dbc9e845fdc98e911e45dc46b32b8c0edeb799bbb405"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.28.0/jhove-1.28.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.28.0/jhove-1.28.0.pom",
+          "sha256": "f5e1de1d29a867d4e7daaa067b766419ec5a53eb293a0c93e49d87451e99fe2a"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jpeg-hul-1.5.4.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/jpeg-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:jpeg2000-hul:1.4.5",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jpeg2000-hul/1.4.5/jpeg2000-hul-1.4.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jpeg2000-hul/1.4.5/jpeg2000-hul-1.4.5.pom",
+          "sha256": "ee1abcc87a57349b851a64a85eb477281bfd78c25bf6a13a761a07b789a1eae2"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jpeg2000-hul/1.4.5/jpeg2000-hul-1.4.5-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jpeg2000-hul/1.4.5/jpeg2000-hul-1.4.5-sources.jar",
+          "sha256": "7819e959ce0eb23bfd955d24c4a90a0e322271a530b586c9a8566e25c338993f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "sha256": "bfb6b78f64441610869eb5da49bd8ae926f40b7e7afda7ec5b2b64f202412874"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jpeg2000-hul-1.4.5.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/jpeg2000-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:pdf-hul:1.12.8",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/pdf-hul/1.12.8/pdf-hul-1.12.8.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/pdf-hul/1.12.8/pdf-hul-1.12.8.pom",
+          "sha256": "35614f2aa7fb623f9ab1a1bc151786e50cd420cd3a19f7990799439519647114"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/pdf-hul/1.12.8/pdf-hul-1.12.8-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/pdf-hul/1.12.8/pdf-hul-1.12.8-sources.jar",
+          "sha256": "7f35c226c6a8de771a45e6fca4e5cad9e678cddd492004c30095b3e352c46c34"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "sha256": "bfb6b78f64441610869eb5da49bd8ae926f40b7e7afda7ec5b2b64f202412874"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/pdf-hul-1.12.8.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/pdf-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:tiff-hul:1.9.5",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/tiff-hul/1.9.5/tiff-hul-1.9.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/tiff-hul/1.9.5/tiff-hul-1.9.5.pom",
+          "sha256": "8bd2191c64b1b2a2a3b23af908a49fa50aa36aaa7008f0e599702091909ea1b7"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/tiff-hul/1.9.5/tiff-hul-1.9.5-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/tiff-hul/1.9.5/tiff-hul-1.9.5-sources.jar",
+          "sha256": "0bb608555447ad4519f03598fc07898e1c767ccf1e7248ecc6f6af87e334e98d"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.32.0/jhove-modules-1.32.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.32.0/jhove-modules-1.32.0.pom",
+          "sha256": "7b897a56acaab09c669e0558ba451a7379cddae7779d3e613cbab07cb0f6a735"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.32.0/jhove-1.32.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.32.0/jhove-1.32.0.pom",
+          "sha256": "fe7076d2a4f099e35acde29b1a90e07f5aebebbac5ffc2bbba28610f5ba05a49"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/tiff-hul-1.9.5.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/tiff-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:utf8-hul:1.7.5",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/utf8-hul/1.7.5/utf8-hul-1.7.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/utf8-hul/1.7.5/utf8-hul-1.7.5.pom",
+          "sha256": "3db82308d1e7c24e25faadda05ea2fff30934b6deae887925dd9048f6f5ad61c"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/utf8-hul/1.7.5/utf8-hul-1.7.5-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/utf8-hul/1.7.5/utf8-hul-1.7.5-sources.jar",
+          "sha256": "0938af744034ceaea88334689ea7499b315ec14bd6df0154cf0db2d3b8659be0"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+          "sha256": "bfb6b78f64441610869eb5da49bd8ae926f40b7e7afda7ec5b2b64f202412874"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+          "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/utf8-hul-1.7.5.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/utf8-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:wave-hul:1.8.3",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/wave-hul/1.8.3/wave-hul-1.8.3.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/wave-hul/1.8.3/wave-hul-1.8.3.pom",
+          "sha256": "b3270ee2201c4dbd15458513637983ec47f45ad766c2718c83b72e682ede9e39"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/wave-hul/1.8.3/wave-hul-1.8.3-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/wave-hul/1.8.3/wave-hul-1.8.3-sources.jar",
+          "sha256": "bc0ad9e86950f91879e79069e52296d8cb24c4f50e35bacd4f32b959dc73389f"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.30.0/jhove-modules-1.30.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.30.0/jhove-modules-1.30.0.pom",
+          "sha256": "da3ad8b5eee1cdccfc5c1ac0e0fb9715e697193ed02fdde92419153c705c43a7"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.30.0/jhove-1.30.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.30.0/jhove-1.30.0.pom",
+          "sha256": "f6464c15639c2e958a14bdf8a06e28b3a4d28f2c1e23c782ab792d066be20001"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/wave-hul-1.8.3.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/wave-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.openpreservation.jhove.modules:xml-hul:1.5.5",
+      "files": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/xml-hul/1.5.5/xml-hul-1.5.5.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/xml-hul/1.5.5/xml-hul-1.5.5.pom",
+          "sha256": "27a190beb7bd8ab34b7ad757322f72dde05b0847653a2e1f3e89bb06dcd95e1a"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/modules/xml-hul/1.5.5/xml-hul-1.5.5-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/xml-hul/1.5.5/xml-hul-1.5.5-sources.jar",
+          "sha256": "748b466864fbc225b5f3189061145b7a8d506e27ff4b2822ee5d030a785f7e3d"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/openpreservation/jhove/modules/jhove-modules/1.32.0/jhove-modules-1.32.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/modules/jhove-modules/1.32.0/jhove-modules-1.32.0.pom",
+          "sha256": "7b897a56acaab09c669e0558ba451a7379cddae7779d3e613cbab07cb0f6a735"
+        },
+        {
+          "file": "maven/org/openpreservation/jhove/jhove/1.32.0/jhove-1.32.0.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove/1.32.0/jhove-1.32.0.pom",
+          "sha256": "fe7076d2a4f099e35acde29b1a90e07f5aebebbac5ffc2bbba28610f5ba05a49"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/xml-hul-1.5.5.jar",
+          "metadata": "META-INF/maven/org.openpreservation.jhove.modules/xml-hul/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.slf4j:slf4j-api:1.7.36",
+      "files": [
+        {
+          "file": "maven/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom",
+          "sha256": "fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684"
+        },
+        {
+          "file": "maven/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36-sources.jar",
+          "sha256": "15bc04357a3725b7a5153f132db71379f95e83b7b8590a86cc6d4ad77bfc150a"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
+          "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.slf4j/slf4j-api/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.slf4j:slf4j-nop:1.7.36",
+      "files": [
+        {
+          "file": "maven/org/slf4j/slf4j-nop/1.7.36/slf4j-nop-1.7.36.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/1.7.36/slf4j-nop-1.7.36.pom",
+          "sha256": "20a0f7c060020d75fef4470ae6948661d418ebd5ea4549c68abedf20ee86cb65"
+        },
+        {
+          "file": "maven/org/slf4j/slf4j-nop/1.7.36/slf4j-nop-1.7.36-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/1.7.36/slf4j-nop-1.7.36-sources.jar",
+          "sha256": "b86491d9a8bbc35fe6a6ecf267fc5168399496f5aeffae608ed0ca99736838e9"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
+          "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.slf4j/slf4j-nop/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf:core:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/core/1.30.2/core-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/core/1.30.2/core-1.30.2.pom",
+          "sha256": "9c42f0f561f347829b087e20240c825e75a3590e085e29b40aaf1ed37612a643"
+        },
+        {
+          "file": "maven/org/verapdf/core/1.30.2/core-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/core/1.30.2/core-1.30.2-sources.jar",
+          "sha256": "f7f44a9886e9d5c78489db02f1dac2776832326c088253e19f56268cfd294582"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/verapdf-library/1.30.2/verapdf-library-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-library/1.30.2/verapdf-library-1.30.2.pom",
+          "sha256": "dad965d48a7ce65b7c65ef19afc4021b6838ac2191f076bec05e636307e00ac3"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/core/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf:feature-reporting:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/feature-reporting/1.30.2/feature-reporting-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/feature-reporting/1.30.2/feature-reporting-1.30.2.pom",
+          "sha256": "6b42e82c88a9b696d542500018bd16fff376a9cdb7b9a5b3e488122b10e9dd65"
+        },
+        {
+          "file": "maven/org/verapdf/feature-reporting/1.30.2/feature-reporting-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/feature-reporting/1.30.2/feature-reporting-1.30.2-sources.jar",
+          "sha256": "45301d09989bb363aae733b09809500d3fd22305955f1b724e859ed63c0ea6ed"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/validation/1.30.2/validation-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/validation/1.30.2/validation-1.30.2.pom",
+          "sha256": "a2de470fd8eb27d058ffd9676ef38c86e7d357e32432fcd1e10d0bfc573861cd"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/feature-reporting/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/feature-reporting/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf:metadata-fixer:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/metadata-fixer/1.30.2/metadata-fixer-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/metadata-fixer/1.30.2/metadata-fixer-1.30.2.pom",
+          "sha256": "0ac52cd87618df562467d51b48ddd80761c8ae0f8efc9ba4a76a5819525d435a"
+        },
+        {
+          "file": "maven/org/verapdf/metadata-fixer/1.30.2/metadata-fixer-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/metadata-fixer/1.30.2/metadata-fixer-1.30.2-sources.jar",
+          "sha256": "0d2688693ac54667511a6d15cb581178ca7ff7505eb61ac05a1f51dfbeeb7691"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/validation/1.30.2/validation-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/validation/1.30.2/validation-1.30.2.pom",
+          "sha256": "a2de470fd8eb27d058ffd9676ef38c86e7d357e32432fcd1e10d0bfc573861cd"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/metadata-fixer/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/metadata-fixer/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf:parser:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/parser/1.30.2/parser-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/parser/1.30.2/parser-1.30.2.pom",
+          "sha256": "3d24ca3d228c4890da50cbe9f405254942233bc42d0b3f6d0ca43f6c4d027972"
+        },
+        {
+          "file": "maven/org/verapdf/parser/1.30.2/parser-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/parser/1.30.2/parser-1.30.2-sources.jar",
+          "sha256": "99fb4d37bad0e27b470912dcd7553657ff0c6b78e13241628ecd683491210ec3"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/parser/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/parser/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf:pdf-model:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/pdf-model/1.30.2/pdf-model-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/pdf-model/1.30.2/pdf-model-1.30.2.pom",
+          "sha256": "a205f7102e0ccb0569130e0bb153420132bcb9562dfe518004075abe04657d4f"
+        },
+        {
+          "file": "maven/org/verapdf/pdf-model/1.30.2/pdf-model-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/pdf-model/1.30.2/pdf-model-1.30.2-sources.jar",
+          "sha256": "9bc4fffa70b0342844a1f6fa59dc5f0a87d622ab9193d5b1ec7be74569841b84"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/pdf-model/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/pdf-model/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf:validation-model:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/validation-model/1.30.2/validation-model-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/validation-model/1.30.2/validation-model-1.30.2.pom",
+          "sha256": "323f8a1c4476bd102ddff49e4afd5e5bc7a0616ff4ff05e1eafd86d41c048aa0"
+        },
+        {
+          "file": "maven/org/verapdf/validation-model/1.30.2/validation-model-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/validation-model/1.30.2/validation-model-1.30.2-sources.jar",
+          "sha256": "ee110fae5bbc8719260f286eb824d01821d34a275100bc1747a688d4b08f26c3"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/validation/1.30.2/validation-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/validation/1.30.2/validation-1.30.2.pom",
+          "sha256": "a2de470fd8eb27d058ffd9676ef38c86e7d357e32432fcd1e10d0bfc573861cd"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/validation-model/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/validation-model/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf:verapdf-xmp-core:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/verapdf-xmp-core/1.30.2/verapdf-xmp-core-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-xmp-core/1.30.2/verapdf-xmp-core-1.30.2.pom",
+          "sha256": "07a6ca26c98b9ff4bb918562aaf60f23804d1deadf3c8b5db723320193846e79"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-xmp-core/1.30.2/verapdf-xmp-core-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-xmp-core/1.30.2/verapdf-xmp-core-1.30.2-sources.jar",
+          "sha256": "194ab59547414021d2c630850dc246d424cc5b4343cb87cd87c8171f92b8c2f3"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/verapdf-library/1.30.2/verapdf-library-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-library/1.30.2/verapdf-library-1.30.2.pom",
+          "sha256": "dad965d48a7ce65b7c65ef19afc4021b6838ac2191f076bec05e636307e00ac3"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/verapdf-xmp-core/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf/verapdf-xmp-core/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf.apps:apps:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/apps/apps/1.30.2/apps-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/apps/apps/1.30.2/apps-1.30.2.pom",
+          "sha256": "8c6c66bf877178203631c497ba018a2c088540dbc89fa393c8c2e790adc35bbf"
+        },
+        {
+          "file": "maven/org/verapdf/apps/apps/1.30.2/apps-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/apps/apps/1.30.2/apps-1.30.2-sources.jar",
+          "sha256": "d53579722a5856a2872bb5c9a16c6a28acc2bc27ac577e88c1c7f57ad2338fcb"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/verapdf-apps/1.30.2/verapdf-apps-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-apps/1.30.2/verapdf-apps-1.30.2.pom",
+          "sha256": "bc24bf38f404dc20e515966e0951ad658225bf3dde463d84903eb1105b81fe7b"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf.apps/apps/pom.properties"
+        },
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf.apps/apps/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf.apps:cli:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/apps/cli/1.30.2/cli-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/apps/cli/1.30.2/cli-1.30.2.pom",
+          "sha256": "43f23bb793824a728140b0bbef4b4af88dd0630fd828034ace13d8a1795a6d05"
+        },
+        {
+          "file": "maven/org/verapdf/apps/cli/1.30.2/cli-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/apps/cli/1.30.2/cli-1.30.2-sources.jar",
+          "sha256": "6a4966632d2be0b2374ae7161644a4af6483e07ee19660026e600d827e085556"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/verapdf-apps/1.30.2/verapdf-apps-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-apps/1.30.2/verapdf-apps-1.30.2.pom",
+          "sha256": "bc24bf38f404dc20e515966e0951ad658225bf3dde463d84903eb1105b81fe7b"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/cli-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf.apps/cli/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.verapdf.apps:gui:1.30.2",
+      "files": [
+        {
+          "file": "maven/org/verapdf/apps/gui/1.30.2/gui-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/apps/gui/1.30.2/gui-1.30.2.pom",
+          "sha256": "8be6cb580de3dd8dd9080d0c4ca47f03d7d8205a843239934d50a9a44d393a58"
+        },
+        {
+          "file": "maven/org/verapdf/apps/gui/1.30.2/gui-1.30.2-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/apps/gui/1.30.2/gui-1.30.2-sources.jar",
+          "sha256": "b25ab9d07aef02bf005ded51bb09cfe42fac759d5fc537c028927d8aa266127c"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/verapdf/verapdf-apps/1.30.2/verapdf-apps-1.30.2.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-apps/1.30.2/verapdf-apps-1.30.2.pom",
+          "sha256": "bc24bf38f404dc20e515966e0951ad658225bf3dde463d84903eb1105b81fe7b"
+        },
+        {
+          "file": "maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+          "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62"
+        },
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/verapdf/bin/gui-1.30.2.jar",
+          "metadata": "META-INF/maven/org.verapdf.apps/gui/pom.properties"
+        }
+      ]
+    },
+    {
+      "gav": "org.w3c:epubcheck:5.2.1",
+      "files": [
+        {
+          "file": "maven/org/w3c/epubcheck/5.2.1/epubcheck-5.2.1.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/w3c/epubcheck/5.2.1/epubcheck-5.2.1.pom",
+          "sha256": "edfda2e8293e4216d2084d56f7f1ba22ecb476a3a25bdcc6695e9c09fe01e036"
+        },
+        {
+          "file": "maven/org/w3c/epubcheck/5.2.1/epubcheck-5.2.1-sources.jar",
+          "url": "https://repo.maven.apache.org/maven2/org/w3c/epubcheck/5.2.1/epubcheck-5.2.1-sources.jar",
+          "sha256": "85f18efb586172474be116181fa9e6d106929c965da91ca935f4cfd05daa4285"
+        }
+      ],
+      "parents": [
+        {
+          "file": "maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+          "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454"
+        }
+      ],
+      "identified_in": [
+        {
+          "jar": "app/resources/binaries/jhove/bin/jhove-ext-modules-1.34.0.jar",
+          "metadata": "META-INF/maven/org.w3c/epubcheck/pom.properties"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

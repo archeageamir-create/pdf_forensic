@@ -1,0 +1,61 @@
+# This file created by conda-build 26.3.0
+# ------------------------------------------------
+
+package:
+  name: liblzma
+  version: 5.8.3
+source:
+  url: https://github.com/tukaani-project/xz/releases/download/v5.8.3/xz-5.8.3.tar.gz
+  sha256: 3d3a1b973af218114f4f889bbaa2f4c037deaae0c8e815eec381c3d546b974a0
+build:
+  run_exports:
+    - liblzma >=5.8.3,<6.0a0
+  number: 0
+  string: hfd05255_0
+requirements:
+  build:
+    - cmake-no-system 4.3.1 hac47afa_0
+    - ninja 1.13.2 h477610d_0
+    - ucrt 10.0.26100.0 h57928b3_0
+    - vc 14.3 h41ae7f8_34
+    - vc14_runtime 14.44.35208 h818238b_34
+    - vcomp14 14.44.35208 h818238b_34
+    - vs2022_win-64 19.44.35207 ha74f236_34
+    - vs_win-64 2022.14 ha74f236_34
+    - vswhere 3.1.7 h40126e0_1
+  run_constrained:
+    - xz 5.8.3.*
+  host:
+    - ucrt 10.0.26100.0 h57928b3_0
+    - vc 14.3 h41ae7f8_34
+    - vc14_runtime 14.44.35208 h818238b_34
+    - vcomp14 14.44.35208 h818238b_34
+  run:
+    - ucrt >=10.0.20348.0
+    - vc >=14.3,<15
+    - vc14_runtime >=14.44.35208
+test:
+  commands:
+    - if not exist %LIBRARY_PREFIX%\bin\liblzma.dll exit 1
+    - if exist %LIBRARY_PREFIX%\lib\lzma.lib exit 1
+about:
+  home: http://tukaani.org/xz/
+  dev_url: http://git.tukaani.org/
+  summary: a compression library with an API similar to that of zlib
+  license: 0BSD
+  license_file:
+    - COPYING
+    - COPYING.0BSD
+extra:
+  recipe-maintainers:
+    - mingwandroid
+    - msarahan
+    - nehaljwani
+    - ocefpaf
+    - scopatz
+    - xhochy
+  final: true
+  copy_test_source_files: true
+  flow_run_id: azure_20260410.1.1
+  remote_url: https://github.com/conda-forge/xz-feedstock
+  sha: ea4ad279cfa9e94ff81e04f31f5b634fb50229d1

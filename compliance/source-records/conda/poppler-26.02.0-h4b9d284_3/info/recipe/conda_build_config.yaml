@@ -1,0 +1,49 @@
+CI: azure
+CONDA_BUILD_SKIP_TESTS: '0'
+c_compiler: vs2022
+c_stdlib: vs
+cairo: '1'
+channel_sources: conda-forge
+channel_targets: conda-forge main
+cpu_optimization_target: nocona
+cran_mirror: https://cran.r-project.org
+curl: '8'
+cxx_compiler: vs2022
+expat: '2'
+extend_keys:
+- ignore_build_only_deps
+- ignore_version
+- pin_run_as_build
+- extend_keys
+fontconfig: '2'
+fortran_compiler: gfortran
+freetype: '2'
+glib: '2'
+ignore_build_only_deps:
+- python
+- numpy
+lcms2: '2'
+libboost_devel: '1.90'
+libcurl: '8'
+libiconv: '1'
+libjpeg_turbo: '3'
+libpng: '1.6'
+libtiff: '4.7'
+lua: '5'
+numpy: '1.26'
+openjpeg: '2'
+perl: 5.26.2
+pin_run_as_build:
+  python:
+    max_pin: x.x
+    min_pin: x.x
+  r-base:
+    max_pin: x.x
+    min_pin: x.x
+poppler: '26.02'
+python: '3.12'
+qt_main: '5.15'
+r_base: '3.4'
+target_platform: win-64
+vc: '14'
+zlib: '1'

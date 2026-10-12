@@ -10,6 +10,8 @@ dist/
 *.log
 .downloads/
 .verification/
+tmp/
+output/
 .compliance-cache/
 app/resources/bin/
 app/resources/binaries/

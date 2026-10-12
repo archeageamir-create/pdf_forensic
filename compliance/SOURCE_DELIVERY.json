@@ -1,0 +1,1785 @@
+{
+  "version": "0.5.1",
+  "scope": "Exact upstream source archives, Poppler supplier recipes/patches, Java source JARs/build POMs, Temurin build scripts, Pillow text-shaping sources and the ANSE ffprobe recipe. Technical delivery verification; not a legal opinion.",
+  "archives": [
+    {
+      "file": "OpenJDK-jdk21u-21.0.11+10.tar.gz",
+      "sha256": "18edf62aa95c99325725475c0ad5621d8de61f4c84fdb8d2b7efd015a6de8e42",
+      "bytes": 114063214
+    },
+    {
+      "file": "ffmpeg-38b88335f9.tar.gz",
+      "sha256": "2ae7e42343cfffb811d15cfe98b6d005f082595fcdf034d30a4ff90cfed9f9c6",
+      "bytes": 16894057
+    },
+    {
+      "file": "jhove-1.34.0.tar.gz",
+      "sha256": "a154058acca91db52d9aec94fa5dc62e2d1dc9448fa9d4405fd9281a0ff59330",
+      "bytes": 244326534
+    },
+    {
+      "file": "poppler-26.02.0.tar.xz",
+      "sha256": "dded8621f7b2f695c91063aab1558691c8418374cd583501e89ed39487e7ab77",
+      "bytes": 2025588
+    },
+    {
+      "file": "poppler-data-0.4.12.tar.gz",
+      "sha256": "c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74",
+      "bytes": 4504754
+    },
+    {
+      "file": "pyside-setup-everywhere-src-6.11.2.tar.xz",
+      "sha256": "cba47efbaad1bedd529725cbc14e21f156c7a19366f07b3edfbb076ffd7afdf8",
+      "bytes": 18053248
+    },
+    {
+      "file": "qt-everywhere-src-6.11.2.tar.xz",
+      "sha256": "6dcfbca271d76a6502741a2c0dc6fc98ef7dd0b7b4cfd0abcebb285a86a26f33",
+      "bytes": 1019661552
+    },
+    {
+      "file": "supplement/bzip2-1.0.8.tar.gz",
+      "sha256": "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269",
+      "bytes": 810029
+    },
+    {
+      "file": "supplement/conda-lcms2-2.19-0-lcms2-2.19.tar.gz",
+      "sha256": "49e7e134e4299733dd0eda434fa468997a28ab3d33fa397c642b03644f552216",
+      "bytes": 5726199
+    },
+    {
+      "file": "supplement/conda-lerc-4.1.0-0-v4.1.0.tar.gz",
+      "sha256": "f05b24d2368becab9144873878655bb718910631550d4f786262378c16ab94a7",
+      "bytes": 4056763
+    },
+    {
+      "file": "supplement/conda-libcurl-8.20.0-0-curl-8.20.0.tar.bz2",
+      "sha256": "4be48e69cf467246cb97d369b85d78a08528f2b37cffef2418ee16e6a4eb596e",
+      "bytes": 3274984
+    },
+    {
+      "file": "supplement/conda-libdeflate-1.25-0-v1.25.tar.gz",
+      "sha256": "d11473c1ad4c57d874695e8026865e38b47116bbcb872bfc622ec8f37a86017d",
+      "bytes": 197494
+    },
+    {
+      "file": "supplement/conda-libfreetype6-2.14.3-0-freetype-2.14.3.tar.gz",
+      "sha256": "e61b31ab26358b946e767ed7eb7f4bb2e507da1cfefeb7a8861ace7fd5c899a1",
+      "bytes": 4134916
+    },
+    {
+      "file": "supplement/conda-libjpeg-turbo-3.1.4.1-0-3.1.4.1.tar.gz",
+      "sha256": "a7da42b640377c2a9a9665e2c4b0ea60cd5599afb48c2521e6df0c9dc9d15a25",
+      "bytes": 2528617
+    },
+    {
+      "file": "supplement/conda-liblzma-5.8.3-0-xz-5.8.3.tar.gz",
+      "sha256": "3d3a1b973af218114f4f889bbaa2f4c037deaae0c8e815eec381c3d546b974a0",
+      "bytes": 2771455
+    },
+    {
+      "file": "supplement/conda-libpng-1.6.58-0-libpng-1.6.58.tar.gz",
+      "sha256": "8c9b05b675ca7301a458df2c2e46f26e1d41ff36b8863f8c33530bc58c2e6225",
+      "bytes": 1582074
+    },
+    {
+      "file": "supplement/conda-libssh2-1.11.1-0-libssh2-1.11.1.tar.gz",
+      "sha256": "d9ec76cbe34db98eec3539fe2c899d26b0c837cb3eb466a56b0f109cabf658f7",
+      "bytes": 1093012
+    },
+    {
+      "file": "supplement/conda-libtiff-4.7.1-0-tiff-4.7.1.tar.gz",
+      "sha256": "f698d94f3103da8ca7438d84e0344e453fe0ba3b7486e04c5bf7a9a3fabe9b69",
+      "bytes": 4000609
+    },
+    {
+      "file": "supplement/conda-libzlib-1.3.2-0-zlib-1.3.2.tar.gz",
+      "sha256": "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16",
+      "bytes": 1502830
+    },
+    {
+      "file": "supplement/conda-openjpeg-2.5.4-0-v2.5.4.tar.gz",
+      "sha256": "a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a",
+      "bytes": 2157028
+    },
+    {
+      "file": "supplement/conda-openssl-3.6.2-0-openssl-3.6.2.tar.gz",
+      "sha256": "aaf51a1fe064384f811daeaeb4ec4dce7340ec8bd893027eee676af31e83a04f",
+      "bytes": 54913556
+    },
+    {
+      "file": "supplement/conda-poppler-26.02.0-0-poppler-26.02.0.tar.xz",
+      "sha256": "dded8621f7b2f695c91063aab1558691c8418374cd583501e89ed39487e7ab77",
+      "bytes": 2025588
+    },
+    {
+      "file": "supplement/conda-zstd-1.5.7-0-v1.5.7.tar.gz",
+      "sha256": "37d7284556b20954e56e1ca85b80226768902e2edabd3b649e9e72c0c9012ee3",
+      "bytes": 2451884
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2-sources.jar",
+      "sha256": "43bdeaa3510e49a035f6ff670882a0c1a6df21c255199a37f6ed660e4839e19f",
+      "bytes": 84028
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.pom",
+      "sha256": "0b2bd694ea89267eea48126a8a5b24a65234c643387542d24469d195bfba1cf8",
+      "bytes": 7092
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21-sources.jar",
+      "sha256": "71fe6323d91b16d5d1007fd1e1533fa06bb369abde74f68a42a68c0f8f061a8b",
+      "bytes": 89547
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.pom",
+      "sha256": "71cac5392151e2a528cc9a09179f0a334179f05c52f8e596cf58ddf12bb27f2b",
+      "bytes": 7390
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2-sources.jar",
+      "sha256": "ab5a6bf525586bee936b7127c0d0d6f0d61bb15d1b49edff845c9924810bd91c",
+      "bytes": 492969
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.pom",
+      "sha256": "e065b0039d21f4dfce46bd43104c7d76d5856bd732e2aa860cc5a4a270ed72de",
+      "bytes": 10012
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-core/2.21.1/jackson-core-2.21.1-sources.jar",
+      "sha256": "50d16c835cd81fd829036d551c73c40196a988dd6c55d00590e3e0bb41deda32",
+      "bytes": 497386
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-core/2.21.1/jackson-core-2.21.1.pom",
+      "sha256": "0f3fb5eb9e8970449ac0cb98e2f8e7b513d2d4ec5b1a4f02e22778e4f7bab8d7",
+      "bytes": 10034
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2-sources.jar",
+      "sha256": "a543f696cc9db5a009f2c548270ced3ac0232c5d947b0ca3e62605dfccc279a2",
+      "bytes": 1228818
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.pom",
+      "sha256": "493a3db6447b7a8ecbb3724234c6ce677d72db4b04f6ba008f0ebeaea7be5a9d",
+      "bytes": 21242
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-databind/2.21.1/jackson-databind-2.21.1-sources.jar",
+      "sha256": "f9f1f15b07eed9bc0fa2a3ab0ee0f7e9ebe3c17dd4ea519cc7509625a57777ca",
+      "bytes": 1251280
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/core/jackson-databind/2.21.1/jackson-databind-2.21.1.pom",
+      "sha256": "bd4817d0b91794aff6f4b116b576bfedc9277be2d6c651c9566f552222c6a550",
+      "bytes": 23020
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/jackson-base/2.18.2/jackson-base-2.18.2.pom",
+      "sha256": "ef574b72f5b48948044f68376b874c88ae09a029dc8e05f64a1c30bdfb6de14a",
+      "bytes": 12298
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/jackson-base/2.21.1/jackson-base-2.21.1.pom",
+      "sha256": "60d4eb66a000a33fa37e7cb51e2550dabe7467a0b8ac60806d7d3ba9728ccd64",
+      "bytes": 13361
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/jackson-bom/2.18.2/jackson-bom-2.18.2.pom",
+      "sha256": "5247cdc301725d3f67f7ef049037289d5af709d6972bcf4b17096e4548d2956b",
+      "bytes": 18696
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/jackson-bom/2.21.1/jackson-bom-2.21.1.pom",
+      "sha256": "8d7c78dde10f4d08e7296cef084cf30b77adcea7a36e23d1520793fdec63ff28",
+      "bytes": 20225
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/jackson-parent/2.18.1/jackson-parent-2.18.1.pom",
+      "sha256": "d0822fac1a0226844b8ad445c920c49a4f619169d09b1010a7dfeed19910998c",
+      "bytes": 6684
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+      "sha256": "3851df627faeb46887b956104630b74a8bbb5f7de22e974cf15982e20e0373de",
+      "bytes": 6879
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/oss-parent/61/oss-parent-61.pom",
+      "sha256": "3649513cf597e9186da0855986a8c543e12bdbd805edeef9c124db56dd036544",
+      "bytes": 22578
+    },
+    {
+      "file": "supplement/maven/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+      "sha256": "fcbbf1c18c9047e6917d384f2064e21b42a58fc85fb0523a9e2e015eff7c619d",
+      "bytes": 24055
+    },
+    {
+      "file": "supplement/maven/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar",
+      "sha256": "1c9e85e272d0708c6a591dc74828c71603053b48cc75ae83cce56912a2aa063b",
+      "bytes": 18102
+    },
+    {
+      "file": "supplement/maven/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom",
+      "sha256": "19889dbdf1b254b2601a5ee645b8147a974644882297684c798afe5d63d78dfe",
+      "bytes": 4286
+    },
+    {
+      "file": "supplement/maven/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0-sources.jar",
+      "sha256": "a2c0783981c8ad48faaa6ea8de6f1926d8e87c125f5df5ce531a9810b943e032",
+      "bytes": 32627
+    },
+    {
+      "file": "supplement/maven/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.pom",
+      "sha256": "920135797dcca5917b5a5c017642a58d340a4cd1bcd12f56f892a5663bd7bddc",
+      "bytes": 2159
+    },
+    {
+      "file": "supplement/maven/com/google/errorprone/error_prone_parent/2.18.0/error_prone_parent-2.18.0.pom",
+      "sha256": "47f22e99c7bf466391def16f8377985e5d3ba6f5bbcf65853644805513e15fad",
+      "bytes": 11080
+    },
+    {
+      "file": "supplement/maven/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1-sources.jar",
+      "sha256": "092346eebbb1657b51aa7485a246bf602bb464cc0b0e2e1c7e7201fadce1e98f",
+      "bytes": 3493
+    },
+    {
+      "file": "supplement/maven/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.pom",
+      "sha256": "e96042ce78fecba0da2be964522947c87b40a291b5fd3cd672a434924103c4b9",
+      "bytes": 2413
+    },
+    {
+      "file": "supplement/maven/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
+      "sha256": "f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04",
+      "bytes": 10180
+    },
+    {
+      "file": "supplement/maven/com/google/guava/guava-parent/32.0.0-jre/guava-parent-32.0.0-jre.pom",
+      "sha256": "acf92bcda177461531c368519dc9abc5f9d5854adc1c289e9bf80371befd35c3",
+      "bytes": 20792
+    },
+    {
+      "file": "supplement/maven/com/google/guava/guava/32.0.0-jre/guava-32.0.0-jre-sources.jar",
+      "sha256": "e8c6bdd4c859768a59dd85b704a25275dd69dee23100b90c78e5e1215fa0336f",
+      "bytes": 1861124
+    },
+    {
+      "file": "supplement/maven/com/google/guava/guava/32.0.0-jre/guava-32.0.0-jre.pom",
+      "sha256": "9eccce508b51d5521e53883b974d2b872f2d268543c2c51b4f866e3fa076f5e7",
+      "bytes": 11354
+    },
+    {
+      "file": "supplement/maven/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.pom",
+      "sha256": "18d4b1db26153d4e55079ce1f76bb1fe05cdb862ef9954a88cbcc4ff38b8679b",
+      "bytes": 2278
+    },
+    {
+      "file": "supplement/maven/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8-sources.jar",
+      "sha256": "7413eed41f111453a08837f5ac680edded7faed466cbd35745e402e13f4cc3f5",
+      "bytes": 12028
+    },
+    {
+      "file": "supplement/maven/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.pom",
+      "sha256": "37f87798b18385113c918bfa9e1276fe50735ef8fa849b5800c519d54dbf11f8",
+      "bytes": 2921
+    },
+    {
+      "file": "supplement/maven/com/sun/activation/all/1.2.0/all-1.2.0.pom",
+      "sha256": "1d8518e3ac7532a104e4f7be77def37c982e530723c6bdb3d67708cce2b0c2c4",
+      "bytes": 17945
+    },
+    {
+      "file": "supplement/maven/com/sun/istack/istack-commons-runtime/3.0.5/istack-commons-runtime-3.0.5-sources.jar",
+      "sha256": "92235ba19d5776456a89b469100de2033e838aaeffc69ad98044603b8e8f0ea1",
+      "bytes": 36415
+    },
+    {
+      "file": "supplement/maven/com/sun/istack/istack-commons-runtime/3.0.5/istack-commons-runtime-3.0.5.pom",
+      "sha256": "fb892aff4c68f0efc4756c97112e044cdd44e73276d3641f9cc1d6ba3c1366e6",
+      "bytes": 3434
+    },
+    {
+      "file": "supplement/maven/com/sun/istack/istack-commons/3.0.5/istack-commons-3.0.5.pom",
+      "sha256": "8ef035349ffd2ff11b8d9bdb9c0b4e78dbbf0add31b192f767d089dc6599724e",
+      "bytes": 13880
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/jaxb-bom-ext/2.3.0.1/jaxb-bom-ext-2.3.0.1.pom",
+      "sha256": "dacb74d0d4568e67bdeb4ad946d5a685f0cba7f08ec247c4c1e1253e1ddf903d",
+      "bytes": 5411
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/jaxb-bom-ext/2.3.2/jaxb-bom-ext-2.3.2.pom",
+      "sha256": "1a7dec2b27e7e055744cdb8cf1b90def4fd473acd1b804eff098139358959bd7",
+      "bytes": 3144
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1-sources.jar",
+      "sha256": "d628f0d4d24e5a89842a81533da9f5eb4dd7c9bd5e2321c3ded3785e3f28a65f",
+      "bytes": 345974
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1.pom",
+      "sha256": "ee7bb74f42fdc4db10e3cc9c68c0e9b5beaf8ebb36cce91d495b479b026c6aab",
+      "bytes": 16171
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/jaxb-impl/2.3.2/jaxb-impl-2.3.2-sources.jar",
+      "sha256": "f9b79e69b82e52160fea14388eedc895109f56199e4bb4bedfb21adb273a86d8",
+      "bytes": 759989
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/jaxb-impl/2.3.2/jaxb-impl-2.3.2.pom",
+      "sha256": "565c155012967597ce8d35140f262094a12612172289a4fe6453c3f0337877a1",
+      "bytes": 12873
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/mvn/jaxb-bundles/2.3.0.1/jaxb-bundles-2.3.0.1.pom",
+      "sha256": "9d705266c0f01695d897b67465115984b3a9b6487087aba4ece1d798a6c344f8",
+      "bytes": 2918
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/mvn/jaxb-bundles/2.3.2/jaxb-bundles-2.3.2.pom",
+      "sha256": "98f694769f99fec316c1f8ac3e1c00b9533c57146027c0bb6ea04cf9dc018657",
+      "bytes": 1262
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/mvn/jaxb-parent/2.3.0.1/jaxb-parent-2.3.0.1.pom",
+      "sha256": "1d366597d77b073448399cbda35d1ace25eda213c593714dd6b1e6742aa162e2",
+      "bytes": 42614
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/mvn/jaxb-parent/2.3.2/jaxb-parent-2.3.2.pom",
+      "sha256": "20dd6dc34ab7549ac40da1d82e92222ec4347ad0ec0cb118ef6c5703bed53a18",
+      "bytes": 29746
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/mvn/jaxb-runtime-parent/2.3.2/jaxb-runtime-parent-2.3.2.pom",
+      "sha256": "b24f8d51f184a68bc1b86d48c0e3cfefeb21a44ede1c5f7303c58ae0488533ec",
+      "bytes": 1133
+    },
+    {
+      "file": "supplement/maven/com/sun/xml/bind/mvn/jaxb-txw-parent/2.3.0.1/jaxb-txw-parent-2.3.0.1.pom",
+      "sha256": "991c209d3e06faa18458df7c72b722f7eba50615128f7b934538e2393dddd13c",
+      "bytes": 2771
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/common/common-image/3.9.4/common-image-3.9.4-sources.jar",
+      "sha256": "349d68f65f9a3998f0303a46ceac87e86a9586ec9f95c0a10b361118fb62c679",
+      "bytes": 105868
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/common/common-image/3.9.4/common-image-3.9.4.pom",
+      "sha256": "f1ee11b8e55830032e8e4d598b61281e35e7674f8dd9a770146a7139a0ce3e41",
+      "bytes": 1323
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/common/common-io/3.9.4/common-io-3.9.4-sources.jar",
+      "sha256": "dcd296ca9a3d403d81414fd8de061b034daa7f4a6d91211ef73c19972fca877a",
+      "bytes": 126821
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/common/common-io/3.9.4/common-io-3.9.4.pom",
+      "sha256": "0ac1e0e9d4244cfcec851c559885d48b845918611087ade549cdd5d5eeabb162",
+      "bytes": 1141
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/common/common-lang/3.9.4/common-lang-3.9.4-sources.jar",
+      "sha256": "5da52d34ea7206d9171cfa636a0f817f16f8423b779b39614e842c050e7f09b2",
+      "bytes": 134792
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/common/common-lang/3.9.4/common-lang-3.9.4.pom",
+      "sha256": "992f15d4d8bd06ffa0e46618ec5579c2abd28b38260cb3e58d8df0189e188c93",
+      "bytes": 774
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/common/common/3.9.4/common-3.9.4.pom",
+      "sha256": "78c2cc88ef497d32816d9aed1d66746185b093800dbc80890c526ac1ebb05901",
+      "bytes": 1879
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/imageio/imageio-core/3.9.4/imageio-core-3.9.4-sources.jar",
+      "sha256": "6f43c8584348112f19c3eaeabfef8a6f9ce460b3509b978a5f632fdd350994c0",
+      "bytes": 117468
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/imageio/imageio-core/3.9.4/imageio-core-3.9.4.pom",
+      "sha256": "6e49a150b58a4e52919ae7e27b4976282235245e3881da8c4ee3e2a4e8fb7817",
+      "bytes": 1132
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/imageio/imageio-jpeg/3.9.4/imageio-jpeg-3.9.4-sources.jar",
+      "sha256": "4cb9e04db9aebd331cc47c37985c788a9e71b98ee0ae1499f30d75790ab53fde",
+      "bytes": 87715
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/imageio/imageio-jpeg/3.9.4/imageio-jpeg-3.9.4.pom",
+      "sha256": "5c6f204e1d2efe4ee8248e1e13b371245517555a692bbbdb41496b2f79c15650",
+      "bytes": 1331
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/imageio/imageio-metadata/3.9.4/imageio-metadata-3.9.4-sources.jar",
+      "sha256": "2a888adb6993195f11003e23eef90f5b6399e415f93b34d9e310013457fada44",
+      "bytes": 97616
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/imageio/imageio-metadata/3.9.4/imageio-metadata-3.9.4.pom",
+      "sha256": "5662064a0e614326d91637837918bf91d4fd3220cdef237937fc50a23c992ed5",
+      "bytes": 1130
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/imageio/imageio/3.9.4/imageio-3.9.4.pom",
+      "sha256": "ab6e1d6369b952d3e22b0bfc9a66586ca461617de83048c3550069dfdf08372a",
+      "bytes": 6044
+    },
+    {
+      "file": "supplement/maven/com/twelvemonkeys/twelvemonkeys/3.9.4/twelvemonkeys-3.9.4.pom",
+      "sha256": "80ecd305df2d56ea25826f3d6b3b9073a828a47e9652ef0564a38f1f3b775527",
+      "bytes": 12668
+    },
+    {
+      "file": "supplement/maven/commons-codec/commons-codec/1.15/commons-codec-1.15-sources.jar",
+      "sha256": "7019940b2298d333edb946e2db3d10f1caacbbd52bb64e85832cfd0017e049cc",
+      "bytes": 364441
+    },
+    {
+      "file": "supplement/maven/commons-codec/commons-codec/1.15/commons-codec-1.15.pom",
+      "sha256": "c86ee198a35a3715487860f419cbf642e7e4d9e8714777947dbe6a4e3a20ab58",
+      "bytes": 15443
+    },
+    {
+      "file": "supplement/maven/jakarta/json/jakarta.json-api/2.1.3/jakarta.json-api-2.1.3-sources.jar",
+      "sha256": "1b1f8585037ae1f34afd052013cc36788853bd4ad4ed566fe5f190b63c5008d2",
+      "bytes": 77519
+    },
+    {
+      "file": "supplement/maven/jakarta/json/jakarta.json-api/2.1.3/jakarta.json-api-2.1.3.pom",
+      "sha256": "416a73971385a0be43f9da8a477aa64f4814ac52187d88f3e24f215b7f89dfde",
+      "bytes": 18655
+    },
+    {
+      "file": "supplement/maven/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0-sources.jar",
+      "sha256": "d7411fb29089cafa4b77493f10bfb52832cd1976948903d0b039e12b0bd70334",
+      "bytes": 78896
+    },
+    {
+      "file": "supplement/maven/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.pom",
+      "sha256": "da2926f3c8be898643cc10acdec6de0b0351a57fb2735770fa0177b06ade71b9",
+      "bytes": 4919
+    },
+    {
+      "file": "supplement/maven/javax/xml/bind/jaxb-api-parent/2.3.1/jaxb-api-parent-2.3.1.pom",
+      "sha256": "cd1beaa4560dc4dfdb826b9d809e464db22526dfb54264bae78a6ff7efb08e1f",
+      "bytes": 8106
+    },
+    {
+      "file": "supplement/maven/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1-sources.jar",
+      "sha256": "d69dc2c28833df5fb6e916efae01477ae936326b342d479a43539b0131c96b9d",
+      "bytes": 271123
+    },
+    {
+      "file": "supplement/maven/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.pom",
+      "sha256": "12b20cf922773445c3445c2883cbf671fa982111e9bf9f875020f9313b3814b1",
+      "bytes": 20160
+    },
+    {
+      "file": "supplement/maven/net/java/jvnet-parent/1/jvnet-parent-1.pom",
+      "sha256": "281440811268e65d9e266b3cc898297e214e04f09740d0386ceeb4a8923d63bf",
+      "bytes": 4711
+    },
+    {
+      "file": "supplement/maven/net/java/jvnet-parent/5/jvnet-parent-5.pom",
+      "sha256": "1af699f8d9ddab67f9a0d202fbd7915eb0362a5a6dfd5ffc54cafa3465c9cb0a",
+      "bytes": 8863
+    },
+    {
+      "file": "supplement/maven/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9-sources.jar",
+      "sha256": "4b6022d773826980f124e7a2aed243cea6541238bc1bed785e2ce86076567f50",
+      "bytes": 20357
+    },
+    {
+      "file": "supplement/maven/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9.pom",
+      "sha256": "fec05e970f239ada8471f4ea3f0611c036fbcc7c43f3ceaa9e5e7be6f3217bb1",
+      "bytes": 10894
+    },
+    {
+      "file": "supplement/maven/net/minidev/json-smart/2.4.10/json-smart-2.4.10-sources.jar",
+      "sha256": "e2ece85df4e5489cf5644fd826d2875527a405233b02496b7520d871755f395d",
+      "bytes": 60158
+    },
+    {
+      "file": "supplement/maven/net/minidev/json-smart/2.4.10/json-smart-2.4.10.pom",
+      "sha256": "a959d62b5742f0d991bb7cc5d797ef987813e94de9391700cf0d8df6fd21392b",
+      "bytes": 9183
+    },
+    {
+      "file": "supplement/maven/net/sf/saxon/Saxon-HE/11.4/Saxon-HE-11.4-sources.jar",
+      "sha256": "3855cb7c56c64c22a194f1abbf590693b3db7fa76da7a9ffff148420043c96c4",
+      "bytes": 4498210
+    },
+    {
+      "file": "supplement/maven/net/sf/saxon/Saxon-HE/11.4/Saxon-HE-11.4.pom",
+      "sha256": "cc4da34ee0bee4c65adb5d7cb292341f659befa35288f6e31f809dc4bb2fc575",
+      "bytes": 4209
+    },
+    {
+      "file": "supplement/maven/net/sf/saxon/Saxon-HE/12.8/Saxon-HE-12.8-sources.jar",
+      "sha256": "995a335a4615132012516122cdfbc4f43db8d50bf5bee20df8a9c5c785fffad5",
+      "bytes": 4754350
+    },
+    {
+      "file": "supplement/maven/net/sf/saxon/Saxon-HE/12.8/Saxon-HE-12.8.pom",
+      "sha256": "15116031263f91da7f7c680681d60532b9521a787e30c19b0d36a863480d0b91",
+      "bytes": 3604
+    },
+    {
+      "file": "supplement/maven/org/apache/apache/23/apache-23.pom",
+      "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c",
+      "bytes": 18422
+    },
+    {
+      "file": "supplement/maven/org/apache/apache/39/apache-39.pom",
+      "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+      "bytes": 27054
+    },
+    {
+      "file": "supplement/maven/org/apache/commons/commons-compress/1.21/commons-compress-1.21-sources.jar",
+      "sha256": "f64973e7c00455e819bcf8b74dda6e91b3e09557135b11b3603c2ba7a0e5479b",
+      "bytes": 883726
+    },
+    {
+      "file": "supplement/maven/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom",
+      "sha256": "675bb023c9beedde3232949979b9742a5fea946280a55a1b462d4ca7801088cd",
+      "bytes": 19684
+    },
+    {
+      "file": "supplement/maven/org/apache/commons/commons-parent/52/commons-parent-52.pom",
+      "sha256": "75dbe8f34e98e4c3ff42daae4a2f9eb4cbcd3b5f1047d54460ace906dbb4502e",
+      "bytes": 79273
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/client5/httpclient5-parent/5.1.3/httpclient5-parent-5.1.3.pom",
+      "sha256": "a27b1413aece92a3aa4774915f7589e0c6179d728d2ac6a295d758ee4fa24cc5",
+      "bytes": 14496
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/client5/httpclient5/5.1.3/httpclient5-5.1.3-sources.jar",
+      "sha256": "86135405842cde6b46337796a8aa4170a3253690d3f95cbdc5a957bc66917eba",
+      "bytes": 581175
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/client5/httpclient5/5.1.3/httpclient5-5.1.3.pom",
+      "sha256": "1988ab3d1bdae0f51f22c83dc97b88fa07561adb6244679d8b8f7146cdd13aaf",
+      "bytes": 5784
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/core5/httpcore5-h2/5.1.3/httpcore5-h2-5.1.3-sources.jar",
+      "sha256": "dde9ca3aa4f3866e73c7d0acafda350ae5f9c14a399ef57c99eacc702c85eb24",
+      "bytes": 171918
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/core5/httpcore5-h2/5.1.3/httpcore5-h2-5.1.3.pom",
+      "sha256": "2bc0317a148edc9aefea3ec1535394efced3d137d62f7ff5656d0b03f94c0786",
+      "bytes": 3501
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/core5/httpcore5-parent/5.1.3/httpcore5-parent-5.1.3.pom",
+      "sha256": "a67538865ae0f3744b21e91ca47d461054737c552d1ff29da714c860c992d5bb",
+      "bytes": 10271
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/core5/httpcore5/5.1.3/httpcore5-5.1.3-sources.jar",
+      "sha256": "97696503c77792102fb84d107932a47acd92563bcbf7a11775894b03b0c8afaa",
+      "bytes": 781107
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/core5/httpcore5/5.1.3/httpcore5-5.1.3.pom",
+      "sha256": "7fc2b8045809f3f27ac9d4d9e99b9d34621b6371cf93c7313ecd84a5af0e9bae",
+      "bytes": 3787
+    },
+    {
+      "file": "supplement/maven/org/apache/httpcomponents/httpcomponents-parent/12/httpcomponents-parent-12.pom",
+      "sha256": "4209f09593212987c29d6801917309dd5e6f71b53b2b1d0e0f0efb984ad11fa1",
+      "bytes": 31896
+    },
+    {
+      "file": "supplement/maven/org/apache/pdfbox/pdfbox-app/3.0.8/pdfbox-app-3.0.8.pom",
+      "sha256": "6991c3bfacb968ce871264243f2a1e784ba9eadc4348d391c15147cbc2bd070d",
+      "bytes": 3810
+    },
+    {
+      "file": "supplement/maven/org/apache/pdfbox/pdfbox-parent/3.0.8/pdfbox-parent-3.0.8.pom",
+      "sha256": "f031373f03c0f92fb4e49210645cd53e40e9579219655363ce19644ff779283e",
+      "bytes": 16493
+    },
+    {
+      "file": "supplement/maven/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom",
+      "sha256": "916b4794d8d8220a59a3fdf6a64dbe794aeb23395e888b81ae36a9b5a2c591a6",
+      "bytes": 13168
+    },
+    {
+      "file": "supplement/maven/org/eclipse/ee4j/project/1.0.8/project-1.0.8.pom",
+      "sha256": "0d0c7b6e54a35eaf6c246e107eb1a8c7ac8ff0a0b84c489b07a357713adf674b",
+      "bytes": 14582
+    },
+    {
+      "file": "supplement/maven/org/eclipse/ee4j/project/1.0.9/project-1.0.9.pom",
+      "sha256": "825379934a1cf29249f349f2d18adaf79a7b2cb2dbe231518974e1ee70941c17",
+      "bytes": 16135
+    },
+    {
+      "file": "supplement/maven/org/eclipse/parsson/parsson/1.1.7/parsson-1.1.7-sources.jar",
+      "sha256": "713a473593782f3500e4fe829fb9b0d282e72cc67970ddbea4447fe93d045511",
+      "bytes": 75659
+    },
+    {
+      "file": "supplement/maven/org/eclipse/parsson/parsson/1.1.7/parsson-1.1.7.pom",
+      "sha256": "aeb404e7f0c14a76ecc8ba6e21ecd92f80f7c10402a446ff5d9c31d50f08e2d3",
+      "bytes": 4645
+    },
+    {
+      "file": "supplement/maven/org/eclipse/parsson/project/1.1.7/project-1.1.7.pom",
+      "sha256": "af5ef5a13ddd78dc0ba11521dc83a12a4572b513c82f101bb310f1186c5c714d",
+      "bytes": 21769
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/jaxb-bom/2.3.0.1/jaxb-bom-2.3.0.1.pom",
+      "sha256": "d94f6debf87f2468c3c3828f548dd2f38557f41b12aec0732922cc5d61be10f1",
+      "bytes": 10667
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/jaxb-bom/2.3.2/jaxb-bom-2.3.2.pom",
+      "sha256": "a1018bb54678ed9f5acb2f7a4084e385ff510201f4e9dbf5f75dc6a675f66be7",
+      "bytes": 8018
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1-sources.jar",
+      "sha256": "c3b2ac8a47dc81dbb99818283c23e83e63fc6dccb01ee3062437b46614f4e11f",
+      "bytes": 208773
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/jaxb-core/2.3.0.1/jaxb-core-2.3.0.1.pom",
+      "sha256": "c1a3d3fda56df5fabe6fbf9eb39b2a8ce7b53c04801498601e9e4df6d6d85166",
+      "bytes": 5052
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2-sources.jar",
+      "sha256": "b85c2e314e6565e7dc4fb7e00ec8688c1c0fe9c9f7275125fb8dee43898f3743",
+      "bytes": 757829
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2.pom",
+      "sha256": "9448a5ad7fa68a6083dfbe4f42c8c83e082b9202a105401fc68e944c26548b34",
+      "bytes": 5573
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/txw2/2.3.0.1/txw2-2.3.0.1-sources.jar",
+      "sha256": "7815dad139de674d13fa73af7ae70dfee1db3b4d631f2d2596416ff2ba883cd3",
+      "bytes": 99273
+    },
+    {
+      "file": "supplement/maven/org/glassfish/jaxb/txw2/2.3.0.1/txw2-2.3.0.1.pom",
+      "sha256": "38b91b6e93dbe1b4b73464a563545bb6213cc09947fa43bffaafb397379ccbe1",
+      "bytes": 3324
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-arc/1.0.3/jwat-arc-1.0.3-sources.jar",
+      "sha256": "7749a59074e0cf4abf4a3b0c43dfa4c11d30f8ad22e92b6b17c567cc5f154e14",
+      "bytes": 48129
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-arc/1.0.3/jwat-arc-1.0.3.pom",
+      "sha256": "cdb7a051b775a945e37d063159ce8f1799275fe9fc0f3819dadc530687a8ddfa",
+      "bytes": 958
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-archive-common/1.0.3/jwat-archive-common-1.0.3-sources.jar",
+      "sha256": "199069c8f0d5f130805c697cba801a1477f1e4b221d8274b48817222ac3edecd",
+      "bytes": 2425
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-archive-common/1.0.3/jwat-archive-common-1.0.3.pom",
+      "sha256": "e708681a6f32752f9a03f0582a5a9083e46348334cbbdb028a95a61f1963fe13",
+      "bytes": 680
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-common/1.0.3/jwat-common-1.0.3-sources.jar",
+      "sha256": "29c03d21c6439c111054828fa38301eaa52b7bb3995e67a9c8ac27b233347acb",
+      "bytes": 74540
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-common/1.0.3/jwat-common-1.0.3.pom",
+      "sha256": "606179d1377bdee3f5b759abe81777167c07019fe052a10a88bf36394a375b8f",
+      "bytes": 451
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-gzip/1.0.3/jwat-gzip-1.0.3-sources.jar",
+      "sha256": "6d3bdb833ac9597805b5a3d84770f6a26cc78f3496bdd9e6064897aac568659a",
+      "bytes": 16347
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-gzip/1.0.3/jwat-gzip-1.0.3.pom",
+      "sha256": "f1bc5d14f31ea18d0bb8ef47caa286a6a9cff0de5a2309c6ce60b1de3cf7786f",
+      "bytes": 670
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-warc/1.0.3/jwat-warc-1.0.3-sources.jar",
+      "sha256": "2cbe0f62bca7724c23f470cebaceb06d621e3fda120eb4b1a13dff5b80c3bc8a",
+      "bytes": 51470
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat-warc/1.0.3/jwat-warc-1.0.3.pom",
+      "sha256": "81ebebf67d38dc60ce70c6d537b121de19ff179783599534d4090e9609163081",
+      "bytes": 1223
+    },
+    {
+      "file": "supplement/maven/org/jwat/jwat/1.0.3/jwat-1.0.3.pom",
+      "sha256": "58a22f261b4b37fde9d9f06018193bc73d28fd0b68ac85e1223b851ca7f69dba",
+      "bytes": 13054
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove-apps/1.34.0/jhove-apps-1.34.0-sources.jar",
+      "sha256": "2e158b28ce1df3d2c86523b8887f7dc23e8104f930e953b651c8441ba64e5025",
+      "bytes": 84865
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove-apps/1.34.0/jhove-apps-1.34.0.pom",
+      "sha256": "8004c02b15893b9cebf249d8ce7e996be20d636f24f16be0de1ebc4ef8b13ba9",
+      "bytes": 3109
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove-core/1.34.0/jhove-core-1.34.0-sources.jar",
+      "sha256": "6c8c5f598ad7a972d829f1659696759edc8bd76597492ec87a29c98803faf240",
+      "bytes": 197343
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove-core/1.34.0/jhove-core-1.34.0.pom",
+      "sha256": "59f52cc68933291320f114cb1491852611aa5dcbeaac9b3ad315ece6a7594fee",
+      "bytes": 1596
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove-ext-modules/1.34.0/jhove-ext-modules-1.34.0-sources.jar",
+      "sha256": "93b42d367d5dec679da7a030433fd94ee133c145bd424a387d9876324d5471b8",
+      "bytes": 74213
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove-ext-modules/1.34.0/jhove-ext-modules-1.34.0.pom",
+      "sha256": "174a3731af4bd5b01ba7186732fe5af42a25cc1f9c1cda27e95fd8b7c6bf7770",
+      "bytes": 2923
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove/1.26.0/jhove-1.26.0.pom",
+      "sha256": "b6143453cbfadb36ea5763edb26f9b8cb7e89790d4aac4f3ee55929abf2cb83b",
+      "bytes": 15388
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove/1.28.0/jhove-1.28.0.pom",
+      "sha256": "f5e1de1d29a867d4e7daaa067b766419ec5a53eb293a0c93e49d87451e99fe2a",
+      "bytes": 14501
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove/1.30.0/jhove-1.30.0.pom",
+      "sha256": "f6464c15639c2e958a14bdf8a06e28b3a4d28f2c1e23c782ab792d066be20001",
+      "bytes": 13642
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove/1.32.0/jhove-1.32.0.pom",
+      "sha256": "fe7076d2a4f099e35acde29b1a90e07f5aebebbac5ffc2bbba28610f5ba05a49",
+      "bytes": 13642
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/jhove/1.34.0/jhove-1.34.0.pom",
+      "sha256": "8c2a4f9a9cd843a28ae226fbdc74d5dfee6fd720a5282625796aee4d673a1ae4",
+      "bytes": 15296
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/aiff-hul/1.6.2/aiff-hul-1.6.2-sources.jar",
+      "sha256": "99aad7dd189c5df8b9060c570b5dbbc256b7b6624654a65006bddda2e65e884a",
+      "bytes": 40747
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/aiff-hul/1.6.2/aiff-hul-1.6.2.pom",
+      "sha256": "020096829e9fbf6f17de47e65dc9345a654cb98e0ef0929129e40a2b43e62b04",
+      "bytes": 588
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/ascii-hul/1.4.2/ascii-hul-1.4.2-sources.jar",
+      "sha256": "c4a91eea35e99ed3f6ef25e4d37ac85ed3ef12fd8269baf87c991fbb6d5a9765",
+      "bytes": 12627
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/ascii-hul/1.4.2/ascii-hul-1.4.2.pom",
+      "sha256": "9dcab4007c95f324da688eb4c030feaec46bf5a6a19f67fdc75b8bedcca0b199",
+      "bytes": 592
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/gif-hul/1.4.3/gif-hul-1.4.3-sources.jar",
+      "sha256": "3d2ebde33929730a60e986e3222bd3c4584de6fc7e3574030ecc7b9f84fb5d00",
+      "bytes": 17512
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/gif-hul/1.4.3/gif-hul-1.4.3.pom",
+      "sha256": "c7dddb19baa7525cbec244b8e2750ce1ab54c35d64573a166ab8af6a21917dfd",
+      "bytes": 585
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/html-hul/1.4.5/html-hul-1.4.5-sources.jar",
+      "sha256": "085c2b6a6e92b0e11fa334de723c9f4b848003d4d8e40586b94763b0e1a9449f",
+      "bytes": 147855
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/html-hul/1.4.5/html-hul-1.4.5.pom",
+      "sha256": "e359d2b016405bc62240d9994c9a2480a5b9b58f29dfdfb1f2c1c957702d019c",
+      "bytes": 800
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jhove-modules/1.26.0/jhove-modules-1.26.0.pom",
+      "sha256": "7a0b5a265551992869b8ae78a155716214ea7283a5cfb7fbd58a89ebb38ade24",
+      "bytes": 1499
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jhove-modules/1.28.0/jhove-modules-1.28.0.pom",
+      "sha256": "f04455b4a368449caf47dbc9e845fdc98e911e45dc46b32b8c0edeb799bbb405",
+      "bytes": 1397
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jhove-modules/1.30.0/jhove-modules-1.30.0.pom",
+      "sha256": "da3ad8b5eee1cdccfc5c1ac0e0fb9715e697193ed02fdde92419153c705c43a7",
+      "bytes": 1309
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jhove-modules/1.32.0/jhove-modules-1.32.0.pom",
+      "sha256": "7b897a56acaab09c669e0558ba451a7379cddae7779d3e613cbab07cb0f6a735",
+      "bytes": 1337
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jhove-modules/1.34.0/jhove-modules-1.34.0.pom",
+      "sha256": "bfb6b78f64441610869eb5da49bd8ae926f40b7e7afda7ec5b2b64f202412874",
+      "bytes": 1372
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jpeg-hul/1.5.4/jpeg-hul-1.5.4-sources.jar",
+      "sha256": "6f2b379b6e881c365a0a9403b9737bbb002628a7437c58aac09f0590927542cc",
+      "bytes": 35236
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jpeg-hul/1.5.4/jpeg-hul-1.5.4.pom",
+      "sha256": "5146ea89882c6ba50bef8a611380b83e91cbf9511db3634e4bd9eb3758c7cfbf",
+      "bytes": 801
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jpeg2000-hul/1.4.5/jpeg2000-hul-1.4.5-sources.jar",
+      "sha256": "7819e959ce0eb23bfd955d24c4a90a0e322271a530b586c9a8566e25c338993f",
+      "bytes": 125652
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/jpeg2000-hul/1.4.5/jpeg2000-hul-1.4.5.pom",
+      "sha256": "ee1abcc87a57349b851a64a85eb477281bfd78c25bf6a13a761a07b789a1eae2",
+      "bytes": 602
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/pdf-hul/1.12.8/pdf-hul-1.12.8-sources.jar",
+      "sha256": "7f35c226c6a8de771a45e6fca4e5cad9e678cddd492004c30095b3e352c46c34",
+      "bytes": 177491
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/pdf-hul/1.12.8/pdf-hul-1.12.8.pom",
+      "sha256": "35614f2aa7fb623f9ab1a1bc151786e50cd420cd3a19f7990799439519647114",
+      "bytes": 586
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/tiff-hul/1.9.5/tiff-hul-1.9.5-sources.jar",
+      "sha256": "0bb608555447ad4519f03598fc07898e1c767ccf1e7248ecc6f6af87e334e98d",
+      "bytes": 151019
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/tiff-hul/1.9.5/tiff-hul-1.9.5.pom",
+      "sha256": "8bd2191c64b1b2a2a3b23af908a49fa50aa36aaa7008f0e599702091909ea1b7",
+      "bytes": 588
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/utf8-hul/1.7.5/utf8-hul-1.7.5-sources.jar",
+      "sha256": "0938af744034ceaea88334689ea7499b315ec14bd6df0154cf0db2d3b8659be0",
+      "bytes": 15769
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/utf8-hul/1.7.5/utf8-hul-1.7.5.pom",
+      "sha256": "3db82308d1e7c24e25faadda05ea2fff30934b6deae887925dd9048f6f5ad61c",
+      "bytes": 1006
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/wave-hul/1.8.3/wave-hul-1.8.3-sources.jar",
+      "sha256": "bc0ad9e86950f91879e79069e52296d8cb24c4f50e35bacd4f32b959dc73389f",
+      "bytes": 59050
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/wave-hul/1.8.3/wave-hul-1.8.3.pom",
+      "sha256": "b3270ee2201c4dbd15458513637983ec47f45ad766c2718c83b72e682ede9e39",
+      "bytes": 801
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/xml-hul/1.5.5/xml-hul-1.5.5-sources.jar",
+      "sha256": "748b466864fbc225b5f3189061145b7a8d506e27ff4b2822ee5d030a785f7e3d",
+      "bytes": 36052
+    },
+    {
+      "file": "supplement/maven/org/openpreservation/jhove/modules/xml-hul/1.5.5/xml-hul-1.5.5.pom",
+      "sha256": "27a190beb7bd8ab34b7ad757322f72dde05b0847653a2e1f3e89bb06dcd95e1a",
+      "bytes": 798
+    },
+    {
+      "file": "supplement/maven/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36-sources.jar",
+      "sha256": "15bc04357a3725b7a5153f132db71379f95e83b7b8590a86cc6d4ad77bfc150a",
+      "bytes": 57747
+    },
+    {
+      "file": "supplement/maven/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom",
+      "sha256": "fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684",
+      "bytes": 2743
+    },
+    {
+      "file": "supplement/maven/org/slf4j/slf4j-nop/1.7.36/slf4j-nop-1.7.36-sources.jar",
+      "sha256": "b86491d9a8bbc35fe6a6ecf267fc5168399496f5aeffae608ed0ca99736838e9",
+      "bytes": 5588
+    },
+    {
+      "file": "supplement/maven/org/slf4j/slf4j-nop/1.7.36/slf4j-nop-1.7.36.pom",
+      "sha256": "20a0f7c060020d75fef4470ae6948661d418ebd5ea4549c68abedf20ee86cb65",
+      "bytes": 790
+    },
+    {
+      "file": "supplement/maven/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
+      "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812",
+      "bytes": 14093
+    },
+    {
+      "file": "supplement/maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom",
+      "sha256": "b51f8867c92b6a722499557fc3a1fdea77bdf9ef574722fe90ce436a29559454",
+      "bytes": 4824
+    },
+    {
+      "file": "supplement/maven/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+      "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a",
+      "bytes": 6569
+    },
+    {
+      "file": "supplement/maven/org/verapdf/apps/apps/1.30.2/apps-1.30.2-sources.jar",
+      "sha256": "d53579722a5856a2872bb5c9a16c6a28acc2bc27ac577e88c1c7f57ad2338fcb",
+      "bytes": 11449
+    },
+    {
+      "file": "supplement/maven/org/verapdf/apps/apps/1.30.2/apps-1.30.2.pom",
+      "sha256": "8c6c66bf877178203631c497ba018a2c088540dbc89fa393c8c2e790adc35bbf",
+      "bytes": 2958
+    },
+    {
+      "file": "supplement/maven/org/verapdf/apps/cli/1.30.2/cli-1.30.2-sources.jar",
+      "sha256": "6a4966632d2be0b2374ae7161644a4af6483e07ee19660026e600d827e085556",
+      "bytes": 24255
+    },
+    {
+      "file": "supplement/maven/org/verapdf/apps/cli/1.30.2/cli-1.30.2.pom",
+      "sha256": "43f23bb793824a728140b0bbef4b4af88dd0630fd828034ace13d8a1795a6d05",
+      "bytes": 4440
+    },
+    {
+      "file": "supplement/maven/org/verapdf/apps/gui/1.30.2/gui-1.30.2-sources.jar",
+      "sha256": "b25ab9d07aef02bf005ded51bb09cfe42fac759d5fc537c028927d8aa266127c",
+      "bytes": 209881
+    },
+    {
+      "file": "supplement/maven/org/verapdf/apps/gui/1.30.2/gui-1.30.2.pom",
+      "sha256": "8be6cb580de3dd8dd9080d0c4ca47f03d7d8205a843239934d50a9a44d393a58",
+      "bytes": 3908
+    },
+    {
+      "file": "supplement/maven/org/verapdf/core/1.30.2/core-1.30.2-sources.jar",
+      "sha256": "f7f44a9886e9d5c78489db02f1dac2776832326c088253e19f56268cfd294582",
+      "bytes": 807393
+    },
+    {
+      "file": "supplement/maven/org/verapdf/core/1.30.2/core-1.30.2.pom",
+      "sha256": "9c42f0f561f347829b087e20240c825e75a3590e085e29b40aaf1ed37612a643",
+      "bytes": 4048
+    },
+    {
+      "file": "supplement/maven/org/verapdf/feature-reporting/1.30.2/feature-reporting-1.30.2-sources.jar",
+      "sha256": "45301d09989bb363aae733b09809500d3fd22305955f1b724e859ed63c0ea6ed",
+      "bytes": 48826
+    },
+    {
+      "file": "supplement/maven/org/verapdf/feature-reporting/1.30.2/feature-reporting-1.30.2.pom",
+      "sha256": "6b42e82c88a9b696d542500018bd16fff376a9cdb7b9a5b3e488122b10e9dd65",
+      "bytes": 3108
+    },
+    {
+      "file": "supplement/maven/org/verapdf/metadata-fixer/1.30.2/metadata-fixer-1.30.2-sources.jar",
+      "sha256": "0d2688693ac54667511a6d15cb581178ca7ff7505eb61ac05a1f51dfbeeb7691",
+      "bytes": 21667
+    },
+    {
+      "file": "supplement/maven/org/verapdf/metadata-fixer/1.30.2/metadata-fixer-1.30.2.pom",
+      "sha256": "0ac52cd87618df562467d51b48ddd80761c8ae0f8efc9ba4a76a5819525d435a",
+      "bytes": 2687
+    },
+    {
+      "file": "supplement/maven/org/verapdf/parser/1.30.2/parser-1.30.2-sources.jar",
+      "sha256": "99fb4d37bad0e27b470912dcd7553657ff0c6b78e13241628ecd683491210ec3",
+      "bytes": 2212053
+    },
+    {
+      "file": "supplement/maven/org/verapdf/parser/1.30.2/parser-1.30.2.pom",
+      "sha256": "3d24ca3d228c4890da50cbe9f405254942233bc42d0b3f6d0ca43f6c4d027972",
+      "bytes": 6089
+    },
+    {
+      "file": "supplement/maven/org/verapdf/pdf-model/1.30.2/pdf-model-1.30.2-sources.jar",
+      "sha256": "9bc4fffa70b0342844a1f6fa59dc5f0a87d622ab9193d5b1ec7be74569841b84",
+      "bytes": 355703
+    },
+    {
+      "file": "supplement/maven/org/verapdf/pdf-model/1.30.2/pdf-model-1.30.2.pom",
+      "sha256": "a205f7102e0ccb0569130e0bb153420132bcb9562dfe518004075abe04657d4f",
+      "bytes": 7216
+    },
+    {
+      "file": "supplement/maven/org/verapdf/validation-model/1.30.2/validation-model-1.30.2-sources.jar",
+      "sha256": "ee110fae5bbc8719260f286eb824d01821d34a275100bc1747a688d4b08f26c3",
+      "bytes": 384492
+    },
+    {
+      "file": "supplement/maven/org/verapdf/validation-model/1.30.2/validation-model-1.30.2.pom",
+      "sha256": "323f8a1c4476bd102ddff49e4afd5e5bc7a0616ff4ff05e1eafd86d41c048aa0",
+      "bytes": 3036
+    },
+    {
+      "file": "supplement/maven/org/verapdf/validation/1.30.2/validation-1.30.2.pom",
+      "sha256": "a2de470fd8eb27d058ffd9676ef38c86e7d357e32432fcd1e10d0bfc573861cd",
+      "bytes": 6062
+    },
+    {
+      "file": "supplement/maven/org/verapdf/verapdf-apps/1.30.2/verapdf-apps-1.30.2.pom",
+      "sha256": "bc24bf38f404dc20e515966e0951ad658225bf3dde463d84903eb1105b81fe7b",
+      "bytes": 9481
+    },
+    {
+      "file": "supplement/maven/org/verapdf/verapdf-library/1.30.2/verapdf-library-1.30.2.pom",
+      "sha256": "dad965d48a7ce65b7c65ef19afc4021b6838ac2191f076bec05e636307e00ac3",
+      "bytes": 7661
+    },
+    {
+      "file": "supplement/maven/org/verapdf/verapdf-parent/1.30.1/verapdf-parent-1.30.1.pom",
+      "sha256": "08760b168e9447c7be4d7462a63aeb644f5702d18db9de1baa55f48bb909db62",
+      "bytes": 16130
+    },
+    {
+      "file": "supplement/maven/org/verapdf/verapdf-xmp-core/1.30.2/verapdf-xmp-core-1.30.2-sources.jar",
+      "sha256": "194ab59547414021d2c630850dc246d424cc5b4343cb87cd87c8171f92b8c2f3",
+      "bytes": 169519
+    },
+    {
+      "file": "supplement/maven/org/verapdf/verapdf-xmp-core/1.30.2/verapdf-xmp-core-1.30.2.pom",
+      "sha256": "07a6ca26c98b9ff4bb918562aaf60f23804d1deadf3c8b5db723320193846e79",
+      "bytes": 2275
+    },
+    {
+      "file": "supplement/maven/org/w3c/epubcheck/5.2.1/epubcheck-5.2.1-sources.jar",
+      "sha256": "85f18efb586172474be116181fa9e6d106929c965da91ca935f4cfd05daa4285",
+      "bytes": 880368
+    },
+    {
+      "file": "supplement/maven/org/w3c/epubcheck/5.2.1/epubcheck-5.2.1.pom",
+      "sha256": "edfda2e8293e4216d2084d56f7f1ba22ecb476a3a25bdcc6695e9c09fe01e036",
+      "bytes": 23755
+    },
+    {
+      "file": "supplement/pdfbox-3.0.8-src.tar.gz",
+      "sha256": "8ce71e5082466ea2705356c4196ab8f52b5ea28e4ee873b46ad66f3119f23c30",
+      "bytes": 16607274
+    },
+    {
+      "file": "supplement/pillow-12.3.0.tar.gz",
+      "sha256": "3b8182a766685eaa002637e28b4ec8d6b18819a0c71f579bf0dbaa5830297cce",
+      "bytes": 47025035
+    },
+    {
+      "file": "supplement/pillow-brotli-v1.2.0.tar.gz",
+      "sha256": "816c96e8e8f193b40151dad7e8ff37b1221d019dbcb9c35cd3fadbfe6477dfec",
+      "bytes": 646315
+    },
+    {
+      "file": "supplement/pillow-fribidi-v1.0.16.zip",
+      "sha256": "1e619b9949db8ff00631a2442d72db8faf53ff104dc4a9bf13cc2c224f7cd2ea",
+      "bytes": 2210399
+    },
+    {
+      "file": "supplement/pillow-harfbuzz-harfbuzz-14.2.1.tar.xz",
+      "sha256": "a54a5d8e9380a41fbb762ce367bcbf7704792dfca0d93f1bbca86c5a57902e0e",
+      "bytes": 19559952
+    },
+    {
+      "file": "supplement/pillow-libpng-libpng-1.6.58.tar.gz",
+      "sha256": "8c9b05b675ca7301a458df2c2e46f26e1d41ff36b8863f8c33530bc58c2e6225",
+      "bytes": 1582074
+    },
+    {
+      "file": "supplement/pillow-pillow-12.3.0.tar.gz",
+      "sha256": "d7ce60fdf8b3d3b4370ea213834d7c852b1ca16396d4e75e5046be815b11b2fb",
+      "bytes": 47120631
+    },
+    {
+      "file": "supplement/pillow-zlib-ng-2.3.3.tar.gz",
+      "sha256": "f9c65aa9c852eb8255b636fd9f07ce1c406f061ec19a2e7d508b318ca0c907d1",
+      "bytes": 2447397
+    },
+    {
+      "file": "supplement/temurin-build-a612825ee82a20ac872d60958c349854c1f29a8e.tar.gz",
+      "sha256": "1c0cdcec98d7f43652ad26b7a54f33172089018ca58759ffc6d6fc0ee18ebd3f",
+      "bytes": 594017
+    },
+    {
+      "file": "verapdf-apps-1.30.2.tar.gz",
+      "sha256": "77dfc85544b83784ba4a9d2807bdb3f194b0c22d83904ecf222054ddf10a5347",
+      "bytes": 966625
+    }
+  ],
+  "records": [
+    {
+      "file": "compliance/runtime-dependencies.lock.json",
+      "sha256": "f94d7b6c18846d5d9049e9aec60c0cf4dbef48b4b8c61f70492a2499fe429f4f"
+    },
+    {
+      "file": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0/info/recipe/bld.bat",
+      "sha256": "b20cac27308b128347a3d17ec80375e7de6e41fda7e2164286be79ae8c01d6b3"
+    },
+    {
+      "file": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0/info/recipe/build.sh",
+      "sha256": "44708927106e3e13a9cf870de5633e0c2b8b0763230127d91c01c776ec6c7c3b"
+    },
+    {
+      "file": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0/info/recipe/conda_build_config.yaml",
+      "sha256": "a0a9c866d2ee9ece41bd94afb4c631ec3e968af1b6f107c0c0205f69cf9dd77d"
+    },
+    {
+      "file": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0/info/recipe/meta.yaml",
+      "sha256": "b6d738c471b1eda8330cfbcd92b71e5c73442d8fe5062f89c1d7aee708f41510"
+    },
+    {
+      "file": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0/info/recipe/meta.yaml.template",
+      "sha256": "6ed96c04bb91c452305b4dbf5a27894a81e0a4ebb0bd7da4ce8befcb160e713a"
+    },
+    {
+      "file": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0/info/recipe/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/lcms2-2.19-hf2c6c5f_0/info/recipe/win_jpegturbo.patch",
+      "sha256": "f396b209ee4d984569d73c1d37471cac59d270f49b087994ae68c63ed6043b00"
+    },
+    {
+      "file": "compliance/source-records/conda/lerc-4.1.0-hd936e49_0/info/recipe/bld.bat",
+      "sha256": "cbb7363f095c80c1c61e3d9d7c0af38e66805c636a1141139d588c8309227abd"
+    },
+    {
+      "file": "compliance/source-records/conda/lerc-4.1.0-hd936e49_0/info/recipe/build.sh",
+      "sha256": "3651b381c78a24dcd7a85e842cecb99cf87bd83b69c7773c2ca637838d5185a6"
+    },
+    {
+      "file": "compliance/source-records/conda/lerc-4.1.0-hd936e49_0/info/recipe/conda_build_config.yaml",
+      "sha256": "e372786735fa14d4cc639f892a0740299d85d1ffb80bb217b2df97f88a934fe8"
+    },
+    {
+      "file": "compliance/source-records/conda/lerc-4.1.0-hd936e49_0/info/recipe/meta.yaml",
+      "sha256": "d39504e7189468f8fc2a17e8d98eef12f9e8e4fd41d2d355b2baf706f542b60d"
+    },
+    {
+      "file": "compliance/source-records/conda/lerc-4.1.0-hd936e49_0/info/recipe/meta.yaml.template",
+      "sha256": "b7688ce834879d77de0b30f4ce34d18722ff914cf5f111b26098dfc78f709aab"
+    },
+    {
+      "file": "compliance/source-records/conda/lerc-4.1.0-hd936e49_0/info/recipe/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/libcurl-8.20.0-h8206538_0/info/recipe/conda_build_config.yaml",
+      "sha256": "5c3cdc56efa8bb9dd578cdee851196effb36b1c33c36bb2cc2b8923cb807b94a"
+    },
+    {
+      "file": "compliance/source-records/conda/libcurl-8.20.0-h8206538_0/info/recipe/meta.yaml",
+      "sha256": "3dc2b57a027b023cc44371962bb721b7d20e9771c75203d47ba98efe2ee9f4eb"
+    },
+    {
+      "file": "compliance/source-records/conda/libcurl-8.20.0-h8206538_0/info/recipe/parent/bld.bat",
+      "sha256": "ecabde06650881c84987c7b8b32409091da2f7f9fca54ea80deaf91148e2961b"
+    },
+    {
+      "file": "compliance/source-records/conda/libcurl-8.20.0-h8206538_0/info/recipe/parent/build.sh",
+      "sha256": "96f881153cb388ad4ab05dd7c24941cad84e94749686bf892e2b1b133dad897d"
+    },
+    {
+      "file": "compliance/source-records/conda/libcurl-8.20.0-h8206538_0/info/recipe/parent/meta.yaml",
+      "sha256": "1ddfe6daa3584995a70919e3d69eb0b5f21c097d197140e69c5dee3630a37901"
+    },
+    {
+      "file": "compliance/source-records/conda/libcurl-8.20.0-h8206538_0/info/recipe/parent/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/libdeflate-1.25-h51727cc_0/info/recipe/bld.bat",
+      "sha256": "18188c5902c6df4519ca364b6cebabecd8c95a1950016dc985f8a4756a950ad4"
+    },
+    {
+      "file": "compliance/source-records/conda/libdeflate-1.25-h51727cc_0/info/recipe/build.sh",
+      "sha256": "aa5841fb23c87bb0ea54c4df3ced3917deae5790bf60d59ef709629bd2b01a2d"
+    },
+    {
+      "file": "compliance/source-records/conda/libdeflate-1.25-h51727cc_0/info/recipe/conda_build_config.yaml",
+      "sha256": "d25a23ff8811e38a61b70afa3ad0dc6d259a7dc5dd6394f0b09113ac7444c32b"
+    },
+    {
+      "file": "compliance/source-records/conda/libdeflate-1.25-h51727cc_0/info/recipe/meta.yaml",
+      "sha256": "bac144cb7d75257e06b82db56ee83aeb422d70789eb9716e2c6cbfb64e89efcd"
+    },
+    {
+      "file": "compliance/source-records/conda/libdeflate-1.25-h51727cc_0/info/recipe/meta.yaml.template",
+      "sha256": "09316568d701d60b171ea28f91b791c7c6f2377fdb361c7f7fc8502eb1f4ac96"
+    },
+    {
+      "file": "compliance/source-records/conda/libdeflate-1.25-h51727cc_0/info/recipe/recipe-scripts-license.txt",
+      "sha256": "933c7e2f7471d8c90e6aee877c0838fc01b19dd55e362e2e2ec367b74caeb97f"
+    },
+    {
+      "file": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0/info/recipe/conda_build_config.yaml",
+      "sha256": "d3609dbc6ea0e98cdeb868c9de992716d28cde5966ab8f2eb9d30ec25a122add"
+    },
+    {
+      "file": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0/info/recipe/meta.yaml",
+      "sha256": "a697c325176b74113914d7da259e9886addd8e762c901bcb6f98890711ecc82b"
+    },
+    {
+      "file": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0/info/recipe/parent/bld.bat",
+      "sha256": "6b54cdd9192aa602d2fcdcd86c953584a82431cf8b152a16a224feb1ea1efd56"
+    },
+    {
+      "file": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0/info/recipe/parent/build.sh",
+      "sha256": "9880b79b92b4ab21a2bcb60803249be8b58ddb1513e7a48e8340b4d138539e58"
+    },
+    {
+      "file": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0/info/recipe/parent/conda_build_config.yaml",
+      "sha256": "bc4ed5d52d3152415c5b67dae72f62045bb2d02beae178df7cbd088c9fa7cfa0"
+    },
+    {
+      "file": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0/info/recipe/parent/meta.yaml",
+      "sha256": "80034fac9e99806e7fbfb0cb996fd4fae3fa12356d99c774e3e1ea6e3fb4f5b3"
+    },
+    {
+      "file": "compliance/source-records/conda/libfreetype6-2.14.3-hdbac1cb_0/info/recipe/parent/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0/info/recipe/bld.bat",
+      "sha256": "ebddf6779e6db02c1804639ce3b84366a5ccb47b9768fde9c13e3133bc282400"
+    },
+    {
+      "file": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0/info/recipe/build.sh",
+      "sha256": "48a7ccc10b1ffaed86eb91050eb3b7819471f8383b8893158fa50b0ff66e80ab"
+    },
+    {
+      "file": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0/info/recipe/conda_build_config.yaml",
+      "sha256": "2dae7bd1af1165fbb4d80c966bf44682214a5f74a08a33f6a7adff3cd50c83d7"
+    },
+    {
+      "file": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0/info/recipe/meta.yaml",
+      "sha256": "6e46b55aae48ee02f1cdd024f8c523ae12aa2a289d381e01cd3ece63a0596a77"
+    },
+    {
+      "file": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0/info/recipe/meta.yaml.template",
+      "sha256": "764ca1fe8fa325df7087d1ad22dc6313ed2283b9efa36b672a57bc18926b4720"
+    },
+    {
+      "file": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0/info/recipe/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/libjpeg-turbo-3.1.4.1-hfd05255_0/info/recipe/testorig.jpg",
+      "sha256": "acc6ec555d41d15b368320edaa3b20958ee6fa97cb6e4a18d1213d5ae8bec73b"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/conda_build_config.yaml",
+      "sha256": "4e6a25242eebd0cd005c6ea53f2756ae17223010670e1dc72a98e580065d2587"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/install-liblzma.bat",
+      "sha256": "ebdc706351fe2d98e677b1023fcfb550c5c24903e17c529c30ea8b4ee9b24e90"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/meta.yaml",
+      "sha256": "b6d969494bd406386ed98144d1e74740c77aeb4c20019fa8f7763f665743a161"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/0002-Add-gettimeofday-for-VS2008.patch",
+      "sha256": "074c5b31f35b90edfa8f635310a1b1fc6317d54e0e71c2d385fcd8dccd142485"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/bld-static.bat",
+      "sha256": "43876f3f8788598a2084e267c26196f47375d7562aef28c8f0b762e14f0be13b"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/bld.bat",
+      "sha256": "651eb943501092ade80ee8d0d040726221416dcc76484a8cf75755e744e7d3ed"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/build.sh",
+      "sha256": "be6903f58213fff7b729f81eec8fb08a4ebfcf52cbcec76655c36cb447812707"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/CMakeLists.txt",
+      "sha256": "6fdc6ec6a5fac0090cc3efbe384d1255c549f3447060e8f7676d35088dc94671"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/conda_build_config.yaml",
+      "sha256": "9ea3505f6042bd412c13a21eaf209c48e605796313b8b38cb40c28c4b2a8919e"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/install-liblzma.bat",
+      "sha256": "ebdc706351fe2d98e677b1023fcfb550c5c24903e17c529c30ea8b4ee9b24e90"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/install-liblzma.sh",
+      "sha256": "8f0f0639ccfc90b8733162d8cf1d921c4c0c48c2868d8bc403f84d899f0b559a"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/install.bat",
+      "sha256": "fdd79012b0dbcbc93294f25acb7f640c216c65fa6c06114a882c6e2f377a6d3f"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/install.sh",
+      "sha256": "f3ec283ad47eca210868c7b2fd9a5e6cb65a698f2e02024b8a67021e3266c6b1"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/meta.yaml",
+      "sha256": "547aaf8bef02a14f5e4b83a65d3c1c2b88b164b5a3ab964827a04c999beda0bc"
+    },
+    {
+      "file": "compliance/source-records/conda/liblzma-5.8.3-hfd05255_0/info/recipe/parent/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/licenses/LICENSE",
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/build.bat",
+      "sha256": "7a3ea2bc6f4cf3161c771ae9b64ab2acb6b77e6326b37cab225eb1f4cace211a"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/build.sh",
+      "sha256": "33bf186a8f7daf2a31d7048d3ac0dc1cdec4863ff0c01f7a929d9a27d4989ece"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/patches/0001-Include-pkg-config-files-in-the-Windows-packages-too.patch",
+      "sha256": "1fe817e3a91201194c7db24717b186f74f3490c9062952e5e0ade62c5774dab5"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/patches/0002-Ensure-that-lm-is-not-included-in-Windows-pkg-config.patch",
+      "sha256": "eda8bb8c284aebaac6a8049a20f048c712c9023c3039f877e6876ffcb4876819"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/recipe.yaml",
+      "sha256": "5ac75aba218b9e93858e9358beb64c32fa36ac2bbfc3eb46da7906f55554a44f"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/rendered_recipe.yaml",
+      "sha256": "b2e9b3ac0eafef02d7b42ccea0a6a6ac5199ab6b5ae65133b803e6e75040c1eb"
+    },
+    {
+      "file": "compliance/source-records/conda/libpng-1.6.58-h7351971_0/info/recipe/variant_config.yaml",
+      "sha256": "01ce644cfd9d151c4c9358a086cefdc21bd1485731f7912d1573524047a703c8"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/bld_shared.bat",
+      "sha256": "c54b722fe46e9b1ed17f84674d728745873c9b09058a92a4c73f656cba8b0fad"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/conda_build_config.yaml",
+      "sha256": "8a828eeb581715bbb0e5d94914142b5253ae2ea1b53ae6e92fee6c0d7450dc5b"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/meta.yaml",
+      "sha256": "9c554cda9046fb090bef90b0fee34ebc28000a0345292e6a98ad2791410261e9"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/bld_shared.bat",
+      "sha256": "c54b722fe46e9b1ed17f84674d728745873c9b09058a92a4c73f656cba8b0fad"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/bld_static.bat",
+      "sha256": "a173cd6d501326c6fabd7e43d66f073c8b0f55eecebf95743760dc233f403195"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/build_shared.sh",
+      "sha256": "1bb2ba4360b1715664c29281a7a95cb285b2c167e1093fffed6dcb9a99df6409"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/build_static.sh",
+      "sha256": "62898ed848591476367424e4e3b03b1da825721c779b7237b65366b1e933ab18"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/meta.yaml",
+      "sha256": "008d8955fb08c9919a4586768a63cddf17aaa53ec9e6475d942929b449aa6541"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/missing_files/test_public_key_auth_succeeds_with_correct_ed25519_key.c",
+      "sha256": "31e7fb17f70d4756d144a5da8885297ca4afa2b4b468462684079eb7df2a15f8"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/missing_files/test_public_key_auth_succeeds_with_correct_ed25519_key_from_mem.c",
+      "sha256": "5c7ccd0760deda06da57fb7cc93f1e24bc9165cddb8180c5e3e17e54ee512a0d"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/missing_files/test_public_key_auth_succeeds_with_correct_encrypted_ed25519_key.c",
+      "sha256": "9164b8bbc2a9796f95b173189a04a3872b4a5f14690ba44fc8a1f79349c792fe"
+    },
+    {
+      "file": "compliance/source-records/conda/libssh2-1.11.1-h9aa295b_0/info/recipe/parent/recipe-scripts-license.txt",
+      "sha256": "933c7e2f7471d8c90e6aee877c0838fc01b19dd55e362e2e2ec367b74caeb97f"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/bld.bat",
+      "sha256": "ade2cfe9cb7236b1d9e872394f5a3b0e14b04d00c04aa65cd6cda980eac92f38"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/build.sh",
+      "sha256": "365ab6a7ea335d976329f02f90327a9ef74c7371258615c13f63d8fa415f569e"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/conda_build_config.yaml",
+      "sha256": "79b8dc04d2bcfb84f7be2b1a7d018ce62ecf9ba50f4795983c17ebc4f6d454a8"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/meta.yaml",
+      "sha256": "8170015564aea7c45beb89581b0637217e3767fbfe3535d8732cf9d2b84ec959"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/meta.yaml.template",
+      "sha256": "3d293cbff9372839a069b00b91bac5ab40cf3056ec538b451f55e19ba43b3151"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/patches/use_unix_io.patch",
+      "sha256": "ebab3a00ad525718fe852e30d56f19d6296dce4b8aa93e0879a1d3253c391025"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/recipe-scripts-license.txt",
+      "sha256": "933c7e2f7471d8c90e6aee877c0838fc01b19dd55e362e2e2ec367b74caeb97f"
+    },
+    {
+      "file": "compliance/source-records/conda/libtiff-4.7.1-h8f73337_1/info/recipe/yum_requirements.txt",
+      "sha256": "129112a7d9f8e7be50e6dfa646f159bcd43ce04883c8735c69ee7fbf5b8cfef4"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/conda_build_config.yaml",
+      "sha256": "fe5aec671173f5f66c75142cfcb471e841ab5adc0c344dd405b405c1e5f70620"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/meta.yaml",
+      "sha256": "4a2e6040f5303fe794c93da483b95677fed7c3bf0317225ca1992f124e6f3a44"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/parent/bld.bat",
+      "sha256": "6248e2b07b6e0036ed870ded7c92aae6c1e003267fe87a23bbe835328898a484"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/parent/build.sh",
+      "sha256": "c6d64207060c5c11cf73ecd858e5bd9200aeba4d8b74cf84f12322281a6917ef"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/parent/conda_build_config.yaml",
+      "sha256": "816952911a6aa46bcf9ae7e94cfca84352be1a5ac0ba6a9f937084b4185158d7"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/parent/meta.yaml",
+      "sha256": "173945ac8f7018b73e6c37a786d02ec1eef10c4b5efbf60298f45618ebaf53f1"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/parent/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/parent/test_compile_flags.bat",
+      "sha256": "7fa0c671542459219c9a8ad0106fc931f896949bb8b48dc8e68c00d1c9fa8a0e"
+    },
+    {
+      "file": "compliance/source-records/conda/libzlib-1.3.2-hfd05255_2/info/recipe/parent/test_compile_flags.c",
+      "sha256": "b456e9029afb2d80518ec75f8c783886e467e6a5b479874dd5b94220288552c6"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/bld.bat",
+      "sha256": "f742efc336b4bf6b0f703f740ad4708987096c25b46ccd4b73e456a9f75661bc"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/build.sh",
+      "sha256": "f53935db8868bde8ed7484d0c9c9809719b6e0d744feec34e289fd93ec7cbafc"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/conda_build_config.yaml",
+      "sha256": "e1e505c2e0049d7b49a6f6afe692f24ed4ae42c9b3ff3a2a781391041558ce3b"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/meta.yaml",
+      "sha256": "b88f35f5242f309ee90eadb984f57aeb1fbfd9ac86b4c86d5886a53fd95cece3"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/meta.yaml.template",
+      "sha256": "561d7280e258287b41e66c77a6924f92c642f104c0fbc0b926cf579606abead1"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/p0_01.j2k",
+      "sha256": "a61ea8d21ad0f7f9b76796e0f841c3e125240f83e308e3b8d626f4356b9a1113"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/pkgconfig-private-libs.patch",
+      "sha256": "caffb7b09cb4faa7871cc5c26935b8a52ab705ba7613eb3401d5397ac5bd95a7"
+    },
+    {
+      "file": "compliance/source-records/conda/openjpeg-2.5.4-h0e57b4f_0/info/recipe/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/conda_build_config.yaml",
+      "sha256": "cd20af42aad980c6d9151878ad0ef526f648fc4e6301da164d10edd4b4f15702"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/install_openssl.bat",
+      "sha256": "eb63463181ed55e935763d73b5f9f3f2ed983a94458d3a0b52841e40552c0502"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/meta.yaml",
+      "sha256": "2928ab27f07e36e35472b7a04870b39c37a9a00aa4262c0773f448b3d207c184"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/.gitattributes",
+      "sha256": "178d14a4668ff9c1f805f023824888a65b021fffcb14393fea9fdb9f5bd715c6"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/activate-win.bat",
+      "sha256": "4d8a81a3adaa5530d3887b8564b7dbb417abc6806027c35a1314972f287ac39f"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/activate-win.ps1",
+      "sha256": "3949fb8c03c1455d40dad37617f10c8d9f9992ce5b59aa8847a6fb51a1c9a7f5"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/activate-win.sh",
+      "sha256": "5ec78b73cfd2233288a35c464470b62e4a2b08c0dcf8ec3c48969deae24b0e06"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/bld.bat",
+      "sha256": "e88b5b6424b314f3793bcc4dc5dd7d3256fead2301ee2bc74569e0fad7893b3a"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/build.sh",
+      "sha256": "be2d352b6ec7a518b681efde677cef98278e17826c04e8ffa62fdb87594683d0"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/conda_build_config.yaml",
+      "sha256": "1c1b848c2c70cf3d3c9632cb4f2127d0d7c526a5a8773ff7734ed76df311e06f"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/deactivate-win.bat",
+      "sha256": "c8d3299f7c2495c4591726336d94de91d9b8d25a4d85186b43c6b9bbe3e5b3ee"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/deactivate-win.ps1",
+      "sha256": "0c7b217451fade4d5faf97e6ff2e7fe38aa7e173c54d24b4b89933e22211b972"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/deactivate-win.sh",
+      "sha256": "ee47af6120be7738e01e715096555d3453134517f67443597c02c2a25d7a2c5a"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/install_libopenssl-static.bat",
+      "sha256": "5e79c1c3ef5b1365663527a9cbf28fe57bbc074a2e48338570995bbd724b66ee"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/install_libopenssl-static.sh",
+      "sha256": "0e18e63b85f3a89eab9e634f322371c511d9901a8adacf146b7a6df6b433a8c7"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/install_openssl.bat",
+      "sha256": "eb63463181ed55e935763d73b5f9f3f2ed983a94458d3a0b52841e40552c0502"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/install_openssl.sh",
+      "sha256": "535b27befc0903c764d443534dc4478b23d515ac724784a6ce1123d7f5f823fa"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/meta.yaml",
+      "sha256": "5dfd04428698e174522976ea62486d7fd13b4590fe9afe5638eaac8a09517593"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/win_pkgconfig/libcrypto.pc.in",
+      "sha256": "c61ebcfe1c0b03beee27f6025e8c368c62eb42b4b8d53d473f63f8f8b9e2423d"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/win_pkgconfig/libssl.pc.in",
+      "sha256": "8accfc29a79da2900553cd087219893d011a23f8175b9e428b051625f8702c0a"
+    },
+    {
+      "file": "compliance/source-records/conda/openssl-3.6.2-hf411b9b_0/info/recipe/parent/win_pkgconfig/openssl.pc.in",
+      "sha256": "e80f14d0674c88a25ecd3def3d8f82f74f3e16920d8bfe0d0b7be89f33375395"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/conda_build_config.yaml",
+      "sha256": "61fea16f423890825ad08cc84073feb36ddd8e9af886ce6d6ab91b0a46252bdd"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/install.bat",
+      "sha256": "76bcd580de54ef9ba5487b0e9745f5ed74a7d205b125006be32849828b66d477"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/meta.yaml",
+      "sha256": "d8a790d39d187f174430caff363b9b1ec870b32bf8321ff341ac39c5b1ea571a"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/bld.bat",
+      "sha256": "655f67de56bfabb65704def2b28d9ed72a65bff5f6010c7d04ab3ed6839ddd5c"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/build.sh",
+      "sha256": "b3ce41299cb1530217a5ec61d14bef07292e85164653980d0749259bcf88ff5e"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/conda_build_config.yaml",
+      "sha256": "d291985aba35d1ff8a0ce14e4357e35c8787e90942d840fad9678c25e14c4b21"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/disable-libtiff-win32-io.patch",
+      "sha256": "09520ecebeca933fff1ceac43b79a5092ec25c8ed5f9840d3630cd80b9213e37"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/exportsymbols.patch",
+      "sha256": "c85f36d798caa7621835d360e63eea0f3868b0dd887ccd897c00f9ca57ed3542"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/includesystembeforejpeg.patch",
+      "sha256": "d6a219602b05a643c1874da5dc2fb4a05bcc0abbc0cddaea1cbf0ca290f1bc30"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/install.bat",
+      "sha256": "76bcd580de54ef9ba5487b0e9745f5ed74a7d205b125006be32849828b66d477"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/install.sh",
+      "sha256": "ff90d26d15905195e38f8abfc79469d358b67650011b671b0f9d09e33b1861dd"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/meta.yaml",
+      "sha256": "1b3bd5a3e64fe8585e4875163ad6e927bc3ae271a3f325db5ef14ce4c5d1783a"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/recipe-scripts-license.txt",
+      "sha256": "b2f940c8e8ed8a05c62c1f7e41d16807a3ef28f7e33f54c3c8d1697b90ec149e"
+    },
+    {
+      "file": "compliance/source-records/conda/poppler-26.02.0-h4b9d284_3/info/recipe/parent/windows-data.patch",
+      "sha256": "d859382a71e21ffecf1936971b64c05f49789f11de9e69f8e0e81a4921feb279"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/licenses/LICENSE",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/cf_test/CMakeLists.txt",
+      "sha256": "e597e75ad7a2a133b52643ac3c953736e42243e5f86df0136edcce1c2774751a"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/conda_build_config.yaml",
+      "sha256": "b46912f849d54626aa7df11c335176de5d521520b2d6f273e4aede9f1b6612ea"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/install.bat",
+      "sha256": "7062798ce986f2d0c231a0a092fea7e7bfc1ae299b32d3738a7bf8998b8e8872"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/install.sh",
+      "sha256": "54013480cdc5332f0746afcebccc781c3ce145eacafd6e0edd1c258242348653"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/recipe-scripts-license.txt",
+      "sha256": "933c7e2f7471d8c90e6aee877c0838fc01b19dd55e362e2e2ec367b74caeb97f"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/recipe.yaml",
+      "sha256": "c439a28d4459f13edc823e05eb3d475148dfa64e84d7850967d85c5652ad8f3f"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/rendered_recipe.yaml",
+      "sha256": "7d86780ae18c60bf43c70a81eceed249ae51734972e2e279002c89e40737be75"
+    },
+    {
+      "file": "compliance/source-records/conda/zstd-1.5.7-h534d264_6/info/recipe/variant_config.yaml",
+      "sha256": "1fbbf7cb27c1dc8472d396afe6ed2dd2b24fd912edb28cf18e9131c7209ddc3c"
+    },
+    {
+      "file": "compliance/source-records/ffprobe-compression.json",
+      "sha256": "3e04f1eadd640a5b5d535610165ae221bdc22a76108659743721ad5e2535aa1a"
+    },
+    {
+      "file": "compliance/source-records/java-provenance.json",
+      "sha256": "d514e0b01d5ed717c55f5461f7c56dcb181808ce0bfd98abfdccf63c24c97267"
+    },
+    {
+      "file": "compliance/source-records/pillow/build_prepare.py",
+      "sha256": "599261894f109cb15418b6a2cdf2fc3a9b78e0479747b965897724968422ec2d"
+    },
+    {
+      "file": "compliance/source-records/pillow/dependencies.json",
+      "sha256": "8366ffa27ce82527124bd471c0181c2670595d37e3a80ddccaf2868c4fdb01a6"
+    },
+    {
+      "file": "compliance/source-records/pillow/fribidi.c",
+      "sha256": "7e8cfa78dcd21cebeb0ad91c0cd23e0dba6496c0fbd66e1ec3d25c5b1b365d11"
+    },
+    {
+      "file": "compliance/source-records/pillow/fribidi.cmake",
+      "sha256": "c12b23bae66dddd061835e756a34c450860cad8b5a95179b559daa23b09940ad"
+    },
+    {
+      "file": "compliance/source-records/pillow/fribidi.h",
+      "sha256": "1751c311ab8a3017e30cace05c48e08abe75a3597dd897c0f53d2dbee9293329"
+    },
+    {
+      "file": "compliance/source-records/pillow-provenance.json",
+      "sha256": "ad1ef7ea5b22e1c019ba3c75c120d013ddfe5d212055c45df1b9c7282d888d6c"
+    },
+    {
+      "file": "compliance/source-records/poppler-provenance.json",
+      "sha256": "af9727804503c7974314b587a22dbeb62b8cd93f48d56655b4438df4fdb0d6fc"
+    },
+    {
+      "file": "compliance/source-records/temurin-build.json",
+      "sha256": "92569501338b3b704579e73a8c39ec868c6866db56bf2090fa8654c8a9de80ed"
+    },
+    {
+      "file": "scripts/build_ffprobe.py",
+      "sha256": "11d2d7062495d2e566976e2994cc31f1ca076e60924ecf5ea7b98ad2aa449bf4"
+    },
+    {
+      "file": "scripts/prepare_runtime_dependencies.py",
+      "sha256": "19dffd0cdab64792ddd601cd3a8c34a1d3cba926147caa629faf3e7a87ca5ae0"
+    }
+  ]
+}

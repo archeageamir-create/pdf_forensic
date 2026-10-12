@@ -19,7 +19,9 @@ class AppConfig:
     reports_dir: Path
     settings_path: Path | None = None
     tool_timeout_seconds: int = 120
+    max_analysis_seconds: int = 900
     exiftool_command: str = "exiftool"
+    ffprobe_command: str = "ffprobe"
     qpdf_command: str = "qpdf"
     pdfcpu_command: str = "pdfcpu"
     poppler_bin_dir: Path | None = None
@@ -49,6 +51,7 @@ class AppConfig:
         tools_dir = bundled_resource("app", "resources", "tools")
         binaries_dir = bundled_resource("app", "resources", "binaries")
         bundled_exiftool = binaries_dir / "ExifTool.exe"
+        bundled_ffprobe = binaries_dir / "ffmpeg" / "ffprobe.exe"
         bundled_qpdf = binaries_dir / "qpdf" / "qpdf.exe"
         bundled_pdfcpu = binaries_dir / "pdfcpu" / "pdfcpu.exe"
         bundled_poppler = binaries_dir / "poppler" / "bin"
@@ -62,16 +65,15 @@ class AppConfig:
             cases_dir=data_dir / "cases",
             reports_dir=data_dir / "reports",
             settings_path=data_dir / "settings.json",
-            exiftool_command=str(bundled_exiftool) if bundled_exiftool.exists() else "exiftool",
-            qpdf_command=str(bundled_qpdf) if bundled_qpdf.exists() else "qpdf",
-            pdfcpu_command=(
-                str(bundled_pdfcpu) if bundled_pdfcpu.exists() else "pdfcpu"
-            ),
-            poppler_bin_dir=_existing_path(bundled_poppler),
-            java_command=str(bundled_java) if bundled_java.exists() else "java",
-            jhove_dir=_existing_path(bundled_jhove),
-            verapdf_dir=_existing_path(bundled_verapdf),
-            pdfbox_jar=_existing_path(bundled_pdfbox),
+            exiftool_command=_tool_command(bundled_exiftool, "exiftool"),
+            ffprobe_command=_tool_command(bundled_ffprobe, "ffprobe"),
+            qpdf_command=_tool_command(bundled_qpdf, "qpdf"),
+            pdfcpu_command=_tool_command(bundled_pdfcpu, "pdfcpu"),
+            poppler_bin_dir=_tool_path(bundled_poppler),
+            java_command=_tool_command(bundled_java, "java"),
+            jhove_dir=_tool_path(bundled_jhove),
+            verapdf_dir=_tool_path(bundled_verapdf),
+            pdfbox_jar=_tool_path(bundled_pdfbox),
             pdfid_script=_optional_path(os.environ.get("PDFID_SCRIPT"))
             or _existing_path(tools_dir / "pdfid.py"),
             pdf_parser_script=_optional_path(os.environ.get("PDF_PARSER_SCRIPT"))
@@ -85,6 +87,16 @@ class AppConfig:
 
 def _optional_path(value: str | None) -> Path | None:
     return Path(value).expanduser().resolve() if value else None
+
+
+def _tool_command(path: Path, fallback: str) -> str:
+    # A damaged portable package must report the missing bundled tool, not
+    # silently substitute a different version installed on the host.
+    return str(path) if getattr(sys, "frozen", False) or path.is_file() else fallback
+
+
+def _tool_path(path: Path) -> Path | None:
+    return path if getattr(sys, "frozen", False) else _existing_path(path)
 
 
 def _existing_path(path: Path) -> Path | None:

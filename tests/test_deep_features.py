@@ -236,8 +236,9 @@ class AttachmentAndReportingTests(unittest.TestCase):
             document = Document(docx_path)
             text = "\n".join(item.text for item in document.paragraphs)
             self.assertIn("ТЕХНИЧЕСКИЙ ОТЧЁТ", text)
-            self.assertIn("4. Авторство и история правок", text)
-            self.assertIn("Amirkhan Smagulov", text)
+            self.assertIn("4. Область исследования", text)
+            self.assertIn("Авторство и история правок PDF", text)
+            self.assertIn("ТОО «АНСЭ»", text)
             self.assertIn(r"raw\x00value\x01", text)
             package = ZipPackageExporter().export(result, root / "package.zip")
             with zipfile.ZipFile(package) as archive:

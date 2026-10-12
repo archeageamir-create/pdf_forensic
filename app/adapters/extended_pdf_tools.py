@@ -2,13 +2,29 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import shutil
+import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Iterable
 
 from app.adapters.base import AdapterResult, CancellationToken, CommandRunner, ToolAdapter
 from app.models import Finding, FindingLevel, ToolRunStatus
+from app.core.config import default_data_dir
+
+
+def _poppler_output_path(path: Path) -> str:
+    """Use extended Windows paths for pdftotext output beyond MAX_PATH."""
+    if os.name != "nt":
+        return str(path)
+    absolute = str(path.absolute())
+    if absolute.startswith("\\\\?\\"):
+        return absolute
+    if absolute.startswith("\\\\"):
+        return "\\\\?\\UNC\\" + absolute[2:]
+    return "\\\\?\\" + absolute
 
 
 class PopplerAdapter(ToolAdapter):
@@ -48,7 +64,7 @@ class PopplerAdapter(ToolAdapter):
                     "-enc",
                     "UTF-8",
                     str(path),
-                    str(text_temp),
+                    _poppler_output_path(text_temp),
                 ],
             ),
         )
@@ -86,34 +102,39 @@ class PopplerAdapter(ToolAdapter):
                 if not revision_path.is_file():
                     continue
                 prefix = render_root / f"revision-{revision_number:03d}"
-                render_run = self.runner.run(
-                    f"poppler/render-revision-{revision_number:03d}",
-                    [
-                        self._exe("pdftoppm"),
-                        "-png",
-                        "-r",
-                        "96",
-                        "-f",
-                        "1",
-                        "-l",
-                        str(self.max_render_pages),
-                        str(revision_path),
-                        str(prefix),
-                    ],
-                    ppm_version,
-                )
-                runs.append(render_run)
+                # Poppler's PNG writer uses a fixed MAX_PATH buffer even for
+                # extended paths. Render in a short private temp directory and
+                # copy the completed images into the case with Python's Unicode IO.
                 pages = []
-                if render_run.status == ToolRunStatus.COMPLETED:
-                    for image_path in sorted(render_root.glob(f"{prefix.name}-*.png")):
-                        match = re.search(r"-(\d+)\.png$", image_path.name)
-                        pages.append(
-                            {
+                with tempfile.TemporaryDirectory(prefix="dfi-pdf-render-") as temporary:
+                    staging = Path(temporary).resolve()
+                    if not staging.is_relative_to(Path(tempfile.gettempdir()).resolve()):
+                        raise ValueError("Unexpected rendering staging path")
+                    staged_prefix = staging / prefix.name
+                    render_run = self.runner.run(
+                        f"poppler/render-revision-{revision_number:03d}",
+                        [
+                            self._exe("pdftoppm"), "-png", "-r", "96", "-f", "1",
+                            "-l", str(self.max_render_pages), str(revision_path), str(staged_prefix),
+                        ],
+                        ppm_version,
+                    )
+                    runs.append(render_run)
+                    if render_run.status == ToolRunStatus.COMPLETED:
+                        for rendered in sorted(staging.glob(f"{prefix.name}-*.png")):
+                            image_path = render_root / rendered.name
+                            shutil.copyfile(rendered, image_path)
+                            match = re.search(r"-(\d+)\.png$", image_path.name)
+                            pages.append({
                                 "page": int(match.group(1)) if match else len(pages) + 1,
                                 "path": str(image_path),
                                 "sha256": _sha256(image_path),
-                            }
-                        )
+                            })
+                        if not pages:
+                            render_run.status = ToolRunStatus.FAILED
+                            render_run.stderr += "\nRenderer returned success without any page images"
+                    render_run.parsed_result["output_directory"] = str(render_root)
+                    render_run.parsed_result["copied_pages"] = len(pages)
                 render_groups.append(
                     {
                         "revision": revision_number,
@@ -282,7 +303,7 @@ class VeraPdfAdapter(ToolAdapter):
         self.runner = CommandRunner(timeout_seconds, cancellation_token)
 
     def analyze(self, path: Path) -> AdapterResult:
-        prefix = self.command_prefix()
+        prefix = self.command_prefix(path.parent / "verapdf-config")
         version = [*prefix, "--version"]
         runs = [
             self.runner.run(
@@ -303,7 +324,9 @@ class VeraPdfAdapter(ToolAdapter):
                     *prefix,
                     "--off",
                     "--format",
-                    "json",
+                    # veraPDF 1.30.2's JSON serializer fails on lowLevelInfo.
+                    # XML retains the complete report, including that section.
+                    "xml",
                     "--extract",
                     self.FEATURES,
                     str(path),
@@ -315,8 +338,19 @@ class VeraPdfAdapter(ToolAdapter):
         artifacts: dict[str, object] = {}
         for run in runs:
             try:
-                payload = json.loads(run.stdout)
-            except json.JSONDecodeError:
+                if run.tool_name == "verapdf/features":
+                    root = ET.fromstring(run.stdout)
+                    if not any(node.tag.rsplit("}", 1)[-1] == "featuresReport" for node in root.iter()):
+                        raise ValueError("XML has no featuresReport")
+                    payload = {"format": "xml", "xml": run.stdout}
+                else:
+                    payload = json.loads(run.stdout)
+                    if not isinstance(payload, dict) or not isinstance(payload.get("report"), dict):
+                        raise ValueError("JSON has no report object")
+            except (json.JSONDecodeError, ET.ParseError, ValueError) as exc:
+                if run.status == ToolRunStatus.COMPLETED:
+                    run.status = ToolRunStatus.FAILED
+                run.stderr += f"\nCannot read veraPDF report: {exc}"
                 continue
             # veraPDF returns 1 when validation is complete but non-conformant.
             if run.exit_code == 1 and isinstance(payload.get("report"), dict):
@@ -336,6 +370,8 @@ class VeraPdfAdapter(ToolAdapter):
                 )
                 findings.extend(_parse_verapdf_validation(payload))
             else:
+                xml_path = path.parent / "verapdf-features.xml"
+                xml_path.write_text(run.stdout, encoding="utf-8")
                 report_path = path.parent / "verapdf-features.json"
                 report_path.write_text(
                     json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -344,6 +380,7 @@ class VeraPdfAdapter(ToolAdapter):
                     {
                         "verapdf_features": payload,
                         "verapdf_features_path": str(report_path),
+                        "verapdf_features_xml_path": str(xml_path),
                     }
                 )
                 findings.append(
@@ -356,9 +393,13 @@ class VeraPdfAdapter(ToolAdapter):
                 )
         return AdapterResult(findings=findings, tool_runs=runs, artifacts=artifacts)
 
-    def command_prefix(self) -> list[str]:
+    def command_prefix(self, home_dir: Path | None = None) -> list[str]:
         root = self.verapdf_dir or Path("verapdf")
         bin_dir = root / "bin"
+        # veraPDF creates configuration files at app.home. Keep the installed
+        # engines immutable and the analysis configuration with its case.
+        home = home_dir or default_data_dir() / "tool-config" / "verapdf"
+        home.mkdir(parents=True, exist_ok=True)
         return [
             self.java_command,
             "-classpath",
@@ -366,7 +407,7 @@ class VeraPdfAdapter(ToolAdapter):
             "-Dfile.encoding=UTF8",
             "-Dapp.name=veraPDF CLI",
             f"-Dapp.repo={bin_dir}",
-            f"-Dapp.home={root}",
+            f"-Dapp.home={home}",
             f"-Dbasedir={root}",
             "--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED",
             "org.verapdf.apps.GreenfieldCliWrapper",

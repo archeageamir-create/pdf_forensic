@@ -9,9 +9,11 @@ import sys
 import zipfile
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.4.2"
+sys.path.insert(0, str(ROOT))
+from app import __version__ as VERSION
+from scripts.create_public_source_archive import allowed
+
 DIST = ROOT / "dist"
 APP_DIR = DIST / "DocumentForensicInspector"
 INSTALLER = DIST / f"DocumentForensicInspector-Setup-{VERSION}.exe"
@@ -23,8 +25,20 @@ FORBIDDEN_SUFFIXES = {
 FORBIDDEN_PARTS = {".verification", ".downloads", ".compliance-cache", "build", "dist", "__pycache__"}
 PRIVATE_PATTERNS = (
     re.compile(rb"[A-Z]:\\Users\\[^\\\r\n]+\\", re.IGNORECASE),
+    re.compile(rb"(?:[A-Z]:|/[a-z])/Users/[^/\r\n]+/", re.IGNORECASE),
     re.compile(rb"BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY"),
 )
+
+
+def audit_build_records(folder: Path) -> list[str]:
+    errors = []
+    allowed = {"config.h", "config.mak", "toolchain.txt", "build_ffprobe.py", "ffprobe-version.txt"}
+    for path in folder.iterdir():
+        if not path.is_file() or path.name not in allowed:
+            errors.append(f"Unexpected build record: {path.name}")
+        elif any(pattern.search(path.read_bytes()) for pattern in PRIVATE_PATTERNS):
+            errors.append(f"Private marker in build record: {path.name}")
+    return errors
 
 
 def _sha256(path: Path) -> str:
@@ -37,12 +51,26 @@ def _sha256(path: Path) -> str:
 
 def audit() -> tuple[list[str], dict[str, object]]:
     errors: list[str] = []
+    for document in (APP_DIR / "_internal/docs/release").glob("*"):
+        if document.name not in {"README-RU.txt", "REQUIREMENTS-RU.txt"}:
+            errors.append(f"Non-public runtime document: {document.name}")
+    records = APP_DIR / "_internal/app/resources/binaries/ffmpeg/build-information"
+    if records.is_dir():
+        errors.extend(audit_build_records(records))
+    else:
+        errors.append("Missing ffprobe build records")
+    from scripts.verify_source_delivery import verify as verify_sources
+    try:
+        source_delivery = verify_sources()
+    except (OSError, ValueError, KeyError) as error:
+        errors.append(f"Source delivery: {error}")
+        source_delivery = {"status": "failed"}
     required_runtime = [
         APP_DIR / "DocumentForensicInspector.exe",
         APP_DIR / "_internal" / "PySide6" / "QtCore.pyd",
         APP_DIR / "_internal" / "app" / "resources" / "SBOM.spdx.json",
         APP_DIR / "_internal" / "app" / "resources" / "THIRD_PARTY_NOTICES.md",
-        APP_DIR / "_internal" / "app" / "resources" / "licenses" / "qt" / "LGPL-3.0-only.txt",
+        APP_DIR / "_internal" / "app" / "resources" / "licenses" / "repository-notices" / "qt" / "LGPL-3.0-only.txt",
         APP_DIR / "_internal" / "app" / "resources" / "compliance" / "SOURCE_OFFER.md",
         APP_DIR / "_internal" / "app" / "resources" / "bin" / "DocumentForensicToolRunner.exe",
     ]
@@ -59,6 +87,9 @@ def audit() -> tuple[list[str], dict[str, object]]:
                     continue
                 source_files += 1
                 path = Path(info.filename)
+                repository_path = Path(*path.parts[1:])
+                if not allowed(ROOT / repository_path):
+                    errors.append(f"Non-public file in source archive: {info.filename}")
                 parts = {part.casefold() for part in path.parts}
                 if parts & FORBIDDEN_PARTS:
                     errors.append(f"Forbidden directory in source archive: {info.filename}")
@@ -75,6 +106,7 @@ def audit() -> tuple[list[str], dict[str, object]]:
         "version": VERSION,
         "status": "failed" if errors else "passed",
         "source_files": source_files,
+        "source_delivery": source_delivery,
         "artifacts": {},
         "errors": errors,
     }
@@ -91,7 +123,8 @@ def audit() -> tuple[list[str], dict[str, object]]:
 
 def main() -> int:
     errors, report = audit()
-    destination = DIST / f"DocumentForensicInspector-Release-Audit-{VERSION}.json"
+    destination = ROOT / ".verification" / f"release-audit-{VERSION}.json"
+    destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if errors:
         for error in errors:

@@ -2,43 +2,89 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import shutil
-import sys
 import tempfile
 import zipfile
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.4.2"
+import sys
+
+sys.path.insert(0, str(ROOT))
+from app import __version__ as VERSION
+
 ARCHIVE = ROOT / "dist" / f"DocumentForensicInspector-Source-{VERSION}.zip"
-DIRECTORIES = ("app", "compliance", "docs", "installer", "scripts", "signing", "tests")
+DIRECTORIES = ("app", "compliance", "docs", "installer", "scripts", "tests")
 FILES = (
-    ".gitignore", "build.ps1", "CONTRIBUTING.md", "create-self-signed-certificate.ps1",
-    "DocumentForensicInspector.spec", "DocumentForensicToolRunner.spec", "LICENSE",
-    "NOTICE", "pyproject.toml", "README.md", "requirements-dev.txt", "requirements.txt",
-    "run.ps1", "SECURITY.md", "sign-build.ps1", "SOURCE_OFFER.md",
-    "THIRD_PARTY_NOTICES.md", "SBOM.spdx.json",
+    ".gitattributes",
+    ".gitignore",
+    "build.ps1",
+    "CONTRIBUTING.md",
+    "DocumentForensicInspector.spec",
+    "DocumentForensicToolRunner.spec",
+    "LICENSE",
+    "NOTICE",
+    "pyproject.toml",
+    "README.md",
+    "requirements-dev.txt",
+    "requirements.txt",
+    "run.ps1",
+    "SECURITY.md",
+    "SOURCE_OFFER.md",
+    "THIRD_PARTY_NOTICES.md",
+    "SBOM.spdx.json",
+    "Launch.vbs",
+    "setup.ps1",
+    "build-preview.ps1",
+    "DocumentForensicInspectorPreview.spec",
 )
 EXCLUDED_PARTS = {
-    "__pycache__", ".pytest_cache", "binaries", "bin", "archives",
+    "__pycache__",
+    ".pytest_cache",
+    "binaries",
+    "bin",
+    "archives",
 }
 EXCLUDED_SUFFIXES = {".pyc", ".pfx", ".p12", ".pem", ".key", ".exe", ".dll", ".jar"}
+# Published documentation is selected explicitly. Internal validation reports,
+# plans and historical snapshots remain in the repository, outside delivery.
+PUBLIC_DOCS = {
+    "ADDING_ANALYZERS.md", "ARCHITECTURE.md", "DEPENDENCY_SOURCES.md",
+    "DRIVE_DOWNLOAD_RU.txt", "COMPONENTS_DOWNLOAD_RU.txt", "LGPL_COMPLIANCE.md", "RESEARCH_ASSISTANT_KZ.md",
+    "STANDALONE_BUILD.md",
+    "release/README-RU.txt", "release/REQUIREMENTS-RU.txt",
+}
 
 
 def allowed(path: Path) -> bool:
     relative = path.relative_to(ROOT)
+    if relative.as_posix() == "scripts/write_preview_validation.py":
+        return False
+    if relative.parts[0] == "docs":
+        document = relative.relative_to("docs").as_posix()
+        if document not in PUBLIC_DOCS and not document.startswith("user-guide/"):
+            return False
     if any(part in EXCLUDED_PARTS for part in relative.parts):
         return False
     return path.suffix.lower() not in EXCLUDED_SUFFIXES
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--preview",
+        action="store_true",
+        help="Label this development snapshot as a universal preview.",
+    )
+    args = parser.parse_args()
+    version = VERSION + "+universal-preview" if args.preview else VERSION
+    archive_path = ROOT / "dist" / f"DocumentForensicInspector-Source-{version}.zip"
     ROOT.joinpath("dist").mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="dfi-public-source-") as temporary:
-        stage = Path(temporary) / f"document-forensic-inspector-{VERSION}"
+        stage = Path(temporary) / f"document-forensic-inspector-{version}"
         stage.mkdir()
         for filename in FILES:
             source = ROOT / filename
@@ -60,22 +106,35 @@ def main() -> int:
         manifest: list[dict[str, str | int]] = []
         for source in sorted(path for path in stage.rglob("*") if path.is_file()):
             data = source.read_bytes()
-            manifest.append({
-                "path": source.relative_to(stage).as_posix(),
-                "size": len(data),
-                "sha256": hashlib.sha256(data).hexdigest(),
-            })
+            manifest.append(
+                {
+                    "path": source.relative_to(stage).as_posix(),
+                    "size": len(data),
+                    "sha256": hashlib.sha256(data).hexdigest(),
+                }
+            )
         (stage / "SOURCE_MANIFEST.json").write_text(
-            json.dumps({"version": VERSION, "files": manifest}, indent=2) + "\n",
+            json.dumps({"version": version, "files": manifest}, indent=2) + "\n",
             encoding="utf-8",
         )
-        ARCHIVE.unlink(missing_ok=True)
-        with zipfile.ZipFile(ARCHIVE, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
-            for source in sorted(path for path in stage.rglob("*") if path.is_file()):
-                archive.write(source, source.relative_to(stage.parent))
+        with tempfile.NamedTemporaryFile(
+            dir=archive_path.parent, suffix=".tmp", delete=False
+        ) as output:
+            staged_archive = Path(output.name)
+        try:
+            with zipfile.ZipFile(
+                staged_archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
+            ) as archive:
+                for source in sorted(
+                    path for path in stage.rglob("*") if path.is_file()
+                ):
+                    archive.write(source, source.relative_to(stage.parent))
+            staged_archive.replace(archive_path)
+        finally:
+            staged_archive.unlink(missing_ok=True)
 
-    print(ARCHIVE)
-    print(f"SHA256={hashlib.sha256(ARCHIVE.read_bytes()).hexdigest()}")
+    print(archive_path)
+    print(f"SHA256={hashlib.sha256(archive_path.read_bytes()).hexdigest()}")
     return 0
 
 

@@ -3,9 +3,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import mmap
-import shutil
 import subprocess
-import sys
 from pathlib import Path
 from typing import Callable, Iterable
 
@@ -28,6 +26,9 @@ from app.adapters.base import (
     ToolAdapter,
 )
 from app.adapters.pdf_tools import _python_tool_prefix
+from app.adapters.ffprobe import FfprobeAdapter
+from app.analyzers.universal import analyze_universal
+from app.analyzers.interpretation import InterpretationBuilder
 from app.analyzers import (
     FileComparator,
     MetadataConflictDetector,
@@ -45,7 +46,7 @@ from app.analyzers.signatures import PdfSignatureAnalyzer
 from app.core.config import AppConfig
 from app.core.database import AnalysisRepository
 from app.core.errors import AnalysisError, EvidencePreparationError
-from app.core.formats import canonical_extension
+from app.core.formats import PROFILES, canonical_extension, extension_matches
 from app.core.hashing import sha256_file
 from app.core.workspace import EvidenceWorkspace
 from app.models import (
@@ -83,6 +84,7 @@ class ForensicsService:
         selected_analyzers: set[str] | None = None,
         cancellation_token: CancellationToken | None = None,
         progress: ProgressCallback | None = None,
+        result_id: str | None = None,
     ) -> AnalysisResult:
         mode = AnalysisMode(mode)
         token = cancellation_token or CancellationToken()
@@ -92,6 +94,8 @@ class ForensicsService:
         if original_path.stat().st_size > self.config.max_file_size_bytes:
             raise EvidencePreparationError("File exceeds configured size limit")
         evidence = self.workspace.prepare(original_path, project_id, mode)
+        if result_id:
+            evidence.id = result_id
         if not self.workspace.verify(evidence):
             raise EvidencePreparationError("Working copy failed the integrity check")
         self.repository.log_event("evidence_added", evidence.id, "working copy verified", project_id)
@@ -101,6 +105,7 @@ class ForensicsService:
         tool_runs: list[ToolRun] = []
         errors: list[str] = []
         artifacts: dict[str, object] = {}
+        artifacts["analysis_scope"] = {"profile": evidence.kind.value, "coverage": PROFILES[evidence.kind].coverage}
 
         self._progress(progress, "Встроенный структурный анализ", 1, 8)
         self._check_cancel(token)
@@ -124,12 +129,17 @@ class ForensicsService:
                     max_xml_part_bytes=self.config.max_xml_part_bytes,
                     max_compression_ratio=self.config.max_zip_compression_ratio,
                 )
-                findings.extend(PptxAnalyzer(limits).analyze(path))
+                if evidence.kind == FileKind.PPTX:
+                    findings.extend(PptxAnalyzer(limits).analyze(path))
+                else:
+                    builtin = analyze_universal(path, evidence.kind, limits)
+                    findings.extend(builtin.findings)
+                    artifacts.update(builtin.artifacts)
         except (AnalysisError, OSError, ValueError) as exc:
             LOGGER.exception("Built-in analyzer failed")
             errors.append(f"Built-in analyzer: {exc}")
 
-        self._progress(progress, "Подписи и вложения", 2, 8)
+        self._progress(progress, "Подготовка профильных проверок", 2, 8)
         self._check_cancel(token)
         if evidence.kind == FileKind.PDF and self._enabled("signatures", mode, selected):
             signature_result = PdfSignatureAnalyzer(
@@ -241,6 +251,7 @@ class ForensicsService:
             artifacts=artifacts,
         )
         result.summary = SummaryBuilder().build(result)
+        result.artifacts["research_assistant"] = InterpretationBuilder().snapshot(result)
         self.repository.save(result)
         self.repository.log_event(
             "analysis_completed",
@@ -386,12 +397,13 @@ class ForensicsService:
         pdfbox_jar = self.config.pdfbox_jar or Path("pdfbox-app.jar")
         commands = [
             ("ExifTool", [self.config.exiftool_command, "-ver"]),
+            ("ffprobe", [self.config.ffprobe_command, "-version"]),
             ("qpdf", [self.config.qpdf_command, "--version"]),
             ("pdfcpu", [self.config.pdfcpu_command, "version"]),
             ("Poppler", [poppler._exe("pdfinfo"), "-v"]),
             ("Java runtime", [self.config.java_command, "-version"]),
             ("JHOVE PDF-hul", [*jhove.command_prefix(), "-h"]),
-            ("veraPDF", [*verapdf.command_prefix(), "--version"]),
+            ("veraPDF", [*verapdf.command_prefix(self.config.data_dir / "tool-config" / "verapdf"), "--version"]),
             (
                 "Apache PDFBox",
                 [self.config.java_command, "-jar", str(pdfbox_jar), "version"],
@@ -442,6 +454,8 @@ class ForensicsService:
         artifacts: dict[str, object],
     ) -> list[ToolAdapter]:
         adapters: list[ToolAdapter] = []
+        if PROFILES[kind].analyzer == "media" and self._enabled("ffprobe", mode, selected, quick=True):
+            adapters.append(FfprobeAdapter(kind, self.config.ffprobe_command, self.config.tool_timeout_seconds, token))
         if self._enabled("exiftool", mode, selected, quick=True):
             adapters.append(
                 ExifToolAdapter(
@@ -594,13 +608,14 @@ class ForensicsService:
     @staticmethod
     def _evidence_findings(extension: str, kind: FileKind) -> list[Finding]:
         expected = canonical_extension(kind)
-        mismatch = extension.casefold() != expected
+        match = extension_matches(extension, kind)
+        mismatch = match is False
         return [
             Finding("Integrity", "Signature format", kind.value.upper(), "File signature"),
             Finding(
                 "Integrity",
                 "Extension matches signature",
-                not mismatch,
+                match if match is not None else "Формат не распознан; соответствие не проверено",
                 "File signature",
                 FindingLevel.MEDIUM if mismatch else FindingLevel.INFO,
                 details=(

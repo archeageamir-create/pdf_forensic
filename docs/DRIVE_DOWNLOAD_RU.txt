@@ -1,0 +1,22 @@
+КАК УСТАНОВИТЬ DOCUMENT FORENSIC INSPECTOR 0.5.1
+
+1. Скачайте установщик для Windows:
+https://github.com/archeageamir-create/pdf_forensic/releases/download/v0.5.1/DocumentForensicInspector-Setup-0.5.1.exe
+
+2. Откройте скачанный EXE, прочитайте условия и подтвердите установку.
+3. После установки откройте программу с рабочего стола.
+
+Это один файл. Python, Java и все инструменты уже включены.
+Папка программы и ярлык создаются автоматически. Права администратора
+не нужны. После скачивания установка и работа не требуют интернета.
+
+Руководство PDF:
+https://github.com/archeageamir-create/pdf_forensic/releases/download/v0.5.1/DocumentForensicInspector-User-Guide-RU.pdf
+
+Все файлы версии, включая переносную программу, исходники и лицензии:
+https://github.com/archeageamir-create/pdf_forensic/releases/tag/v0.5.1
+
+В этой папке Диска сохранён дополнительный комплект: «Windows 0.5.1 — скачать
+целиком». Если используете его, скачайте всю папку, распакуйте и откройте
+Install.cmd. Для переносной версии откройте Portable.cmd, затем распакуйте
+полученный Windows.zip целиком и запустите DocumentForensicInspector.exe.

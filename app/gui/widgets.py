@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QPlainTextEdit,
     QPushButton,
+    QSizePolicy,
     QSpinBox,
     QSplitter,
     QTableWidget,
@@ -26,8 +27,35 @@ from PySide6.QtWidgets import (
 )
 
 from app.core.service import ForensicsService
-from app.models import AnalysisResult, Finding, UserMark
+from app.models import Finding, UserMark
 from app.resources.labels import display_value, parameter_description, parameter_label, source_label
+
+
+class ElidedLabel(QLabel):
+    """Keep a long evidence name from taking space away from its results."""
+
+    def __init__(self, text="", parent=None):
+        super().__init__(parent)
+        self._full_text = text
+        self.setTextFormat(Qt.TextFormat.PlainText)
+        self.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Preferred)
+        self.setMinimumWidth(0)
+        self.setText(text)
+
+    def setText(self, text):
+        self._full_text = text
+        self.setToolTip(text)
+        self.setAccessibleName(text)
+        self._elide()
+
+    def _elide(self):
+        super().setText(self.fontMetrics().elidedText(
+            self._full_text, Qt.TextElideMode.ElideMiddle, max(1, self.contentsRect().width())
+        ))
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._elide()
 
 
 class FindingsTable(QTableWidget):
@@ -35,6 +63,7 @@ class FindingsTable(QTableWidget):
 
     def __init__(self, settings_key: str = "findings") -> None:
         super().__init__(0, 7)
+        self.review_controls = {}
         self.setHorizontalHeaderLabels(
             [
                 "Параметр",
@@ -59,6 +88,7 @@ class FindingsTable(QTableWidget):
         )
 
     def populate(self, findings: list[Finding]) -> None:
+        self.review_controls.clear()
         self.setRowCount(len(findings))
         labels = {
             UserMark.NONE.value: "Не отмечено",
@@ -91,6 +121,7 @@ class FindingsTable(QTableWidget):
             combo.setCurrentIndex(max(0, current))
             include = QCheckBox()
             include.setChecked(finding.include_in_report)
+            self.review_controls[finding.id] = (combo, include)
             combo.currentIndexChanged.connect(
                 lambda _index, c=combo, box=include, f=finding: self.mark_changed.emit(
                     f.id, str(c.currentData()), box.isChecked()
@@ -103,6 +134,18 @@ class FindingsTable(QTableWidget):
             )
             self.setCellWidget(row, 5, combo)
             self.setCellWidget(row, 6, include)
+
+    def sync_mark(self, finding: Finding) -> None:
+        controls = self.review_controls.get(finding.id)
+        if not controls:
+            return
+        combo, include = controls
+        combo.blockSignals(True)
+        include.blockSignals(True)
+        combo.setCurrentIndex(max(0, combo.findData(finding.user_mark)))
+        include.setChecked(finding.include_in_report)
+        combo.blockSignals(False)
+        include.blockSignals(False)
 
 
 class PdfObjectsWidget(QWidget):
@@ -276,6 +319,8 @@ def configure_resizable_columns(
     default_widths: list[int],
 ) -> None:
     """Make every column user-resizable and persist its width between launches."""
+    # Arrow keys navigate cells; Tab must reach the controls after the table.
+    table.setTabKeyNavigation(False)
     header = table.horizontalHeader()
     header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
     header.setStretchLastSection(False)

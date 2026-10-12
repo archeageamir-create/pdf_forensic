@@ -58,7 +58,7 @@ class AnalyzerTests(unittest.TestCase):
         ]
         MetadataConflictDetector().mark(findings)
         self.assertTrue(all(item.conflict for item in findings))
-        self.assertTrue(all("not, by itself" in item.details for item in findings))
+        self.assertTrue(all("само по себе не доказывает подделку" in item.details for item in findings))
 
     def test_pdf_author_is_compared_with_xmp_creator(self) -> None:
         findings = [

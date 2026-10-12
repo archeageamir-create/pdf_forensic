@@ -6,7 +6,6 @@ import re
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Iterator
 from xml.etree import ElementTree
 
 from app.core.errors import AnalysisError
@@ -106,7 +105,7 @@ class PptxAnalyzer:
         ):
             if part not in names:
                 findings.append(
-                    Finding(category, "Part present", False, self.SOURCE, FindingLevel.LOW)
+                    Finding(category, "Part present", False, self.SOURCE, FindingLevel.INFO, location=part, details=f"В пакете отсутствует {part}. Этот набор свойств недоступен; отсутствие необязательных метаданных само по себе не указывает на изменение файла.")
                 )
                 continue
             root = self._read_xml(archive, part)
@@ -133,7 +132,7 @@ class PptxAnalyzer:
                 )
         else:
             findings.append(
-                Finding("OOXML Custom Properties", "Part present", False, self.SOURCE)
+                Finding("OOXML Custom Properties", "Part present", False, self.SOURCE, location=self.CUSTOM_PATH, details="В пакете нет docProps/custom.xml: пользовательские свойства не записаны.")
             )
         return findings
 

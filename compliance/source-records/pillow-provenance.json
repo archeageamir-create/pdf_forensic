@@ -1,0 +1,52 @@
+{
+  "component": "Pillow and LGPL text-shaping shim",
+  "files": [
+    {
+      "file": "pillow-12.3.0.tar.gz",
+      "sha256": "3b8182a766685eaa002637e28b4ec8d6b18819a0c71f579bf0dbaa5830297cce",
+      "url": "https://files.pythonhosted.org/packages/1c/3d/bb7fca845737cf9d7dbde16ed1843984665ff2e0a518f5db43e77ec540b9/pillow-12.3.0.tar.gz"
+    },
+    {
+      "file": "pillow-pillow-12.3.0.tar.gz",
+      "url": "https://github.com/python-pillow/Pillow/archive/refs/tags/12.3.0.tar.gz",
+      "sha256": "d7ce60fdf8b3d3b4370ea213834d7c852b1ca16396d4e75e5046be815b11b2fb"
+    },
+    {
+      "file": "pillow-fribidi-v1.0.16.zip",
+      "url": "https://github.com/fribidi/fribidi/archive/v1.0.16.zip",
+      "sha256": "1e619b9949db8ff00631a2442d72db8faf53ff104dc4a9bf13cc2c224f7cd2ea"
+    },
+    {
+      "file": "pillow-harfbuzz-harfbuzz-14.2.1.tar.xz",
+      "url": "https://github.com/harfbuzz/harfbuzz/releases/download/14.2.1/harfbuzz-14.2.1.tar.xz",
+      "sha256": "a54a5d8e9380a41fbb762ce367bcbf7704792dfca0d93f1bbca86c5a57902e0e"
+    },
+    {
+      "file": "pillow-brotli-v1.2.0.tar.gz",
+      "url": "https://github.com/google/brotli/archive/refs/tags/v1.2.0.tar.gz",
+      "sha256": "816c96e8e8f193b40151dad7e8ff37b1221d019dbcb9c35cd3fadbfe6477dfec"
+    },
+    {
+      "file": "pillow-zlib-ng-2.3.3.tar.gz",
+      "url": "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.3.3.tar.gz",
+      "sha256": "f9c65aa9c852eb8255b636fd9f07ce1c406f061ec19a2e7d508b318ca0c907d1"
+    },
+    {
+      "file": "pillow-libpng-libpng-1.6.58.tar.gz",
+      "url": "https://downloads.sourceforge.net/project/libpng/libpng16/1.6.58/libpng-1.6.58.tar.gz",
+      "sha256": "8c9b05b675ca7301a458df2c2e46f26e1d41ff36b8863f8c33530bc58c2e6225"
+    },
+    {
+      "file": "conda-libfreetype6-2.14.3-0-freetype-2.14.3.tar.gz",
+      "sha256": "e61b31ab26358b946e767ed7eb7f4bb2e507da1cfefeb7a8861ace7fd5c899a1",
+      "url": "https://download.savannah.gnu.org/releases/freetype/freetype-2.14.3.tar.gz"
+    }
+  ],
+  "binary_metadata": "Pillow wheel 12.3.0 cp312 win_amd64; source and winbuild scripts retained",
+  "feature_check": {
+    "libimagequant": false,
+    "raqm": "0.10.5",
+    "harfbuzz": "14.2.1",
+    "fribidi_shim": "runtime-loaded; no FriBiDi DLL included in Pillow wheel"
+  }
+}

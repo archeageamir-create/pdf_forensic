@@ -7,7 +7,6 @@ from typing import Iterable
 
 from docx import Document
 from docx.document import Document as DocumentType
-from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
@@ -15,6 +14,8 @@ from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 
 from app.models import AnalysisResult, Finding, ResearchProject
+from app.reporting.safety import atomic_report_path, validate_report_destination
+from app.reporting.timeline import timeline_cells
 from app.resources.labels import (
     category_label,
     display_value,
@@ -41,12 +42,14 @@ class DocxReportExporter:
         destination: Path,
         project: ResearchProject | None = None,
     ) -> Path:
+        validate_report_destination(result, destination)
         destination.parent.mkdir(parents=True, exist_ok=True)
         document = Document(str(self.template)) if self.template and self.template.is_file() else Document()
         self._configure(document)
         self._masthead(document, result, project)
         self._body(document, result, project)
-        document.save(destination)
+        with atomic_report_path(result, destination) as temporary:
+            document.save(temporary)
         return destination
 
     def _configure(self, document: DocumentType) -> None:
@@ -96,13 +99,13 @@ class DocxReportExporter:
         _font(run.font, "Calibri", 23, bold=True)
         subtitle = document.add_paragraph()
         subtitle.paragraph_format.space_after = Pt(16)
-        run = subtitle.add_run("Экспертное исследование метаданных и структуры документа")
+        run = subtitle.add_run("Исследование метаданных и структуры файла")
         _font(run.font, "Calibri", 14, color=MUTED)
 
         authorship = document.add_paragraph()
         authorship.paragraph_format.space_after = Pt(12)
         run = authorship.add_run(
-            "Оболочка, интеграция и сборка: Amirkhan Smagulov. Сторонние "
+            "Оболочка, интеграция и сборка: ТОО «АНСЭ». Сторонние "
             "open-source инструменты сохраняют своё авторство и лицензии."
         )
         _font(run.font, "Calibri", 9.5, color=MUTED)
@@ -130,7 +133,7 @@ class DocxReportExporter:
     ) -> None:
         document.add_heading("1. Сводка", level=1)
         for item in result.summary:
-            document.add_paragraph(item, style="List Bullet")
+            document.add_paragraph(_xml_safe(item), style="List Bullet")
 
         document.add_heading("2. Идентификация объекта", level=1)
         evidence = result.evidence
@@ -144,15 +147,21 @@ class DocxReportExporter:
                 ("SHA-256", evidence.sha256),
                 ("SHA-1", evidence.sha1),
                 ("MD5", evidence.md5),
-                ("Режим", evidence.analysis_mode.value),
+                ("Режим", display_value(evidence.analysis_mode.value)),
             ],
         )
 
         document.add_heading("3. Использованные методы", level=1)
         self._tool_table(document, result)
 
-        document.add_heading("4. Авторство и история правок", level=1)
-        self._provenance_table(document, result)
+        document.add_heading("4. Область исследования", level=1)
+        scope = result.artifacts.get("analysis_scope", {})
+        if isinstance(scope, dict):
+            document.add_paragraph(_xml_safe(str(scope.get("coverage", "Область проверки не записана в этой версии результата."))))
+        document.add_paragraph("Полнота относится к выбранным методам. Неподдерживаемые свойства и отсутствующие инструменты не считаются выполненной проверкой.")
+        if result.artifacts.get("pdf_provenance"):
+            document.add_heading("Авторство и история правок PDF", level=2)
+            self._provenance_table(document, result)
 
         grouped: dict[str, list[Finding]] = defaultdict(list)
         for finding in result.findings:
@@ -174,33 +183,32 @@ class DocxReportExporter:
                 if not isinstance(item, dict):
                     continue
                 cells = table.add_row().cells
-                cells[0].text = str(item.get("normalized") or item.get("raw", ""))
-                cells[1].text = source_label(str(item.get("source", "")))
-                cells[2].text = parameter_label(str(item.get("name", "")))
-                cells[3].text = str(item.get("raw", ""))
+                for cell, text in zip(cells, timeline_cells(item)):
+                    cell.text = _xml_safe(text)
             _format_table(table, [2100, 1800, 2700, 2760])
         else:
             document.add_paragraph("Даты не извлечены.")
 
         document.add_heading("7. Выводы и заметки пользователя", level=1)
         document.add_heading("Выводы", level=2)
-        document.add_paragraph(evidence.user_conclusions or "Не заполнены.")
+        document.add_paragraph(_xml_safe(evidence.user_conclusions or "Не заполнены."))
         document.add_heading("Заметки", level=2)
-        document.add_paragraph(evidence.user_notes or "Не заполнены.")
+        document.add_paragraph(_xml_safe(evidence.user_notes or "Не заполнены."))
 
         document.add_heading("8. Ограничения", level=1)
         document.add_paragraph(
             "Программное обеспечение систематизирует технические факты и не устанавливает "
             "личность фактического автора, факт подделки или юридическую действительность подписи."
         )
+        document.add_paragraph("Значения в таблицах длиннее 6000 символов сокращены с явной пометкой. Полные значения сохранены в базе и доступны в JSON-отчёте. Недопустимые в XML управляющие символы показаны как буквальные escape-последовательности.")
         if result.errors:
             for error in result.errors:
-                document.add_paragraph(error, style="List Bullet")
+                document.add_paragraph(_xml_safe(error), style="List Bullet")
 
         document.add_page_break()
         document.add_heading("Приложение: необработанные результаты", level=1)
         for run in result.tool_runs:
-            document.add_heading(run.tool_name, level=2)
+            document.add_heading(_xml_safe(run.tool_name), level=2)
             self._key_value_table(
                 document,
                 [
@@ -210,7 +218,10 @@ class DocxReportExporter:
                     ("Exit code", str(run.exit_code)),
                 ],
             )
-            for label, value in (("stdout", run.stdout), ("stderr", run.stderr)):
+            streams = [("stdout", run.stdout), ("stderr", run.stderr)]
+            if run.parsed_result.get("stdin_utf8"):
+                streams.insert(0, ("stdin (UTF-8)", str(run.parsed_result["stdin_utf8"])))
+            for label, value in streams:
                 document.add_heading(label, level=3)
                 _add_preformatted(document, value or "(пусто)")
 
@@ -218,11 +229,11 @@ class DocxReportExporter:
         table = document.add_table(rows=0, cols=2)
         for label, value in rows:
             cells = table.add_row().cells
-            cells[0].text = str(label)
-            cells[1].text = str(value)
+            cells[0].text = _xml_safe(str(label))
+            cells[1].text = _xml_safe(str(value))
             for run in cells[0].paragraphs[0].runs:
                 run.bold = True
-        _format_table(table, [2700, 6660])
+        _format_table(table, [2700, 6660], header=False)
 
     def _tool_table(self, document: DocumentType, result: AnalysisResult) -> None:
         table = document.add_table(rows=1, cols=5)
@@ -242,7 +253,7 @@ class DocxReportExporter:
                     f"{run.duration_ms} мс",
                 ),
             ):
-                cell.text = value
+                cell.text = _xml_safe(value)
         _format_table(table, [1800, 2700, 1500, 900, 2460])
 
     def _provenance_table(
@@ -252,7 +263,7 @@ class DocxReportExporter:
         if not isinstance(provenance, dict):
             document.add_paragraph("Для этого формата данные не формируются.")
             return
-        caution = document.add_paragraph(str(provenance.get("caution", "")))
+        caution = document.add_paragraph(_xml_safe(str(provenance.get("caution", ""))))
         if caution.runs:
             _font(caution.runs[0].font, "Calibri", 10, color=MUTED, bold=True)
         signals = provenance.get("signals", [])
@@ -271,13 +282,13 @@ class DocxReportExporter:
             cells = table.add_row().cells
             values = (
                 item.get("role", ""),
-                _display(item.get("value", ""))[:6000],
+                _table_value(_display(item.get("value", ""))),
                 source_label(str(item.get("source", ""))),
                 item.get("strength", ""),
                 item.get("explanation", ""),
             )
             for cell, value in zip(cells, values):
-                cell.text = str(value)
+                cell.text = _xml_safe(str(value))
         _format_table(table, [1700, 2500, 1500, 1600, 2060])
 
     def _finding_table(self, document: DocumentType, findings: Iterable[Finding]) -> None:
@@ -291,20 +302,26 @@ class DocxReportExporter:
             cells = table.add_row().cells
             values = (
                 parameter_label(item.name),
-                display_value(item.value)[:6000],
-                source_label(item.source),
-                item.user_mark or display_value(item.level.value),
+                _table_value(display_value(item.value)),
+                source_label(item.source) + ("\n" + item.location if item.location else ""),
+                display_value(item.level.value) + "\nЭксперт: " + display_value(item.user_mark),
                 parameter_description(item.name, item.details or item.description),
             )
             for cell, value in zip(cells, values):
-                cell.text = value
+                cell.text = _xml_safe(value)
             if item.conflict:
                 for cell in cells:
                     _cell_fill(cell, "FFF1C9")
         _format_table(table, [1800, 2600, 1500, 1160, 2300])
 
 
-def _format_table(table, widths: list[int]) -> None:
+def _table_value(value: str) -> str:
+    if len(value) <= 6000:
+        return value
+    return value[:6000] + f"\n[Сокращено: всего {len(value)} символов. Полное значение — в JSON-отчёте.]"
+
+
+def _format_table(table, widths: list[int], *, header: bool = True) -> None:
     table.autofit = False
     table.style = "Table Grid"
     table_element = table._tbl
@@ -329,6 +346,10 @@ def _format_table(table, widths: list[int]) -> None:
         column.set(qn("w:w"), str(item))
         grid.append(column)
     for row_index, row in enumerate(table.rows):
+        row_properties = row._tr.get_or_add_trPr()
+        row_properties.append(OxmlElement("w:cantSplit"))
+        if header and row_index == 0:
+            row_properties.append(OxmlElement("w:tblHeader"))
         for index, cell in enumerate(row.cells):
             cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
             tc_width = cell._tc.get_or_add_tcPr().get_or_add_tcW()
@@ -338,8 +359,8 @@ def _format_table(table, widths: list[int]) -> None:
             for paragraph in cell.paragraphs:
                 paragraph.paragraph_format.space_after = Pt(2)
                 for run in paragraph.runs:
-                    _font(run.font, "Calibri", 9.5, bold=(row_index == 0))
-            if row_index == 0:
+                    _font(run.font, "Calibri", 9.5, bold=((header and row_index == 0) or (not header and index == 0)))
+            if header and row_index == 0:
                 _cell_fill(cell, "F2F4F7")
 
 

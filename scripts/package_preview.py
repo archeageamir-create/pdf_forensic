@@ -1,0 +1,178 @@
+"""Package the tested onedir preview, verifying that it matches current app sources."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import tempfile
+import zipfile
+import sys
+from datetime import UTC, datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+APPLICATION = "DocumentForensicInspectorPreview"
+sys.path.insert(0, str(ROOT))
+from scripts.prepare_runtime_dependencies import verify_bundle
+
+
+def sha256(path: Path) -> str:
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def main() -> int:
+    global APPLICATION
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--release", action="store_true", help="Package the release application instead of the preview")
+    parser.add_argument(
+        "--output", type=Path
+    )
+    args = parser.parse_args()
+    if args.release:
+        APPLICATION = "DocumentForensicInspector"
+    if args.output is None:
+        from app import __version__
+        args.output = ROOT / "dist" / (f"{APPLICATION}-{__version__}-Windows.zip" if args.release else f"{APPLICATION}-Windows.zip")
+    folder = ROOT / "dist" / APPLICATION
+    executable = folder / f"{APPLICATION}.exe"
+    inventory = json.loads(
+        (folder / "_internal/app/resources/BUILD_INVENTORY.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    actual_sources = {
+        path.relative_to(ROOT).as_posix(): sha256(path)
+        for path in (ROOT / "app").rglob("*.py")
+    }
+    if actual_sources != inventory["source_sha256"]:
+        raise RuntimeError(
+            "The application sources changed after this build. Rebuild and validate before packaging."
+        )
+    for icon in (ROOT / "app/resources/icons").iterdir():
+        if icon.is_file() and sha256(icon) != sha256(folder / "_internal" / icon.relative_to(ROOT)):
+            raise RuntimeError(f"The bundled interface icon changed: {icon.name}")
+    if not executable.is_file():
+        raise FileNotFoundError(executable)
+    runtime_path = folder / "_internal/app/resources/binaries"
+    runtime = verify_bundle(runtime_path)
+    if not inventory.get("standalone") or inventory.get("runtime_manifest_sha256") != sha256(runtime_path / "RUNTIME_MANIFEST.json"):
+        raise RuntimeError("The complete runtime payload does not match this application build")
+    guide_relative = Path("docs/user-guide/DocumentForensicInspector-User-Guide-RU.pdf")
+    if sha256(ROOT / guide_relative) != sha256(folder / "_internal" / guide_relative):
+        raise RuntimeError("The bundled user guide does not match the current PDF. Rebuild before packaging.")
+    for example in (ROOT / "docs/user-guide/examples").iterdir():
+        if example.is_file() and sha256(example) != sha256(folder / "_internal" / example.relative_to(ROOT)):
+            raise RuntimeError(f"The bundled training example changed: {example.name}")
+    output = args.output.resolve()
+    if output.is_relative_to(folder.resolve()):
+        raise ValueError(
+            "The output archive must be outside the application directory."
+        )
+    output.parent.mkdir(parents=True, exist_ok=True)
+    files = sorted(path for path in folder.rglob("*") if path.is_file())
+    for path in files:
+        if path.is_symlink() or not path.resolve().is_relative_to(folder.resolve()):
+            raise ValueError(f"Unexpected linked file: {path}")
+    manifest = {
+        "created_utc": datetime.now(UTC).isoformat(),
+        "build": "release" if args.release else "universal-preview",
+        "base_version": inventory["base_version"],
+        "executable_sha256": sha256(executable),
+        "current_app_sources_match_build": True,
+        "standalone": True,
+        "runtime_components": [{"name": item["name"], "version": item["version"]} for item in runtime["components"]],
+        "files": [
+            {
+                "path": p.relative_to(folder).as_posix(),
+                "size": p.stat().st_size,
+                "sha256": sha256(p),
+            }
+            for p in files
+        ],
+    }
+    readme = """ФОРЕНЗИК-ЛАБОРАТОРИЯ ФАЙЛОВ — UNIVERSAL PREVIEW
+
+Распакуйте всю папку и откройте DocumentForensicInspectorPreview.exe.
+Папка _internal должна оставаться рядом с EXE. Всё нужное уже внутри:
+Python, Qt, ExifTool с Perl, qpdf, pdfcpu, Poppler, ffprobe, Java, JHOVE,
+veraPDF, PDFBox и инструменты PDFiD/pdf-parser. Отдельно ничего ставить не нужно.
+
+Добавьте файлы кнопкой или перетаскиванием. Начните с обзора, затем откройте
+«Результаты»: поиск, исходные значения, источники и пояснения. «Поиск по проекту»
+ищет по всем сохранённым исследованиям. «Очередь» позволяет наблюдать за папками.
+
+Помощник исследования: пояснения к артефактам, основания, пределы интерпретации
+и заготовки для заметок. В «Хронологии» запомните первую дату, выберите вторую
+и нажмите «Сравнить даты». Можно также выделить две строки с Ctrl.
+НПВ в ходе исследования и сообщение до исследования разделены;
+решение и вывод формулирует эксперт.
+
+PDF-руководство со скриншотами: F1 или «Справка → Руководство пользователя».
+Файл: _internal/docs/user-guide/DocumentForensicInspector-User-Guide-RU.pdf.
+Учебные файлы: _internal/docs/user-guide/examples.
+Кнопка «Сохранить отчёт» находится справа от имени открытого файла.
+
+В этой сборке: PDF, Office OOXML, распространённые изображения, аудио/видео,
+ZIP и базовая карточка других файлов. Глубина анализа зависит от формата.
+Проверка инструментов и их версии доступны в меню инструментов.
+OCR, старые DOC/XLS и восстановление удалённых данных пока не входят.
+
+Данные сохраняются в %LOCALAPPDATA%/DocumentForensicsLab. Наблюдение работает,
+пока открыто приложение или запущен отдельный процесс демона. Файлы не
+отправляются в облако. Сборка для Windows, на базе проекта версии 0.4.2;
+это предварительная версия без цифровой подписи.
+
+Состав и SHA-256 файлов: PREVIEW_MANIFEST.json.
+Лицензии и инвентарь: _internal/app/resources.
+"""
+    if args.release:
+        readme = (ROOT / "docs/release/README-RU.txt").read_text(encoding="utf-8")
+    with tempfile.NamedTemporaryFile(
+        dir=output.parent, suffix=".tmp", delete=False
+    ) as temporary:
+        staged = Path(temporary.name)
+    try:
+        with zipfile.ZipFile(
+            staged, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6
+        ) as archive:
+            for path in files:
+                archive.write(
+                    path, f"{APPLICATION}/{path.relative_to(folder).as_posix()}"
+                )
+            archive.writestr(
+                f"{APPLICATION}/{'RELEASE' if args.release else 'PREVIEW'}_MANIFEST.json",
+                json.dumps(manifest, ensure_ascii=False, indent=2),
+            )
+            archive.writestr(
+                f"{APPLICATION}/START_HERE.txt", readme.encode("utf-8-sig")
+            )
+        with zipfile.ZipFile(staged) as archive:
+            bad_file = archive.testzip()
+            if bad_file:
+                raise RuntimeError(f"Archive validation failed: {bad_file}")
+        staged.replace(output)
+    finally:
+        staged.unlink(missing_ok=True)
+    digest = sha256(output)
+    output.with_suffix(output.suffix + ".sha256").write_text(
+        f"{digest}  {output.name}\n", encoding="utf-8"
+    )
+    print(
+        json.dumps(
+            {
+                "archive": str(output),
+                "bytes": output.stat().st_size,
+                "sha256": digest,
+                "files": len(files),
+                "app_sources_match_build": True,
+            },
+            ensure_ascii=False,
+        )
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

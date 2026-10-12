@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 from pathlib import Path
+from PySide6.QtGui import QGuiApplication
 
 from PySide6.QtWidgets import (
     QCheckBox,
@@ -15,6 +16,8 @@ from PySide6.QtWidgets import (
     QPlainTextEdit,
     QPushButton,
     QSpinBox,
+    QScrollArea,
+    QFrame,
     QVBoxLayout,
     QWidget,
 )
@@ -55,11 +58,11 @@ class ProjectDialog(QDialog):
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
         )
+        buttons.button(QDialogButtonBox.StandardButton.Save).setText("Сохранить")
+        buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Отмена")
         buttons.accepted.connect(self._validate)
         buttons.rejected.connect(self.reject)
-        layout = QVBoxLayout(self)
-        layout.addLayout(form)
-        layout.addWidget(buttons)
+        _scrolling_form(self, form, buttons)
 
     def _validate(self) -> None:
         if not all(
@@ -95,6 +98,7 @@ class SettingsDialog(QDialog):
         self.setWindowTitle("Настройки анализа")
         form = QFormLayout()
         self.exiftool = _path_row(str(config.exiftool_command), self, executable=True)
+        self.ffprobe = _path_row(str(config.ffprobe_command), self, executable=True)
         self.qpdf = _path_row(str(config.qpdf_command), self, executable=True)
         self.pdfcpu = _path_row(str(config.pdfcpu_command), self, executable=True)
         self.poppler = _directory_row(str(config.poppler_bin_dir or ""), self)
@@ -108,6 +112,9 @@ class SettingsDialog(QDialog):
         self.timeout = QSpinBox()
         self.timeout.setRange(10, 3600)
         self.timeout.setValue(config.tool_timeout_seconds)
+        self.analysis_timeout = QSpinBox()
+        self.analysis_timeout.setRange(1, 240)
+        self.analysis_timeout.setValue(max(1, config.max_analysis_seconds // 60))
         self.stream_limit = QSpinBox()
         self.stream_limit.setRange(1, 2048)
         self.stream_limit.setValue(config.max_stream_bytes // (1024 * 1024))
@@ -116,6 +123,7 @@ class SettingsDialog(QDialog):
         self.signatures = QCheckBox("Проверять подписи криптографически")
         self.signatures.setChecked(config.validate_signatures)
         form.addRow("ExifTool", self.exiftool)
+        form.addRow("ffprobe — аудио и видео", self.ffprobe)
         form.addRow("qpdf", self.qpdf)
         form.addRow("pdfcpu", self.pdfcpu)
         form.addRow("Poppler — папка bin", self.poppler)
@@ -126,22 +134,24 @@ class SettingsDialog(QDialog):
         form.addRow("DOCX-шаблон", self.template)
         form.addRow("Манифест обновлений", self.update_url)
         form.addRow("Timeout, секунд", self.timeout)
+        form.addRow("Лимит на файл, минут", self.analysis_timeout)
         form.addRow("Максимальный stream, МБ", self.stream_limit)
         form.addRow(self.qdf)
         form.addRow(self.signatures)
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
         )
+        buttons.button(QDialogButtonBox.StandardButton.Save).setText("Сохранить")
+        buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Отмена")
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
-        layout = QVBoxLayout(self)
-        layout.addLayout(form)
-        layout.addWidget(buttons)
+        _scrolling_form(self, form, buttons)
 
     def value(self) -> AppConfig:
         return replace(
             self.config,
             exiftool_command=self.exiftool.findChild(QLineEdit).text().strip() or "exiftool",
+            ffprobe_command=self.ffprobe.findChild(QLineEdit).text().strip() or "ffprobe",
             qpdf_command=self.qpdf.findChild(QLineEdit).text().strip() or "qpdf",
             pdfcpu_command=self.pdfcpu.findChild(QLineEdit).text().strip() or "pdfcpu",
             poppler_bin_dir=(
@@ -171,6 +181,7 @@ class SettingsDialog(QDialog):
                 else None
             ),
             tool_timeout_seconds=self.timeout.value(),
+            max_analysis_seconds=self.analysis_timeout.value() * 60,
             max_stream_bytes=self.stream_limit.value() * 1024 * 1024,
             create_qdf_in_full_mode=self.qdf.isChecked(),
             validate_signatures=self.signatures.isChecked(),
@@ -193,6 +204,7 @@ class CustomAnalyzersDialog(QDialog):
             ("verapdf", "veraPDF — PDF/A и PDF/UA"),
             ("pdfbox", "Apache PDFBox — независимый парсер"),
             ("pdfid", "PDFiD"),
+            ("ffprobe", "ffprobe — контейнер и медиадорожки"),
             ("pdf_parser", "pdf-parser"),
             ("deep_pdf", "Ревизии, объекты и streams"),
             ("signatures", "ByteRange и подписи"),
@@ -205,12 +217,32 @@ class CustomAnalyzersDialog(QDialog):
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
         )
+        buttons.button(QDialogButtonBox.StandardButton.Ok).setText("Применить")
+        buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Отмена")
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
         layout.addWidget(buttons)
 
     def selected(self) -> set[str]:
         return {key for key, box in self.boxes.items() if box.isChecked()}
+
+
+def _scrolling_form(dialog: QDialog, form: QFormLayout, buttons: QDialogButtonBox) -> None:
+    """Keep Save/Cancel reachable on short displays and at increased DPI."""
+    form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
+    form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+    content = QWidget()
+    content.setLayout(form)
+    scroll = QScrollArea()
+    scroll.setWidgetResizable(True)
+    scroll.setFrameShape(QFrame.Shape.NoFrame)
+    scroll.setWidget(content)
+    layout = QVBoxLayout(dialog)
+    layout.addWidget(scroll, 1)
+    layout.addWidget(buttons)
+    screen = dialog.parentWidget().screen() if dialog.parentWidget() else QGuiApplication.primaryScreen()
+    area = screen.availableGeometry() if screen else None
+    dialog.resize(min(760, area.width() - 40) if area else 760, min(640, area.height() - 60) if area else 640)
 
 
 def _path_row(

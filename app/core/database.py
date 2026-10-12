@@ -136,6 +136,18 @@ class AnalysisRepository:
                 ).fetchall()
         return [str(row[0]) for row in rows]
 
+    def list_evidence_summaries(self, project_id: str | None = None) -> list[dict[str, Any]]:
+        """Lightweight sidebar records; None means the unassigned research group."""
+        with self._connection() as connection:
+            connection.row_factory = sqlite3.Row
+            rows = connection.execute("""
+                SELECT e.id, e.original_name, e.original_path, e.detected_format,
+                       e.sha256, e.kind, e.analysis_mode, e.added_at, a.incomplete
+                FROM evidence_files e JOIN analyses a ON a.evidence_id = e.id
+                WHERE e.project_id IS ? ORDER BY e.added_at DESC, e.rowid DESC
+            """, (project_id,)).fetchall()
+        return [dict(row) for row in rows]
+
     def save(self, result: AnalysisResult) -> None:
         evidence = result.evidence
         with self._connection() as connection:
@@ -398,6 +410,16 @@ class AnalysisRepository:
                 rows = connection.execute("SELECT * FROM audit_log ORDER BY id").fetchall()
         return [dict(row) for row in rows]
 
+    def list_evidence_audit(self, evidence_id: str) -> list[dict[str, Any]]:
+        """A file export must not disclose activity from unrelated evidence."""
+        with self._connection() as connection:
+            connection.row_factory = sqlite3.Row
+            rows = connection.execute(
+                "SELECT * FROM audit_log WHERE object_id = ? ORDER BY id",
+                (evidence_id,),
+            ).fetchall()
+        return [dict(row) for row in rows]
+
     def _connect(self) -> sqlite3.Connection:
         return sqlite3.connect(self.database_path)
 
@@ -472,6 +494,7 @@ CREATE TABLE IF NOT EXISTS audit_log (
     FOREIGN KEY (project_id) REFERENCES projects(id)
 );
 CREATE INDEX IF NOT EXISTS idx_evidence_sha256 ON evidence_files(sha256);
+CREATE INDEX IF NOT EXISTS idx_evidence_project ON evidence_files(project_id, added_at);
 CREATE INDEX IF NOT EXISTS idx_findings_evidence ON findings(evidence_id);
 CREATE INDEX IF NOT EXISTS idx_runs_evidence ON tool_runs(evidence_id);
 """

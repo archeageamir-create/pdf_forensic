@@ -49,16 +49,18 @@ class MetadataConflictDetector:
             values = {_normalize_value(item.value) for item in items}
             if len(sources) < 2 or len(values) <= 1:
                 continue
-            originals = [{"source": item.source, "value": item.value} for item in items]
+            originals = [{"source": item.source, "value": item.value, "finding_id": item.id,
+                          "location": item.location} for item in items]
             normalized = sorted(values)
             detail = (
-                "Different normalized values were extracted from independent metadata sources. "
-                "This discrepancy requires expert evaluation and is not, by itself, proof of falsification."
+                "Различаются записи или представления метаданных. Разные анализаторы могут читать одно "
+                "и то же поле и не являются независимыми подтверждениями события. Расхождение требует "
+                "проверки смысла полей и само по себе не доказывает подделку."
             )
             for item in items:
                 item.conflict = True
                 item.level = FindingLevel.LOW
-                item.details = detail
+                item.details = "\n".join(part for part in (item.details, detail) if part)
             appended.append(
                 Finding(
                     "Metadata conflicts",
@@ -95,6 +97,8 @@ class MetadataConflictDetector:
                     continue
                 left = normalize_date(str(created_item.value))
                 right = normalize_date(str(modified_item.value))
+                if left.get("timezone_present") != right.get("timezone_present"):
+                    continue
                 if left.get("timestamp") is not None and right.get("timestamp") is not None:
                     if float(right["timestamp"]) < float(left["timestamp"]):
                         results.append(
@@ -144,5 +148,7 @@ def _normalize_value(value: Any) -> str:
         )
     date = normalize_date(str(value))
     if date.get("parsed"):
+        if date.get("timestamp") is not None:
+            return f"UTC timestamp: {date['timestamp']}"
         return str(date["normalized"])
     return " ".join(str(value).strip().split()).casefold()
