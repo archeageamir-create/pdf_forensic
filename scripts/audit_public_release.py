@@ -9,10 +9,11 @@ import sys
 import zipfile
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from app import __version__ as VERSION
+from scripts.create_public_source_archive import allowed
+
 DIST = ROOT / "dist"
 APP_DIR = DIST / "DocumentForensicInspector"
 INSTALLER = DIST / f"DocumentForensicInspector-Setup-{VERSION}.exe"
@@ -50,6 +51,9 @@ def _sha256(path: Path) -> str:
 
 def audit() -> tuple[list[str], dict[str, object]]:
     errors: list[str] = []
+    for document in (APP_DIR / "_internal/docs/release").glob("*"):
+        if document.name not in {"README-RU.txt", "REQUIREMENTS-RU.txt"}:
+            errors.append(f"Non-public runtime document: {document.name}")
     records = APP_DIR / "_internal/app/resources/binaries/ffmpeg/build-information"
     if records.is_dir():
         errors.extend(audit_build_records(records))
@@ -83,6 +87,9 @@ def audit() -> tuple[list[str], dict[str, object]]:
                     continue
                 source_files += 1
                 path = Path(info.filename)
+                repository_path = Path(*path.parts[1:])
+                if not allowed(ROOT / repository_path):
+                    errors.append(f"Non-public file in source archive: {info.filename}")
                 parts = {part.casefold() for part in path.parts}
                 if parts & FORBIDDEN_PARTS:
                     errors.append(f"Forbidden directory in source archive: {info.filename}")
@@ -116,7 +123,8 @@ def audit() -> tuple[list[str], dict[str, object]]:
 
 def main() -> int:
     errors, report = audit()
-    destination = DIST / f"DocumentForensicInspector-Release-Audit-{VERSION}.json"
+    destination = ROOT / ".verification" / f"release-audit-{VERSION}.json"
+    destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if errors:
         for error in errors:

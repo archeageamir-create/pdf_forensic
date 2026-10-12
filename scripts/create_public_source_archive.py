@@ -10,11 +10,12 @@ import tempfile
 import zipfile
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 import sys
+
 sys.path.insert(0, str(ROOT))
 from app import __version__ as VERSION
+
 ARCHIVE = ROOT / "dist" / f"DocumentForensicInspector-Source-{VERSION}.zip"
 DIRECTORIES = ("app", "compliance", "docs", "installer", "scripts", "tests")
 FILES = (
@@ -35,7 +36,6 @@ FILES = (
     "SOURCE_OFFER.md",
     "THIRD_PARTY_NOTICES.md",
     "SBOM.spdx.json",
-    "PRODUCT.md",
     "Launch.vbs",
     "setup.ps1",
     "build-preview.ps1",
@@ -49,10 +49,24 @@ EXCLUDED_PARTS = {
     "archives",
 }
 EXCLUDED_SUFFIXES = {".pyc", ".pfx", ".p12", ".pem", ".key", ".exe", ".dll", ".jar"}
+# Published documentation is selected explicitly. Internal validation reports,
+# plans and historical snapshots remain in the repository, outside delivery.
+PUBLIC_DOCS = {
+    "ADDING_ANALYZERS.md", "ARCHITECTURE.md", "DEPENDENCY_SOURCES.md",
+    "DRIVE_DOWNLOAD_RU.txt", "COMPONENTS_DOWNLOAD_RU.txt", "LGPL_COMPLIANCE.md", "RESEARCH_ASSISTANT_KZ.md",
+    "STANDALONE_BUILD.md",
+    "release/README-RU.txt", "release/REQUIREMENTS-RU.txt",
+}
 
 
 def allowed(path: Path) -> bool:
     relative = path.relative_to(ROOT)
+    if relative.as_posix() == "scripts/write_preview_validation.py":
+        return False
+    if relative.parts[0] == "docs":
+        document = relative.relative_to("docs").as_posix()
+        if document not in PUBLIC_DOCS and not document.startswith("user-guide/"):
+            return False
     if any(part in EXCLUDED_PARTS for part in relative.parts):
         return False
     return path.suffix.lower() not in EXCLUDED_SUFFIXES

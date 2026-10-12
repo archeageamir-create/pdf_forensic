@@ -1,9 +1,7 @@
-# Source delivery for 0.5.1
+# Component source inventory — 0.5.1
 
-The 0.5.0 blocker was the unknown full source composition of the vendor's
-static ffprobe build. That binary is replaced by an ANSE build from unmodified
-FFmpeg commit 38b88335f99e76ed89ff3c93f877fdefce736c13, with an explicit LGPL
-configuration, replaceable DLLs, compression libraries and retained build records.
+The ANSE ffprobe build uses unmodified FFmpeg commit
+38b88335f99e76ed89ff3c93f877fdefce736c13 and replaceable LGPL libraries.
 The recipe is `scripts/build_ffprobe.py`. Network support, GPL/nonfree features,
 encoders and muxers are disabled. zlib, bzip2 and liblzma support is retained for
 compressed containers, including legacy QuickTime headers.
@@ -33,8 +31,3 @@ a host-installed Visual C++ runtime as proof of a complete package.
 The base archives and 0.5.1 supplement are supplied together. See
 `docs/DEPENDENCY_SOURCES.md` for extraction, rebuilding and replacement.
 The source offer and original third-party notices remain in force.
-
-This is a technical source-delivery record, not a guarantee of byte-identical
-reproduction of every vendor binary or a legal opinion. We rebuilt FFmpeg and
-verified media-output compatibility; the other vendor components were matched
-to retained upstream source/build records rather than independently rebuilt.
